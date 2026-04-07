@@ -1498,8 +1498,8 @@ body:not(.theme-desert) .card:nth-child(4)::before {
 
 @media (max-width: 992px) {
   .content-grid {
-    grid-template-columns: 1fr;
-    gap: 20px;
+    columns: 1;
+    column-gap: 0;
   }
 
   .main-layout {
@@ -1587,6 +1587,10 @@ body:not(.theme-desert) .card:nth-child(4)::before {
 }
 
 @media (max-width: 480px) {
+  .dashboard {
+    padding: 10px 10px;
+  }
+  
   .hero h1 {
     font-size: 28px;
   }
@@ -1727,7 +1731,8 @@ body:not(.theme-desert) .card:nth-child(4)::before {
 }
 
 .ttt-container {
-  width: 340px;
+  width: 90%;
+  max-width: 340px;
   background: var(--card-bg);
   border: 1px solid var(--text-main);
   box-shadow: 0 0 40px rgba(0,0,0,1), 0 0 20px var(--text-main);
