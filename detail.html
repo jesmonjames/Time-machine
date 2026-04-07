@@ -1,0 +1,301 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>SYSTEM DETAIL - Time Machine</title>
+<link rel="stylesheet" href="assets/css/style.css">
+<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700&family=Space+Mono:ital,wght@0,400;0,700;1,400&family=Black+Ops+One&family=Stardos+Stencil:wght@400;700&family=Goldman:wght@400;700&family=Wallpoet&family=Share+Tech+Mono&family=Roboto+Mono:wght@400;700&family=Courier+Prime:wght@400;700&display=swap" rel="stylesheet">
+
+</head>
+<body class="theme-throat">
+
+<div class="mini-loader" id="miniLoader">
+  <div class="mini-loader-content">
+    <div class="mini-spinner"></div>
+    <div id="miniLoadText" style="letter-spacing: 2px;">SYNCING... 0%</div>
+  </div>
+</div>
+
+<div class="dashboard">
+  <!-- TOP BAR -->
+  <header class="top-bar">
+    <div class="status-indicator">
+      <span class="dot green animated-pulse"></span> ONLINE | JES-001 | <strong>CLASSIFIED: TS/SCI</strong>
+    </div>
+    <div class="coordinates">
+      MODULE ANALYSIS // <span id="moduleName">UNKNOWN</span>
+    </div>
+    <div class="time-display" id="clock">00:00:00</div>
+    <div class="sys-load" id="sysStat">LOAD: 0.15% | RAM: 14GB</div>
+  </header>
+
+  <div class="main-layout">
+    <aside class="sidebar">
+      <div class="chakra-logo-container" id="chakraLogo">
+        <!-- Dynamically injected SVG -->
+      </div>
+      <div class="hero">
+        <div class="hero-label">TIME MACHINE</div>
+        <h1>JESMON<br>K J</h1>
+        <div class="hero-titles">
+          <p>[ ROLE: ENGINEER | TEACHER ]</p>
+          <p>[ AREA: ARTIST | CREATOR ]</p>
+        </div>
+        <button onclick="triggerMiniLoader('index.html')" class="tech-btn">BACK_TO_DASHBOARD &larr;</button>
+      </div>
+
+      <div class="metadata-panel">
+        <div class="sys-data">
+          <p>LAT: 9.9312&deg; N</p>
+          <p>LNG: 76.2673&deg; E</p>
+          <p>ALT: 3 M</p>
+          <p>UNIT: JES-001</p>
+          <p>UPTIME: <span id="uptime">00:00:00</span></p>
+        </div>
+      </div>
+    </aside>
+
+    <div class="full-width-grid">
+    <div style="margin-bottom: 30px;">
+      <button onclick="triggerMiniLoader('index.html')" class="tech-btn">DISCONNECT_STATION &larr;</button>
+    </div>
+
+    <div id="career" class="module-content">
+      <section class="card">
+        <div class="card-header">
+          <h2>CAREER ARCHIVE</h2>
+          <div class="leds"><span class="dot red"></span><span class="dot orange"></span></div>
+        </div>
+        <div class="card-body">
+          <p class="subtitle">Complete chronological record of professional missions.</p>
+          <div class="data-block">
+            <h3>2026 // MISSION: NEW EXPLORATIONS</h3>
+            <p>Initialized a new operational phase focused on broad technological and artistic explorations. Pivoting from specialized UI architecture to investigate emerging paradigms in both tech and creative mediums.</p>
+          </div>
+          <br>
+          <div class="data-block">
+            <h3>2024 // ADVANCED UI ENGINEER</h3>
+            <p>Led development of high-performance UI systems and modular component architectures. Architected classified design systems for global research platforms.</p>
+          </div>
+          <br>
+          <div class="data-block">
+            <h3>2020 // MISSION: SOFTWARE ENGINEER [UI/UX]</h3>
+            <p>Operated as a Software Engineer [UI/UX] at Panapps International Pvt. Ltd. Responsible for architecting intuitive interface layers and spearheading application modernization efforts across enterprise systems. Leveraged React.js, Angular, and design-thinking principles to build user-centric digital products.</p>
+          </div>
+          <br>
+          <div class="data-block">
+            <h3>2017 // MISSION: WEB CURIOSITY</h3>
+            <p>Foundational exploration of core web technologies (HTML, CSS, and basic JavaScript). This period marked the initialization of a trajectory towards advanced UI engineering and UX research.</p>
+          </div>
+        </div>
+      </section>
+    </div>
+
+    <div id="education" class="module-content">
+      <section class="card">
+        <div class="card-header">
+          <h2>EDUCATION ARCHIVE</h2>
+          <div class="leds"><span class="dot green"></span><span class="dot green"></span></div>
+        </div>
+        <div class="card-body">
+          <p class="subtitle">Complete record of academic training.</p>
+          <div class="data-block">
+            <h3>2020 // MASTER'S DEGREE</h3>
+            <p>Computer Applications.</p>
+          </div>
+          <br>
+          <div class="data-block">
+            <h3>2018 // 2 YEAR GAP</h3>
+            <p>Independent study, skill exploration, and part-time employment.</p>
+          </div>
+          <br>
+          <div class="data-block">
+            <h3>2016 // BACHELOR'S DEGREE</h3>
+            <p>Computer Applications.</p>
+          </div>
+          <br>
+          <div class="data-block">
+            <h3>2013 // HIGHER SECONDARY</h3>
+            <p>Biomaths.</p>
+          </div>
+          <br>
+          <div class="data-block">
+            <h3>2011 // HIGH SCHOOL</h3>
+            <p>Secondary School Leaving Certificate.</p>
+          </div>
+        </div>
+      </section>
+    </div>
+
+    <div id="skills" class="module-content">
+      <section class="card">
+        <div class="card-header">
+          <h2>ARSENAL INVENTORY</h2>
+          <div class="leds"><span class="dot orange"></span></div>
+        </div>
+        <div class="card-body">
+          <p class="subtitle">Technical capabilities and toolset breakdown.</p>
+          <div class="skills-grid" style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px;">
+            <div class="data-block">
+              <h3>COMMAND LANGUAGES</h3>
+              <p>JavaScript (ES6+), jQuery, HTML5, CSS3/SASS</p>
+            </div>
+            <div class="data-block">
+              <h3>OPERATING FRAMEWORKS</h3>
+              <p>ASP.NET, Bootstrap, Next.js, Nuxt.js, Node.js, Vue, Vuetify, Angular, React.js, NPM</p>
+            </div>
+            <div class="data-block">
+              <h3>SYSTEM ARCHITECTURE</h3>
+              <p>Drupal, Component Library Design, Frontend Development, Figma, Photoshop</p>
+            </div>
+          </div>
+        </div>
+      </section>
+    </div>
+
+    <div id="projects" class="module-content">
+      <section class="card">
+        <div class="card-header">
+          <h2>ARTIFACT ARCHIVE</h2>
+          <div class="leds"><span class="dot blue"></span></div>
+        </div>
+        <div class="card-body">
+          <p class="subtitle">A full list of recovered system artifacts.</p>
+          <div class="artifact-list">
+            <h3>METRO DISPLAY REPLICA</h3>
+            <p>Full-scale simulation of urban transit display systems. Focused on typography and real-time state management.</p>
+            <hr style="border:0; border-top:1px dashed var(--border-color); margin: 15px 0;">
+            <h3>TACTICAL FILTERS</h3>
+            <p>High-performance faceted search and filtering system for large datasets. Built for Drupal environments.</p>
+          </div>
+        </div>
+      </section>
+    </div>
+
+    <div id="gallery" class="module-content">
+      <section class="card gallery-card">
+        <div class="palette-background"></div>
+        <div class="card-header">
+          <h2>ARTISTIC_DOSSIER // 06_MEDIUMS</h2>
+          <div class="leds"><span class="dot active"></span><span class="dot active"></span></div>
+        </div>
+        <div class="card-body">
+          <p class="subtitle">A complete analysis of manual rendering capabilities.</p>
+          
+          <div class="gallery-grid">
+            <!-- Pencil -->
+            <div class="medium-dossier" style="--accent: #888;">
+              <div class="medium-header">PENCIL_DRAWING</div>
+              <div class="medium-stats">CORE_STRENGTH: SHADING & CONTRAST</div>
+              <p>Specialization in monochrome realism using varying graphite grades. Proficiency in multi-layered shading, smooth transitions, and high-fidelity texture rendering.</p>
+              <div class="technique-tags">
+                <span>GRADATION</span><span>CROSS-HATCH</span><span>STIPPPLING</span>
+              </div>
+            </div>
+
+            <!-- Oil Pastel -->
+            <div class="medium-dossier" style="--accent: #ff8800;">
+              <div class="medium-header">OIL_PASTEL</div>
+              <div class="medium-stats">CORE_STRENGTH: COLOR_BLENDING</div>
+              <p>Execution of vibrant, tactile compositions. Mastery of heavy impasto techniques and surgical sgraffito for complex detail recovery within thick layers.</p>
+              <div class="technique-tags">
+                <span>SCUMBLING</span><span>SGRAFFITO</span><span>BURNISHING</span>
+              </div>
+            </div>
+
+            <!-- Charcoal -->
+            <div class="medium-dossier" style="--accent: #333;">
+              <div class="medium-header">CHARCOAL</div>
+              <div class="medium-stats">CORE_STRENGTH: TONAL_DRAMA</div>
+              <p>Utilization of high-contrast graphite alternatives for emotional depth. Expertise in broad smudging for environmental atmospherics and subtractive highlighting.</p>
+              <div class="technique-tags">
+                <span>VINE_VS_COMP</span><span>SUBTRACTIVE</span><span>SMUDGING</span>
+              </div>
+            </div>
+
+            <!-- Watercolor -->
+            <div class="medium-dossier" style="--accent: #00ccff;">
+              <div class="medium-header">WATERCOLOR</div>
+              <div class="medium-stats">CORE_STRENGTH: FLUID_DYNAMICS</div>
+              <p>Control of transparent washes and moisture-led diffusion. Balancing precise linework with unpredictable pigment flow to create depth and luminosity.</p>
+              <div class="technique-tags">
+                <span>WET_ON_WET</span><span>GLAZING</span><span>LIFTING</span>
+              </div>
+            </div>
+
+            <!-- Acrylic -->
+            <div class="medium-dossier" style="--accent: #ff00ff;">
+              <div class="medium-header">ACRYLIC_PAINT</div>
+              <div class="medium-stats">CORE_STRENGTH: TEXTURE_LAYERING</div>
+              <p>Fast-drying polymer architecture allowing for rapid visual iteration. Implementation of thick textures and synthetic vibrancy for modern experimental pieces.</p>
+              <div class="technique-tags">
+                <span>IMPASTO</span><span>UNDERPAINT</span><span>DRY_BRUSH</span>
+              </div>
+            </div>
+
+            <!-- Pen & Ink -->
+            <div class="medium-dossier" style="--accent: #000;">
+              <div class="medium-header">PEN_INK</div>
+              <div class="medium-stats">CORE_STRENGTH: LINEAR_PRECISION</div>
+              <p>Uncompromising manual rendering with permanent ink. Mastery of line weight variation, architectural contouring, and dense stippling patterns.</p>
+              <div class="technique-tags">
+                <span>LINEWORK</span><span>POINTILLISM</span><span>CONTOUR</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+    </div>
+
+    <div id="comms" class="module-content">
+      <section class="card">
+        <div class="card-header">
+          <h2>COMMS CHANNEL</h2>
+          <div class="leds"><span class="dot red"></span></div>
+        </div>
+        <div class="card-body">
+          <p class="subtitle">Direct frequency for field communications.</p>
+          <div class="data-block">
+            <p>GITHUB: <a href="https://github.com/jesmonjames" style="color:var(--text-main);">GITHUB.COM/JESMONJAMES</a></p>
+            <p>LOCATION: KOCHI, INDIA [STATION 7]</p>
+            <p>STATUS: AWAITING INPUT...</p>
+          </div>
+        </div>
+      </section>
+    </div>
+
+    <!-- RELOCATED FOOTER -->
+    <footer class="bottom-bar" style="margin-top: 60px;">
+      <div class="themes" id="themeButtons">
+        <button class="theme-btn" data-theme="theme-crown">CROWN</button>
+        <button class="theme-btn" data-theme="theme-third-eye">THIRD EYE</button>
+        <button class="theme-btn" data-theme="theme-throat">THROAT</button>
+        <button class="theme-btn" data-theme="theme-heart">HEART</button>
+        <button class="theme-btn" data-theme="theme-solar">SOLAR</button>
+        <button class="theme-btn" data-theme="theme-sacral">SACRAL</button>
+        <button class="theme-btn" data-theme="theme-root">ROOT</button>
+      </div>
+    </footer>
+  </div>
+</div>
+
+<script src="assets/js/script.js"></script>
+<script>
+  window.addEventListener('DOMContentLoaded', () => {
+    const params = new URLSearchParams(window.location.search);
+    const module = params.get('module') || 'career';
+    
+    // Deactivate all
+    document.querySelectorAll('.module-content').forEach(el => el.classList.remove('active'));
+    
+    // Activate requested
+    const target = document.getElementById(module);
+    if(target) {
+      target.classList.add('active');
+      document.getElementById('moduleName').textContent = module.toUpperCase();
+    }
+  });
+</script>
+</body>
+</html>

@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>JESMON K J - About</title>
+<link rel="stylesheet" href="assets/css/style.css">
+<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700&family=Space+Mono:ital,wght@0,400;0,700;1,400&family=Black+Ops+One&family=Stardos+Stencil:wght@400;700&family=Goldman:wght@400;700&family=Wallpoet&family=Share+Tech+Mono&family=Roboto+Mono:wght@400;700&family=Courier+Prime:wght@400;700&display=swap" rel="stylesheet">
+</head>
+<body class="theme-throat">
+
+<div class="mini-loader" id="miniLoader">
+  <div class="mini-loader-content">
+    <div class="mini-spinner"></div>
+    <div id="miniLoadText" style="letter-spacing: 2px;">SYNCING... 0%</div>
+  </div>
+</div>
+
+<div class="dashboard">
+  <!-- TOP BAR -->
+  <header class="top-bar">
+    <div class="status-indicator">
+      <span class="dot green animated-pulse"></span> ONLINE | JES-001 | <strong>CLASSIFIED: TS/SCI</strong>
+    </div>
+    <div class="coordinates">
+      LAT: 9.9312&deg; N &middot; LNG: 76.2673&deg; E &middot; ALT: 3 M &middot; EST. 2026
+    </div>
+    <div class="time-display" id="clock">00:00:00</div>
+    <div class="sys-load" id="sysStat">LOAD: 0.15% | RAM: 14GB</div>
+  </header>
+
+  <div class="main-layout">
+    
+    <!-- LEFT SIDEBAR -->
+    <aside class="sidebar">
+      <div class="chakra-logo-container" id="chakraLogo">
+        <!-- Dynamically injected SVG -->
+      </div>
+      <div class="hero">
+        <div class="hero-label">TIME MACHINE</div>
+        <h1>JESMON<br>K J</h1>
+        <div class="hero-titles">
+          <p>[ ROLE: ENGINEER | TEACHER ]</p>
+          <p>[ AREA: ARTIST | CREATOR ]</p>
+        </div>
+        <button onclick="triggerMiniLoader('index.html')" class="tech-btn">BACK TO DASHBOARD &larr;</button>
+      </div>
+
+      <div class="metadata-panel">
+        <div class="sys-data">
+          <p>LAT: 9.9312&deg; N</p>
+          <p>LNG: 76.2673&deg; E</p>
+          <p>ALT: 3 M</p>
+          <p>UNIT: JES-001</p>
+          <p>UPTIME: <span id="uptime">00:00:00</span></p>
+        </div>
+      </div>
+    </aside>
+
+    <!-- MAIN GRID AREA -->
+    <main class="full-width-grid" id="mainContent">
+
+      <section class="card timeline-item">
+        <div class="card-header">
+          <h2>PERSONAL NOTEBOOK / LOG.TXT</h2>
+          <div class="leds"><span class="dot green"></span></div>
+        </div>
+        <div class="card-body">
+          <p class="subtitle">Decrypted personal entry.</p>
+          <div style="font-family: var(--font-serif); font-size: 15px; line-height: 2;">
+            <p style="margin-bottom: 25px;">
+              Greetings. I am <strong style="color: var(--text-main);">Jesmon K J</strong>.
+            </p>
+            <p style="margin-bottom: 25px; color: var(--text-muted);">
+              I operate at the intersection of data, design, and human experience. My mission is to transform raw information into systems that communicate, perform, and endure.
+            </p>
+            <ul class="timeline-list" style="margin-bottom: 25px;">
+              <li style="margin-bottom: 15px; font-size: 14px; color: var(--text-muted);">As an <strong style="color: var(--text-main); font-size: 15px;">Engineer</strong>, I architect resilient digital structures.</li>
+              <li style="margin-bottom: 15px; font-size: 14px; color: var(--text-muted);">As an <strong style="color: var(--text-main); font-size: 15px;">Artist</strong>, I craft experiences where thoughts becomes expression.</li>
+              <li style="margin-bottom: 15px; font-size: 14px; color: var(--text-muted);">As a <strong style="color: var(--text-main); font-size: 15px;">Teacher</strong>, I illuminate pathways for those ready to advance.</li>
+            </ul>
+            <p style="margin-bottom: 25px;">
+              Every project is an operation. Every line of code is deliberate. Every system is built with purpose.
+            </p>
+            <p style="margin-bottom: 40px; color: var(--text-main); text-shadow: var(--text-glow);">
+              My terminal remains active &mdash; always scanning the horizon, always prepared for what comes next.
+            </p>
+            <p style="font-size: 13px; color: var(--text-muted); opacity: 0.6; letter-spacing: 2px;">
+              [END OF RECORDING]
+            </p>
+          </div>
+        </div>
+        <div class="card-footer">
+          <span>STATUS: DECRYPTED</span>
+        </div>
+      </section>
+
+      <!-- BOTTOM BAR -->
+      <!-- RELOCATED FOOTER -->
+      <footer class="bottom-bar" style="margin-top: 60px;">
+        <div class="themes" id="themeButtons">
+          <button class="theme-btn" data-theme="theme-crown">CROWN</button>
+          <button class="theme-btn" data-theme="theme-third-eye">THIRD EYE</button>
+          <button class="theme-btn" data-theme="theme-throat">THROAT</button>
+          <button class="theme-btn" data-theme="theme-heart">HEART</button>
+          <button class="theme-btn" data-theme="theme-solar">SOLAR</button>
+          <button class="theme-btn" data-theme="theme-sacral">SACRAL</button>
+          <button class="theme-btn" data-theme="theme-root">ROOT</button>
+        </div>
+        <div class="stats">
+          <span class="dot orange animated-pulse"></span> READING LOG
+          <span class="separator"> &nbsp;|&nbsp; </span>
+          1 ENTRY LOADED
+        </div>
+      </footer>
+
+    </main>
+  </div>
+</div>
+
+<script src="assets/js/script.js"></script>
+</body>
+</html>

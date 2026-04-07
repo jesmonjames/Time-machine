@@ -1,0 +1,464 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>JESMON K J - Time Machine</title>
+<link rel="stylesheet" href="assets/css/style.css">
+<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700&family=Space+Mono:ital,wght@0,400;0,700;1,400&family=Black+Ops+One&family=Stardos+Stencil:wght@400;700&family=Goldman:wght@400;700&family=Wallpoet&family=Share+Tech+Mono&family=Roboto+Mono:wght@400;700&family=Courier+Prime:wght@400;700&display=swap" rel="stylesheet">
+</head>
+<body class="theme-throat">
+
+<div class="mini-loader" id="miniLoader" style="display: none;">
+  <div class="mini-loader-content">
+    <div class="mini-spinner"></div>
+    <div id="miniLoadText" style="letter-spacing: 2px;">SYNCING... 0%</div>
+  </div>
+</div>
+
+<div class="loader" id="loader">
+  <canvas id="loaderCanvas"></canvas>
+  <div class="loader-scanline"></div>
+  <div class="loader-content">
+    <div class="boot-header">JES-001 // TACTICAL_LINK_76.26</div>
+    <div class="boot-grid">
+      <div class="boot-log" id="bootLog"></div>
+      <div class="boot-log" id="bootLogRight"></div>
+    </div>
+    <div class="progress-wrapper">
+      <div class="progress-bar"><div class="progress"></div></div>
+      <div class="decrypt-text" id="decryptText">0%</div>
+    </div>
+    <p id="bootStatus">SECURE BOOT INITIALIZED...</p>
+  </div>
+</div>
+
+<div class="dashboard">
+  <!-- TOP BAR -->
+  <header class="top-bar">
+    <div class="status-indicator">
+      <span class="dot green animated-pulse"></span> ONLINE | JES-001 | <strong>CLASSIFIED: TS/SCI</strong>
+    </div>
+    <div class="coordinates">
+      LAT: 9.9312° N &middot; LNG: 76.2673° E &middot; ALT: 3 M &middot; EST. 2026
+    </div>
+    <div class="time-display" id="clock">
+      00:00:00
+    </div>
+    <div class="sys-load" id="sysStat">
+      LOAD: 0.28% | RAM: 14GB
+    </div>
+  </header>
+
+  <div class="main-layout">
+    
+    <!-- LEFT SIDEBAR -->
+    <aside class="sidebar">
+      <div class="chakra-logo-container" id="chakraLogo">
+        <!-- Dynamically injected SVG -->
+      </div>
+      <div class="hero">
+        <div class="hero-label">TIME MACHINE</div>
+        <h1>JESMON<br>K J</h1>
+        <div class="hero-titles">
+          <p>[ ROLE: ENGINEER | TEACHER ]</p>
+          <p>[ AREA: ARTIST | CREATOR ]</p>
+        </div>
+        <button id="startJourney" class="tech-btn">PERSONAL NOTEBOOK &rarr;</button>
+      </div>
+
+      <div class="metadata-panel">
+        <div class="sys-data">
+          <p>LAT: 9.9312&deg; N</p>
+          <p>LNG: 76.2673&deg; E</p>
+          <p>ALT: 3 M</p>
+          <p>UNIT: JES-001</p>
+          <p>UPTIME: <span id="uptime">00:00:00</span></p>
+        </div>
+      </div>
+    </aside>
+
+    <!-- MAIN GRID AREA -->
+    <main class="content-grid" id="mainContent">
+      <!-- Progress Analysis -->
+      <section class="card module-archive timeline-item">
+        <div class="card-header">
+          <h2>SYSTEM_PROGRESS.LOG</h2>
+          <div class="leds"><span class="dot active"></span><span class="dot gray"></span></div>
+        </div>
+        <div class="card-body">
+          <p class="subtitle">Multi-sector operational synchronization.</p>
+          
+          <div class="progress-display-grid">
+            <!-- Radar Chart -->
+            <div class="chart-container radar-box">
+              <svg viewBox="0 0 100 100" class="radar-chart">
+                <!-- Grid Circles -->
+                <circle cx="50" cy="50" r="10" class="radar-grid" />
+                <circle cx="50" cy="50" r="25" class="radar-grid" />
+                <circle cx="50" cy="50" r="40" class="radar-grid" />
+                <!-- Axes -->
+                <line x1="50" y1="10" x2="50" y2="90" class="radar-grid" />
+                <line x1="10" y1="50" x2="90" y2="50" class="radar-grid" />
+                <!-- Data Polygon (Recalibrated to 92/85/88/78) -->
+                <polygon points="50,13.2 84,50 50,85.2 18.8,50" class="radar-data h-target" data-label="OPERATIONAL_SYNC" data-value="85.7% AVG" />
+                <circle cx="50" cy="13.2" r="3" class="radar-point h-target" data-label="ENGINEERING" data-value="92%" />
+                <circle cx="84" cy="50" r="3" class="radar-point h-target" data-label="ARTISTRY" data-value="85%" />
+                <circle cx="50" cy="85.2" r="3" class="radar-point h-target" data-label="TEACHING" data-value="88%" />
+                <circle cx="18.8" cy="50" r="3" class="radar-point h-target" data-label="MISSION" data-value="78%" />
+              </svg>
+              <div class="radar-labels">
+                <span class="lbl-top">ENG</span>
+                <span class="lbl-right">ART</span>
+                <span class="lbl-bottom">TEA</span>
+                <span class="lbl-left">MIS</span>
+              </div>
+            </div>
+
+            <!-- Waveform & Stats -->
+            <div class="stats-box">
+              <div class="waveform-container">
+                <svg viewBox="0 0 200 40" class="waveform">
+                  <path d="M0,20 Q25,5 50,20 T100,20 T150,20 T200,20" class="wave-path" />
+                </svg>
+                <div class="wave-scanline"></div>
+              </div>
+              
+              <div class="mini-stats">
+                <div class="mini-item"><span>SYNC</span><span class="val">98.2%</span></div>
+                <div class="mini-item"><span>LATENCY</span><span class="val">14ms</span></div>
+                <div class="mini-item"><span>SIGNAL</span><span class="val">CRYPTO_OK</span></div>
+              </div>
+            </div>
+          </div>
+
+          <div class="progress-graph">
+            <div class="graph-bar-group">
+              <div class="graph-label">SYSTEM_INTEGRITY</div>
+              <div class="graph-track"><div class="graph-fill" style="width: 88%;"></div></div>
+            </div>
+          </div>
+
+          <!-- Micro Telemetry Clusters -->
+          <div class="telemetry-clusters">
+            <div class="cluster">
+              <h5>BUFFER_ARRAY.7</h5>
+              <div class="cluster-dots">
+                <span class="tiny-dot active"></span>
+                <span class="tiny-dot active"></span>
+                <span class="tiny-dot"></span>
+                <span class="tiny-dot active"></span>
+              </div>
+            </div>
+            <div class="cluster">
+              <h5>UPLINK_STATUS</h5>
+              <div class="tag-status">ENCRYPTED</div>
+            </div>
+            <div class="cluster">
+              <h5>CACHE_INTEGRITY</h5>
+              <div class="tag-status green">OPTIMAL</div>
+            </div>
+          </div>
+        </div>
+        <div class="card-footer" id="viewLogsBtn">
+          <span>REAL-TIME ANALYSIS</span>
+          <span class="action">VIEW LOGS &rarr;</span>
+        </div>
+      </section>
+
+      <!-- Career Timeline -->
+      <section class="card module-engine timeline-item">
+        <div class="card-header">
+          <h2>CAREER TIMELINE</h2>
+          <div class="leds"><span class="dot red"></span><span class="dot orange"></span></div>
+        </div>
+        <div class="card-body">
+          <p class="subtitle">Exploring interfaces across time.</p>
+          <ul class="timeline-list">
+            <li><span class="year">2026</span> <strong>MISSION: NEW EXPLORATIONS</strong><br><span class="desc">Started new explorations in the technology and art fields, expanding horizons beyond UI engineering.</span></li>
+            <li><span class="year">2020</span> <strong>Software Engineer[UI/UX]</strong><br><span class="desc">Specialized in architecting intuitive interface layers and application modernization at Panapps International Pvt. Ltd.</span></li>
+            <li><span class="year">2017</span> <strong>Web Curiosity Begins</strong><br><span class="desc">Started exploring HTML and CSS.</span></li>
+          </ul>
+        </div>
+        <a href="javascript:void(0)" onclick="handleTacticalLink('detail.html?module=career')" class="card-footer">
+          <span>FULL ARCHIVE</span>
+          <span class="action">ENTER &rarr;</span>
+        </a>
+      </section>
+
+      <!-- Education Timeline -->
+      <section class="card module-education timeline-item">
+        <div class="card-header">
+          <h2>EDUCATION TIMELINE</h2>
+          <div class="leds"><span class="dot green"></span><span class="dot green"></span></div>
+        </div>
+        <div class="card-body">
+          <p class="subtitle">Academic training records.</p>
+          <ul class="timeline-list">
+            <li><span class="year">2020</span> <strong>Master's Degree</strong><br><span class="desc">Computer Applications.</span></li>
+            <li><span class="year">2018</span> <strong>2 Year Gap</strong><br><span class="desc">Independent study, skill exploration, and part-time employment.</span></li>
+            <li><span class="year">2016</span> <strong>Bachelor's Degree</strong><br><span class="desc">Computer Applications.</span></li>
+          </ul>
+        </div>
+        <a href="javascript:void(0)" onclick="handleTacticalLink('detail.html?module=education')" class="card-footer">
+          <span>FULL ARCHIVE</span>
+          <span class="action">ENTER &rarr;</span>
+        </a>
+      </section>
+
+      <!-- Skills Arsenal -->
+      <section class="card module-ideas timeline-item">
+        <div class="card-header">
+          <h2>SKILLS ARSENAL</h2>
+          <div class="leds"><span class="dot orange"></span><span class="dot green"></span></div>
+        </div>
+        <div class="card-body">
+          <p class="subtitle">Tools for temporal engineering.</p>
+          <div class="skills-tags">
+            <span class="tag">HTML</span>
+            <span class="tag">CSS</span>
+            <span class="tag">JavaScript</span>
+            <span class="tag">jQuery</span>
+            <span class="tag">Frontend Development</span>
+            <span class="tag">UI/UX</span>
+            <span class="tag">Drupal</span>
+            <span class="tag">Nuxt.js</span>
+            <span class="tag">Photoshop</span>
+            <span class="tag">Bootstrap</span>
+            <span class="tag">ASP.NET</span>
+            <span class="tag">Vue</span>
+            <span class="tag">Vuetify</span>
+            <span class="tag">Angular</span>
+            <span class="tag">React</span>
+            <span class="tag">NPM</span>
+          </div>
+        </div>
+        <a href="javascript:void(0)" onclick="handleTacticalLink('detail.html?module=skills')" class="card-footer">
+          <span>16 CORE SKILLS</span>
+          <span class="action">READ &rarr;</span>
+        </a>
+      </section>
+
+      </section>
+
+      <!-- Artistic Intelligence -->
+      <section class="card module-engine timeline-item">
+        <div class="card-header">
+          <h2>ARTISTIC_INTELLIGENCE // FIELD_SKETCH</h2>
+          <div class="leds"><span class="dot active"></span><span class="dot gray"></span></div>
+        </div>
+        <div class="card-body">
+          <p class="subtitle">Manual rendering & tactical visualization.</p>
+          
+          <div class="art-skills-grid">
+            <!-- Pencil -->
+            <div class="art-cluster">
+              <div class="art-cat">PENCIL_DRAWING</div>
+              <div class="art-tags">
+                <span class="art-tag h-target" data-label="GRADATION" data-value="SMOOTH TRANSITION FROM LIGHT TO DARK GRAPHITE.">GRADATION</span>
+                <span class="art-tag h-target" data-label="CROSS_HATCH" data-value="LAYERS OF INTERSECTING LINES FOR SHADING.">CROSS_HATCH</span>
+                <span class="art-tag h-target" data-label="STIPPLING" data-value="PATTERNING VIA MICRO-DOTS OF VARYING DENSITY.">STIPPLING</span>
+              </div>
+            </div>
+            <!-- Oil Pastel -->
+            <div class="art-cluster">
+              <div class="art-cat">OIL_PASTEL</div>
+              <div class="art-tags">
+                <span class="art-tag h-target" data-label="SCUMBLING" data-value="SOFTLY APPLYING LAYERS TO CREATE BROKEN COLOR.">SCUMBLING</span>
+                <span class="art-tag h-target" data-label="SGRAFFITO" data-value="SCRATCHING TOP LAYER TO REVEAL UNDERCOLOR.">SGRAFFITO</span>
+                <span class="art-tag h-target" data-label="BURNISHING" data-value="HEAVY PRESSURE TO BLEND AND FILL TOOTH.">BURNISHING</span>
+              </div>
+            </div>
+            <!-- Charcoal -->
+            <div class="art-cluster">
+              <div class="art-cat">CHARCOAL</div>
+              <div class="art-tags">
+                <span class="art-tag h-target" data-label="SMUDGING" data-value="BLENDING WITH STUMPS FOR SOFT SHADOWS.">SMUDGING</span>
+                <span class="art-tag h-target" data-label="VINE_VS_COMP" data-value="SOFTER VINE VS DARK COMPRESSED TEXTURES.">VINE_VS_COMP</span>
+                <span class="art-tag h-target" data-label="SUBTRACTIVE" data-value="ERASING HIGHLIGHTS OUT OF DARK BASES.">SUBTRACTIVE</span>
+              </div>
+            </div>
+            <!-- Watercolor -->
+            <div class="art-cluster">
+              <div class="art-cat">WATERCOLOR</div>
+              <div class="art-tags">
+                <span class="art-tag h-target" data-label="WET_ON_WET" data-value="WET PAINT ON WET SURFACE FOR DIFFUSION.">WET_ON_WET</span>
+                <span class="art-tag h-target" data-label="GLAZING" data-value="LAYERING THIN TRANSPARENT WASHES.">GLAZING</span>
+                <span class="art-tag h-target" data-label="LIFTING" data-value="REMOVING PIGMENT TO REVEAL BRIGHT HIGHLIGHTS.">LIFTING</span>
+              </div>
+            </div>
+            <!-- Acrylic -->
+            <div class="art-cluster">
+              <div class="art-cat">ACRYLIC_PAINT</div>
+              <div class="art-tags">
+                <span class="art-tag h-target" data-label="IMPASTO" data-value="APPLYING THICK TEXTURED PAINT FOR 3D EFFECT.">IMPASTO</span>
+                <span class="art-tag h-target" data-label="UNDERPAINT" data-value="INITIAL THIN LAYER TO ESTABLISH TONAL VALUES.">UNDERPAINT</span>
+                <span class="art-tag h-target" data-label="DRY_BRUSH" data-value="MINIMAL PAINT ON DRY BRUSH FOR TEXTURE.">DRY_BRUSH</span>
+              </div>
+            </div>
+            <!-- Pen & Ink -->
+            <div class="art-cluster">
+              <div class="art-cat">PEN_INK</div>
+              <div class="art-tags">
+                <span class="art-tag h-target" data-label="LINEWORK" data-value="PRECISE CONTROL OF LINE WEIGHT & DIRECTION.">LINEWORK</span>
+                <span class="art-tag h-target" data-label="POINTILLISM" data-value="IMAGE CONSTRUCTION VIA DISTINCT MICRO-DOTS.">POINTILLISM</span>
+                <span class="art-tag h-target" data-label="CONTOUR" data-value="DEFINING FORM THROUGH OUTER EDGES.">CONTOUR</span>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="card-footer">
+          <span>06 MEDIUMS ARCHIVED</span>
+          <span class="action" onclick="handleTacticalLink('detail.html?module=gallery')">GALLERY &rarr;</span>
+        </div>
+      </section>
+
+      <!-- Projects Laboratory -->
+      <section class="card module-archive timeline-item">
+        <div class="card-header">
+          <h2>PROJECTS LABORATORY</h2>
+          <div class="leds"><span class="dot gray"></span><span class="dot gray"></span></div>
+        </div>
+        <div class="card-body">
+          <p class="subtitle">Artifacts recovered from the field.</p>
+          <div class="project-list">
+            <div class="proj-item">
+              <strong>Metro Display Replica</strong>
+              <p>Metro stop display UI simulation.</p>
+            </div>
+            <div class="proj-item">
+              <strong>Drupal UI Filters</strong>
+              <p>Advanced filter UI components.</p>
+            </div>
+            <div class="proj-item">
+              <strong>AI UI Experiments</strong>
+              <p>Experimental AI interface design.</p>
+            </div>
+          </div>
+        </div>
+        <a href="javascript:void(0)" onclick="handleTacticalLink('detail.html?module=projects')" class="card-footer">
+          <span>03 ARTIFACTS</span>
+          <span class="action">EXPLORE &rarr;</span>
+        </a>
+      </section>
+
+
+
+      <!-- Contact Section -->
+      <section class="card module-bench timeline-item">
+        <div class="card-header">
+          <h2>OPEN FUTURE PORTAL</h2>
+          <div class="leds"><span class="dot orange"></span><span class="dot orange"></span></div>
+        </div>
+        <div class="card-body">
+          <p class="subtitle">Establish communication array.</p>
+          <div class="contact-links">
+            <p><strong>EMAIL:</strong> <a href="mailto:kjjesmon@gmail.com" target="_blank" rel="noopener noreferrer">kjjesmon@gmail.com</a></p>
+            <p><strong>LINKEDIN:</strong> <a href="https://in.linkedin.com/in/jesmon-kj" target="_blank" rel="noopener noreferrer">linkedin.com/in/jesmon-kj</a></p>
+            <p><strong>GITHUB:</strong> <a href="https://github.com/jesmonjames" target="_blank" rel="noopener noreferrer">github.com/jesmonjames</a></p>
+          </div>
+        </div>
+        <div class="card-footer">
+          <span>PING ENDPOINT</span>
+          <span class="action">OPEN &rarr;</span>
+        </div>
+      </section>
+
+    </main>
+  </div>
+
+  <!-- BOTTOM BAR -->
+  <footer class="bottom-bar">
+    <div class="themes">
+      <button class="theme-btn" data-theme="theme-crown">CROWN</button>
+      <button class="theme-btn" data-theme="theme-third-eye">THIRD EYE</button>
+      <button class="theme-btn active" data-theme="theme-throat">THROAT</button>
+      <button class="theme-btn" data-theme="theme-heart">HEART</button>
+      <button class="theme-btn" data-theme="theme-solar">SOLAR</button>
+      <button class="theme-btn" data-theme="theme-sacral">SACRAL</button>
+      <button class="theme-btn" data-theme="theme-root">ROOT</button>
+    </div>
+    <div class="stats">
+      <span class="dot orange animated-pulse"></span> BROADCASTING
+      <span class="separator"> &nbsp;|&nbsp; </span>
+      3 MILESTONES &middot; 6 SKILLS &middot; 3 ARTIFACTS
+    </div>
+  </footer>
+</div>
+
+  <!-- TIC-TAC-TOE CHALLENGE MODAL -->
+  <div id="tttModal" class="ttt-overlay">
+    <div class="ttt-container">
+      <div class="ttt-header">
+        <h3 id="tttTitle">IDENTITY_VERIFICATION</h3>
+        <div id="tttStatus" class="ttt-status">SUBSYSTEM_LOCKED: WIN_TO_PROCEED</div>
+      </div>
+      <div class="ttt-grid" id="tttGrid">
+        <div class="ttt-cell" data-index="0"></div>
+        <div class="ttt-cell" data-index="1"></div>
+        <div class="ttt-cell" data-index="2"></div>
+        <div class="ttt-cell" data-index="3"></div>
+        <div class="ttt-cell" data-index="4"></div>
+        <div class="ttt-cell" data-index="5"></div>
+        <div class="ttt-cell" data-index="6"></div>
+        <div class="ttt-cell" data-index="7"></div>
+        <div class="ttt-cell" data-index="8"></div>
+      </div>
+      <div class="ttt-actions">
+        <button id="tttCancel" class="ttt-btn secondary">ABORT_SYNC</button>
+        <button id="tttReset" class="ttt-btn" style="display: none;">REBOOT_GAME</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- DIAGNOSTICS MODAL -->
+  <div id="diagnosticsModal" class="modal-overlay">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h3>DIAGNOSTICS_REPORT // ADV_ANALYSIS</h3>
+        <button id="closeModal" class="modal-close">[ X ] CLOSE_TERMINAL</button>
+      </div>
+      <div class="modal-body">
+        <div class="modal-grid">
+          <!-- Radar Chart (Enlarged) -->
+          <div class="modal-card">
+            <h4>BIO_SYNAPTIC_RESONANCE</h4>
+            <div class="modal-chart-box">
+              <svg viewBox="0 0 100 100" class="adv-radar">
+                <circle cx="50" cy="50" r="10" stroke="#444" fill="none" />
+                <circle cx="50" cy="50" r="20" stroke="#444" fill="none" />
+                <circle cx="50" cy="50" r="30" stroke="#444" fill="none" />
+                <circle cx="50" cy="50" r="40" stroke="#444" fill="none" />
+                <polygon points="50,13.2 84,50 50,85.2 18.8,50" class="h-target" data-label="TOTAL_SYSTEM_SYNC" data-value="85.7%" fill="var(--text-main)" fill-opacity="0.3" stroke="var(--text-main)" stroke-width="1.5" />
+                <line x1="50" y1="10" x2="50" y2="90" stroke="#444" stroke-width="0.5" />
+                <line x1="10" y1="50" x2="90" y2="50" stroke="#444" stroke-width="0.5" />
+              </svg>
+            </div>
+          </div>
+
+          <!-- Signal Waveform (Complex) -->
+          <div class="modal-card">
+            <h4>TEMPORAL_FLUX_DENSITY</h4>
+            <div class="modal-chart-box">
+              <svg viewBox="0 0 200 100" class="adv-wave">
+                <path d="M0,50 Q10,10 20,50 T40,50 T60,50 T80,50 T100,50 T120,50 T140,50 T160,50 T180,50 T200,50" fill="none" stroke="var(--text-main)" stroke-width="1.5" />
+                <path d="M0,50 Q10,0 20,50 T40,50 T60,50 T80,50 T100,50 T120,50 T140,50 T160,50 T180,50 T200,50" fill="none" stroke="var(--text-main)" stroke-opacity="0.2" stroke-width="1" />
+              </svg>
+            </div>
+          </div>
+
+          <!-- Hex Log -->
+          <div class="modal-card full-width">
+            <h4>HEX_KERNEL_DUMP // REAL_TIME_STREAM</h4>
+            <div class="hex-log-container" id="hexStream">
+              <!-- Streamed content -->
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script src="assets/js/script.js"></script>
+</body>
+</html>
