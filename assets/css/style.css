@@ -509,6 +509,154 @@ h3 {
   width: fit-content;
 }
 
+/* ROLE ROW + LIBRARY ICON */
+.role-row {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.lib-icon-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 28px;
+  height: 28px;
+  border: 1px solid var(--border-color);
+  background: rgba(0, 0, 0, 0.3);
+  color: var(--text-muted);
+  text-decoration: none;
+  transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+  flex-shrink: 0;
+}
+
+.lib-icon-btn svg {
+  width: 14px;
+  height: 14px;
+}
+
+.lib-icon-btn:hover {
+  border-color: var(--text-main);
+  color: var(--text-main);
+  background: rgba(0, 0, 0, 0.5);
+  box-shadow: 0 0 10px var(--text-main);
+}
+
+/* LIBRARY PAGE */
+.library-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 25px;
+  margin-top: 20px;
+}
+
+.book-card {
+  background: rgba(0, 0, 0, 0.3);
+  border: 1px solid var(--border-color);
+  border-left: 3px solid var(--text-main);
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  transition: all 0.3s ease;
+  position: relative;
+  overflow: hidden;
+}
+
+.book-card::before {
+  content: "■ FIELD_LOG";
+  position: absolute;
+  top: 8px;
+  right: 10px;
+  font-size: 7px;
+  font-family: var(--font-mono);
+  color: var(--text-muted);
+  letter-spacing: 1px;
+  opacity: 0.5;
+}
+
+.book-card:hover {
+  border-left-color: var(--text-main);
+  border-color: var(--text-main);
+  transform: translateX(4px);
+  box-shadow: -4px 0 15px var(--text-main), 0 0 15px rgba(0,0,0,0.5);
+}
+
+.book-title {
+  font-family: 'Black Ops One', system-ui;
+  font-size: 13px;
+  color: var(--text-main);
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  line-height: 1.3;
+}
+
+.book-author {
+  font-size: 9px;
+  font-family: var(--font-mono);
+  color: var(--text-muted);
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  border-bottom: 1px dashed var(--border-color);
+  padding-bottom: 8px;
+}
+
+.book-desc {
+  font-size: 12px;
+  color: var(--text-muted);
+  line-height: 1.6;
+  flex-grow: 1;
+}
+
+.book-read-more {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  background: none;
+  border: 1px solid var(--text-main);
+  color: var(--text-main);
+  font-family: var(--font-mono);
+  font-size: 10px;
+  padding: 7px 14px;
+  cursor: pointer;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  transition: all 0.2s;
+  text-decoration: none;
+  width: fit-content;
+  margin-top: 5px;
+}
+
+.book-read-more:hover {
+  background: var(--text-main);
+  color: var(--bg-color);
+  box-shadow: 0 0 15px var(--text-main);
+}
+
+/* BOOK EXPAND (read more toggle) */
+.book-full {
+  display: none;
+  font-size: 12px;
+  color: var(--text-muted);
+  line-height: 1.6;
+  border-top: 1px dashed var(--border-color);
+  padding-top: 10px;
+  margin-top: 5px;
+  animation: tacticalFadeIn 0.3s ease-out;
+}
+
+.book-card.expanded .book-full {
+  display: block;
+}
+
+.book-card.expanded .book-read-more::after {
+  content: " ↑";
+}
+
+.book-read-more::after {
+  content: " →";
+}
+
 .tech-btn {
   margin-top: 25px;
   /* Reduced margin */
