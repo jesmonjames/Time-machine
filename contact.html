@@ -1,0 +1,478 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <!-- PRIMARY SEO -->
+  <title>Contact Jesmon K J | Jesmon James &mdash; Open Future Portal</title>
+  <meta name="description" content="Contact Jesmon K J (Jesmon James) &mdash; UI/UX Engineer, Artist and Teacher from Kochi, India. Email, LinkedIn and GitHub communication channels.">
+  <meta name="keywords" content="Jesmon K J contact, Jesmon James email, Jesmon KJ LinkedIn, contact Jesmon, hire Jesmon K J">
+  <meta name="author" content="Jesmon K J">
+  <meta name="robots" content="index, follow">
+  <link rel="canonical" href="https://jesmonjames.github.io/Time-machine/contact.html">
+
+  <!-- OPEN GRAPH -->
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://jesmonjames.github.io/Time-machine/contact.html">
+  <meta property="og:title" content="Contact Jesmon K J &mdash; Open Future Portal">
+  <meta property="og:description" content="Reach Jesmon K J (Jesmon James) via email, LinkedIn or GitHub.">
+  <meta property="og:site_name" content="Jesmon K J &mdash; Time Machine Portfolio">
+
+  <link rel="stylesheet" href="assets/css/style.css">
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700&family=Space+Mono:ital,wght@0,400;0,700;1,400&family=Black+Ops+One&family=Stardos+Stencil:wght@400;700&family=Goldman:wght@400;700&family=Wallpoet&family=Share+Tech+Mono&family=Roboto+Mono:wght@400;700&family=Courier+Prime:wght@400;700&display=swap" rel="stylesheet">
+
+  <style>
+    /* CONTACT PAGE SPECIFIC */
+    .contact-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 25px;
+      margin-top: 20px;
+    }
+
+    .contact-channel {
+      border: 1px solid var(--border-color);
+      border-left: 3px solid var(--text-main);
+      padding: 25px;
+      background: rgba(0,0,0,0.3);
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      transition: all 0.3s ease;
+      position: relative;
+      overflow: hidden;
+      text-decoration: none;
+    }
+
+    .contact-channel::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(135deg, transparent 60%, rgba(255,255,255,0.02));
+      pointer-events: none;
+    }
+
+    .contact-channel:hover {
+      border-color: var(--text-main);
+      transform: translateY(-3px);
+      box-shadow: 0 8px 30px rgba(0,0,0,0.5), 0 0 15px var(--text-main);
+    }
+
+    .channel-icon {
+      width: 40px;
+      height: 40px;
+      border: 1px solid var(--border-color);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--text-main);
+      background: rgba(0,0,0,0.3);
+    }
+
+    .channel-icon svg {
+      width: 20px;
+      height: 20px;
+    }
+
+    .channel-label {
+      font-size: 9px;
+      font-family: var(--font-mono);
+      color: var(--text-muted);
+      letter-spacing: 2px;
+      text-transform: uppercase;
+    }
+
+    .channel-name {
+      font-family: 'Black Ops One', system-ui;
+      font-size: 16px;
+      color: var(--text-main);
+      letter-spacing: 2px;
+      text-transform: uppercase;
+    }
+
+    .channel-value {
+      font-size: 12px;
+      color: var(--text-muted);
+      font-family: var(--font-mono);
+      word-break: break-all;
+    }
+
+    .channel-cta {
+      margin-top: auto;
+      font-size: 10px;
+      font-family: var(--font-mono);
+      color: var(--text-main);
+      text-transform: uppercase;
+      letter-spacing: 2px;
+    }
+
+    .channel-cta::before {
+      content: "> ";
+    }
+
+    /* SIGNAL STATUS */
+    .signal-status {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+      gap: 15px;
+      margin-top: 25px;
+      padding-top: 20px;
+      border-top: 1px dashed var(--border-color);
+    }
+
+    .sig-item {
+      text-align: center;
+    }
+
+    .sig-label {
+      font-size: 8px;
+      font-family: var(--font-mono);
+      color: var(--text-muted);
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      margin-bottom: 6px;
+    }
+
+    .sig-value {
+      font-size: 13px;
+      font-family: var(--font-mono);
+      color: var(--text-main);
+    }
+
+    /* AVAILABILITY INDICATOR */
+    .availability-bar {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      padding: 18px 20px;
+      background: rgba(0,0,0,0.4);
+      border: 1px solid var(--border-color);
+      margin-bottom: 25px;
+    }
+
+    .avail-dot {
+      width: 10px;
+      height: 10px;
+      background: #39ff14;
+      border-radius: 50%;
+      box-shadow: 0 0 10px #39ff14;
+      animation: pulse 1.5s infinite;
+      flex-shrink: 0;
+    }
+
+    .avail-text {
+      font-size: 11px;
+      font-family: var(--font-mono);
+      color: var(--text-muted);
+      letter-spacing: 1px;
+    }
+
+    .avail-text strong {
+      color: #39ff14;
+    }
+
+    .avail-badge {
+      margin-left: auto;
+      font-size: 9px;
+      font-family: var(--font-mono);
+      color: var(--text-main);
+      border: 1px solid var(--text-main);
+      padding: 3px 8px;
+      letter-spacing: 1px;
+    }
+
+    /* QUICK MESSAGE LOG (decorative) */
+    .msg-terminal {
+      background: #000;
+      border: 1px solid var(--border-color);
+      padding: 15px;
+      font-family: 'Space Mono', monospace;
+      font-size: 10px;
+      color: var(--text-muted);
+      line-height: 1.8;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .msg-terminal::before {
+      content: "COMMS_TERMINAL // CHANNEL_76.26";
+      display: block;
+      font-size: 8px;
+      color: var(--text-main);
+      letter-spacing: 2px;
+      margin-bottom: 10px;
+      border-bottom: 1px dashed var(--border-color);
+      padding-bottom: 8px;
+    }
+
+    .msg-line {
+      opacity: 0;
+      animation: fadeInLine 0.3s forwards;
+    }
+
+    .msg-line span { color: var(--text-main); }
+
+    @keyframes fadeInLine {
+      to { opacity: 1; }
+    }
+
+    .cursor-blink {
+      display: inline-block;
+      width: 8px;
+      height: 13px;
+      background: var(--text-main);
+      animation: blink 0.8s step-end infinite;
+      vertical-align: middle;
+    }
+
+    @keyframes blink {
+      50% { opacity: 0; }
+    }
+
+    @media (max-width: 768px) {
+      .contact-grid { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body class="theme-throat">
+
+  <div class="mini-loader" id="miniLoader" style="display: none;">
+    <div class="mini-loader-content">
+      <div class="mini-spinner"></div>
+      <div id="miniLoadText" style="letter-spacing: 2px;">SYNCING... 0%</div>
+    </div>
+  </div>
+
+  <div class="dashboard">
+    <!-- TOP BAR -->
+    <header class="top-bar">
+      <div class="status-indicator">
+        <span class="dot green animated-pulse"></span> ONLINE | JES-001 | <strong>CLASSIFIED: TS/SCI</strong>
+      </div>
+      <div class="coordinates">
+        OPEN_FUTURE_PORTAL // COMMS_ARRAY
+      </div>
+      <div class="time-display" id="clock">00:00:00</div>
+      <div class="sys-load" id="sysStat">LOAD: 0.12% | RAM: 14GB</div>
+    </header>
+
+    <div class="main-layout">
+      <!-- SIDEBAR -->
+      <aside class="sidebar">
+        <div class="chakra-logo-container" id="chakraLogo"></div>
+        <div class="hero">
+          <div class="hero-label">TIME MACHINE</div>
+          <h1>JESMON<br>K J</h1>
+          <div class="hero-titles">
+            <div class="hero-titles-tags">
+              <p>[ ROLE: ENGINEER | TEACHER ]</p>
+              <p>[ AREA: ARTIST | CREATOR ]</p>
+            </div>
+            <a href="library.html" class="lib-icon-btn" aria-label="My Library">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/>
+                <path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/>
+              </svg>
+            </a>
+          </div>
+          <button onclick="triggerMiniLoader('index.html')" class="tech-btn">BACK_TO_DASHBOARD &larr;</button>
+        </div>
+        <div class="metadata-panel">
+          <div class="sys-data">
+            <p>LAT: 9.9312&deg; N</p>
+            <p>LNG: 76.2673&deg; E</p>
+            <p>ALT: 3 M</p>
+            <p>UNIT: JES-001</p>
+            <p>UPTIME: <span id="uptime">00:00:00</span></p>
+          </div>
+        </div>
+      </aside>
+
+      <!-- MAIN CONTENT -->
+      <div class="full-width-grid">
+        <div style="margin-bottom: 30px;">
+          <button onclick="triggerMiniLoader('index.html')" class="tech-btn">DISCONNECT_STATION &larr;</button>
+        </div>
+
+        <section class="card">
+          <div class="card-header">
+            <h2>OPEN FUTURE PORTAL // COMMS_ARRAY</h2>
+            <div class="leds"><span class="dot orange animated-pulse"></span><span class="dot orange animated-pulse"></span></div>
+          </div>
+          <div class="card-body">
+            <p class="subtitle">Establish a secure communication channel. All frequencies monitored. Response time: <strong style="color: var(--text-main);">24&ndash;48 HRS</strong>.</p>
+
+            <!-- Availability status -->
+            <div class="availability-bar">
+              <div class="avail-dot"></div>
+              <div class="avail-text">OPERATIVE STATUS: <strong>AVAILABLE FOR MISSIONS</strong> &mdash; Open to freelance, collaboration & full-time opportunities.</div>
+              <div class="avail-badge">SIGNAL: LIVE</div>
+            </div>
+
+            <!-- Channel Grid -->
+            <div class="contact-grid">
+
+              <!-- Email -->
+              <a href="mailto:kjjesmon@gmail.com" class="contact-channel" target="_blank" rel="noopener noreferrer">
+                <div class="channel-icon">
+                  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/>
+                    <polyline points="22,6 12,13 2,6"/>
+                  </svg>
+                </div>
+                <div class="channel-label">CHANNEL_01 // DIRECT_COMMS</div>
+                <div class="channel-name">EMAIL</div>
+                <div class="channel-value">kjjesmon@gmail.com</div>
+                <div class="channel-cta">OPEN CHANNEL</div>
+              </a>
+
+              <!-- LinkedIn -->
+              <a href="https://in.linkedin.com/in/jesmon-kj" class="contact-channel" target="_blank" rel="noopener noreferrer">
+                <div class="channel-icon">
+                  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/>
+                    <rect x="2" y="9" width="4" height="12"/>
+                    <circle cx="4" cy="4" r="2"/>
+                  </svg>
+                </div>
+                <div class="channel-label">CHANNEL_02 // PROFESSIONAL_NETWORK</div>
+                <div class="channel-name">LINKEDIN</div>
+                <div class="channel-value">linkedin.com/in/jesmon-kj</div>
+                <div class="channel-cta">VIEW PROFILE</div>
+              </a>
+
+              <!-- GitHub -->
+              <a href="https://github.com/jesmonjames" class="contact-channel" target="_blank" rel="noopener noreferrer">
+                <div class="channel-icon">
+                  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"/>
+                  </svg>
+                </div>
+                <div class="channel-label">CHANNEL_03 // CODE_REPOSITORY</div>
+                <div class="channel-name">GITHUB</div>
+                <div class="channel-value">github.com/jesmonjames</div>
+                <div class="channel-cta">EXPLORE REPOS</div>
+              </a>
+
+              <!-- Location -->
+              <div class="contact-channel" style="cursor: default;">
+                <div class="channel-icon">
+                  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/>
+                    <circle cx="12" cy="10" r="3"/>
+                  </svg>
+                </div>
+                <div class="channel-label">CHANNEL_04 // GROUND_STATION</div>
+                <div class="channel-name">LOCATION</div>
+                <div class="channel-value">KOCHI, KERALA, INDIA<br>LAT: 9.9312&deg; N &middot; LNG: 76.2673&deg; E</div>
+                <div class="channel-cta">STATION_7 // ACTIVE</div>
+              </div>
+
+            </div>
+
+            <!-- Signal Stats -->
+            <div class="signal-status">
+              <div class="sig-item">
+                <div class="sig-label">RESPONSE_TIME</div>
+                <div class="sig-value">24&ndash;48 HRS</div>
+              </div>
+              <div class="sig-item">
+                <div class="sig-label">TIMEZONE</div>
+                <div class="sig-value">IST / UTC+5:30</div>
+              </div>
+              <div class="sig-item">
+                <div class="sig-label">STATUS</div>
+                <div class="sig-value" style="color: #39ff14;">OPEN</div>
+              </div>
+              <div class="sig-item">
+                <div class="sig-label">SIGNAL_STRENGTH</div>
+                <div class="sig-value" id="signalStrength">98.2%</div>
+              </div>
+            </div>
+
+            <!-- Terminal Log (decorative) -->
+            <div class="msg-terminal" style="margin-top: 25px;" id="commsTerminal">
+              <span class="cursor-blink"></span>
+            </div>
+
+          </div>
+        </section>
+
+        <!-- FOOTER -->
+        <footer class="bottom-bar" style="margin-top: 60px;">
+          <div class="themes" id="themeButtons">
+            <button class="theme-btn" data-theme="theme-crown">CROWN</button>
+            <button class="theme-btn" data-theme="theme-third-eye">THIRD EYE</button>
+            <button class="theme-btn" data-theme="theme-throat">THROAT</button>
+            <button class="theme-btn" data-theme="theme-heart">HEART</button>
+            <button class="theme-btn" data-theme="theme-solar">SOLAR</button>
+            <button class="theme-btn" data-theme="theme-sacral">SACRAL</button>
+            <button class="theme-btn" data-theme="theme-root">ROOT</button>
+          </div>
+        </footer>
+      </div>
+    </div>
+  </div>
+
+  <!-- TIC-TAC-TOE MODAL (required for handleTacticalLink) -->
+  <div id="tttModal" class="ttt-overlay">
+    <div class="ttt-container">
+      <div class="ttt-header">
+        <h3 id="tttTitle">IDENTITY_VERIFICATION</h3>
+        <div id="tttStatus" class="ttt-status">SUBSYSTEM_LOCKED: WIN_TO_PROCEED</div>
+      </div>
+      <div class="ttt-grid" id="tttGrid">
+        <div class="ttt-cell" data-index="0"></div>
+        <div class="ttt-cell" data-index="1"></div>
+        <div class="ttt-cell" data-index="2"></div>
+        <div class="ttt-cell" data-index="3"></div>
+        <div class="ttt-cell" data-index="4"></div>
+        <div class="ttt-cell" data-index="5"></div>
+        <div class="ttt-cell" data-index="6"></div>
+        <div class="ttt-cell" data-index="7"></div>
+        <div class="ttt-cell" data-index="8"></div>
+      </div>
+      <div class="ttt-actions">
+        <button id="tttCancel" class="ttt-btn secondary">ABORT_SYNC</button>
+        <button id="tttReset" class="ttt-btn" style="display: none;">REBOOT_GAME</button>
+      </div>
+    </div>
+  </div>
+
+  <div id="tacticalTooltip">
+    <span class="tt-label" id="ttLabel"></span>
+    <span id="ttValue"></span>
+  </div>
+
+  <script src="assets/js/script.js"></script>
+  <script>
+    // Animated terminal comms log
+    const terminal = document.getElementById('commsTerminal');
+    const logs = [
+      { delay: 200,  text: '<span>[SYS]</span> COMMS_ARRAY initialized. Scanning frequencies...' },
+      { delay: 800,  text: '<span>[OK]</span>  Security handshake: ENCRYPTED_v2' },
+      { delay: 1400, text: '<span>[OK]</span>  Channel bandwidth: 1.2 Tbps' },
+      { delay: 2000, text: '<span>[TX]</span>  BROADCASTING identity signature...' },
+      { delay: 2800, text: '<span>[RX]</span>  FREQ_76.26: OPEN — Awaiting input.' },
+      { delay: 3600, text: '<span>[SYS]</span> All channels <span style="color:#39ff14">LIVE</span>. Operative reachable.' },
+    ];
+
+    logs.forEach(({ delay, text }) => {
+      setTimeout(() => {
+        const line = document.createElement('div');
+        line.className = 'msg-line';
+        line.style.animationDelay = '0s';
+        line.innerHTML = text;
+        terminal.insertBefore(line, terminal.lastElementChild);
+      }, delay);
+    });
+
+    // Live signal strength fluctuation
+    setInterval(() => {
+      const el = document.getElementById('signalStrength');
+      if (el) el.textContent = (97 + Math.random() * 2.8).toFixed(1) + '%';
+    }, 2000);
+  </script>
+</body>
+</html>
