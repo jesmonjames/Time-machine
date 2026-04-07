@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://jesmonjames.github.io/Time-machine/sitemap.xml
