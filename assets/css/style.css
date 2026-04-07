@@ -490,9 +490,11 @@ h3 {
 
 .hero-titles {
   display: flex;
-  flex-direction: column;
-  gap: 8px;
+  flex-direction: row;
+  align-items: center;
+  gap: 10px;
   margin-bottom: 18px;
+  width: 100%;
 }
 
 .hero-titles p {
@@ -510,29 +512,33 @@ h3 {
 }
 
 /* ROLE ROW + LIBRARY ICON */
-.role-row {
+.hero-titles-tags {
   display: flex;
-  align-items: center;
+  flex-direction: column;
   gap: 8px;
+  flex: 1;
 }
 
 .lib-icon-btn {
+  position: relative;
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  width: 28px;
-  height: 28px;
+  width: 32px;
+  height: 32px;
   border: 1px solid var(--border-color);
   background: rgba(0, 0, 0, 0.3);
   color: var(--text-muted);
   text-decoration: none;
   transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
   flex-shrink: 0;
+  align-self: center;
+  margin-left: auto;
 }
 
 .lib-icon-btn svg {
-  width: 14px;
-  height: 14px;
+  width: 15px;
+  height: 15px;
 }
 
 .lib-icon-btn:hover {
@@ -540,6 +546,33 @@ h3 {
   color: var(--text-main);
   background: rgba(0, 0, 0, 0.5);
   box-shadow: 0 0 10px var(--text-main);
+}
+
+/* Tooltip */
+.lib-icon-btn::after {
+  content: "My Library";
+  position: absolute;
+  left: 50%;
+  bottom: calc(100% + 8px);
+  transform: translateX(-50%);
+  background: var(--bg-color);
+  color: var(--text-main);
+  border: 1px solid var(--text-main);
+  font-family: var(--font-mono);
+  font-size: 9px;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  padding: 4px 8px;
+  white-space: nowrap;
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity 0.2s ease;
+  z-index: 100;
+  box-shadow: 0 0 8px var(--text-main);
+}
+
+.lib-icon-btn:hover::after {
+  opacity: 1;
 }
 
 /* LIBRARY PAGE */
