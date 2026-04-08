@@ -1,3 +1,41 @@
+// Book Detail Modal Logic
+document.addEventListener('DOMContentLoaded', function() {
+  const modal = document.getElementById('bookDetailModal');
+  const closeBtn = document.getElementById('closeBookModal');
+  const modalTitle = document.getElementById('modalBookTitle');
+  const modalAuthor = document.getElementById('modalBookAuthor');
+  const modalDesc = document.getElementById('modalBookDesc');
+  const modalFull = document.getElementById('modalBookFull');
+  const bookCards = document.querySelectorAll('.book-card');
+  if (modal && closeBtn && modalTitle && modalAuthor && modalDesc && modalFull && bookCards.length) {
+    bookCards.forEach(card => {
+      const readMoreBtn = card.querySelector('.book-read-more');
+      if (readMoreBtn) {
+        readMoreBtn.onclick = function(e) {
+          e.preventDefault();
+          modalTitle.textContent = card.querySelector('.book-title').textContent;
+          modalAuthor.textContent = card.querySelector('.book-author').textContent;
+          modalDesc.textContent = card.querySelector('.book-desc').textContent;
+          modalFull.textContent = card.querySelector('.book-full').textContent;
+          modal.classList.add('active');
+          document.body.style.overflow = 'hidden';
+          setTimeout(() => { closeBtn.focus(); }, 50);
+        };
+      }
+    });
+    closeBtn.onclick = function() {
+      modal.classList.remove('active');
+      document.body.style.overflow = '';
+    };
+    // Close modal on outside click
+    modal.onclick = function(e) {
+      if (e.target === modal) {
+        modal.classList.remove('active');
+        document.body.style.overflow = '';
+      }
+    };
+  }
+});
 window.addEventListener("load", function() {
   const loader = document.getElementById("loader");
   const bootLog = document.getElementById("bootLog");
