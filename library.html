@@ -1,13 +1,16 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
   <!-- PRIMARY SEO -->
   <title>Jesmon K J — Field Library | Books Read by Jesmon James</title>
-  <meta name="description" content="Books read by Jesmon K J (Jesmon James) — a curated library of influential reads across engineering, design, philosophy, art and psychology.">
-  <meta name="keywords" content="Jesmon K J books, Jesmon James reading list, Jesmon library, Jesmon KJ, books read by Jesmon">
+  <meta name="description"
+    content="Books read by Jesmon K J (Jesmon James) — a curated library of influential reads across engineering, design, philosophy, art and psychology.">
+  <meta name="keywords"
+    content="Jesmon K J books, Jesmon James reading list, Jesmon library, Jesmon KJ, books read by Jesmon">
   <meta name="author" content="Jesmon K J">
   <meta name="robots" content="index, follow">
   <link rel="canonical" href="https://jesmonjames.github.io/Time-machine/library.html">
@@ -16,11 +19,15 @@
   <meta property="og:type" content="website">
   <meta property="og:url" content="https://jesmonjames.github.io/Time-machine/library.html">
   <meta property="og:title" content="Jesmon K J — Field Library">
-  <meta property="og:description" content="Books that shaped Jesmon K J (Jesmon James) — design, engineering, philosophy, art and psychology picks.">
+  <meta property="og:description"
+    content="Books that shaped Jesmon K J (Jesmon James) — design, engineering, philosophy, art and psychology picks.">
   <meta property="og:site_name" content="Jesmon K J — Time Machine Portfolio">
   <link rel="stylesheet" href="assets/css/style.css">
-  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700&family=Space+Mono:ital,wght@0,400;0,700;1,400&family=Black+Ops+One&family=Stardos+Stencil:wght@400;700&family=Goldman:wght@400;700&family=Wallpoet&family=Share+Tech+Mono&family=Roboto+Mono:wght@400;700&family=Courier+Prime:wght@400;700&display=swap" rel="stylesheet">
+  <link
+    href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700&family=Space+Mono:ital,wght@0,400;0,700;1,400&family=Black+Ops+One&family=Stardos+Stencil:wght@400;700&family=Goldman:wght@400;700&family=Wallpoet&family=Share+Tech+Mono&family=Roboto+Mono:wght@400;700&family=Courier+Prime:wght@400;700&display=swap"
+    rel="stylesheet">
 </head>
+
 <body class="theme-throat">
 
   <div class="mini-loader" id="miniLoader" style="display: none;">
@@ -58,9 +65,10 @@
               <p>[ AREA: ARTIST | CREATOR ]</p>
             </div>
             <a href="library.html" class="lib-icon-btn" aria-label="My Library">
-              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
-                <path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/>
-                <path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/>
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20" />
+                <path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z" />
               </svg>
             </a>
           </div>
@@ -80,6 +88,7 @@
 
       <!-- MAIN CONTENT -->
       <div class="full-width-grid">
+
         <div style="margin-bottom: 30px;">
           <button onclick="triggerMiniLoader('index.html')" class="tech-btn">DISCONNECT_STATION &larr;</button>
         </div>
@@ -90,20 +99,17 @@
             <div class="leds"><span class="dot active"></span><span class="dot gray"></span></div>
           </div>
           <div class="card-body">
-            <p class="subtitle">Classified catalogue of field reading materials — texts that shaped the operative's thinking across engineering, creativity & philosophy.</p>
+            <p class="subtitle">Classified catalogue of field reading materials — texts that shaped the operative's
+              thinking across engineering, creativity & philosophy.</p>
 
             <!-- Filter Tags -->
             <div class="skills-tags" style="margin-bottom: 25px;" id="filterTags">
-              <span class="tag filter-tag active" data-filter="all">ALL</span>
-              <span class="tag filter-tag" data-filter="design">DESIGN</span>
-              <span class="tag filter-tag" data-filter="philosophy">PHILOSOPHY</span>
-              <span class="tag filter-tag" data-filter="engineering">ENGINEERING</span>
-              <span class="tag filter-tag" data-filter="art">ART</span>
-              <span class="tag filter-tag" data-filter="psychology">PSYCHOLOGY</span>
+              <!-- Filter tags will be generated dynamically by JavaScript. -->
             </div>
 
             <div class="library-grid" id="libraryGrid">
-
+              <!-- Book cards will be rendered here by JavaScript. -->
+            </div>
             <!-- Book Detail Modal -->
             <div id="bookDetailModal" class="book-detail-modal">
               <div class="book-detail-content">
@@ -114,113 +120,24 @@
                 <div id="modalBookFull"></div>
               </div>
             </div>
-
-              <!-- Book 1 -->
-              <div class="book-card" data-category="design">
-                <div class="book-title">The Design of Everyday Things</div>
-                <div class="book-author">— Don Norman &middot; DESIGN / UX</div>
-                <p class="book-desc">A foundational text on human-centred design. Explores why some products satisfy users while others frustrate them, and how design can communicate its own use.</p>
-                <div class="book-full">
-                  The book introduced the concept of affordances — the relationship between a user and an object. It fundamentally changed how I approach interface architecture. Every element on a screen should communicate its own interaction model without requiring instruction. This idea drives every UI decision I make.
-                </div>
-                <button class="book-read-more" onclick="toggleBook(this)">READ MORE</button>
-              </div>
-
-              <!-- Book 2 -->
-              <div class="book-card" data-category="philosophy">
-                <div class="book-title">Meditations</div>
-                <div class="book-author">— Marcus Aurelius &middot; PHILOSOPHY / STOICISM</div>
-                <p class="book-desc">Private journal of a Roman emperor — a manual on controlling perception, directing action with purpose, and accepting what cannot be changed.</p>
-                <div class="book-full">
-                  Written for no audience but himself, Aurelius' meditations become a timeless field manual for navigating chaos. The practice of separating what is within our control from what is not has direct applications to both engineering under pressure and creative work during failure. Essential reading.
-                </div>
-                <button class="book-read-more" onclick="toggleBook(this)">READ MORE</button>
-              </div>
-
-              <!-- Book 3 -->
-              <div class="book-card" data-category="art">
-                <div class="book-title">The Artist's Way</div>
-                <div class="book-author">— Julia Cameron &middot; ART / CREATIVITY</div>
-                <p class="book-desc">A 12-week program for recovering and discovering creative self. Introduces the concept of morning pages and the artist's date as tools for creative recovery.</p>
-                <div class="book-full">
-                  This book dismantled the internal censors that block creative flow. The morning pages practice — three uncensored, handwritten pages each morning — became a mechanism to separate noise from genuine creative impulse. It connected the technical and artistic sides of my practice in unexpected ways.
-                </div>
-                <button class="book-read-more" onclick="toggleBook(this)">READ MORE</button>
-              </div>
-
-              <!-- Book 4 -->
-              <div class="book-card" data-category="engineering">
-                <div class="book-title">Clean Code</div>
-                <div class="book-author">— Robert C. Martin &middot; ENGINEERING / SOFTWARE</div>
-                <p class="book-desc">A handbook for writing readable, maintainable code. Argues that writing clean code is a professional responsibility, not just a preference.</p>
-                <div class="book-full">
-                  The book's central argument — that code is read far more often than it is written — reshaped how I think about variable naming, function scope, and component structure. The metaphor of code as a newspaper article, where the important summary is at the top, directly influenced how I architect component trees.
-                </div>
-                <button class="book-read-more" onclick="toggleBook(this)">READ MORE</button>
-              </div>
-
-              <!-- Book 5 -->
-              <div class="book-card" data-category="psychology">
-                <div class="book-title">Thinking, Fast and Slow</div>
-                <div class="book-author">— Daniel Kahneman &middot; PSYCHOLOGY / BEHAVIOUR</div>
-                <p class="book-desc">Explores the two systems that drive the way we think — System 1 (fast, intuitive) and System 2 (slow, deliberate) — and the biases they produce.</p>
-                <div class="book-full">
-                  Understanding cognitive biases changed how I design user interfaces. Users operate primarily in System 1 — they react before they think. Designing for this means reducing friction, using familiar patterns, and ensuring that dangerous actions require deliberate, System 2 engagement. This book is a UX bible in disguise.
-                </div>
-                <button class="book-read-more" onclick="toggleBook(this)">READ MORE</button>
-              </div>
-
-              <!-- Book 6 -->
-              <div class="book-card" data-category="art">
-                <div class="book-title">Ways of Seeing</div>
-                <div class="book-author">— John Berger &middot; ART / VISUAL CULTURE</div>
-                <p class="book-desc">A radical analysis of how we look at images and how our cultural conditioning shapes visual perception — based on the landmark BBC television series.</p>
-                <div class="book-full">
-                  Berger argues that we never simply look at art — we are already carrying assumptions about gender, class, and social power that shape every perception. This awareness fundamentally altered how I compose visual work, asking: who is this made for, and what does the framing convey without words?
-                </div>
-                <button class="book-read-more" onclick="toggleBook(this)">READ MORE</button>
-              </div>
-
-              <!-- Book 7 -->
-              <div class="book-card" data-category="philosophy">
-                <div class="book-title">Atomic Habits</div>
-                <div class="book-author">— James Clear &middot; PHILOSOPHY / BEHAVIOUR</div>
-                <p class="book-desc">A proven framework for building good habits and breaking bad ones. Argues that systems, not goals, are the foundation of lasting improvement.</p>
-                <div class="book-full">
-                  The core insight — that identity is shaped by the small actions we repeat, not by our aspirations — changed how I approach learning. Instead of aiming to "become a better developer," I focused on daily habits: one component built, one concept documented. The compound effect is real and measurable over time.
-                </div>
-                <button class="book-read-more" onclick="toggleBook(this)">READ MORE</button>
-              </div>
-
-              <!-- Book 8 -->
-              <div class="book-card" data-category="design">
-                <div class="book-title">Don't Make Me Think</div>
-                <div class="book-author">— Steve Krug &middot; DESIGN / UX / WEB</div>
-                <p class="book-desc">The definitive guide to web usability. Argues that effective web design removes cognitive load so users can navigate with minimal effort.</p>
-                <div class="book-full">
-                  Krug's first law — "Don't make me think" — sounds simple but is ruthlessly hard to execute. Every element that forces users to pause and question is a failure of design. This book recalibrated my instinct for when to add and when to remove, which in practice means removing far more than feels comfortable.
-                </div>
-                <button class="book-read-more" onclick="toggleBook(this)">READ MORE</button>
-              </div>
-
+          </div>
+          <!-- RELOCATED FOOTER -->
+          <footer class="bottom-bar" style="margin-top: 60px;">
+            <div class="themes" id="themeButtons">
+              <button class="theme-btn" data-theme="theme-crown">CROWN</button>
+              <button class="theme-btn" data-theme="theme-third-eye">THIRD EYE</button>
+              <button class="theme-btn" data-theme="theme-throat">THROAT</button>
+              <button class="theme-btn" data-theme="theme-heart">HEART</button>
+              <button class="theme-btn" data-theme="theme-solar">SOLAR</button>
+              <button class="theme-btn" data-theme="theme-sacral">SACRAL</button>
+              <button class="theme-btn" data-theme="theme-root">ROOT</button>
             </div>
-          </div>
-        </section>
-
-        <!-- RELOCATED FOOTER -->
-        <footer class="bottom-bar" style="margin-top: 60px;">
-          <div class="themes" id="themeButtons">
-            <button class="theme-btn" data-theme="theme-crown">CROWN</button>
-            <button class="theme-btn" data-theme="theme-third-eye">THIRD EYE</button>
-            <button class="theme-btn" data-theme="theme-throat">THROAT</button>
-            <button class="theme-btn" data-theme="theme-heart">HEART</button>
-            <button class="theme-btn" data-theme="theme-solar">SOLAR</button>
-            <button class="theme-btn" data-theme="theme-sacral">SACRAL</button>
-            <button class="theme-btn" data-theme="theme-root">ROOT</button>
-          </div>
-        </footer>
+          </footer>
       </div>
+      </section>
+
     </div>
+  </div>
   </div>
 
   <div id="tacticalTooltip">
@@ -230,21 +147,163 @@
 
   <script src="assets/js/script.js"></script>
   <script>
-    // Filter logic
-    document.querySelectorAll('.filter-tag').forEach(tag => {
-      tag.addEventListener('click', () => {
-        document.querySelectorAll('.filter-tag').forEach(t => t.classList.remove('active'));
-        tag.classList.add('active');
+    let books = [];
+    let currentPage = 1;
+    const booksPerPage = 12;
 
-        const filter = tag.dataset.filter;
-        document.querySelectorAll('.book-card').forEach(card => {
-          if (filter === 'all' || card.dataset.category === filter) {
-            card.style.display = 'flex';
-          } else {
-            card.style.display = 'none';
-          }
-        });
+    fetch('assets/js/books.json')
+      .then(response => response.json())
+      .then(data => {
+        books = data;
+        renderFilterTags();
+        renderBooks();
+        renderPagination();
       });
+
+    function renderFilterTags() {
+      const filterTags = document.getElementById('filterTags');
+      const types = Array.from(new Set(books.map(b => (b.type || 'other').toLowerCase())));
+      filterTags.innerHTML = '<span class="tag filter-tag active" data-filter="all">ALL</span>' +
+        types.map(type => `<span class="tag filter-tag" data-filter="${type}">${type.toUpperCase()}</span>`).join('');
+    }
+
+    let currentFilter = 'all';
+    function renderBooks(filter = currentFilter, page = currentPage) {
+      currentFilter = filter;
+      currentPage = page;
+      const grid = document.getElementById('libraryGrid');
+      // Fade out
+      grid.classList.add('fading');
+      setTimeout(() => {
+        grid.innerHTML = '';
+        // Filter books
+        const filteredBooks = books.filter(book => {
+          const type = (book.type || 'other').toLowerCase();
+          return filter === 'all' || filter === type;
+        });
+        // Pagination
+        const start = (page - 1) * booksPerPage;
+        const end = start + booksPerPage;
+        const pageBooks = filteredBooks.slice(start, end);
+        pageBooks.forEach(book => {
+          const type = (book.type || 'other').toLowerCase();
+          const card = document.createElement('div');
+          card.className = 'book-card';
+          card.setAttribute('data-category', type);
+          card.setAttribute('tabindex', '0'); // Make focusable
+          card.innerHTML = `
+            <div class="book-title">${book.name}</div>
+            <div class="book-author">— ${book.author || ''} ${book.type ? '&middot; ' + book.type.toUpperCase() : ''}</div>
+            ${book.short_description ? `<p class="book-desc">${book.short_description}</p>` : ''}
+            <div class="book-full" style="display:none;">${book.detailed_description || ''}</div>
+            <button class="book-read-more">READ MORE</button>
+          `;
+          grid.appendChild(card);
+        });
+        // Attach modal logic
+        document.querySelectorAll('.book-read-more').forEach(btn => {
+          btn.onclick = function (e) {
+            e.preventDefault();
+            const card = btn.closest('.book-card');
+            document.getElementById('modalBookTitle').textContent = card.querySelector('.book-title').textContent;
+            document.getElementById('modalBookAuthor').textContent = card.querySelector('.book-author').textContent;
+            const desc = card.querySelector('.book-desc');
+            document.getElementById('modalBookDesc').textContent = desc ? desc.textContent : '';
+            document.getElementById('modalBookFull').textContent = card.querySelector('.book-full').textContent;
+            document.getElementById('bookDetailModal').classList.add('active');
+            document.body.style.overflow = 'hidden';
+            setTimeout(() => { document.getElementById('closeBookModal').focus(); }, 50);
+          };
+        });
+        renderPagination(filteredBooks.length, page);
+        // Fade in
+        setTimeout(() => {
+          grid.classList.remove('fading');
+          // Focus first card after fade in
+          const firstCard = document.querySelector('.library-grid .book-card');
+          if (firstCard) firstCard.focus();
+        }, 10);
+      }, 400);
+    }
+
+    function renderPagination(totalBooks = books.length, page = currentPage) {
+      let pagination = document.getElementById('pagination');
+      if (!pagination) {
+        pagination = document.createElement('div');
+        pagination.id = 'pagination';
+        pagination.style = 'text-align:center;margin:30px 0;';
+        document.querySelector('.card-body').appendChild(pagination);
+      }
+      pagination.innerHTML = '';
+      const totalPages = Math.ceil(totalBooks / booksPerPage);
+      if (totalPages <= 1) {
+        pagination.style.display = 'none';
+        return;
+      }
+      pagination.style.display = '';
+      // Prev button
+      const prevBtn = document.createElement('button');
+      prevBtn.textContent = 'Prev';
+      prevBtn.disabled = page === 1;
+      prevBtn.className = 'pagination-btn';
+      prevBtn.onclick = () => {
+        renderBooks(currentFilter, page - 1);
+        setTimeout(() => {
+          const firstCard = document.querySelector('.library-grid .book-card');
+          if (firstCard) firstCard.focus();
+        }, 0);
+      };
+      pagination.appendChild(prevBtn);
+      // Page numbers
+      for (let i = 1; i <= totalPages; i++) {
+        const pageBtn = document.createElement('button');
+        pageBtn.textContent = i;
+        pageBtn.className = 'pagination-btn' + (i === page ? ' active' : '');
+        pageBtn.disabled = i === page;
+        pageBtn.onclick = () => {
+          renderBooks(currentFilter, i);
+          setTimeout(() => {
+            const firstCard = document.querySelector('.library-grid .book-card');
+            if (firstCard) firstCard.focus();
+          }, 0);
+        };
+        pagination.appendChild(pageBtn);
+      }
+      // Next button
+      const nextBtn = document.createElement('button');
+      nextBtn.textContent = 'Next';
+      nextBtn.disabled = page === totalPages;
+      nextBtn.className = 'pagination-btn';
+      nextBtn.onclick = () => {
+        renderBooks(currentFilter, page + 1);
+        setTimeout(() => {
+          const firstCard = document.querySelector('.library-grid .book-card');
+          if (firstCard) firstCard.focus();
+        }, 0);
+      };
+      pagination.appendChild(nextBtn);
+    }
+
+    // Modal close logic
+    document.getElementById('closeBookModal').onclick = function () {
+      document.getElementById('bookDetailModal').classList.remove('active');
+      document.body.style.overflow = '';
+    };
+    document.getElementById('bookDetailModal').onclick = function (e) {
+      if (e.target === this) {
+        this.classList.remove('active');
+        document.body.style.overflow = '';
+      }
+    };
+
+    // Filter logic (case-insensitive)
+    document.getElementById('filterTags').addEventListener('click', function (e) {
+      if (e.target.classList.contains('filter-tag')) {
+        document.querySelectorAll('.filter-tag').forEach(t => t.classList.remove('active'));
+        e.target.classList.add('active');
+        const filter = e.target.getAttribute('data-filter');
+        renderBooks(filter, 1);
+      }
     });
 
     // Read More toggle
@@ -253,6 +312,60 @@
       card.classList.toggle('expanded');
       btn.textContent = card.classList.contains('expanded') ? 'COLLAPSE' : 'READ MORE';
     }
+
+    // Make book cards focusable for accessibility
+    document.addEventListener('DOMContentLoaded', function () {
+      const style = document.createElement('style');
+      style.innerHTML = `.book-card { outline: none; }`;
+      document.head.appendChild(style);
+    });
   </script>
-</body>
-</html>
+  <style>
+    /* Military theme pagination styles */
+    #pagination {
+      margin: 30px 0 0 0;
+      text-align: center;
+    }
+
+    .pagination-btn {
+      background: #232b2b;
+      color: #e2e28f;
+      border: 2px solid #4b5320;
+      font-family: 'Share Tech Mono', 'Courier New', Courier, monospace;
+      font-size: 1.1em;
+      margin: 0 3px;
+      padding: 7px 16px;
+      border-radius: 4px;
+      cursor: pointer;
+      transition: background 0.2s, color 0.2s, border 0.2s;
+      box-shadow: 0 2px 6px rgba(35, 43, 43, 0.12);
+      letter-spacing: 2px;
+    }
+
+    .pagination-btn.active,
+    .pagination-btn:disabled {
+      background: #4b5320;
+      color: #fff;
+      border-color: #e2e28f;
+      cursor: default;
+      font-weight: bold;
+      box-shadow: 0 0 0 2px #e2e28f44;
+    }
+
+    .pagination-btn:hover:not(:disabled):not(.active) {
+      background: #e2e28f;
+      color: #232b2b;
+      border-color: #4b5320;
+    }
+
+    /* Smooth fade transition for book grid */
+    .library-grid {
+      transition: opacity 0.4s cubic-bezier(.4, 0, .2, 1);
+      opacity: 1;
+    }
+
+    .library-grid.fading {
+      opacity: 0;
+      pointer-events: none;
+    }
+  </style>

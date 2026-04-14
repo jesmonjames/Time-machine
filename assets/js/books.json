@@ -1,0 +1,281 @@
+[
+    {
+        "name": "Astronomy in Minutes",
+        "author": "Giles Sparrow",
+        "type": "science",
+        "short_description": "A quick guide to understanding astronomy.",
+        "detailed_description": "Astronomy in Minutes explains the vast universe in short and easily understandable sections. The book introduces readers to stars, galaxies, black holes, cosmology, and the evolution of the universe. It simplifies complex astronomical theories and discoveries into concise explanations, making it ideal for beginners who want to grasp how the universe works."
+    },
+    {
+        "name": "Eternal Echoes",
+        "author": "Sadhguru",
+        "type": "philosophy",
+        "short_description": "A reflective exploration of human thoughts and timeless ideas.",
+        "detailed_description": "Eternal Echoes reflects on ideas that transcend time such as identity, memory, love, and spiritual awareness. Through reflective writing and philosophical observations, the book explores how human experiences echo across generations and how thoughts and emotions shape our perception of life."
+    },
+    {
+        "name": "The Incredible Banker",
+        "author": "Ravi Subramanian",
+        "type": "fiction",
+        "short_description": "A corporate thriller set in the banking world.",
+        "detailed_description": "The Incredible Banker is a fast-paced story that dives into the world of corporate banking, ambition, power struggles, and ethical dilemmas. It follows professionals navigating the intense pressures of the financial industry while dealing with ambition, personal values, and the consequences of decisions."
+    },
+    {
+        "name": "Hyperfocus",
+        "author": "Chris Bailey",
+        "type": "productivity",
+        "short_description": "A guide to improving concentration and deep work.",
+        "detailed_description": "Hyperfocus explores how attention works and how people can train their minds to focus better in a distracted world. The book explains two important mental states—hyperfocus and scatterfocus—and provides practical strategies to improve productivity, creativity, and mental clarity."
+    },
+    {
+        "name": "Get Epic Shit Done",
+        "author": "Ankur Warikoo",
+        "type": "self_help",
+        "short_description": "Motivational advice for achieving personal goals.",
+        "detailed_description": "Get Epic Shit Done encourages readers to build discipline, self-awareness, and clarity in their lives. Through personal experiences and practical tips, the book shows how small consistent actions, strong habits, and the right mindset can help individuals achieve meaningful success."
+    },
+    {
+        "name": "Healing Is the New High",
+        "author": "Vex King",
+        "type": "spirituality",
+        "short_description": "A guide to emotional healing and inner peace.",
+        "detailed_description": "Healing Is the New High focuses on self-love, emotional recovery, and spiritual growth. Vex King explains how unresolved trauma, negative thoughts, and emotional pain can affect life and provides tools such as mindfulness, affirmations, and inner work to achieve healing."
+    },
+    {
+        "name": "The Secret",
+        "author": "Rhonda Byrne",
+        "type": "self_help",
+        "short_description": "A book about the law of attraction.",
+        "detailed_description": "The Secret introduces the concept of the law of attraction, which suggests that positive thoughts attract positive outcomes. The book teaches readers to visualize goals, maintain gratitude, and align their mindset with success and abundance."
+    },
+    {
+        "name": "Do Epic Shit",
+        "author": "Ankur Warikoo",
+        "type": "self_help",
+        "short_description": "Life lessons about ambition and personal growth.",
+        "detailed_description": "Do Epic Shit contains short reflections on success, failure, discipline, and happiness. Warikoo shares insights from his career and life experiences to inspire readers to take bold decisions and build meaningful lives."
+    },
+    {
+        "name": "Van Gogh",
+        "author": "Various",
+        "type": "art",
+        "short_description": "A study of the life and art of Vincent Van Gogh.",
+        "detailed_description": "This book explores the life of Vincent Van Gogh, one of the most influential painters in art history. It examines his artistic style, emotional struggles, and groundbreaking paintings that shaped modern art."
+    },
+    {
+        "name": "Ikigai",
+        "author": "Hector Garcia and Francesc Miralles",
+        "type": "philosophy",
+        "short_description": "The Japanese philosophy of finding purpose.",
+        "detailed_description": "Ikigai explores the Japanese idea of living with purpose and balance. The book studies how people in Okinawa live long, meaningful lives by combining passion, mission, vocation, and profession."
+    },
+    {
+        "name": "How to Win Friends and Influence People",
+        "author": "Dale Carnegie",
+        "type": "self_help",
+        "short_description": "Classic book on communication and relationships.",
+        "detailed_description": "This timeless book teaches principles of effective communication, leadership, and human relations. Dale Carnegie explains how empathy, appreciation, and positive influence can strengthen relationships and help individuals succeed in personal and professional life."
+    },
+    {
+        "name": "Atomic Habits",
+        "author": "James Clear",
+        "type": "self_help",
+        "short_description": "A system for building good habits.",
+        "detailed_description": "Atomic Habits explains how small daily improvements can lead to remarkable results. James Clear introduces a framework for building good habits, breaking bad ones, and designing systems that make success easier."
+    },
+    {
+        "name": "Sapiens",
+        "author": "Yuval Noah Harari",
+        "type": "history",
+        "short_description": "A history of humankind.",
+        "detailed_description": "Sapiens traces the history of humanity from ancient hunter-gatherers to modern technological societies. Harari explains how biology, culture, economics, and religion shaped human civilization."
+    },
+    {
+        "name": "The Psychology of Money",
+        "author": "Morgan Housel",
+        "type": "finance",
+        "short_description": "Understanding how people think about money.",
+        "detailed_description": "The Psychology of Money explores how human behavior influences financial decisions. Through stories and real-life examples, Morgan Housel explains why patience, discipline, and emotional control are essential for financial success."
+    },
+    {
+        "name": "Chirikkunna Marapava",
+        "author": "Vaikom Muhammad Basheer",
+        "type": "fiction",
+        "short_description": "A Malayalam literary work.",
+        "detailed_description": "This novel reflects Basheer's unique storytelling style combining humor, philosophy, and human emotions. It explores the absurdities and beauty of life through simple yet profound narratives."
+    },
+    {
+        "name": "Viddikalude Swargam",
+        "author": "Vaikom Muhammad Basheer",
+        "type": "fiction",
+        "short_description": "A satirical Malayalam novel.",
+        "detailed_description": "Viddikalude Swargam portrays human foolishness and societal hypocrisy with humor and satire. Basheer's writing exposes human weaknesses while celebrating innocence and compassion."
+    },
+    {
+        "name": "Dopamine Detox",
+        "author": "Thibaut Meurisse",
+        "type": "psychology",
+        "short_description": "Reducing distractions and improving focus.",
+        "detailed_description": "Dopamine Detox explains how overstimulation from social media, entertainment, and instant gratification can damage focus and motivation. The book teaches strategies to reset the brain and regain discipline."
+    },
+    {
+        "name": "Pranayathinte Moonnam Kannu",
+        "author": "K. V. Mohankumar",
+        "type": "fiction",
+        "short_description": "A Malayalam romantic novel.",
+        "detailed_description": "This novel explores love, emotions, and relationships through deep psychological and emotional storytelling, portraying how love transforms individuals."
+    },
+    {
+        "name": "Who Moved My Cheese",
+        "author": "Spencer Johnson",
+        "type": "self_help",
+        "short_description": "A story about dealing with change.",
+        "detailed_description": "Through a simple allegory of characters searching for cheese in a maze, the book teaches how people react to change and why adaptability is essential for success."
+    },
+    {
+        "name": "The Alchemist",
+        "author": "Paulo Coelho",
+        "type": "philosophy",
+        "short_description": "A spiritual journey to follow one's dreams.",
+        "detailed_description": "The Alchemist follows Santiago, a shepherd who travels in search of treasure and discovers deeper truths about destiny, faith, and the pursuit of dreams."
+    },
+    {
+        "name": "Francis Ittikora",
+        "author": "T. D. Ramakrishnan",
+        "type": "fiction",
+        "detailed_description": "A historical thriller exploring the legend of Francis Ittikora, a mysterious figure connected to global trade networks and hidden histories."
+    },
+    {
+        "name": "The Valkyries",
+        "author": "Paulo Coelho",
+        "type": "spirituality",
+        "detailed_description": "The Valkyries narrates Coelho’s spiritual journey in the Mojave Desert where he confronts fears and seeks contact with angels."
+    },
+    {
+        "name": "Premalekhanam",
+        "author": "Vaikom Muhammad Basheer",
+        "type": "fiction",
+        "detailed_description": "A humorous and romantic Malayalam novel about love between two individuals from different religious backgrounds."
+    },
+    {
+        "name": "Cheviyorkuka Anthimakahalam",
+        "author": "Vaikom Muhammad Basheer",
+        "type": "fiction",
+        "detailed_description": "A philosophical narrative reflecting on life, mortality, and human experiences."
+    },
+    {
+        "name": "Ego Is the Enemy",
+        "author": "Ryan Holiday",
+        "type": "philosophy",
+        "detailed_description": "The book explains how ego can destroy success and teaches humility, discipline, and self-awareness."
+    },
+    {
+        "name": "Ormakuripp",
+        "author": "Vaikom Muhammad Basheer",
+        "type": "memoir",
+        "detailed_description": "A reflective memoir capturing Basheer’s memories, struggles, and insights about life."
+    },
+    {
+        "name": "Think Like a Monk",
+        "author": "Jay Shetty",
+        "type": "self_help",
+        "detailed_description": "Jay Shetty explains how monk wisdom can help modern people develop clarity, peace, and purpose."
+    },
+    {
+        "name": "Outgrowing God",
+        "author": "Richard Dawkins",
+        "type": "science",
+        "detailed_description": "A critical examination of religion encouraging rational thinking and scientific understanding."
+    },
+    {
+        "name": "The Magic",
+        "author": "Rhonda Byrne",
+        "type": "self_help",
+        "detailed_description": "A follow-up to The Secret focusing on gratitude practices to transform life."
+    },
+    {
+        "name": "Mindf*cked",
+        "author": "Anubhav Agrawal",
+        "type": "poetry",
+        "detailed_description": "A collection of raw poetry expressing heartbreak, love, and emotional struggles."
+    },
+    {
+        "name": "Aadujeevitham",
+        "author": "Benyamin",
+        "type": "fiction",
+        "detailed_description": "A powerful Malayalam novel about a migrant worker’s struggle for survival in the Arabian desert."
+    },
+    {
+        "name": "Vythyastharakan",
+        "author": "Dr Alexander Jacob",
+        "type": "biography",
+        "detailed_description": "An inspiring account of leadership and ethical service by IPS officer Alexander Jacob."
+    },
+    {
+        "name": "Sex, Power and Money",
+        "author": "Osho",
+        "type": "philosophy",
+        "detailed_description": "Osho discusses humanity’s obsession with power, sexuality, and wealth while encouraging deeper awareness."
+    },
+    {
+        "name": "Jesus Lived in India",
+        "author": "Holger Kersten",
+        "type": "history",
+        "detailed_description": "A controversial historical theory suggesting that Jesus traveled to India during his life."
+    },
+    {
+        "name": "The Subtle Art of Not Giving a F*ck",
+        "author": "Mark Manson",
+        "type": "self_help",
+        "detailed_description": "A counter-intuitive guide encouraging people to focus only on what truly matters in life."
+    },
+    {
+        "name": "The Telomere Effect",
+        "author": "Elizabeth Blackburn",
+        "type": "health",
+        "detailed_description": "Explains how lifestyle choices influence aging at the cellular level through telomeres."
+    },
+    {
+        "name": "The Constitution of India",
+        "author": "B. R. Ambedkar",
+        "type": "law",
+        "detailed_description": "The foundational legal document outlining India’s political structure, rights, and governance."
+    },
+    {
+        "name": "The Art of Seduction",
+        "author": "Robert Greene",
+        "type": "psychology",
+        "detailed_description": "A study of historical seduction strategies and psychological influence."
+    },
+    {
+        "name": "The Immortals of Meluha",
+        "author": "Amish Tripathi",
+        "type": "mythology",
+        "detailed_description": "A reimagining of Lord Shiva’s journey in an ancient civilization blending mythology with fiction."
+    },
+    {
+        "name": "Harry Potter and the Goblet of Fire",
+        "author": "J. K. Rowling",
+        "type": "fantasy",
+        "detailed_description": "Harry competes in the dangerous Triwizard Tournament while dark forces gather strength."
+    },
+    {
+        "name": "The Power of Your Subconscious Mind",
+        "author": "Joseph Murphy",
+        "type": "self_help",
+        "detailed_description": "A classic book explaining how subconscious beliefs influence success, health, and happiness."
+    },
+    {
+        "name": "Mario's Goa",
+        "author": "Mario de Miranda",
+        "type": "art",
+        "short_description": "A humorous illustrated portrayal of life and culture in Goa.",
+        "detailed_description": "Mario's Goa is a beautifully illustrated book by the legendary Indian cartoonist Mario de Miranda. Through lively sketches and witty observations, the book captures the everyday life, traditions, festivals, architecture, and social scenes of Goa. Mario's signature cartoon style humorously portrays Goan culture, local characters, and the relaxed coastal lifestyle, making the book both a cultural document and an artistic celebration of Goa."
+    },
+    {
+        "name": "The 48 Laws of Power",
+        "author": "Robert Greene",
+        "type": "strategy",
+        "detailed_description": "A famous guide exploring historical strategies used by powerful figures to gain influence and control."
+    }
+]
