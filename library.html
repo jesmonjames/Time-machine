@@ -231,7 +231,6 @@
       if (!pagination) {
         pagination = document.createElement('div');
         pagination.id = 'pagination';
-        pagination.style = 'text-align:center;margin:30px 0;';
         document.querySelector('.card-body').appendChild(pagination);
       }
       pagination.innerHTML = '';
@@ -325,6 +324,11 @@
     #pagination {
       margin: 30px 0 0 0;
       text-align: center;
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      align-items: center;
+      gap: 8px;
     }
 
     .pagination-btn {
@@ -333,13 +337,25 @@
       border: 2px solid #4b5320;
       font-family: 'Share Tech Mono', 'Courier New', Courier, monospace;
       font-size: 1.1em;
-      margin: 0 3px;
+      margin: 0;
       padding: 7px 16px;
       border-radius: 4px;
       cursor: pointer;
       transition: background 0.2s, color 0.2s, border 0.2s;
       box-shadow: 0 2px 6px rgba(35, 43, 43, 0.12);
       letter-spacing: 2px;
+    }
+
+    @media (max-width: 600px) {
+      #pagination {
+        gap: 6px;
+        margin-top: 20px;
+      }
+      .pagination-btn {
+        padding: 6px 12px;
+        font-size: 0.95em;
+        letter-spacing: 1px;
+      }
     }
 
     .pagination-btn.active,
