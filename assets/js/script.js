@@ -1,40 +1,6 @@
-// Book Detail Modal Logic
+// Global System Initialization
 document.addEventListener('DOMContentLoaded', function() {
-  const modal = document.getElementById('bookDetailModal');
-  const closeBtn = document.getElementById('closeBookModal');
-  const modalTitle = document.getElementById('modalBookTitle');
-  const modalAuthor = document.getElementById('modalBookAuthor');
-  const modalDesc = document.getElementById('modalBookDesc');
-  const modalFull = document.getElementById('modalBookFull');
-  const bookCards = document.querySelectorAll('.book-card');
-  if (modal && closeBtn && modalTitle && modalAuthor && modalDesc && modalFull && bookCards.length) {
-    bookCards.forEach(card => {
-      const readMoreBtn = card.querySelector('.book-read-more');
-      if (readMoreBtn) {
-        readMoreBtn.onclick = function(e) {
-          e.preventDefault();
-          modalTitle.textContent = card.querySelector('.book-title').textContent;
-          modalAuthor.textContent = card.querySelector('.book-author').textContent;
-          modalDesc.textContent = card.querySelector('.book-desc').textContent;
-          modalFull.textContent = card.querySelector('.book-full').textContent;
-          modal.classList.add('active');
-          document.body.style.overflow = 'hidden';
-          setTimeout(() => { closeBtn.focus(); }, 50);
-        };
-      }
-    });
-    closeBtn.onclick = function() {
-      modal.classList.remove('active');
-      document.body.style.overflow = '';
-    };
-    // Close modal on outside click
-    modal.onclick = function(e) {
-      if (e.target === modal) {
-        modal.classList.remove('active');
-        document.body.style.overflow = '';
-      }
-    };
-  }
+  // Global cross-page initializations can go here
 });
 window.addEventListener("load", function() {
   const loader = document.getElementById("loader");
@@ -194,7 +160,7 @@ window.triggerMiniLoader = function(action, isSlow = false) {
 const startBtn = document.getElementById("startJourney");
 if(startBtn) {
   startBtn.onclick = function() {
-    triggerMiniLoader('about.html');
+    triggerMiniLoader('pages/about.html');
   };
 }
 
@@ -273,56 +239,7 @@ const chakraLogos = {
   'theme-crown': '<svg viewBox="0 0 100 100" class="chakra-svg"><g class="chakra-spin"><circle cx="50" cy="50" r="42" fill="none" stroke="currentColor" stroke-width="6" stroke-dasharray="3 3"/><circle cx="50" cy="50" r="34" fill="none" stroke="currentColor" stroke-width="6" stroke-dasharray="4 3"/><circle cx="50" cy="50" r="26" fill="none" stroke="currentColor" stroke-width="6" stroke-dasharray="6 3"/><circle cx="50" cy="50" r="21" fill="none" stroke="currentColor" stroke-width="2"/></g><text x="50" y="50" dominant-baseline="central" font-family="sans-serif" font-size="16" font-weight="bold" text-anchor="middle" fill="currentColor">अँ</text></svg>'
 };
 
-// MODAL LOGIC
-const viewLogsBtn = document.getElementById("viewLogsBtn");
-const diagnosticsModal = document.getElementById("diagnosticsModal");
-const closeModal = document.getElementById("closeModal");
-const hexStream = document.getElementById("hexStream");
 
-if(viewLogsBtn && diagnosticsModal) {
-  viewLogsBtn.onclick = () => {
-    diagnosticsModal.style.display = "flex";
-    document.body.style.overflow = "hidden"; // Lock scroll
-    startHexStream();
-  };
-}
-
-if(closeModal && diagnosticsModal) {
-  closeModal.onclick = () => {
-    diagnosticsModal.style.display = "none";
-    document.body.style.overflow = "auto"; // Unlock scroll
-    stopHexStream();
-  };
-}
-
-let hexInterval;
-function startHexStream() {
-  if(hexInterval) clearInterval(hexInterval);
-  hexInterval = setInterval(() => {
-    if(!hexStream) return;
-    const addr = Math.floor(Math.random() * 0xFFFFFF).toString(16).toUpperCase().padStart(6, '0');
-    const data = Array.from({length: 8}, () => 
-      Math.floor(Math.random() * 0xFF).toString(16).toUpperCase().padStart(2, '0')
-    ).join(' ');
-    
-    const div = document.createElement('div');
-    div.className = 'hex-line';
-    div.innerHTML = `<span class="hex-addr">0x${addr}</span> ${data}`;
-    hexStream.appendChild(div);
-    
-    // Auto scroll to bottom
-    hexStream.scrollTop = hexStream.scrollHeight;
-    
-    // Limit lines
-    if(hexStream.childNodes.length > 100) {
-      hexStream.removeChild(hexStream.firstChild);
-    }
-  }, 100);
-}
-
-function stopHexStream() {
-  clearInterval(hexInterval);
-}
 
 // TACTICAL TOOLTIP ENGINE
 const tooltip = document.createElement('div');

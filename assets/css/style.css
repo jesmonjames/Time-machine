@@ -610,7 +610,7 @@ h3 {
 
 /* Tooltip */
 .lib-icon-btn::after {
-  content: "My Library";
+  content: attr(aria-label);
   position: absolute;
   left: 50%;
   bottom: calc(100% + 8px);
@@ -2156,4 +2156,97 @@ body:not(.theme-desert) .card:nth-child(4)::before {
 .ttt-cell[data-marker="O"] {
   color: var(--accent-orange);
   text-shadow: 0 0 10px var(--accent-orange);
+}
+
+/* Smooth fade transition and layout for journal list */
+.journal-list {
+  display: flex !important;
+  flex-direction: column !important;
+  gap: 15px !important;
+  margin-top: 20px;
+  transition: opacity 0.4s cubic-bezier(.4, 0, .2, 1);
+  opacity: 1;
+}
+
+/* Fallback for gap property in older or strict browsers */
+.journal-list .book-card {
+  margin-bottom: 15px !important;
+  width: 100% !important;
+}
+.journal-list .book-card:last-child {
+  margin-bottom: 0 !important;
+}
+
+.journal-list.fading {
+  opacity: 0;
+  pointer-events: none;
+}
+
+/* ==========================================================================
+   GLOBAL COMPONENTS: PAGINATION & SHARED MODULES
+   ========================================================================== */
+
+#pagination {
+  margin: 30px 0 0 0;
+  text-align: center;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  gap: 8px;
+}
+
+.pagination-btn {
+  background: #232b2b;
+  color: #e2e28f;
+  border: 2px solid #4b5320;
+  font-family: 'Share Tech Mono', 'Courier New', Courier, monospace;
+  font-size: 1.1em;
+  margin: 0;
+  padding: 7px 16px;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background 0.2s, color 0.2s, border 0.2s;
+  box-shadow: 0 2px 6px rgba(35, 43, 43, 0.12);
+  letter-spacing: 2px;
+}
+
+@media (max-width: 600px) {
+  #pagination {
+    gap: 6px;
+    margin-top: 20px;
+  }
+
+  .pagination-btn {
+    padding: 6px 12px;
+    font-size: 0.95em;
+    letter-spacing: 1px;
+  }
+}
+
+.pagination-btn.active,
+.pagination-btn:disabled {
+  background: #4b5320;
+  color: #fff;
+  border-color: #e2e28f;
+  cursor: default;
+  font-weight: bold;
+  box-shadow: 0 0 0 2px #e2e28f44;
+}
+
+.pagination-btn:hover:not(:disabled):not(.active) {
+  background: #e2e28f;
+  color: #232b2b;
+  border-color: #4b5320;
+}
+
+/* Base fading transition for all grids */
+.fading {
+  opacity: 0 !important;
+  pointer-events: none;
+}
+
+.journal-list, .library-grid {
+  transition: opacity 0.4s cubic-bezier(.4, 0, .2, 1);
+  opacity: 1;
 }

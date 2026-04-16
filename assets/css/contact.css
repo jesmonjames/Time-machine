@@ -1,0 +1,210 @@
+/* CONTACT PAGE SPECIFIC */
+.contact-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 25px;
+  margin-top: 20px;
+}
+
+.contact-channel {
+  border: 1px solid var(--border-color);
+  border-left: 3px solid var(--text-main);
+  padding: 25px;
+  background: rgba(0,0,0,0.3);
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  transition: all 0.3s ease;
+  position: relative;
+  overflow: hidden;
+  text-decoration: none;
+}
+
+.contact-channel::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(135deg, transparent 60%, rgba(255,255,255,0.02));
+  pointer-events: none;
+}
+
+.contact-channel:hover {
+  border-color: var(--text-main);
+  transform: translateY(-3px);
+  box-shadow: 0 8px 30px rgba(0,0,0,0.5), 0 0 15px var(--text-main);
+}
+
+.channel-icon {
+  width: 40px;
+  height: 40px;
+  border: 1px solid var(--border-color);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--text-main);
+  background: rgba(0,0,0,0.3);
+}
+
+.channel-icon svg {
+  width: 20px;
+  height: 20px;
+}
+
+.channel-label {
+  font-size: 9px;
+  font-family: var(--font-mono);
+  color: var(--text-muted);
+  letter-spacing: 2px;
+  text-transform: uppercase;
+}
+
+.channel-name {
+  font-family: 'Black Ops One', system-ui;
+  font-size: 16px;
+  color: var(--text-main);
+  letter-spacing: 2px;
+  text-transform: uppercase;
+}
+
+.channel-value {
+  font-size: 12px;
+  color: var(--text-muted);
+  font-family: var(--font-mono);
+  word-break: break-all;
+}
+
+.channel-cta {
+  margin-top: auto;
+  font-size: 10px;
+  font-family: var(--font-mono);
+  color: var(--text-main);
+  text-transform: uppercase;
+  letter-spacing: 2px;
+}
+
+.channel-cta::before {
+  content: "> ";
+}
+
+/* SIGNAL STATUS */
+.signal-status {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+  gap: 15px;
+  margin-top: 25px;
+  padding-top: 20px;
+  border-top: 1px dashed var(--border-color);
+}
+
+.sig-item {
+  text-align: center;
+}
+
+.sig-label {
+  font-size: 8px;
+  font-family: var(--font-mono);
+  color: var(--text-muted);
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  margin-bottom: 6px;
+}
+
+.sig-value {
+  font-size: 13px;
+  font-family: var(--font-mono);
+  color: var(--text-main);
+}
+
+/* AVAILABILITY INDICATOR */
+.availability-bar {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 18px 20px;
+  background: rgba(0,0,0,0.4);
+  border: 1px solid var(--border-color);
+  margin-bottom: 25px;
+}
+
+.avail-dot {
+  width: 10px;
+  height: 10px;
+  background: #39ff14;
+  border-radius: 50%;
+  box-shadow: 0 0 10px #39ff14;
+  animation: pulse 1.5s infinite;
+  flex-shrink: 0;
+}
+
+.avail-text {
+  font-size: 11px;
+  font-family: var(--font-mono);
+  color: var(--text-muted);
+  letter-spacing: 1px;
+}
+
+.avail-text strong {
+  color: #39ff14;
+}
+
+.avail-badge {
+  margin-left: auto;
+  font-size: 9px;
+  font-family: var(--font-mono);
+  color: var(--text-main);
+  border: 1px solid var(--text-main);
+  padding: 3px 8px;
+  letter-spacing: 1px;
+}
+
+/* QUICK MESSAGE LOG (decorative) */
+.msg-terminal {
+  background: #000;
+  border: 1px solid var(--border-color);
+  padding: 15px;
+  font-family: 'Space Mono', monospace;
+  font-size: 10px;
+  color: var(--text-muted);
+  line-height: 1.8;
+  position: relative;
+  overflow: hidden;
+}
+
+.msg-terminal::before {
+  content: "COMMS_TERMINAL // CHANNEL_76.26";
+  display: block;
+  font-size: 8px;
+  color: var(--text-main);
+  letter-spacing: 2px;
+  margin-bottom: 10px;
+  border-bottom: 1px dashed var(--border-color);
+  padding-bottom: 8px;
+}
+
+.msg-line {
+  opacity: 0;
+  animation: fadeInLine 0.3s forwards;
+}
+
+.msg-line span { color: var(--text-main); }
+
+@keyframes fadeInLine {
+  to { opacity: 1; }
+}
+
+.cursor-blink {
+  display: inline-block;
+  width: 8px;
+  height: 13px;
+  background: var(--text-main);
+  animation: blink 0.8s step-end infinite;
+  vertical-align: middle;
+}
+
+@keyframes blink {
+  50% { opacity: 0; }
+}
+
+@media (max-width: 768px) {
+  .contact-grid { grid-template-columns: 1fr; }
+}

@@ -10,230 +10,17 @@
   <meta name="keywords" content="Jesmon K J contact, Jesmon James email, Jesmon KJ LinkedIn, contact Jesmon, hire Jesmon K J">
   <meta name="author" content="Jesmon K J">
   <meta name="robots" content="index, follow">
-  <link rel="canonical" href="https://jesmonjames.github.io/Time-machine/contact.html">
+  <link rel="canonical" href="https://jesmonjames.github.io/Time-machine/pages/contact.html">
 
   <!-- OPEN GRAPH -->
   <meta property="og:type" content="website">
-  <meta property="og:url" content="https://jesmonjames.github.io/Time-machine/contact.html">
+  <meta property="og:url" content="https://jesmonjames.github.io/Time-machine/pages/contact.html">
   <meta property="og:title" content="Contact Jesmon K J &mdash; Open Future Portal">
   <meta property="og:description" content="Reach Jesmon K J (Jesmon James) via email, LinkedIn or GitHub.">
   <meta property="og:site_name" content="Jesmon K J &mdash; Time Machine Portfolio">
 
-  <link rel="stylesheet" href="assets/css/style.css">
-  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700&family=Space+Mono:ital,wght@0,400;0,700;1,400&family=Black+Ops+One&family=Stardos+Stencil:wght@400;700&family=Goldman:wght@400;700&family=Wallpoet&family=Share+Tech+Mono&family=Roboto+Mono:wght@400;700&family=Courier+Prime:wght@400;700&display=swap" rel="stylesheet">
-
-  <style>
-    /* CONTACT PAGE SPECIFIC */
-    .contact-grid {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 25px;
-      margin-top: 20px;
-    }
-
-    .contact-channel {
-      border: 1px solid var(--border-color);
-      border-left: 3px solid var(--text-main);
-      padding: 25px;
-      background: rgba(0,0,0,0.3);
-      display: flex;
-      flex-direction: column;
-      gap: 12px;
-      transition: all 0.3s ease;
-      position: relative;
-      overflow: hidden;
-      text-decoration: none;
-    }
-
-    .contact-channel::after {
-      content: "";
-      position: absolute;
-      inset: 0;
-      background: linear-gradient(135deg, transparent 60%, rgba(255,255,255,0.02));
-      pointer-events: none;
-    }
-
-    .contact-channel:hover {
-      border-color: var(--text-main);
-      transform: translateY(-3px);
-      box-shadow: 0 8px 30px rgba(0,0,0,0.5), 0 0 15px var(--text-main);
-    }
-
-    .channel-icon {
-      width: 40px;
-      height: 40px;
-      border: 1px solid var(--border-color);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      color: var(--text-main);
-      background: rgba(0,0,0,0.3);
-    }
-
-    .channel-icon svg {
-      width: 20px;
-      height: 20px;
-    }
-
-    .channel-label {
-      font-size: 9px;
-      font-family: var(--font-mono);
-      color: var(--text-muted);
-      letter-spacing: 2px;
-      text-transform: uppercase;
-    }
-
-    .channel-name {
-      font-family: 'Black Ops One', system-ui;
-      font-size: 16px;
-      color: var(--text-main);
-      letter-spacing: 2px;
-      text-transform: uppercase;
-    }
-
-    .channel-value {
-      font-size: 12px;
-      color: var(--text-muted);
-      font-family: var(--font-mono);
-      word-break: break-all;
-    }
-
-    .channel-cta {
-      margin-top: auto;
-      font-size: 10px;
-      font-family: var(--font-mono);
-      color: var(--text-main);
-      text-transform: uppercase;
-      letter-spacing: 2px;
-    }
-
-    .channel-cta::before {
-      content: "> ";
-    }
-
-    /* SIGNAL STATUS */
-    .signal-status {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
-      gap: 15px;
-      margin-top: 25px;
-      padding-top: 20px;
-      border-top: 1px dashed var(--border-color);
-    }
-
-    .sig-item {
-      text-align: center;
-    }
-
-    .sig-label {
-      font-size: 8px;
-      font-family: var(--font-mono);
-      color: var(--text-muted);
-      letter-spacing: 1px;
-      text-transform: uppercase;
-      margin-bottom: 6px;
-    }
-
-    .sig-value {
-      font-size: 13px;
-      font-family: var(--font-mono);
-      color: var(--text-main);
-    }
-
-    /* AVAILABILITY INDICATOR */
-    .availability-bar {
-      display: flex;
-      align-items: center;
-      gap: 12px;
-      padding: 18px 20px;
-      background: rgba(0,0,0,0.4);
-      border: 1px solid var(--border-color);
-      margin-bottom: 25px;
-    }
-
-    .avail-dot {
-      width: 10px;
-      height: 10px;
-      background: #39ff14;
-      border-radius: 50%;
-      box-shadow: 0 0 10px #39ff14;
-      animation: pulse 1.5s infinite;
-      flex-shrink: 0;
-    }
-
-    .avail-text {
-      font-size: 11px;
-      font-family: var(--font-mono);
-      color: var(--text-muted);
-      letter-spacing: 1px;
-    }
-
-    .avail-text strong {
-      color: #39ff14;
-    }
-
-    .avail-badge {
-      margin-left: auto;
-      font-size: 9px;
-      font-family: var(--font-mono);
-      color: var(--text-main);
-      border: 1px solid var(--text-main);
-      padding: 3px 8px;
-      letter-spacing: 1px;
-    }
-
-    /* QUICK MESSAGE LOG (decorative) */
-    .msg-terminal {
-      background: #000;
-      border: 1px solid var(--border-color);
-      padding: 15px;
-      font-family: 'Space Mono', monospace;
-      font-size: 10px;
-      color: var(--text-muted);
-      line-height: 1.8;
-      position: relative;
-      overflow: hidden;
-    }
-
-    .msg-terminal::before {
-      content: "COMMS_TERMINAL // CHANNEL_76.26";
-      display: block;
-      font-size: 8px;
-      color: var(--text-main);
-      letter-spacing: 2px;
-      margin-bottom: 10px;
-      border-bottom: 1px dashed var(--border-color);
-      padding-bottom: 8px;
-    }
-
-    .msg-line {
-      opacity: 0;
-      animation: fadeInLine 0.3s forwards;
-    }
-
-    .msg-line span { color: var(--text-main); }
-
-    @keyframes fadeInLine {
-      to { opacity: 1; }
-    }
-
-    .cursor-blink {
-      display: inline-block;
-      width: 8px;
-      height: 13px;
-      background: var(--text-main);
-      animation: blink 0.8s step-end infinite;
-      vertical-align: middle;
-    }
-
-    @keyframes blink {
-      50% { opacity: 0; }
-    }
-
-    @media (max-width: 768px) {
-      .contact-grid { grid-template-columns: 1fr; }
-    }
-  </style>
+  <link rel="stylesheet" href="../assets/css/style.css">
+  <link rel="stylesheet" href="../assets/css/contact.css">
 </head>
 <body class="theme-throat">
 
@@ -248,7 +35,7 @@
     <!-- TOP BAR -->
     <header class="top-bar">
       <div class="status-indicator">
-        <span class="dot green animated-pulse"></span> ONLINE | JES-001 | <strong>CLASSIFIED: TS/SCI</strong>
+        <span class="dot green animated-pulse"></span> ONLINE | JES-007 | <strong>CLASSIFIED: TS/SCI</strong>
       </div>
       <div class="coordinates">
         OPEN_FUTURE_PORTAL // COMMS_ARRAY
@@ -269,21 +56,32 @@
               <p>[ ROLE: ENGINEER | TEACHER ]</p>
               <p>[ AREA: ARTIST | CREATOR ]</p>
             </div>
-            <a href="library.html" class="lib-icon-btn" aria-label="My Library">
-              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
-                <path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/>
-                <path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/>
-              </svg>
-            </a>
+            <div class="hero-icons" style="display: flex; gap: 10px; margin-left: auto;">
+              <a href="library.html" class="lib-icon-btn" aria-label="My Library">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/>
+                  <path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/>
+                </svg>
+              </a>
+              <a href="journal.html" class="lib-icon-btn" aria-label="My Journal">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/>
+                  <path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/>
+                  <line x1="10" y1="8" x2="16" y2="8"></line>
+                  <line x1="10" y1="12" x2="16" y2="12"></line>
+                  <line x1="10" y1="16" x2="13" y2="16"></line>
+                </svg>
+              </a>
+            </div>
           </div>
-          <button onclick="triggerMiniLoader('index.html')" class="tech-btn">BACK_TO_DASHBOARD &larr;</button>
+          <button onclick="triggerMiniLoader('../index.html')" class="tech-btn">BACK_TO_DASHBOARD &larr;</button>
         </div>
         <div class="metadata-panel">
           <div class="sys-data">
             <p>LAT: 9.9312&deg; N</p>
             <p>LNG: 76.2673&deg; E</p>
             <p>ALT: 3 M</p>
-            <p>UNIT: JES-001</p>
+            <p>UNIT: JES-007</p>
             <p>UPTIME: <span id="uptime">00:00:00</span></p>
           </div>
         </div>
@@ -292,7 +90,7 @@
       <!-- MAIN CONTENT -->
       <div class="full-width-grid">
         <div style="margin-bottom: 30px;">
-          <button onclick="triggerMiniLoader('index.html')" class="tech-btn">DISCONNECT_STATION &larr;</button>
+          <button onclick="triggerMiniLoader('../index.html')" class="tech-btn">DISCONNECT_STATION &larr;</button>
         </div>
 
         <section class="card">
@@ -445,34 +243,7 @@
     <span id="ttValue"></span>
   </div>
 
-  <script src="assets/js/script.js"></script>
-  <script>
-    // Animated terminal comms log
-    const terminal = document.getElementById('commsTerminal');
-    const logs = [
-      { delay: 200,  text: '<span>[SYS]</span> COMMS_ARRAY initialized. Scanning frequencies...' },
-      { delay: 800,  text: '<span>[OK]</span>  Security handshake: ENCRYPTED_v2' },
-      { delay: 1400, text: '<span>[OK]</span>  Channel bandwidth: 1.2 Tbps' },
-      { delay: 2000, text: '<span>[TX]</span>  BROADCASTING identity signature...' },
-      { delay: 2800, text: '<span>[RX]</span>  FREQ_76.26: OPEN — Awaiting input.' },
-      { delay: 3600, text: '<span>[SYS]</span> All channels <span style="color:#39ff14">LIVE</span>. Operative reachable.' },
-    ];
-
-    logs.forEach(({ delay, text }) => {
-      setTimeout(() => {
-        const line = document.createElement('div');
-        line.className = 'msg-line';
-        line.style.animationDelay = '0s';
-        line.innerHTML = text;
-        terminal.insertBefore(line, terminal.lastElementChild);
-      }, delay);
-    });
-
-    // Live signal strength fluctuation
-    setInterval(() => {
-      const el = document.getElementById('signalStrength');
-      if (el) el.textContent = (97 + Math.random() * 2.8).toFixed(1) + '%';
-    }, 2000);
-  </script>
+  <script src="../assets/js/script.js"></script>
+  <script src="../assets/js/contact.js" defer></script>
 </body>
 </html>

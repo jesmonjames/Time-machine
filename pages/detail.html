@@ -8,16 +8,16 @@
 <meta name="keywords" content="Jesmon K J, Jesmon James, Jesmon KJ, UI engineer portfolio, frontend developer Kerala, Jesmon career, Jesmon skills">
 <meta name="author" content="Jesmon K J">
 <meta name="robots" content="index, follow">
-<link rel="canonical" href="https://jesmonjames.github.io/Time-machine/detail.html">
+<link rel="canonical" href="https://jesmonjames.github.io/Time-machine/pages/detail.html">
 
 <!-- OPEN GRAPH -->
 <meta property="og:type" content="website">
-<meta property="og:url" content="https://jesmonjames.github.io/Time-machine/detail.html">
+<meta property="og:url" content="https://jesmonjames.github.io/Time-machine/pages/detail.html">
 <meta property="og:title" content="Jesmon K J — Portfolio Archive">
 <meta property="og:description" content="Career, education, skills and art of Jesmon K J (Jesmon James), UI/UX Engineer & Artist from Kochi, India.">
 <meta property="og:site_name" content="Jesmon K J — Time Machine Portfolio">
 
-<link rel="stylesheet" href="assets/css/style.css">
+<link rel="stylesheet" href="../assets/css/style.css">
 <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700&family=Space+Mono:ital,wght@0,400;0,700;1,400&family=Black+Ops+One&family=Stardos+Stencil:wght@400;700&family=Goldman:wght@400;700&family=Wallpoet&family=Share+Tech+Mono&family=Roboto+Mono:wght@400;700&family=Courier+Prime:wght@400;700&display=swap" rel="stylesheet">
 
 </head>
@@ -34,7 +34,7 @@
   <!-- TOP BAR -->
   <header class="top-bar">
     <div class="status-indicator">
-      <span class="dot green animated-pulse"></span> ONLINE | JES-001 | <strong>CLASSIFIED: TS/SCI</strong>
+      <span class="dot green animated-pulse"></span> ONLINE | JES-007 | <strong>CLASSIFIED: TS/SCI</strong>
     </div>
     <div class="coordinates">
       MODULE ANALYSIS // <span id="moduleName">UNKNOWN</span>
@@ -56,14 +56,25 @@
               <p>[ ROLE: ENGINEER | TEACHER ]</p>
               <p>[ AREA: ARTIST | CREATOR ]</p>
             </div>
-            <a href="library.html" class="lib-icon-btn" aria-label="My Library">
-              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
-                <path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/>
-                <path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/>
-              </svg>
-            </a>
+            <div class="hero-icons" style="display: flex; gap: 10px; margin-left: auto;">
+              <a href="library.html" class="lib-icon-btn" aria-label="My Library">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/>
+                  <path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/>
+                </svg>
+              </a>
+              <a href="journal.html" class="lib-icon-btn" aria-label="My Journal">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/>
+                  <path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/>
+                  <line x1="10" y1="8" x2="16" y2="8"></line>
+                  <line x1="10" y1="12" x2="16" y2="12"></line>
+                  <line x1="10" y1="16" x2="13" y2="16"></line>
+                </svg>
+              </a>
+            </div>
           </div>
-        <button onclick="triggerMiniLoader('index.html')" class="tech-btn">BACK_TO_DASHBOARD &larr;</button>
+        <button onclick="triggerMiniLoader('../index.html')" class="tech-btn">BACK_TO_DASHBOARD &larr;</button>
       </div>
 
       <div class="metadata-panel">
@@ -71,7 +82,7 @@
           <p>LAT: 9.9312&deg; N</p>
           <p>LNG: 76.2673&deg; E</p>
           <p>ALT: 3 M</p>
-          <p>UNIT: JES-001</p>
+          <p>UNIT: JES-007</p>
           <p>UPTIME: <span id="uptime">00:00:00</span></p>
         </div>
       </div>
@@ -79,7 +90,7 @@
 
     <div class="full-width-grid">
     <div style="margin-bottom: 30px;">
-      <button onclick="triggerMiniLoader('index.html')" class="tech-btn">DISCONNECT_STATION &larr;</button>
+      <button onclick="triggerMiniLoader('../index.html')" class="tech-btn">DISCONNECT_STATION &larr;</button>
     </div>
 
     <div id="career-education" class="module-content">
@@ -293,22 +304,7 @@
   </div>
 </div>
 
-<script src="assets/js/script.js"></script>
-<script>
-  window.addEventListener('DOMContentLoaded', () => {
-    const params = new URLSearchParams(window.location.search);
-    const module = params.get('module') || 'career';
-    
-    // Deactivate all
-    document.querySelectorAll('.module-content').forEach(el => el.classList.remove('active'));
-    
-    // Activate requested
-    const target = document.getElementById(module);
-    if(target) {
-      target.classList.add('active');
-      document.getElementById('moduleName').textContent = module.toUpperCase();
-    }
-  });
-</script>
+<script src="../assets/js/script.js"></script>
+<script src="../assets/js/detail.js" defer></script>
 </body>
 </html>

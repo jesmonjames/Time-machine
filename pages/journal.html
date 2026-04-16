@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <!-- PRIMARY SEO -->
+  <title>Jesmon K J — Field Journal | Tactical Notes & Logs</title>
+  <meta name="description"
+    content="Field Journal by Jesmon K J (Jesmon James) — tactical notes, ongoing learning milestones, and personal logs.">
+  <meta name="keywords"
+    content="Jesmon K J journal, Jesmon James notes, personal logs, Jesmon learning milestones, Jesmon KJ updates">
+  <meta name="author" content="Jesmon K J">
+  <meta name="robots" content="index, follow">
+  <link rel="canonical" href="https://jesmonjames.github.io/Time-machine/pages/journal.html">
+
+  <!-- OPEN GRAPH -->
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://jesmonjames.github.io/Time-machine/pages/journal.html">
+  <meta property="og:title" content="Jesmon K J — Field Journal">
+  <meta property="og:description" content="Field Journal by Jesmon K J (Jesmon James) — notes, learnings, and updates.">
+  <meta property="og:site_name" content="Jesmon K J — Time Machine Portfolio">
+  <link rel="stylesheet" href="../assets/css/style.css">
+  <link
+    href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700&family=Space+Mono:ital,wght@0,400;0,700;1,400&family=Black+Ops+One&family=Stardos+Stencil:wght@400;700&family=Goldman:wght@400;700&family=Wallpoet&family=Share+Tech+Mono&family=Roboto+Mono:wght@400;700&family=Courier+Prime:wght@400;700&display=swap"
+    rel="stylesheet">
+</head>
+
+<body class="theme-throat">
+
+  <div class="mini-loader" id="miniLoader" style="display: none;">
+    <div class="mini-loader-content">
+      <div class="mini-spinner"></div>
+      <div id="miniLoadText" style="letter-spacing: 2px;">SYNCING... 0%</div>
+    </div>
+  </div>
+
+  <div class="dashboard">
+    <!-- TOP BAR -->
+    <header class="top-bar">
+      <div class="status-indicator">
+        <span class="dot green animated-pulse"></span> ONLINE | JES-007 | <strong>CLASSIFIED: TS/SCI</strong>
+      </div>
+      <div class="coordinates">
+        FIELD_JOURNAL // TACTICAL_NOTES
+      </div>
+      <div class="time-display" id="clock">00:00:00</div>
+      <div class="sys-load" id="sysStat">LOAD: 0.12% | RAM: 14GB</div>
+    </header>
+
+    <div class="main-layout">
+      <!-- SIDEBAR -->
+      <aside class="sidebar">
+        <div class="chakra-logo-container" id="chakraLogo">
+          <!-- Dynamically injected SVG -->
+        </div>
+        <div class="hero">
+          <div class="hero-label">TIME MACHINE</div>
+          <h1>JESMON<br>K J</h1>
+          <div class="hero-titles">
+            <div class="hero-titles-tags">
+              <p>[ ROLE: ENGINEER | TEACHER ]</p>
+              <p>[ AREA: ARTIST | CREATOR ]</p>
+            </div>
+            <div class="hero-icons" style="display: flex; gap: 10px; margin-left: auto;">
+              <a href="library.html" class="lib-icon-btn" aria-label="My Library">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                  stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20" />
+                  <path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z" />
+                </svg>
+              </a>
+              <a href="journal.html" class="lib-icon-btn" aria-label="My Journal">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                  stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20" />
+                  <path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z" />
+                  <line x1="10" y1="8" x2="16" y2="8"></line>
+                  <line x1="10" y1="12" x2="16" y2="12"></line>
+                  <line x1="10" y1="16" x2="13" y2="16"></line>
+                </svg>
+              </a>
+            </div>
+          </div>
+          <button onclick="triggerMiniLoader('../index.html')" class="tech-btn">BACK_TO_DASHBOARD &larr;</button>
+        </div>
+
+        <div class="metadata-panel">
+          <div class="sys-data">
+            <p>LAT: 9.9312&deg; N</p>
+            <p>LNG: 76.2673&deg; E</p>
+            <p>ALT: 3 M</p>
+            <p>UNIT: JES-007</p>
+            <p>UPTIME: <span id="uptime">00:00:00</span></p>
+          </div>
+        </div>
+      </aside>
+
+      <!-- MAIN CONTENT -->
+      <div class="full-width-grid">
+
+        <div style="margin-bottom: 30px;">
+          <button onclick="triggerMiniLoader('../index.html')" class="tech-btn">DISCONNECT_STATION &larr;</button>
+        </div>
+
+        <section class="card">
+          <div class="card-header">
+            <h2>FIELD JOURNAL // TACTICAL_NOTES</h2>
+            <div class="leds"><span class="dot active"></span><span class="dot gray"></span></div>
+          </div>
+          <div class="card-body">
+            <p class="subtitle">Encrypted personal logs, experimental notes, and ongoing learning milestones.</p>
+
+            <!-- Filter Tags -->
+            <div class="skills-tags" style="margin-bottom: 25px;" id="filterTags">
+              <!-- Filter tags will be generated dynamically by JavaScript. -->
+            </div>
+
+            <div class="journal-list" id="journalGrid">
+              <!-- Book cards will be rendered here by JavaScript. -->
+            </div>
+            <!-- Book Detail Modal -->
+            <div id="noteDetailModal" class="book-detail-modal">
+              <div class="book-detail-content">
+                <span class="close-modal" id="closeNoteModal" tabindex="0" autofocus>&times;</span>
+                <h2 id="modalNoteTitle"></h2>
+                <div id="modalNoteDate" class="modal-author"></div>
+                <div id="modalNoteDesc" class="modal-desc"></div>
+                <div id="modalNoteFull"></div>
+              </div>
+            </div>
+          </div>
+          <!-- RELOCATED FOOTER -->
+          <footer class="bottom-bar" style="margin-top: 60px;">
+            <div class="themes" id="themeButtons">
+              <button class="theme-btn" data-theme="theme-crown">CROWN</button>
+              <button class="theme-btn" data-theme="theme-third-eye">THIRD EYE</button>
+              <button class="theme-btn" data-theme="theme-throat">THROAT</button>
+              <button class="theme-btn" data-theme="theme-heart">HEART</button>
+              <button class="theme-btn" data-theme="theme-solar">SOLAR</button>
+              <button class="theme-btn" data-theme="theme-sacral">SACRAL</button>
+              <button class="theme-btn" data-theme="theme-root">ROOT</button>
+            </div>
+          </footer>
+        </section>
+      </div>
+
+    </div>
+  </div>
+
+
+
+  <script src="../assets/js/script.js"></script>
+  <script src="../assets/js/journal.js" defer></script>
+</body>
+
+</html>

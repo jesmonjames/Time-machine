@@ -73,7 +73,7 @@
     <canvas id="loaderCanvas"></canvas>
     <div class="loader-scanline"></div>
     <div class="loader-content">
-      <div class="boot-header">JES-001 // TACTICAL_LINK_76.26</div>
+      <div class="boot-header">JES-007 // TACTICAL_LINK_76.26</div>
       <div class="boot-grid">
         <div class="boot-log" id="bootLog"></div>
         <div class="boot-log" id="bootLogRight"></div>
@@ -92,7 +92,7 @@
     <!-- TOP BAR -->
     <header class="top-bar">
       <div class="status-indicator">
-        <span class="dot green animated-pulse"></span> ONLINE | JES-001 | <strong>CLASSIFIED: TS/SCI</strong>
+        <span class="dot green animated-pulse"></span> ONLINE | JES-007 | <strong>CLASSIFIED: TS/SCI</strong>
       </div>
       <div class="coordinates">
         LAT: 9.9312° N &middot; LNG: 76.2673° E &middot; ALT: 3 M &middot; EST. 2026
@@ -120,12 +120,23 @@
               <p>[ ROLE: ENGINEER | TEACHER ]</p>
               <p>[ AREA: ARTIST | CREATOR ]</p>
             </div>
-            <a href="library.html" class="lib-icon-btn" aria-label="My Library">
-              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
-                <path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/>
-                <path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/>
-              </svg>
-            </a>
+            <div class="hero-icons" style="display: flex; gap: 10px; margin-left: auto;">
+              <a href="pages/library.html" class="lib-icon-btn" aria-label="My Library">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/>
+                  <path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/>
+                </svg>
+              </a>
+              <a href="pages/journal.html" class="lib-icon-btn" aria-label="My Journal">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/>
+                  <path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/>
+                  <line x1="10" y1="8" x2="16" y2="8"></line>
+                  <line x1="10" y1="12" x2="16" y2="12"></line>
+                  <line x1="10" y1="16" x2="13" y2="16"></line>
+                </svg>
+              </a>
+            </div>
           </div>
           <button id="startJourney" class="tech-btn">PERSONAL NOTEBOOK &rarr;</button>
         </div>
@@ -135,7 +146,7 @@
             <p>LAT: 9.9312&deg; N</p>
             <p>LNG: 76.2673&deg; E</p>
             <p>ALT: 3 M</p>
-            <p>UNIT: JES-001</p>
+            <p>UNIT: JES-007</p>
             <p>UPTIME: <span id="uptime">00:00:00</span></p>
           </div>
         </div>
@@ -260,7 +271,7 @@
               <span class="tag">NPM</span>
             </div>
           </div>
-          <a href="javascript:void(0)" onclick="handleTacticalLink('detail.html?module=skills')" class="card-footer">
+          <a href="javascript:void(0)" onclick="handleTacticalLink('pages/detail.html?module=skills')" class="card-footer">
             <span>16 CORE SKILLS</span>
             <span class="action">READ &rarr;</span>
           </a>
@@ -352,7 +363,7 @@
           </div>
           <div class="card-footer">
             <span>06 MEDIUMS ARCHIVED</span>
-            <span class="action" onclick="handleTacticalLink('detail.html?module=gallery')">GALLERY &rarr;</span>
+            <span class="action" onclick="handleTacticalLink('pages/detail.html?module=gallery')">GALLERY &rarr;</span>
           </div>
         </section>
 
@@ -379,7 +390,7 @@
               </div>
             </div>
           </div>
-          <a href="javascript:void(0)" onclick="handleTacticalLink('detail.html?module=projects')" class="card-footer">
+          <a href="javascript:void(0)" onclick="handleTacticalLink('pages/detail.html?module=projects')" class="card-footer">
             <span>03 ARTIFACTS</span>
             <span class="action">EXPLORE &rarr;</span>
           </a>
@@ -403,7 +414,7 @@
               <em>Earlier records available in full archive.</em>
             </div>
           </div>
-          <a href="javascript:void(0)" onclick="handleTacticalLink('detail.html?module=career-education')" class="card-footer">
+          <a href="javascript:void(0)" onclick="handleTacticalLink('pages/detail.html?module=career-education')" class="card-footer">
             <span>FULL ARCHIVE</span>
             <span class="action">ENTER &rarr;</span>
           </a>
@@ -427,7 +438,7 @@
                     rel="noopener noreferrer">github.com/jesmonjames</a></p>
               </div>
             </div>
-            <a href="javascript:void(0)" onclick="handleTacticalLink('contact.html')" class="card-footer">
+            <a href="javascript:void(0)" onclick="handleTacticalLink('pages/contact.html')" class="card-footer">
               <span>PING ENDPOINT</span>
               <span class="action">OPEN CHANNEL &rarr;</span>
             </a>
@@ -534,6 +545,7 @@
   </div>
 
   <script src="assets/js/script.js"></script>
+  <script src="assets/js/index.js" defer></script>
 </body>
 
 </html>
