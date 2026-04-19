@@ -22,5 +22,29 @@
     "title": "Local AI Intelligence Integration",
     "description": "Integrated Ollama with Qwen2.5 and DeepSeek-Coder for local interface development.",
     "content": "Successfully installed Ollama and initialized local models: Qwen2.5:7b (4.7 GB) and DeepSeek-coder:6.7b (3.8 GB). Integrated these local intelligence endpoints with VS Code for sub-second inference targets. Qwen2.5 is performing optimally, while DeepSeek-coder is requiring further conflict resolution for full tactical sync."
+  },
+  {
+    "id": 4,
+    "date": "2026-04-20",
+    "type": "learning",
+    "title": "Cursor IDE Install & Agent Prompting Benchmark",
+    "description": "Installed Cursor and ran side-by-side prompting experiments against VS Code workflows and Antigravity agents.",
+    "content": "Completed a clean install of Cursor IDE and spent the session stress-testing how prompting behaves compared to my usual VS Code setup and Antigravity-style agent flows.\n\nVS Code still feels like the baseline editor: extensions and manual context assembly win on predictability. Cursor pulls the model into the file tree and diffs in a tighter loop—less tab-hopping, more \"show me the change\" energy. Antigravity agents sit in a different lane: broader autonomy, higher variance, and a heavier hand on long-horizon tasks; Cursor felt more surgical when I wanted a scoped patch with immediate review.\n\nTakeaway: keep VS Code muscle memory for shallow edits, reach for Cursor when I want chat + apply across the repo, and treat Antigravity-class agents as expeditionary units—not the same contract as inline assistant prompting."
+  },
+  {
+    "id": 6,
+    "date": "2026-04-20",
+    "type": "synthesis",
+    "title": "Vitruvian Man // Anatomical Map & Field Journal Bridge",
+    "description": "Shipped the interactive Vitruvian diagram on About, then pressure-tested how classical proportion maps to real routines—and why this journal exists.",
+    "content": "Locked in the full Vitruvian Man stack on the About page: SVG geometry (square, circumscribed circle, measurement rails), hover telemetry for proportional callouts, the seven-node chakra overlay tied to the same spinal axis, and the expandable chakra grid scan. Theme sync now drives stroke and gradient stops so the figure breathes with the same accent as the rest of the Time Machine UI.\n\nVitruvius was not decorating; he was arguing that beauty is commensurability—parts that agree with each other and with the whole. Translating that into real life means treating the week like a module system: a repeatable head-length for deep work, fixed margins for recovery, and a single \"navel\" checkpoint where I ask whether effort still lines up with the larger square I claim I am building.\n\nThis Field Journal is the plaintext audit trail for that habit. If the anatomical map is the idealized schematic, these entries are the field readings—what shipped, what snapped under load, and what proportion I need to recalibrate next."
+  },
+  {
+    "id": 5,
+    "date": "2026-04-18",
+    "type": "learning",
+    "title": "Unity Boot Camp — 2D Micro-Prototype With AI Co-Pilot",
+    "description": "First Unity 6.4 install and a guided 2D mini-game tutorial, accelerated by iterative AI prompting when I hit editor friction.",
+    "content": "Ran through a fresh Unity Editor install and onboarding pass—Unity Hub, Unity 6.4 as the supported baseline for this experiment, 2D template, and the baseline project hygiene checks (input system choice, build target sanity, version control ignore rules). Locking to 6.4 kept tutorial notes and package defaults aligned with current editor behavior.\n\nPrimary objective was a compact 2D prototype: player movement, a simple collectible or hazard loop, and one win/lose condition—enough to prove the pipeline without opening a full production scope.\n\nWhenever the tutorial skipped a step or the inspector layout shifted between versions, I leaned on AI-assisted prompts to decode errors, suggest component wiring, and sanity-check C# snippets before pasting them in. The model was strongest as a glossary and debugger; it was weaker when I needed exact menu paths, so I cross-checked those against official docs.\n\nNet result: a playable micro-build and a mental map of where Unity wants you to live (Scenes, Prefabs, Physics2D) versus where the friction hides (packages, serialization warnings, import defaults)."
   }
 ]
