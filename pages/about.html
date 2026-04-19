@@ -21,8 +21,418 @@
 
 <link rel="stylesheet" href="../assets/css/style.css">
 <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700&family=Space+Mono:ital,wght@0,400;0,700;1,400&family=Black+Ops+One&family=Stardos+Stencil:wght@400;700&family=Goldman:wght@400;700&family=Wallpoet&family=Share+Tech+Mono&family=Roboto+Mono:wght@400;700&family=Courier+Prime:wght@400;700&display=swap" rel="stylesheet">
+
+<style>
+  /* ── VITRUVIAN TOOLTIP ── */
+  #vtTooltip {
+    position: fixed;
+    z-index: 9999;
+    pointer-events: none;
+    background: rgba(0,0,0,0.92);
+    border: 1px solid var(--accent, #00e5ff);
+    border-radius: 4px;
+    padding: 10px 14px;
+    max-width: 260px;
+    opacity: 0;
+    transform: translateY(6px);
+    transition: opacity 0.18s ease, transform 0.18s ease;
+    box-shadow: 0 0 18px var(--accent, #00e5ff), 0 2px 12px rgba(0,0,0,0.7);
+    backdrop-filter: blur(6px);
+  }
+  #vtTooltip.visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+  #vtTooltip .tt-title {
+    font-family: 'Share Tech Mono', monospace;
+    font-size: 11px;
+    color: var(--accent, #00e5ff);
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    margin-bottom: 5px;
+    border-bottom: 1px solid rgba(0,229,255,0.2);
+    padding-bottom: 4px;
+  }
+  #vtTooltip .tt-val {
+    font-family: 'Space Mono', monospace;
+    font-size: 10px;
+    color: var(--accent, #00e5ff);
+    opacity: 0.85;
+    margin-bottom: 3px;
+    letter-spacing: 1px;
+  }
+  #vtTooltip .tt-desc {
+    font-family: 'Courier Prime', monospace;
+    font-size: 11px;
+    color: #ccc;
+    line-height: 1.6;
+    margin-top: 5px;
+  }
+
+  /* ── SVG HOVER ZONE ── */
+  .vt-hover {
+    cursor: crosshair;
+    transition: opacity 0.15s ease;
+  }
+  .vt-hover:hover {
+    opacity: 1 !important;
+    filter: drop-shadow(0 0 6px var(--accent, #00e5ff));
+  }
+
+  /* ══════════════════════════════════════════════
+     VITRUVIAN SVG — THEME COLOR BRIDGE
+     All SVG strokes/fills read from --text-main
+     which switches automatically per theme.
+  ══════════════════════════════════════════════ */
+
+  /* All SVG strokes inherit the theme accent */
+  #vitruvianMan { color: var(--text-main); }
+
+  /* Geometry & body lines */
+  #vitruvianMan circle,
+  #vitruvianMan line,
+  #vitruvianMan path,
+  #vitruvianMan rect,
+  #vitruvianMan ellipse {
+    stroke: var(--text-main);
+    transition: stroke 0.5s ease, fill 0.5s ease;
+  }
+
+  /* Filled elements — navel dot, hand dots */
+  #vitruvianMan circle[id="vt-navel"],
+  #vitruvianMan circle.vt-filled {
+    fill: var(--text-main);
+  }
+
+  /* Text fills */
+  #vitruvianMan text,
+  #vitruvianMan .meas-text,
+  #vitruvianMan .meas-label,
+  #vitruvianMan .math-note,
+  #vitruvianMan .prop-lbl {
+    fill: var(--text-main);
+    transition: fill 0.5s ease;
+  }
+
+  /* Measurement lines */
+  .meas-line  { stroke: var(--text-main); stroke-width: 0.6; opacity: 0.4; }
+  .meas-tick  { stroke: var(--text-main); stroke-width: 0.8; opacity: 0.5; }
+
+  /* ── SVG text class styles ── */
+  .meas-text  { font-family: "Share Tech Mono", monospace; font-size: 9.5px; opacity: 0.75; }
+  .meas-label { font-family: "Space Mono", monospace; font-size: 8px; opacity: 0.55; }
+  .math-note  { font-family: "Space Mono", monospace; font-size: 8px; opacity: 0.5; font-style: italic; }
+  .prop-lbl   { font-family: "Share Tech Mono", monospace; font-size: 8px; opacity: 0.6; }
+
+  /* Tooltip border & glow match current theme */
+  #vtTooltip {
+    border-color: var(--text-main) !important;
+    box-shadow: 0 0 18px var(--text-main), 0 2px 12px rgba(0,0,0,0.7) !important;
+  }
+  #vtTooltip .tt-title,
+  #vtTooltip .tt-val {
+    color: var(--text-main) !important;
+  }
+  /* ── CHAKRA GRID ── */
+  .chakra-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    gap: 12px;
+    margin-top: 22px;
+  }
+  .chakra-card {
+    position: relative;
+    border: 1px solid;
+    padding: 14px 14px 12px;
+    background: rgba(0,0,0,0.25);
+    cursor: crosshair;
+    transition: transform 0.2s ease, box-shadow 0.2s ease, background 0.2s ease;
+    overflow: hidden;
+  }
+  .chakra-card::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 2px;
+    background: var(--ck-color);
+    opacity: 0.8;
+  }
+  .chakra-card:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 0 20px var(--ck-color);
+    background: rgba(0,0,0,0.4);
+  }
+  .ck-header {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 8px;
+  }
+  .ck-dot {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    background: var(--ck-color);
+    box-shadow: 0 0 8px var(--ck-color);
+    flex-shrink: 0;
+    animation: ckPulse 2.5s infinite;
+  }
+  @keyframes ckPulse {
+    0%, 100% { opacity: 1; box-shadow: 0 0 8px var(--ck-color); }
+    50%       { opacity: 0.5; box-shadow: 0 0 16px var(--ck-color); }
+  }
+  .ck-num {
+    font-family: 'Share Tech Mono', monospace;
+    font-size: 9px;
+    opacity: 0.45;
+    letter-spacing: 2px;
+    color: var(--ck-color);
+  }
+  .ck-name {
+    font-family: 'Black Ops One', system-ui;
+    font-size: 11px;
+    color: var(--ck-color);
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    flex: 1;
+  }
+  .ck-sanskrit {
+    font-family: 'Courier Prime', monospace;
+    font-size: 16px;
+    color: var(--ck-color);
+    opacity: 0.7;
+    margin-bottom: 7px;
+    letter-spacing: 1px;
+  }
+  .ck-row {
+    display: flex;
+    justify-content: space-between;
+    font-family: 'Space Mono', monospace;
+    font-size: 9px;
+    color: var(--text-muted);
+    letter-spacing: 1px;
+    margin-bottom: 3px;
+    border-bottom: 1px solid rgba(255,255,255,0.05);
+    padding-bottom: 3px;
+  }
+  .ck-row span:last-child {
+    color: var(--ck-color);
+    opacity: 0.85;
+    text-align: right;
+  }
+  .ck-qualities {
+    margin-top: 7px;
+    font-family: 'Space Mono', monospace;
+    font-size: 8px;
+    color: var(--text-muted);
+    opacity: 0.65;
+    line-height: 1.7;
+  }
+  /* pulsing ring on SVG chakra points */
+  .ck-ring { fill: none; }
+
+  /* ══════════════════════════════════════════════
+     CHAKRA GRID FULLSCREEN OVERLAY
+  ══════════════════════════════════════════════ */
+  #chakraGridOverlay {
+    display: none;
+    position: fixed;
+    inset: 0;
+    z-index: 10000;
+    background: rgba(0, 0, 0, 0.96);
+    backdrop-filter: blur(14px);
+    overflow-y: auto;
+    padding: 0;
+    animation: cgOverlayIn 0.35s cubic-bezier(0.22, 1, 0.36, 1);
+  }
+  #chakraGridOverlay.closing {
+    animation: cgOverlayOut 0.28s ease forwards;
+  }
+  @keyframes cgOverlayIn {
+    from { opacity: 0; transform: scale(0.97) translateY(24px); }
+    to   { opacity: 1; transform: scale(1)    translateY(0); }
+  }
+  @keyframes cgOverlayOut {
+    from { opacity: 1; transform: scale(1)    translateY(0); }
+    to   { opacity: 0; transform: scale(0.97) translateY(16px); }
+  }
+  #cgOverlayInner {
+    max-width: 1280px;
+    margin: 0 auto;
+    padding: 36px 28px 48px;
+    min-height: 100vh;
+    box-sizing: border-box;
+  }
+  #cgOverlayHeader {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 28px;
+    padding-bottom: 16px;
+    border-bottom: 1px solid rgba(255,255,255,0.08);
+  }
+  #cgOverlayTitle {
+    font-family: 'Black Ops One', system-ui;
+    font-size: 20px;
+    color: var(--text-main);
+    letter-spacing: 4px;
+    text-transform: uppercase;
+  }
+  #cgOverlaySubtitle {
+    font-family: 'Share Tech Mono', monospace;
+    font-size: 10px;
+    color: var(--text-muted);
+    letter-spacing: 2px;
+    opacity: 0.55;
+    margin-top: 4px;
+  }
+  #cgOverlayClose {
+    background: none;
+    border: 1px solid var(--text-main);
+    color: var(--text-main);
+    font-family: 'Share Tech Mono', monospace;
+    font-size: 11px;
+    padding: 8px 18px;
+    cursor: pointer;
+    letter-spacing: 2px;
+    transition: background 0.2s, color 0.2s, box-shadow 0.2s;
+    text-transform: uppercase;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    position: relative;
+  }
+  #cgOverlayClose:hover {
+    background: var(--text-main);
+    color: #000;
+    box-shadow: 0 0 18px var(--text-main);
+  }
+  /* override grid for fullscreen layout */
+  #chakraGridOverlay .chakra-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+    gap: 18px;
+    margin-top: 0;
+  }
+  #chakraGridOverlay .chakra-card {
+    padding: 20px 18px 16px;
+  }
+  #chakraGridOverlay .ck-sanskrit {
+    font-size: 22px;
+    margin-bottom: 12px;
+  }
+  #chakraGridOverlay .ck-row {
+    font-size: 10px;
+    margin-bottom: 4px;
+    padding-bottom: 4px;
+  }
+  #chakraGridOverlay .ck-qualities {
+    font-size: 9px;
+    margin-top: 10px;
+    line-height: 1.9;
+  }
+  /* scan-open button */
+  #btnOpenChakraGrid {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    background: transparent;
+    border: 1px solid var(--text-main);
+    color: var(--text-main);
+    font-family: 'Share Tech Mono', monospace;
+    font-size: 11px;
+    letter-spacing: 3px;
+    padding: 12px 28px;
+    cursor: pointer;
+    text-transform: uppercase;
+    transition: all 0.25s ease;
+    position: relative;
+    overflow: hidden;
+  }
+  #btnOpenChakraGrid::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: var(--text-main);
+    opacity: 0;
+    transition: opacity 0.25s ease;
+  }
+  #btnOpenChakraGrid:hover {
+    box-shadow: 0 0 24px var(--text-main);
+    color: #000;
+  }
+  #btnOpenChakraGrid:hover::before { opacity: 1; }
+  #btnOpenChakraGrid span { position: relative; z-index: 1; }
+  .cg-scan-dot {
+    width: 8px; height: 8px;
+    border-radius: 50%;
+    background: var(--text-main);
+    animation: ckPulse 2s infinite;
+    position: relative; z-index: 1;
+    flex-shrink: 0;
+  }
+
+  /* ══════════════════════════════════════════════
+     RESPONSIVE OVERRIDES
+  ══════════════════════════════════════════════ */
+  @media (max-width: 1024px) {
+    .main-layout { gap: 30px; }
+  }
+
+  @media (max-width: 768px) {
+    #mainContent { padding: 0 0 40px !important; }
+    .vitruvian-section .card-body { padding: 15px 5px !important; }
+    
+    .hero h1 { font-size: 28px !important; }
+  }
+
+  @media (max-width: 600px) {
+    #cgOverlayHeader {
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 16px;
+    }
+    #cgOverlayClose { width: 100%; justify-content: center; }
+    #cgOverlayTitle { font-size: 16px; letter-spacing: 2px; }
+    
+    #cgOverlayInner { padding: 24px 16px; }
+    
+    #ckHintBar { font-size: 8px; letter-spacing: 1px; }
+    
+    .chakra-grid {
+      grid-template-columns: 1fr !important;
+    }
+  }
+
+  @media (max-width: 480px) {
+    .card-header h2 { font-size: 11px; letter-spacing: 1px; }
+
+    /* Fix top-bar overflow */
+    .top-bar { flex-direction: column; gap: 4px; height: auto; padding: 10px 15px; }
+    .status-indicator { order: 1; border: none; font-size: 9px; }
+    .time-display { order: 2; font-size: 14px; margin: 4px 0; }
+    .coordinates { display: none; }
+    .sys-load { display: none; }
+    
+    /* Fix metadata panel clipping */
+    .metadata-panel { border-top: 1px solid var(--border-color); padding-top: 10px; margin-top: 20px; }
+    .sys-data { flex-direction: column; align-items: flex-start; gap: 6px; }
+    .sys-data p { border-right: none; border-bottom: 1px solid rgba(255,255,255,0.05); width: 100%; padding: 0 0 4px 0; }
+
+    .hero h1 { font-size: 24px !important; }
+    .hero-titles { flex-direction: column; align-items: flex-start; }
+    .hero-icons { margin-left: 0 !important; margin-top: 10px; }
+  }
+</style>
 </head>
 <body class="theme-throat">
+
+<!-- TOOLTIP ELEMENT -->
+<div id="vtTooltip">
+  <div class="tt-title" id="ttTitle">—</div>
+  <div class="tt-val"  id="ttVal"></div>
+  <div class="tt-desc" id="ttDesc"></div>
+</div>
 
 <div class="mini-loader" id="miniLoader">
   <div class="mini-loader-content">
@@ -94,7 +504,487 @@
     <!-- MAIN GRID AREA -->
     <main class="full-width-grid" id="mainContent">
 
-      <section class="card timeline-item">
+      <!-- ══════════════════════════════════════════════
+           SECTION 1: ANATOMICAL MAP — VITRUVIAN MAN
+      ══════════════════════════════════════════════ -->
+      <section class="card timeline-item vitruvian-section">
+        <div class="card-header">
+          <h2>ANATOMICAL MAP // HUMAN.CONSTANT</h2>
+          <div class="leds"><span class="dot green animated-pulse"></span></div>
+        </div>
+        <div class="card-body" style="padding: 20px 10px; text-align: center;">
+          <p class="subtitle" style="margin-bottom: 4px; font-size:12px; letter-spacing:2px;">
+            FIELD SPECIMEN: JES-007 &bull; DA VINCI PROPORTIONAL ANALYSIS &bull; REF: <em>De Architectura</em>, Vitruvius, ~25 BC
+          </p>
+          <p style="font-family: var(--font-mono); font-size:10px; color:var(--text-muted); opacity:0.6; margin-bottom:18px; letter-spacing:1px;">
+            [ HOVER ANY ELEMENT TO DECODE PROPORTIONAL DATA ]
+          </p>
+
+          <!-- ══════════════════ VITRUVIAN MAN SVG ══════════════════ -->
+          <svg id="vitruvianMan" xmlns="http://www.w3.org/2000/svg"
+            viewBox="0 0 660 680"
+            style="width:100%; max-width:620px; display:inline-block; color: var(--text-main);"
+            aria-label="Vitruvian Man — Da Vinci proportional study diagram">
+
+            <defs>
+              <filter id="vt-glow" x="-25%" y="-25%" width="150%" height="150%">
+                <feGaussianBlur stdDeviation="2.5" result="blur"/>
+                <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+              </filter>
+              <filter id="vt-glow-strong" x="-40%" y="-40%" width="180%" height="180%">
+                <feGaussianBlur stdDeviation="5" result="blur"/>
+                <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+              </filter>
+              <!-- Gradient stops updated by JS on theme change -->
+              <radialGradient id="vt-inner-glow" cx="50%" cy="50%" r="50%">
+                <stop id="vt-grad-inner-1" offset="0%"   stop-color="#00ccff" stop-opacity="0.08"/>
+                <stop id="vt-grad-inner-2" offset="100%" stop-color="#00ccff" stop-opacity="0"/>
+              </radialGradient>
+              <radialGradient id="vt-bg" cx="50%" cy="50%" r="50%">
+                <stop id="vt-grad-bg-1" offset="0%"   stop-color="#00ccff" stop-opacity="0.04"/>
+                <stop id="vt-grad-bg-2" offset="100%" stop-color="transparent" stop-opacity="0"/>
+              </radialGradient>
+            </defs>
+
+            <!-- BACKGROUND -->
+            <rect width="660" height="680" fill="url(#vt-bg)" stroke="none"/>
+
+            <!-- ── GRID CROSSHAIR ── -->
+            <line x1="60" y1="330" x2="600" y2="330" stroke="var(--accent,#00e5ff)" stroke-width="0.4" opacity="0.18" stroke-dasharray="4 8"/>
+            <line x1="330" y1="60" x2="330" y2="610" stroke="var(--accent,#00e5ff)" stroke-width="0.4" opacity="0.18" stroke-dasharray="4 8"/>
+
+            <!-- ── OUTER CIRCLE (navel as centre — Da Vinci's primary circle) ── -->
+            <circle id="vt-outer-circle" cx="330" cy="330" r="245"
+              fill="url(#vt-inner-glow)"
+              stroke-width="0.9" stroke-dasharray="5 7"
+              opacity="0.5" class="vt-hover"
+              data-tt-title="CIRCUMSCRIBED CIRCLE"
+              data-tt-val="R = H × 0.742 | Centre = Navel"
+              data-tt-desc="Da Vinci placed the navel as the exact centre of a circle that perfectly circumscribes man with arms and legs spread. Radius equals ~74.2% of total body height — a constant observed across all ideal human proportions by Vitruvius."/>
+
+            <!-- ── BOUNDING SQUARE (feet-to-crown, wrist-to-wrist) ── -->
+            <rect id="vt-square" x="88" y="85" width="484" height="484"
+              fill="none"
+              stroke-width="0.8" stroke-dasharray="3 9"
+              opacity="0.4" class="vt-hover"
+              data-tt-title="VITRUVIAN SQUARE"
+              data-tt-val="Side = H = SPAN | Ratio = 1:1"
+              data-tt-desc="Vitruvius stated: 'the length of a man's outspread arms is equal to his height.' This perfect square — side equal to body height — encodes human bilateral symmetry and is the foundation of classical architectural modules."/>
+
+            <!-- ── SECONDARY INNER CIRCLE (mid-proportion ring) ── -->
+            <circle cx="330" cy="330" r="152"
+              fill="none"
+              stroke-width="0.5" stroke-dasharray="2 6"
+              opacity="0.2"/>
+
+            <!-- ── GOLDEN SECTION VERTICALS on square ── -->
+            <!-- φ split from left: 88 + 484/φ ≈ 88+299 = 387 -->
+            <line x1="387" y1="85" x2="387" y2="569" stroke-width="0.4" stroke-dasharray="1 6" opacity="0.22"/>
+            <!-- φ split from right: 569 - 299 = 270 -->
+            <line x1="270" y1="85" x2="270" y2="569" stroke-width="0.4" stroke-dasharray="1 6" opacity="0.22"/>
+            <!-- φ split horizontal: 85 + 484/φ ≈ 85+299 = 384 -->
+            <line x1="88" y1="384" x2="572" y2="384" stroke-width="0.4" stroke-dasharray="1 6" opacity="0.22"/>
+            <!-- φ split from top: 85 + (484 - 299) = 85+185 = 270 -->
+            <line x1="88" y1="270" x2="572" y2="270" stroke-width="0.4" stroke-dasharray="1 6" opacity="0.22"/>
+
+
+            <!-- ═══════════════════════════════
+                 HUMAN FIGURE — Vitruvian Pose
+                 Standing upright, arms horizontal
+                 Head top: y=112, Feet: y=569
+                 Total H = 457px units
+            ═══════════════════════════════ -->
+
+            <!-- HEAD (1/8 H = 57px) -->
+            <circle id="vt-head" cx="330" cy="141" r="29"
+              fill="none" stroke-width="2"
+              filter="url(#vt-glow)" opacity="0.95" class="vt-hover"
+              data-tt-title="HEAD — 1/8 TOTAL HEIGHT"
+              data-tt-val="H_head = H ÷ 8 | crown→chin ≈ 57 units"
+              data-tt-desc="Vitruvius: 'The face from the chin to the top of the forehead is 1/10 of total height; from the chin to the crown, 1/8.' The head governs all other proportional divisions — it is the module (M) from which everything else is derived."/>
+
+            <!-- FACE DETAIL — brow line -->
+            <line x1="316" y1="128" x2="344" y2="128" stroke-width="0.6" opacity="0.4"/>
+            <!-- FACE DETAIL — eye line -->
+            <ellipse cx="322" cy="136" rx="4" ry="2.5" fill="none" stroke-width="0.8" opacity="0.5"/>
+            <ellipse cx="338" cy="136" rx="4" ry="2.5" fill="none" stroke-width="0.8" opacity="0.5"/>
+            <!-- nose bridge -->
+            <line x1="330" y1="139" x2="330" y2="147" stroke-width="0.7" opacity="0.4"/>
+            <!-- mouth -->
+            <path d="M323,152 Q330,157 337,152" fill="none" stroke-width="0.8" opacity="0.4"/>
+
+            <!-- NECK -->
+            <rect id="vt-neck" x="322" y="170" width="16" height="20"
+              fill="none" stroke-width="1.2"
+              opacity="0.7" rx="3" class="vt-hover"
+              data-tt-title="NECK — STRUCTURAL PIVOT"
+              data-tt-val="W_neck ≈ H/20 | connects head module to torso"
+              data-tt-desc="The neck width in ideal proportions is approximately 1/20 of height, equal to half the face width. In classical architecture it corresponds to the capital connecting column shaft to entablature — a transitional module."/>
+
+            <!-- TORSO (shoulders y=190 to pelvis y=380) -->
+            <path id="vt-torso" d="M290,190 Q272,240 274,310 Q275,350 310,378 Q330,385 330,385 Q330,385 350,378 Q385,350 386,310 Q388,240 370,190 Z"
+              fill="none" stroke-width="1.9"
+              filter="url(#vt-glow)" opacity="0.9" class="vt-hover"
+              data-tt-title="TORSO — GOLDEN RECTANGLE"
+              data-tt-val="H_torso = 3/8 H | W_shoulder ≈ H/4"
+              data-tt-desc="The torso from shoulders to pelvis spans 3 head-lengths (3/8 H). Shoulder width equals exactly 1/4 of height. The torso itself forms the core golden rectangle — its height-to-width ratio approximates φ (1.618), the divine proportion visible throughout Renaissance art."/>
+
+            <!-- SHOULDER LINE -->
+            <line x1="290" y1="196" x2="370" y2="196" stroke-width="1" opacity="0.5" stroke-dasharray="2 3"/>
+            <!-- CHEST CENTRE LINE -->
+            <line x1="330" y1="190" x2="330" y2="380" stroke-width="0.5" opacity="0.2" stroke-dasharray="2 5"/>
+            <!-- PECTORAL ARCS -->
+            <path d="M310,220 Q330,232 350,220" fill="none" stroke-width="0.7" opacity="0.35"/>
+            <!-- NAVEL MARK -->
+            <circle id="vt-navel" cx="330" cy="330" r="6"
+              style="fill: var(--text-main);" opacity="0.3"
+              filter="url(#vt-glow-strong)" class="vt-hover"
+              data-tt-title="NAVEL — GEOMETRIC CENTRE"
+              data-tt-val="N/H = 0.618 = 1/φ | Circle origin"
+              data-tt-desc="The navel is the most critical point in Vitruvian geometry. Da Vinci proved it is EXACTLY 1/φ (≈ 0.618) of total height from the ground — the golden section of the body. All circles in the diagram are centred here. The navel divides the body into two segments whose ratio equals φ:1."/>
+            <circle cx="330" cy="330" r="3" style="fill: var(--text-main);" opacity="0.7"/>
+
+            <!-- LEFT ARM — horizontal (Da Vinci primary pose) -->
+            <line id="vt-left-arm" x1="290" y1="220" x2="90" y2="255"
+              stroke-width="2" stroke-linecap="round"
+              opacity="0.9" class="vt-hover"
+              data-tt-title="LEFT ARM — HALF SPAN"
+              data-tt-val="L_arm = H/2 | shoulder→fingertip"
+              data-tt-desc="Each arm from shoulder to fingertip equals exactly H/2. The full arm span (fingertip to fingertip) equals the total body height H — Vitruvius' most celebrated ratio. Upper arm : forearm ratio ≈ φ : 1, following the same golden progression found in the finger segments."/>
+            <!-- elbow joint -->
+            <circle cx="200" cy="238" r="4" fill="none" stroke-width="1" opacity="0.5"/>
+            <!-- left hand -->
+            <circle cx="88" cy="256" r="7" fill="none" stroke-width="1.3" opacity="0.65"/>
+            <!-- finger lines -->
+            <line x1="82" y1="252" x2="72" y2="248" stroke-width="0.7" opacity="0.4"/>
+            <line x1="85" y1="256" x2="74" y2="256" stroke-width="0.7" opacity="0.4"/>
+            <line x1="84" y1="261" x2="73" y2="263" stroke-width="0.7" opacity="0.4"/>
+
+            <!-- RIGHT ARM — horizontal -->
+            <line id="vt-right-arm" x1="370" y1="220" x2="570" y2="255"
+              stroke-width="2" stroke-linecap="round"
+              opacity="0.9" class="vt-hover"
+              data-tt-title="RIGHT ARM — HALF SPAN"
+              data-tt-val="L_arm = H/2 | symmetric bilateral axis"
+              data-tt-desc="Perfect bilateral symmetry: the right arm mirrors the left with zero deviation. Vitruvius used this symmetry — called 'eurythmy' — as evidence that nature itself follows mathematical law, and that architecture must obey the same rules."/>
+            <!-- elbow joint -->
+            <circle cx="460" cy="238" r="4" fill="none" stroke-width="1" opacity="0.5"/>
+            <!-- right hand -->
+            <circle cx="572" cy="256" r="7" fill="none" stroke-width="1.3" opacity="0.65"/>
+            <line x1="578" y1="252" x2="588" y2="248" stroke-width="0.7" opacity="0.4"/>
+            <line x1="575" y1="256" x2="586" y2="256" stroke-width="0.7" opacity="0.4"/>
+            <line x1="576" y1="261" x2="587" y2="263" stroke-width="0.7" opacity="0.4"/>
+
+            <!-- SECONDARY ARMS — raised (Da Vinci dual-pose) -->
+            <line x1="370" y1="220" x2="545" y2="140"
+              stroke-width="1" stroke-dasharray="3 5"
+              opacity="0.3" stroke-linecap="round"/>
+            <line x1="290" y1="220" x2="115" y2="140"
+              stroke-width="1" stroke-dasharray="3 5"
+              opacity="0.3" stroke-linecap="round"/>
+
+            <!-- LEFT LEG — straight -->
+            <line id="vt-left-leg" x1="315" y1="380" x2="280" y2="562"
+              stroke-width="2" stroke-linecap="round"
+              opacity="0.88" class="vt-hover"
+              data-tt-title="LEFT LEG — LOWER HALF OF BODY"
+              data-tt-val="L_leg = H/2 | hip→sole"
+              data-tt-desc="From hip to sole equals H/2, matching the arm length exactly. The knee divides the leg at 1/4 H from the ground, and the femur-to-tibia ratio closely approximates φ. Vitruvius: 'from the sole of the foot to the knee will be a fourth part of the man's height.'"/>
+            <!-- knee -->
+            <circle cx="295" cy="472" r="5" fill="none" stroke-width="1" opacity="0.55"/>
+            <!-- left foot -->
+            <path d="M268,562 Q255,565 248,560 Q245,555 260,553 Q270,553 280,562 Z"
+              fill="none" stroke-width="1.3" opacity="0.65"/>
+
+            <!-- RIGHT LEG — straight -->
+            <line id="vt-right-leg" x1="345" y1="380" x2="380" y2="562"
+              stroke-width="2" stroke-linecap="round"
+              opacity="0.88" class="vt-hover"
+              data-tt-title="RIGHT LEG — BILATERAL SYMMETRY"
+              data-tt-val="L_leg = H/2 | confirming eurythmy"
+              data-tt-desc="Both legs are equal — a core pillar of Vitruvian 'symmetria': the commensurability of all parts with one another and with the whole. Vitruvius defined this as the prerequisite for beauty in both the human body and architectural design."/>
+            <!-- knee -->
+            <circle cx="365" cy="472" r="5" fill="none" stroke-width="1" opacity="0.55"/>
+            <!-- right foot -->
+            <path d="M392,562 Q405,565 412,560 Q415,555 400,553 Q390,553 380,562 Z"
+              fill="none" stroke-width="1.3" opacity="0.65"/>
+
+            <!-- SECONDARY LEGS — spread (Da Vinci dual-pose, dashed) -->
+            <line x1="315" y1="380" x2="240" y2="545"
+              stroke-width="0.9" stroke-dasharray="3 5"
+              opacity="0.25" stroke-linecap="round"/>
+            <line x1="345" y1="380" x2="420" y2="545"
+              stroke-width="0.9" stroke-dasharray="3 5"
+              opacity="0.25" stroke-linecap="round"/>
+
+
+            <!-- ══════════════════════════════════
+                 MEASUREMENT LINES & ANNOTATIONS
+            ══════════════════════════════════ -->
+
+            <!-- LEFT EDGE — Total Height -->
+            <line x1="48" y1="112" x2="48" y2="569" class="meas-line"/>
+            <line x1="43" y1="112" x2="53" y2="112" class="meas-tick"/>
+            <line x1="43" y1="569" x2="53" y2="569" class="meas-tick"/>
+            <text x="34" y="345" class="meas-text" transform="rotate(-90,34,345)" id="vt-height-label"
+              class="vt-hover"
+              data-tt-title="TOTAL HEIGHT H"
+              data-tt-val="H = 1.000 unit | All ratios relative"
+              data-tt-desc="The total body height H is the universal module. Every proportion in Vitruvian analysis is expressed as a fraction or multiple of H. Source: De Architectura, Book III.">H = 1.000</text>
+
+            <!-- 8-DIVISION TICKS on right edge -->
+            <!-- H/8 divisions: 112 + n*(457/8) = 112 + n*57 -->
+            <line x1="610" y1="112" x2="610" y2="569" class="meas-line"/>
+            <line x1="605" y1="112" x2="615" y2="112" class="meas-tick"/>
+            <!-- H/8 = 57 -->
+            <line x1="605" y1="169" x2="615" y2="169" class="meas-tick"/><text x="617" y="143" class="prop-lbl">HEAD 1/8 H</text>
+            <line x1="605" y1="226" x2="615" y2="226" class="meas-tick"/><text x="617" y="200" class="prop-lbl">CHIN  2/8 H</text>
+            <line x1="605" y1="283" x2="615" y2="283" class="meas-tick"/><text x="617" y="257" class="prop-lbl">CHEST 3/8 H</text>
+            <!-- NAVEL at 0.618 H from base = 112 + (1-0.618)*457 = 112+174.6 = ~286.6 from top -->
+            <line x1="605" y1="287" x2="615" y2="287" class="meas-tick" stroke="var(--accent)" opacity="0.7"/>
+            <text x="617" y="314" class="prop-lbl" fill="#ffd54f" opacity="0.9">NAVEL φ·H</text>
+            <line x1="605" y1="341" x2="615" y2="341" class="meas-tick"/><text x="617" y="371" class="prop-lbl">PELVIS 5/8 H</text>
+            <line x1="605" y1="398" x2="615" y2="398" class="meas-tick"/><text x="617" y="428" class="prop-lbl">KNEE  6/8 H</text>
+            <line x1="605" y1="455" x2="615" y2="455" class="meas-tick"/><text x="617" y="485" class="prop-lbl">CALF  7/8 H</text>
+            <line x1="605" y1="569" x2="615" y2="569" class="meas-tick"/><text x="617" y="569" class="prop-lbl">SOLE  8/8 H</text>
+
+            <!-- TOP EDGE — Arm Span -->
+            <line x1="88" y1="50" x2="572" y2="50" class="meas-line"/>
+            <line x1="88" y1="44" x2="88" y2="56" class="meas-tick"/>
+            <line x1="572" y1="44" x2="572" y2="56" class="meas-tick"/>
+            <text x="330" y="46" class="meas-text" text-anchor="middle">ARM SPAN = H &times; 1.000</text>
+
+            <!-- HEAD diameter top bar -->
+            <line x1="301" y1="112" x2="301" y2="104" class="meas-tick"/>
+            <line x1="359" y1="112" x2="359" y2="104" class="meas-tick"/>
+            <line x1="301" y1="106" x2="359" y2="106" class="meas-line"/>
+            <text x="330" y="100" class="meas-text" text-anchor="middle" font-size="8">HEAD Ø = H/8</text>
+
+            <!-- NAVEL horizontal guide -->
+            <line x1="48" y1="330" x2="290" y2="330" class="meas-line" stroke-dasharray="3 6"/>
+            <text x="50" y="326" class="prop-lbl" font-size="7.5" opacity="0.5">NAVEL ═</text>
+
+            <!-- SHOULDER WIDTH bottom callout -->
+            <line x1="290" y1="630" x2="370" y2="630" class="meas-line"/>
+            <line x1="290" y1="624" x2="290" y2="636" class="meas-tick"/>
+            <line x1="370" y1="624" x2="370" y2="636" class="meas-tick"/>
+            <text x="330" y="648" class="meas-text" text-anchor="middle" font-size="8.5">W_SHOULDER = H/4</text>
+
+            <!-- Radius diagonal -->
+            <line x1="330" y1="330" x2="530" y2="145"
+              stroke-width="0.55" stroke-dasharray="3 6" opacity="0.28"/>
+            <text x="446" y="218" class="meas-text" transform="rotate(-42,446,218)" font-size="7.5">R = 0.742·H</text>
+
+            <!-- ══════ LEFT NOTES ══════ -->
+            <text x="60" y="166" class="math-note" text-anchor="start" font-size="8">VITRUVIAN</text>
+            <text x="60" y="177" class="math-note" text-anchor="start" font-size="8">PROPORTIONS</text>
+            <text x="60" y="188" class="math-note" text-anchor="start" font-size="7">De Architectura, ~25 BC</text>
+            <text x="60" y="200" class="math-note" text-anchor="start" font-size="7">Leonardo da Vinci, c.1490</text>
+
+            <text x="60" y="415" class="math-note" text-anchor="start" font-size="7.5">GOLDEN RATIO</text>
+            <text x="60" y="428" class="math-note" text-anchor="start" font-size="9">&#966; = (1+&#8730;5)÷2</text>
+            <text x="60" y="441" class="math-note" text-anchor="start" font-size="8.5">&#966; ≈ 1.6180339...</text>
+
+            <text x="60" y="470" class="math-note" text-anchor="start" font-size="7.5">NAVEL THEOREM</text>
+            <text x="60" y="483" class="math-note" text-anchor="start" font-size="8">N/H = 1/&#966; = 0.618</text>
+            <text x="60" y="496" class="math-note" text-anchor="start" font-size="7.5">Confirmed by da Vinci</text>
+
+            <text x="60" y="525" class="math-note" text-anchor="start" font-size="7.5">8-MODULE SYSTEM</text>
+            <text x="60" y="538" class="math-note" text-anchor="start" font-size="7.5">H = 8 heads = 4 cubits</text>
+            <text x="60" y="551" class="math-note" text-anchor="start" font-size="7.5">= 6 palms = 24 digits</text>
+
+            <!-- ══════ BOTTOM LEGEND ══════ -->
+            <text x="330" y="666" class="math-note" text-anchor="middle" font-size="9" opacity="0.65">
+              &#966; = 1.618 &nbsp;|&nbsp; &#960; = 3.14159 &nbsp;|&nbsp; &#8730;2 = 1.414 &nbsp;|&nbsp; &#8730;5 = 2.236
+            </text>
+            <text x="330" y="678" class="meas-label" text-anchor="middle" font-size="7.5" opacity="0.4">
+              [ UNIT: JES-007 | DATUM: NAVEL | REF: DE ARCHITECTURA III.1 ]
+            </text>
+
+            <!-- ══════ ANIMATED SCAN LINE ══════ -->
+            <line x1="88" y1="85" x2="572" y2="85"
+              stroke-width="1" opacity="0.2">
+              <animate attributeName="y1" from="85" to="569" dur="6s" repeatCount="indefinite"/>
+              <animate attributeName="y2" from="85" to="569" dur="6s" repeatCount="indefinite"/>
+              <animate attributeName="opacity" values="0.2;0.04;0.2" dur="6s" repeatCount="indefinite"/>
+            </line>
+
+            <!-- ══════════════════════════════════════════════
+                 7 CHAKRA ENERGY CENTRES
+                 Mapped on sushumna (spinal axis) x=330
+                 Each: pulsing glow dot + outer ring + leader line + label
+            ══════════════════════════════════════════════ -->
+
+            <!-- 1. SAHASRARA (Crown) – y=112, violet -->
+            <g class="vt-hover"
+              data-tt-title="SAHASRARA — CROWN CHAKRA ● 7"
+              data-tt-val="Position: Crown | Vitruvian: Top of circle | y = 0H"
+              data-tt-desc="The thousand-petalled lotus. Governs cosmic consciousness and the connection to universal intelligence. Vitruvian parallel: the crown of the figure touches the outer circle — the boundary between human form and infinite space. Element: Thought/Space. Bija: OM. Sense: Beyond sense.">
+              <!-- outer pulse ring -->
+              <circle cx="330" cy="112" r="10" class="ck-ring" stroke="#b39ddb" stroke-width="0.8" opacity="0.6">
+                <animate attributeName="r" values="8;14;8" dur="2.8s" repeatCount="indefinite"/>
+                <animate attributeName="opacity" values="0.6;0.1;0.6" dur="2.8s" repeatCount="indefinite"/>
+              </circle>
+              <!-- core dot -->
+              <circle cx="330" cy="112" r="5" fill="#b39ddb" opacity="0.95" filter="url(#vt-glow-strong)"/>
+              <!-- leader line to left label -->
+              <line x1="325" y1="112" x2="255" y2="112" stroke="#b39ddb" stroke-width="0.7" opacity="0.5" stroke-dasharray="2 4"/>
+              <text x="250" y="114" font-family="Share Tech Mono,monospace" font-size="7" fill="#b39ddb" text-anchor="end" opacity="0.85">SAHASRARA</text>
+              <text x="250" y="123" font-family="Space Mono,monospace" font-size="6.5" fill="#b39ddb" text-anchor="end" opacity="0.5">OM · CROWN</text>
+            </g>
+
+            <!-- 2. AJNA (Third Eye) – y=133, indigo -->
+            <g class="vt-hover"
+              data-tt-title="AJNA — THIRD EYE CHAKRA ● 6"
+              data-tt-val="Position: Brow | Vitruvian: 1/8 H from crown | y = 0.125H"
+              data-tt-desc="The command centre. Governs intuition, perception, visualisation and inner wisdom. Vitruvian parallel: at 1/8 H — the same module as the full head — it marks where rational observation meets visionary intellect. Element: Light. Bija: AUM. Sense: Extra-sensory perception.">
+              <circle cx="330" cy="133" r="9" class="ck-ring" stroke="#7c4dff" stroke-width="0.8" opacity="0.55">
+                <animate attributeName="r" values="7;13;7" dur="3s" repeatCount="indefinite"/>
+                <animate attributeName="opacity" values="0.55;0.1;0.55" dur="3s" repeatCount="indefinite"/>
+              </circle>
+              <circle cx="330" cy="133" r="4.5" fill="#7c4dff" opacity="0.95" filter="url(#vt-glow-strong)"/>
+              <line x1="325" y1="133" x2="255" y2="133" stroke="#7c4dff" stroke-width="0.7" opacity="0.5" stroke-dasharray="2 4"/>
+              <text x="250" y="135" font-family="Share Tech Mono,monospace" font-size="7" fill="#7c4dff" text-anchor="end" opacity="0.85">AJNA</text>
+              <text x="250" y="144" font-family="Space Mono,monospace" font-size="6.5" fill="#7c4dff" text-anchor="end" opacity="0.5">AUM · BROW</text>
+            </g>
+
+            <!-- 3. VISHUDDHA (Throat) – y=180, cyan -->
+            <g class="vt-hover"
+              data-tt-title="VISHUDDHA — THROAT CHAKRA ● 5"
+              data-tt-val="Position: Thyroid | Vitruvian: 2/8 H mark | y = 0.25H"
+              data-tt-desc="The purification centre. Governs speech, creative expression, truth and resonance. Vitruvian parallel: sits at 2/8 H — where the neck module pivots the head (the master module) onto the torso. Architecturally analogous to the capital connecting column to entablature. Element: Sound/Ether. Bija: HAM. Sense: Hearing.">
+              <circle cx="330" cy="180" r="9" class="ck-ring" stroke="#00bcd4" stroke-width="0.8" opacity="0.55">
+                <animate attributeName="r" values="7;13;7" dur="3.2s" repeatCount="indefinite"/>
+                <animate attributeName="opacity" values="0.55;0.1;0.55" dur="3.2s" repeatCount="indefinite"/>
+              </circle>
+              <circle cx="330" cy="180" r="4.5" fill="#00bcd4" opacity="0.95" filter="url(#vt-glow-strong)"/>
+              <line x1="325" y1="180" x2="255" y2="180" stroke="#00bcd4" stroke-width="0.7" opacity="0.5" stroke-dasharray="2 4"/>
+              <text x="250" y="182" font-family="Share Tech Mono,monospace" font-size="7" fill="#00bcd4" text-anchor="end" opacity="0.85">VISHUDDHA</text>
+              <text x="250" y="191" font-family="Space Mono,monospace" font-size="6.5" fill="#00bcd4" text-anchor="end" opacity="0.5">HAM · THROAT</text>
+            </g>
+
+            <!-- 4. ANAHATA (Heart) – y=228, green -->
+            <g class="vt-hover"
+              data-tt-title="ANAHATA — HEART CHAKRA ● 4"
+              data-tt-val="Position: Cardiac plexus | Vitruvian: 3/8 H | y = 0.375H"
+              data-tt-desc="The unstruck sound. Governs love, compassion, equilibrium and relationship. Vitruvian parallel: at 3/8 H — the geometric midpoint of the torso's golden rectangle — the heart is structurally central to both the body and the human experience. The bridge between lower and upper chakras, as the square bridges earth and circle (heaven). Element: Air. Bija: YAM. Sense: Touch.">
+              <circle cx="330" cy="228" r="10" class="ck-ring" stroke="#4caf50" stroke-width="0.8" opacity="0.55">
+                <animate attributeName="r" values="8;14;8" dur="3.4s" repeatCount="indefinite"/>
+                <animate attributeName="opacity" values="0.55;0.1;0.55" dur="3.4s" repeatCount="indefinite"/>
+              </circle>
+              <circle cx="330" cy="228" r="5" fill="#4caf50" opacity="0.95" filter="url(#vt-glow-strong)"/>
+              <line x1="325" y1="228" x2="255" y2="228" stroke="#4caf50" stroke-width="0.7" opacity="0.5" stroke-dasharray="2 4"/>
+              <text x="250" y="230" font-family="Share Tech Mono,monospace" font-size="7" fill="#4caf50" text-anchor="end" opacity="0.85">ANAHATA</text>
+              <text x="250" y="239" font-family="Space Mono,monospace" font-size="6.5" fill="#4caf50" text-anchor="end" opacity="0.5">YAM · HEART</text>
+            </g>
+
+            <!-- 5. MANIPURA (Solar Plexus) – y=268, amber -->
+            <g class="vt-hover"
+              data-tt-title="MANIPURA — SOLAR PLEXUS CHAKRA ● 3"
+              data-tt-val="Position: Navel above | Vitruvian: approaching φ·H | y = 0.44H"
+              data-tt-desc="The city of jewels. Governs personal power, will, transformation and identity. Vitruvian parallel: positioned near the golden-section transition zone — between the navel (1/φ) and the midpoint — it represents the energetic engine that drives upward aspiration. Element: Fire. Bija: RAM. Sense: Sight.">
+              <circle cx="330" cy="268" r="9" class="ck-ring" stroke="#ffc107" stroke-width="0.8" opacity="0.55">
+                <animate attributeName="r" values="7;13;7" dur="3.6s" repeatCount="indefinite"/>
+                <animate attributeName="opacity" values="0.55;0.1;0.55" dur="3.6s" repeatCount="indefinite"/>
+              </circle>
+              <circle cx="330" cy="268" r="4.5" fill="#ffc107" opacity="0.95" filter="url(#vt-glow-strong)"/>
+              <line x1="325" y1="268" x2="255" y2="268" stroke="#ffc107" stroke-width="0.7" opacity="0.5" stroke-dasharray="2 4"/>
+              <text x="250" y="270" font-family="Share Tech Mono,monospace" font-size="7" fill="#ffc107" text-anchor="end" opacity="0.85">MANIPURA</text>
+              <text x="250" y="279" font-family="Space Mono,monospace" font-size="6.5" fill="#ffc107" text-anchor="end" opacity="0.5">RAM · SOLAR</text>
+            </g>
+
+            <!-- 6. SVADHISTHANA (Sacral) – y=307, orange -->
+            <g class="vt-hover"
+              data-tt-title="SVADHISTHANA — SACRAL CHAKRA ● 2"
+              data-tt-val="Position: Sacrum | Vitruvian: φ·H zone | y = 0.50H"
+              data-tt-desc="One's own abode. Governs creativity, pleasure, sexuality and fluidity. Vitruvian parallel: sits precisely in the navel zone — the Vitruvian golden section point. The outer circle is centred here, making this chakra literally the origin point of the entire geometric system. Element: Water. Bija: VAM. Sense: Taste.">
+              <circle cx="330" cy="307" r="9" class="ck-ring" stroke="#ff9800" stroke-width="0.8" opacity="0.55">
+                <animate attributeName="r" values="7;13;7" dur="3.8s" repeatCount="indefinite"/>
+                <animate attributeName="opacity" values="0.55;0.1;0.55" dur="3.8s" repeatCount="indefinite"/>
+              </circle>
+              <circle cx="330" cy="307" r="4.5" fill="#ff9800" opacity="0.95" filter="url(#vt-glow-strong)"/>
+              <line x1="325" y1="307" x2="255" y2="307" stroke="#ff9800" stroke-width="0.7" opacity="0.5" stroke-dasharray="2 4"/>
+              <text x="250" y="309" font-family="Share Tech Mono,monospace" font-size="7" fill="#ff9800" text-anchor="end" opacity="0.85">SVADHISTHANA</text>
+              <text x="250" y="318" font-family="Space Mono,monospace" font-size="6.5" fill="#ff9800" text-anchor="end" opacity="0.5">VAM · SACRAL</text>
+            </g>
+
+            <!-- 7. MULADHARA (Root) – y=375, red -->
+            <g class="vt-hover"
+              data-tt-title="MULADHARA — ROOT CHAKRA ● 1"
+              data-tt-val="Position: Coccyx/Perineum | Vitruvian: Base of square | y = 0.58H"
+              data-tt-desc="The root support. Governs survival, groundedness, physical existence and primal energy. Vitruvian parallel: at the base of the torso — where the figure meets the earth — it corresponds to the foundation of the Vitruvian square. Just as a building's strength begins at its base, all higher chakra function depends on a stable root. Element: Earth. Bija: LAM. Sense: Smell.">
+              <circle cx="330" cy="375" r="10" class="ck-ring" stroke="#f44336" stroke-width="0.8" opacity="0.55">
+                <animate attributeName="r" values="8;14;8" dur="4s" repeatCount="indefinite"/>
+                <animate attributeName="opacity" values="0.55;0.1;0.55" dur="4s" repeatCount="indefinite"/>
+              </circle>
+              <circle cx="330" cy="375" r="5" fill="#f44336" opacity="0.95" filter="url(#vt-glow-strong)"/>
+              <line x1="325" y1="375" x2="255" y2="375" stroke="#f44336" stroke-width="0.7" opacity="0.5" stroke-dasharray="2 4"/>
+              <text x="250" y="377" font-family="Share Tech Mono,monospace" font-size="7" fill="#f44336" text-anchor="end" opacity="0.85">MULADHARA</text>
+              <text x="250" y="386" font-family="Space Mono,monospace" font-size="6.5" fill="#f44336" text-anchor="end" opacity="0.5">LAM · ROOT</text>
+            </g>
+
+            <!-- Sushumna spine axis line (subtle) -->
+            <line x1="330" y1="107" x2="330" y2="380"
+              stroke="rgba(255,255,255,0.06)" stroke-width="2" stroke-linecap="round"/>
+
+
+          </svg>
+          <!-- ══════════════════ END SVG ══════════════════ -->
+
+          <!-- PROP LEGEND TABLE -->
+          <div style="display:flex; flex-wrap:wrap; gap:10px; justify-content:center; margin-top:18px; font-family:var(--font-mono); font-size:10px; color:var(--text-muted); letter-spacing:1px;">
+            <span class="vt-hover" style="border:1px solid var(--text-main); padding:4px 10px; opacity:0.6; cursor:crosshair;"
+              data-tt-title="HEAD MODULE"
+              data-tt-val="H/8"
+              data-tt-desc="The head is the fundamental module (M) from which all other measurements derive. Everything in Vitruvian proportion is a multiple or fraction of one head-length.">HEAD = H/8</span>
+            <span class="vt-hover" style="border:1px solid var(--text-main); padding:4px 10px; opacity:0.6; cursor:crosshair;"
+              data-tt-title="NAVEL GOLDEN SECTION"
+              data-tt-val="N = H/φ = 0.618·H"
+              data-tt-desc="The navel splits the body at the golden section. Below navel : above navel = φ : 1. This was Leonardo's central discovery — the human body literally encodes φ in its most prominent landmark.">NAVEL = H/φ</span>
+            <span class="vt-hover" style="border:1px solid var(--text-main); padding:4px 10px; opacity:0.6; cursor:crosshair;"
+              data-tt-title="ARM SPAN EQUALITY"
+              data-tt-val="SPAN = H (exact)"
+              data-tt-desc="Vitruvius' most celebrated claim: arm span equals height. This was considered proof that the human body expressed the divine proportion of the square — a shape that can accommodate both circle and square simultaneously.">SPAN = H</span>
+            <span class="vt-hover" style="border:1px solid var(--text-main); padding:4px 10px; opacity:0.6; cursor:crosshair;"
+              data-tt-title="CIRCLE RADIUS"
+              data-tt-val="R = 0.742·H"
+              data-tt-desc="The circumscribed circle has R ≈ 0.742H centred at the navel. This is not an arbitrary value — it is derived from the geometry of fitting both the square and circle to the same body, producing the classical 'squaring the circle' metaphor for human perfection.">R = 0.742·H</span>
+            <span class="vt-hover" style="border:1px solid var(--text-main); padding:4px 10px; opacity:0.6; cursor:crosshair;"
+              data-tt-title="SHOULDER WIDTH"
+              data-tt-val="W = H/4 = 2 head-widths"
+              data-tt-desc="Shoulder-to-shoulder breadth equals H/4, or two head-widths. This guides the colunm intercolumniation in Doric architecture — columns are spaced at 2 module widths, mirroring the human shoulder ratio.">SHOULDER = H/4</span>
+            <span class="vt-hover" style="border:1px solid var(--text-main); padding:4px 10px; opacity:0.6; cursor:crosshair;"
+              data-tt-title="BODY DIVISIONS"
+              data-tt-val="8 heads | 4 cubits | 6 palms | 24 digits"
+              data-tt-desc="Vitruvius documented 4 ancient measurement systems all encoding the same body. 1 cubit = 6 palms = 24 digits. The body's fractal-like self-similarity across scales (digit → palm → cubit → height) anticipates modern fractal geometry.">8 HEADS = 4 CUBITS</span>
+          </div>
+
+          <!-- CHAKRA HINT BAR -->
+          <div style="margin-top:22px; text-align:center;">
+            <p id="ckHintBar" style="font-family:var(--font-mono); font-size:9px; letter-spacing:2px; color:var(--text-muted); opacity:0.55; padding:10px 0; border-top:1px solid var(--border-color); border-bottom:1px solid var(--border-color);">
+              &#9679;&nbsp; CLICK ANY CHAKRA NODE ON THE DIAGRAM TO OPEN DETAILED SCAN
+            </p>
+          </div>
+
+          <!-- OPEN CHAKRA GRID BUTTON -->
+          <div style="text-align:center; margin-top:28px; margin-bottom:6px;">
+            <button id="btnOpenChakraGrid" onclick="openChakraGridOverlay()" aria-label="Open full chakra system scan">
+              <div class="cg-scan-dot"></div>
+              <span>&#9678;&nbsp; SCAN CHAKRA SYSTEM &mdash; ALL 7 NODES</span>
+            </button>
+          </div>
+
+        </div><!-- /.card-body -->
+        <div class="card-footer">
+          <span>BODY: MAPPED &nbsp;|&nbsp; &#9679; 7 CHAKRA NODES ACTIVE</span>
+          <span style="margin-left:auto; opacity:0.5; font-size:11px;">&#966; 1.618 &middot; LAM&rarr;OM &middot; JES-007</span>
+        </div>
+      </section>
+
+      <!-- ══════════════════════════════════════════════
+           SECTION 2: PERSONAL NOTEBOOK
+      ══════════════════════════════════════════════ -->
+      <section class="card timeline-item" style="margin-top: 24px;">
         <div class="card-header">
           <h2>PERSONAL NOTEBOOK / LOG.TXT</h2>
           <div class="leds"><span class="dot green"></span></div>
@@ -129,8 +1019,7 @@
         </div>
       </section>
 
-      <!-- BOTTOM BAR -->
-      <!-- RELOCATED FOOTER -->
+      <!-- FOOTER -->
       <footer class="bottom-bar" style="margin-top: 60px;">
         <div class="themes" id="themeButtons">
           <button class="theme-btn" data-theme="theme-crown">CROWN</button>
@@ -144,7 +1033,7 @@
         <div class="stats">
           <span class="dot orange animated-pulse"></span> READING LOG
           <span class="separator"> &nbsp;|&nbsp; </span>
-          1 ENTRY LOADED
+          2 SECTIONS &nbsp;|&nbsp; 7 CHAKRAS MAPPED
         </div>
       </footer>
 
@@ -152,6 +1041,405 @@
   </div>
 </div>
 
+<!-- ═══════════════════════════════════════════════════════════
+     CHAKRA GRID FULLSCREEN OVERLAY
+═══════════════════════════════════════════════════════════ -->
+<div id="chakraGridOverlay" role="dialog" aria-modal="true" aria-label="Chakra System Full Scan">
+  <div id="cgOverlayInner">
+
+    <!-- Header -->
+    <div id="cgOverlayHeader">
+      <div>
+        <div id="cgOverlayTitle">&#9678; CHAKRA SYSTEM &mdash; FULL SCAN</div>
+        <div id="cgOverlaySubtitle">7 ENERGY CENTRES &nbsp;|&nbsp; SUSHUMNA AXIS &nbsp;|&nbsp; UNIT: JES-007</div>
+      </div>
+      <button id="cgOverlayClose" onclick="closeChakraGridOverlay()" aria-label="Close chakra scan">
+        <span>&#10005; CLOSE SCAN</span>
+      </button>
+    </div>
+
+    <!-- Chakra Grid -->
+    <div class="chakra-grid">
+
+      <!-- 1. MULADHARA -->
+      <div class="chakra-card vt-hover" style="--ck-color:#f44336; border-color:rgba(244,67,54,0.3);"
+        data-tt-title="LAM — BIJA MANTRA OF MULADHARA"
+        data-tt-val="Frequency: 396 Hz | Keynote: C"
+        data-tt-desc="Chanting LAM activates the root energy centre. 396 Hz is the Solfeggio frequency associated with releasing fear and guilt, establishing the physical foundation of consciousness.">
+        <div class="ck-header">
+          <div class="ck-dot"></div>
+          <span class="ck-num">#1</span>
+          <span class="ck-name">MULADHARA</span>
+        </div>
+        <div class="ck-sanskrit">लं &nbsp;LAM</div>
+        <div class="ck-row"><span>REGION</span><span>Coccyx · Perineum</span></div>
+        <div class="ck-row"><span>ELEMENT</span><span>Earth · Pṛthivī</span></div>
+        <div class="ck-row"><span>SENSE</span><span>Smell · Gandha</span></div>
+        <div class="ck-row"><span>GLAND</span><span>Adrenal</span></div>
+        <div class="ck-row"><span>VITRUVIAN</span><span>Base of Square</span></div>
+        <div class="ck-qualities">▸ Survival · Grounding · Stability<br>▸ Physical identity · Primal energy</div>
+      </div>
+
+      <!-- 2. SVADHISTHANA -->
+      <div class="chakra-card vt-hover" style="--ck-color:#ff9800; border-color:rgba(255,152,0,0.3);"
+        data-tt-title="VAM — BIJA MANTRA OF SVADHISTHANA"
+        data-tt-val="Frequency: 417 Hz | Keynote: D"
+        data-tt-desc="Chanting VAM activates the sacral creative energy. 417 Hz facilitates change and undoing difficult situations. This mantra resonates with fluid creativity and the reproductive life-force.">
+        <div class="ck-header">
+          <div class="ck-dot"></div>
+          <span class="ck-num">#2</span>
+          <span class="ck-name">SVADHISTHANA</span>
+        </div>
+        <div class="ck-sanskrit">वं &nbsp;VAM</div>
+        <div class="ck-row"><span>REGION</span><span>Sacrum · Lower abdomen</span></div>
+        <div class="ck-row"><span>ELEMENT</span><span>Water · Āpa</span></div>
+        <div class="ck-row"><span>SENSE</span><span>Taste · Rasa</span></div>
+        <div class="ck-row"><span>GLAND</span><span>Gonads</span></div>
+        <div class="ck-row"><span>VITRUVIAN</span><span>Navel · φ origin</span></div>
+        <div class="ck-qualities">▸ Creativity · Pleasure · Emotion<br>▸ Fluidity · Desire · Sexuality</div>
+      </div>
+
+      <!-- 3. MANIPURA -->
+      <div class="chakra-card vt-hover" style="--ck-color:#ffc107; border-color:rgba(255,193,7,0.3);"
+        data-tt-title="RAM — BIJA MANTRA OF MANIPURA"
+        data-tt-val="Frequency: 528 Hz | Keynote: E"
+        data-tt-desc="Chanting RAM ignites the inner fire of will and transformation. 528 Hz is known as the 'miracle tone' — associated with DNA repair and transformation of consciousness. The solar plexus governs action and identity.">
+        <div class="ck-header">
+          <div class="ck-dot"></div>
+          <span class="ck-num">#3</span>
+          <span class="ck-name">MANIPURA</span>
+        </div>
+        <div class="ck-sanskrit">रं &nbsp;RAM</div>
+        <div class="ck-row"><span>REGION</span><span>Solar plexus · Navel</span></div>
+        <div class="ck-row"><span>ELEMENT</span><span>Fire · Tejas</span></div>
+        <div class="ck-row"><span>SENSE</span><span>Sight · Rūpa</span></div>
+        <div class="ck-row"><span>GLAND</span><span>Pancreas</span></div>
+        <div class="ck-row"><span>VITRUVIAN</span><span>Upper abdomen · 3/8 H</span></div>
+        <div class="ck-qualities">▸ Will · Power · Transformation<br>▸ Self-esteem · Discipline</div>
+      </div>
+
+      <!-- 4. ANAHATA -->
+      <div class="chakra-card vt-hover" style="--ck-color:#4caf50; border-color:rgba(76,175,80,0.3);"
+        data-tt-title="YAM — BIJA MANTRA OF ANAHATA"
+        data-tt-val="Frequency: 639 Hz | Keynote: F"
+        data-tt-desc="Chanting YAM opens the heart to unconditional love and compassion. 639 Hz enhances communication, understanding and relationships. The Vitruvian heart sits at the geometric centre of the torso's golden rectangle — structurally and spiritually central.">
+        <div class="ck-header">
+          <div class="ck-dot"></div>
+          <span class="ck-num">#4</span>
+          <span class="ck-name">ANAHATA</span>
+        </div>
+        <div class="ck-sanskrit">यं &nbsp;YAM</div>
+        <div class="ck-row"><span>REGION</span><span>Cardiac plexus</span></div>
+        <div class="ck-row"><span>ELEMENT</span><span>Air · Vāyu</span></div>
+        <div class="ck-row"><span>SENSE</span><span>Touch · Sparśa</span></div>
+        <div class="ck-row"><span>GLAND</span><span>Thymus</span></div>
+        <div class="ck-row"><span>VITRUVIAN</span><span>Heart · 3/8 H bridge</span></div>
+        <div class="ck-qualities">▸ Love · Compassion · Balance<br>▸ Bridge of upper · lower energy</div>
+      </div>
+
+      <!-- 5. VISHUDDHA -->
+      <div class="chakra-card vt-hover" style="--ck-color:#00bcd4; border-color:rgba(0,188,212,0.3);"
+        data-tt-title="HAM — BIJA MANTRA OF VISHUDDHA"
+        data-tt-val="Frequency: 741 Hz | Keynote: G"
+        data-tt-desc="Chanting HAM purifies and activates the throat energy. 741 Hz awakens intuition and supports solving problems through clear expression. The throat in Vitruvian anatomy is the critical transition between head (module) and body — analogous to the capital of a column.">
+        <div class="ck-header">
+          <div class="ck-dot"></div>
+          <span class="ck-num">#5</span>
+          <span class="ck-name">VISHUDDHA</span>
+        </div>
+        <div class="ck-sanskrit">हं &nbsp;HAM</div>
+        <div class="ck-row"><span>REGION</span><span>Thyroid · Larynx</span></div>
+        <div class="ck-row"><span>ELEMENT</span><span>Sound · Ākāśa</span></div>
+        <div class="ck-row"><span>SENSE</span><span>Hearing · Śravanaa</span></div>
+        <div class="ck-row"><span>GLAND</span><span>Thyroid</span></div>
+        <div class="ck-row"><span>VITRUVIAN</span><span>Neck module · 2/8 H</span></div>
+        <div class="ck-qualities">▸ Expression · Truth · Resonance<br>▸ Creative voice · Authenticity</div>
+      </div>
+
+      <!-- 6. AJNA -->
+      <div class="chakra-card vt-hover" style="--ck-color:#7c4dff; border-color:rgba(124,77,255,0.3);"
+        data-tt-title="AUM — BIJA MANTRA OF AJNA"
+        data-tt-val="Frequency: 852 Hz | Keynote: A"
+        data-tt-desc="Chanting AUM (the primordial sound) activates the third eye of perception. 852 Hz is linked to returning to spiritual order and awakening intuition. Vitruvian position: 1/8 H from crown — within the head module itself, at the seat of reason and vision.">
+        <div class="ck-header">
+          <div class="ck-dot"></div>
+          <span class="ck-num">#6</span>
+          <span class="ck-name">AJNA</span>
+        </div>
+        <div class="ck-sanskrit">ओं &nbsp;AUM</div>
+        <div class="ck-row"><span>REGION</span><span>Pineal · Brow centre</span></div>
+        <div class="ck-row"><span>ELEMENT</span><span>Light · Tamas</span></div>
+        <div class="ck-row"><span>SENSE</span><span>Extra-perception</span></div>
+        <div class="ck-row"><span>GLAND</span><span>Pineal</span></div>
+        <div class="ck-row"><span>VITRUVIAN</span><span>Brow · within 1/8 H</span></div>
+        <div class="ck-qualities">▸ Intuition · Insight · Wisdom<br>▸ Perception · Inner vision</div>
+      </div>
+
+      <!-- 7. SAHASRARA -->
+      <div class="chakra-card vt-hover" style="--ck-color:#b39ddb; border-color:rgba(179,157,219,0.3);"
+        data-tt-title="OM — BIJA SEED OF SAHASRARA"
+        data-tt-val="Frequency: 963 Hz | Keynote: B"
+        data-tt-desc="Sahasrara has no bija in the traditional sense — its mantra is silence and OM. 963 Hz is associated with awakening the crown and activating the pineal gland. Vitruvian position: the exact apex of the outer circle — the point at which the geometric system of the body meets infinite space.">
+        <div class="ck-header">
+          <div class="ck-dot"></div>
+          <span class="ck-num">#7</span>
+          <span class="ck-name">SAHASRARA</span>
+        </div>
+        <div class="ck-sanskrit">अं &nbsp;OM</div>
+        <div class="ck-row"><span>REGION</span><span>Crown · Cerebral cortex</span></div>
+        <div class="ck-row"><span>ELEMENT</span><span>Thought · Consciousness</span></div>
+        <div class="ck-row"><span>SENSE</span><span>Beyond sense</span></div>
+        <div class="ck-row"><span>GLAND</span><span>Pituitary</span></div>
+        <div class="ck-row"><span>VITRUVIAN</span><span>Crown · Circle apex</span></div>
+        <div class="ck-qualities">▸ Unity · Bliss · Cosmic awareness<br>▸ Dissolution of ego · Enlightenment</div>
+      </div>
+
+    </div><!-- /.chakra-grid -->
+
+    <!-- Footer -->
+    <div style="margin-top:32px; padding-top:16px; border-top:1px solid rgba(255,255,255,0.06); text-align:center; font-family:'Share Tech Mono',monospace; font-size:9px; color:var(--text-muted); letter-spacing:2px; opacity:0.4;">
+      &#9679; 7 CHAKRA NODES ACTIVE &nbsp;|&nbsp; &phi; 1.618 &middot; LAM&rarr;OM &middot; JES-007
+    </div>
+
+  </div><!-- /#cgOverlayInner -->
+</div><!-- /#chakraGridOverlay -->
+
+<!-- CHAKRA MODAL -->
+<div id="ckModal" style="
+  display:none; position:fixed; inset:0; z-index:9998;
+  background:rgba(0,0,0,0.82); backdrop-filter:blur(8px);
+  justify-content:center; align-items:center;
+  padding:20px;
+" onclick="if(event.target===this)closeCkModal()">
+  <div id="ckModalBox" style="
+    position:relative;
+    max-width:480px; width:100%;
+    border:1px solid var(--ck-modal-color,#00ccff);
+    background:rgba(5,10,25,0.97);
+    padding:30px 28px 24px;
+    box-shadow:0 0 40px var(--ck-modal-color,#00ccff), 0 0 80px rgba(0,0,0,0.9);
+    animation:ckModalIn 0.25s ease;
+  ">
+    <!-- top accent bar -->
+    <div id="ckModalBar" style="position:absolute;top:0;left:0;right:0;height:3px;background:var(--ck-modal-color,#00ccff);opacity:0.9;"></div>
+
+    <!-- close btn -->
+    <button onclick="closeCkModal()" style="
+      position:absolute;top:14px;right:16px;
+      background:none;border:none;color:var(--ck-modal-color,#00ccff);
+      font-size:18px;cursor:pointer;opacity:0.7;font-family:monospace;
+      transition:opacity 0.15s;
+    " onmouseover="this.style.opacity=1" onmouseout="this.style.opacity=0.7">&#10005;</button>
+
+    <!-- number + name -->
+    <div style="display:flex;align-items:baseline;gap:12px;margin-bottom:14px;">
+      <span id="ckNum" style="font-family:'Share Tech Mono',monospace;font-size:11px;letter-spacing:3px;color:var(--ck-modal-color,#00ccff);opacity:0.45;">#1</span>
+      <span id="ckName" style="font-family:'Black Ops One',system-ui;font-size:20px;color:var(--ck-modal-color,#00ccff);letter-spacing:2px;text-transform:uppercase;">MULADHARA</span>
+    </div>
+
+    <!-- bija + big Sanskrit glyph -->
+    <div style="display:flex;align-items:center;gap:18px;margin-bottom:18px;border-bottom:1px solid rgba(255,255,255,0.07);padding-bottom:16px;">
+      <div id="ckGlyph" style="font-family:'Courier Prime',monospace;font-size:52px;color:var(--ck-modal-color,#00ccff);opacity:0.65;line-height:1;">&#2354;&#2306;</div>
+      <div>
+        <div id="ckBija" style="font-family:'Share Tech Mono',monospace;font-size:14px;color:var(--ck-modal-color,#00ccff);letter-spacing:3px;margin-bottom:4px;">LAM</div>
+        <div id="ckFreq" style="font-family:'Space Mono',monospace;font-size:10px;color:var(--text-muted,#666);letter-spacing:1px;">396 Hz · Keynote C</div>
+        <div id="ckElem" style="font-family:'Space Mono',monospace;font-size:10px;color:var(--text-muted,#666);letter-spacing:1px;margin-top:2px;">Earth · Prthivi</div>
+      </div>
+    </div>
+
+    <!-- data rows -->
+    <div id="ckRows" style="margin-bottom:14px;"></div>
+
+    <!-- description -->
+    <div id="ckDesc" style="
+      font-family:'Courier Prime',monospace;font-size:12px;
+      color:rgba(255,255,255,0.6);line-height:1.75;
+      border-top:1px solid rgba(255,255,255,0.07);
+      padding-top:12px;
+    "></div>
+
+    <!-- qualities footer -->
+    <div id="ckQualities" style="
+      margin-top:12px;padding-top:10px;
+      border-top:1px solid rgba(255,255,255,0.06);
+      font-family:'Space Mono',monospace;font-size:9px;
+      color:var(--ck-modal-color,#00ccff);opacity:0.65;letter-spacing:1px;
+    "></div>
+
+    <!-- navigator -->
+    <div style="display:flex;justify-content:space-between;margin-top:20px;">
+      <button id="ckPrev" onclick="navigateCk(-1)" style="
+        background:none;border:1px solid var(--ck-modal-color,#00ccff);
+        color:var(--ck-modal-color,#00ccff);font-family:'Share Tech Mono',monospace;
+        font-size:10px;padding:7px 16px;cursor:pointer;letter-spacing:2px;
+        transition:all 0.2s;opacity:0.6;
+      " onmouseover="this.style.opacity=1" onmouseout="this.style.opacity=0.6">&larr; PREV</button>
+      <span id="ckNav" style="font-family:'Space Mono',monospace;font-size:9px;color:var(--text-muted,#666);align-self:center;letter-spacing:1px;">1 / 7</span>
+      <button id="ckNext" onclick="navigateCk(1)" style="
+        background:none;border:1px solid var(--ck-modal-color,#00ccff);
+        color:var(--ck-modal-color,#00ccff);font-family:'Share Tech Mono',monospace;
+        font-size:10px;padding:7px 16px;cursor:pointer;letter-spacing:2px;
+        transition:all 0.2s;opacity:0.6;
+      " onmouseover="this.style.opacity=1" onmouseout="this.style.opacity=0.6">NEXT &rarr;</button>
+    </div>
+  </div>
+</div>
+
+<style>
+@keyframes ckModalIn {
+  from { opacity:0; transform:scale(0.94) translateY(12px); }
+  to   { opacity:1; transform:scale(1)    translateY(0); }
+}
+</style>
+
 <script src="../assets/js/script.js"></script>
+<script>
+/* ══════════════════════════════════════════════════
+   VITRUVIAN MAN — HOVER TOOLTIP ENGINE
+══════════════════════════════════════════════════ */
+(function() {
+  const tooltip  = document.getElementById('vtTooltip');
+  const ttTitle  = document.getElementById('ttTitle');
+  const ttVal    = document.getElementById('ttVal');
+  const ttDesc   = document.getElementById('ttDesc');
+
+  let mouseX = 0, mouseY = 0;
+  let rafId  = null;
+
+  document.addEventListener('mousemove', function(e) {
+    mouseX = e.clientX;
+    mouseY = e.clientY;
+  });
+
+  function positionTooltip() {
+    const tw = tooltip.offsetWidth  || 260;
+    const th = tooltip.offsetHeight || 90;
+    const vw = window.innerWidth;
+    const vh = window.innerHeight;
+    const pad = 16;
+    let left = mouseX + 18;
+    let top  = mouseY - 20;
+    if (left + tw + pad > vw) left = mouseX - tw - 18;
+    if (top  + th + pad > vh) top  = mouseY - th - 10;
+    if (top < pad) top = pad;
+    tooltip.style.left = left + 'px';
+    tooltip.style.top  = top  + 'px';
+  }
+
+  function startTracking() {
+    function frame() { positionTooltip(); rafId = requestAnimationFrame(frame); }
+    rafId = requestAnimationFrame(frame);
+  }
+  function stopTracking() {
+    if (rafId) { cancelAnimationFrame(rafId); rafId = null; }
+  }
+
+  document.querySelectorAll('.vt-hover[data-tt-title]').forEach(function(el) {
+    el.addEventListener('mouseenter', function() {
+      ttTitle.textContent = el.dataset.ttTitle || '';
+      ttVal.textContent   = el.dataset.ttVal   || '';
+      ttDesc.textContent  = el.dataset.ttDesc  || '';
+      positionTooltip();
+      tooltip.classList.add('visible');
+      startTracking();
+    });
+    el.addEventListener('mouseleave', function() {
+      tooltip.classList.remove('visible');
+      stopTracking();
+    });
+  });
+})();
+
+/* ══════════════════════════════════════════════════
+   VITRUVIAN SVG — THEME COLOR SYNC
+   Updates SVG gradient stops to match current theme
+   whenever applyTheme() is called in script.js.
+   Theme accent colours derived from --text-main.
+══════════════════════════════════════════════════ */
+(function() {
+  /* Map each theme to its primary text-main colour */
+  const THEME_COLORS = {
+    'theme-root':       '#b30000',
+    'theme-sacral':     '#0a0500',
+    'theme-solar':      '#665c00',
+    'theme-heart':      '#39ff14',
+    'theme-throat':     '#00ccff',
+    'theme-third-eye':  '#9d4edd',
+    'theme-crown':      '#2c3e50'
+  };
+
+  function updateVtGradients(color) {
+    const g1 = document.getElementById('vt-grad-inner-1');
+    const g2 = document.getElementById('vt-grad-inner-2');
+    const b1 = document.getElementById('vt-grad-bg-1');
+    if (g1) { g1.setAttribute('stop-color', color); }
+    if (g2) { g2.setAttribute('stop-color', color); }
+    if (b1) { b1.setAttribute('stop-color', color); }
+  }
+
+  /* Hook into applyTheme — patch it after script.js loads */
+  function patchApplyTheme() {
+    const orig = window.applyTheme;
+    if (!orig) { setTimeout(patchApplyTheme, 100); return; }
+    window.applyTheme = function(themeName) {
+      orig(themeName);
+      const color = THEME_COLORS[themeName] || '#00ccff';
+      updateVtGradients(color);
+    };
+    /* Run immediately for current theme */
+    const cur = localStorage.getItem('portfolio-theme') || 'theme-throat';
+    updateVtGradients(THEME_COLORS[cur] || '#00ccff');
+  }
+
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', patchApplyTheme);
+  } else {
+    patchApplyTheme();
+  }
+})();
+
+/* ══════════════════════════════════════════════════
+   CHAKRA GRID FULLSCREEN OVERLAY — open / close
+══════════════════════════════════════════════════ */
+function openChakraGridOverlay() {
+  var overlay = document.getElementById('chakraGridOverlay');
+  overlay.style.display = 'block';
+  overlay.classList.remove('closing');
+  document.body.style.overflow = 'hidden';
+  // Re-attach vt-hover tooltip listeners for cards inside overlay
+  overlay.querySelectorAll('.vt-hover[data-tt-title]').forEach(function(el) {
+    el.addEventListener('mouseenter', function() {
+      var tooltip = document.getElementById('vtTooltip');
+      document.getElementById('ttTitle').textContent = el.dataset.ttTitle || '';
+      document.getElementById('ttVal').textContent   = el.dataset.ttVal   || '';
+      document.getElementById('ttDesc').textContent  = el.dataset.ttDesc  || '';
+      tooltip.classList.add('visible');
+    });
+    el.addEventListener('mouseleave', function() {
+      document.getElementById('vtTooltip').classList.remove('visible');
+    });
+  });
+}
+function closeChakraGridOverlay() {
+  var overlay = document.getElementById('chakraGridOverlay');
+  overlay.classList.add('closing');
+  setTimeout(function() {
+    overlay.style.display = 'none';
+    overlay.classList.remove('closing');
+    document.body.style.overflow = '';
+  }, 280);
+}
+// Close on Escape key
+document.addEventListener('keydown', function(e) {
+  if (e.key === 'Escape') {
+    var overlay = document.getElementById('chakraGridOverlay');
+    if (overlay && overlay.style.display !== 'none') closeChakraGridOverlay();
+  }
+});
+// Close on click outside inner content
+document.getElementById('chakraGridOverlay').addEventListener('click', function(e) {
+  if (e.target === this) closeChakraGridOverlay();
+});
+</script>
 </body>
 </html>
