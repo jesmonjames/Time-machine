@@ -62,5 +62,13 @@
     "title": "Site Updates Panel & Theme Persistence",
     "description": "Integrated a dynamic site updates panel in the top menu and refined the theme persistence logic.",
     "content": "Added a new 'Updates' panel to the tactical top bar. The panel dynamically fetches recent site changes, keeping the dashboard clean while surfacing new developments without needing a full archive dive.\n\nSimultaneously overhauled the theme engine logic: the 'Throat' theme is now enforced as the default baseline on fresh visits. However, the system leverages sessionStorage to smoothly persist any selected theme across page navigations during an active session, resetting only when you disconnect the terminal. Also rolled out custom tactical scrollbar styling for the updates panel to match the interface's military aesthetic."
+  },
+  {
+    "id": 9,
+    "date": "2026-04-27",
+    "type": "learning",
+    "title": "Architectural Pivot Analysis — MEVN & Nuxt 3",
+    "description": "Explored the theoretical roadmap for upgrading this vanilla portfolio into a robust MEVN stack leveraging Nuxt 3 and Serverless hosting.",
+    "content": "Conducted a deep-dive architectural review into transitioning this static portfolio into a dynamic Next-Gen application using Vue 3 and Node.js. The objective was assessing how to pivot without breaking the live deployment or losing the tactical aesthetic.\n\nThe findings were highly decisive: moving to a modern framework unlocks massive capability. An integrated Node.js (Express) backend linked to a database kills the need for static JSON files and third-party form handlers, enabling purely native data operations like a hidden 'Classified Admin Center' for drafting entries directly via GUI.\n\nMore critically, the analysis illuminated the ideal path for Vercel deployment. Standard separate Express servers struggle in a serverless ecosystem unless explicitly mapped. But migrating directly to Nuxt 3 (Vue's meta-framework) resolves this natively. Nuxt's embedded 'server/api' engine automatically complies with Vercel's Serverless constraints without requiring configuration tweaks, offering SSR speeds alongside our robust tactical UI."
   }
 ]

@@ -1,5 +1,19 @@
 [
   {
+    "date": "2026-04-27",
+    "rank": 3,
+    "title": "Field journal // MEVN & Nuxt 3 Pivot",
+    "detail": "Logged deep dive architectural pivot analysis to transition from static to native full-stack MEVN utilizing Nuxt 3.",
+    "href": "pages/journal.html"
+  },
+  {
+    "date": "2026-04-27",
+    "rank": 3,
+    "title": "Interface // Updates & Theme Engine",
+    "detail": "Integrated the responsive site updates dropdown and refactored theme manager to leverage Session Storage tracking.",
+    "href": "pages/journal.html"
+  },
+  {
     "date": "2026-04-20",
     "rank": 3,
     "title": "About // Vitruvian anatomical map",
