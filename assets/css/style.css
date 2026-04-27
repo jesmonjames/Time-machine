@@ -1760,6 +1760,7 @@ body:not(.theme-desert) .card:nth-child(4)::before {
 
 @media (max-width: 768px) {
   .top-bar {
+    position: relative;
     flex-wrap: wrap;
     height: auto;
     padding: 10px;
@@ -2466,10 +2467,17 @@ body:not(.theme-desert) .card:nth-child(4)::before {
 }
 
 @media (max-width: 768px) {
+  .top-bar-updates-wrap {
+    position: static;
+  }
   .top-bar-updates-panel {
-    right: auto;
-    left: 50%;
-    transform: translateX(-50%);
+    top: 100%;
+    right: 0;
+    left: 0;
+    width: 100%;
+    max-width: 340px;
+    margin: 5px auto 0;
+    transform: none;
   }
 }
 
