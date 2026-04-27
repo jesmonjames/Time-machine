@@ -46,5 +46,21 @@
     "title": "Unity Boot Camp — 2D Micro-Prototype With AI Co-Pilot",
     "description": "First Unity 6.4 install and a guided 2D mini-game tutorial, accelerated by iterative AI prompting when I hit editor friction.",
     "content": "Ran through a fresh Unity Editor install and onboarding pass—Unity Hub, Unity 6.4 as the supported baseline for this experiment, 2D template, and the baseline project hygiene checks (input system choice, build target sanity, version control ignore rules). Locking to 6.4 kept tutorial notes and package defaults aligned with current editor behavior.\n\nPrimary objective was a compact 2D prototype: player movement, a simple collectible or hazard loop, and one win/lose condition—enough to prove the pipeline without opening a full production scope.\n\nWhenever the tutorial skipped a step or the inspector layout shifted between versions, I leaned on AI-assisted prompts to decode errors, suggest component wiring, and sanity-check C# snippets before pasting them in. The model was strongest as a glossary and debugger; it was weaker when I needed exact menu paths, so I cross-checked those against official docs.\n\nNet result: a playable micro-build and a mental map of where Unity wants you to live (Scenes, Prefabs, Physics2D) versus where the friction hides (packages, serialization warnings, import defaults)."
+  },
+  {
+    "id": 7,
+    "date": "2026-04-21",
+    "type": "learning",
+    "title": "Opencode & Codellama Install — Agentic CLI Evaluation",
+    "description": "Installed opencode CLI and Codellama for agentic development workflow comparison.",
+    "content": "Spin up opencode and Codellama today as complementary agents in the local toolkit. \n\nOpencode positioned itself as an interactive CLI assistant—think of it as the anti-Cursor: instead of the model seeing your files and diffs in a tight loop inside a VS Code-derived shell, opencode runs as a standalone terminal tool that pulls file context via glob/regex and presents the change back to you in Markdown before you approve it. The UX is more git-add than git-commit, if that makes sense. It reads your codebase via its own search tools, surfaces findings, and waits for your go-ahead before touching anything.\n\nCodellama came up after the opencode session. Pulled the 7B model at 3.8 GB and set it as a quick-consult endpoint separate from Ollama's Qwen/DeepSeek cluster. It's lighter than the others and hits faster—useful as a disposable thinking partner when you don't want the full 7B+ context reloaded into GPU VRAM.\n\nThe contrast: opencode is a workflow agent (it does things), Codellama is a thinking agent (you ask, it answers). Both are local and privacy-first. Will integrate opencode more fully into the daily workflow—the approval loop UX feels like it could replace manual file edits for routine refactors."
+  },
+  {
+    "id": 8,
+    "date": "2026-04-27",
+    "type": "project",
+    "title": "Site Updates Panel & Theme Persistence",
+    "description": "Integrated a dynamic site updates panel in the top menu and refined the theme persistence logic.",
+    "content": "Added a new 'Updates' panel to the tactical top bar. The panel dynamically fetches recent site changes, keeping the dashboard clean while surfacing new developments without needing a full archive dive.\n\nSimultaneously overhauled the theme engine logic: the 'Throat' theme is now enforced as the default baseline on fresh visits. However, the system leverages sessionStorage to smoothly persist any selected theme across page navigations during an active session, resetting only when you disconnect the terminal. Also rolled out custom tactical scrollbar styling for the updates panel to match the interface's military aesthetic."
   }
 ]

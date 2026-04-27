@@ -1100,7 +1100,8 @@ body:not(.theme-desert) .card:nth-child(4)::before {
   letter-spacing: 1px;
 }
 
-.skills-tags .tag:hover {
+.skills-tags .tag:hover,
+.skills-tags .tag.active {
   background: var(--text-main);
   color: var(--bg-color);
   border-color: var(--text-main);
@@ -2249,4 +2250,230 @@ body:not(.theme-desert) .card:nth-child(4)::before {
 .journal-list, .library-grid {
   transition: opacity 0.4s cubic-bezier(.4, 0, .2, 1);
   opacity: 1;
+}
+
+/* ==========================================================================
+   INDEX: HEADER SITE UPDATES (notification + dropdown)
+   ========================================================================== */
+
+.top-bar-updates-wrap {
+  position: relative;
+  flex-shrink: 0;
+}
+
+.top-bar-updates-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  margin: 0;
+  padding: 6px 12px 6px 10px;
+  font-family: 'Share Tech Mono', 'Courier New', Courier, monospace;
+  font-size: 10px;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: var(--text-main);
+  background: rgba(0, 0, 0, 0.35);
+  border: 1px solid var(--border-color);
+  cursor: pointer;
+  transition: border-color 0.25s, box-shadow 0.25s, color 0.25s;
+}
+
+.top-bar-updates-btn:hover,
+.top-bar-updates-btn:focus-visible {
+  border-color: var(--text-main);
+  box-shadow: 0 0 12px rgba(0, 0, 0, 0.4), 0 0 14px color-mix(in srgb, var(--text-main) 35%, transparent);
+  outline: none;
+}
+
+.top-bar-updates-btn[aria-expanded="true"] {
+  border-color: var(--text-main);
+  box-shadow: 0 0 16px color-mix(in srgb, var(--text-main) 40%, transparent);
+}
+
+.top-bar-updates-ping {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: var(--text-main);
+  box-shadow: 0 0 8px var(--text-main);
+  animation: tmUpdatesPulse 2s ease-in-out infinite;
+}
+
+@keyframes tmUpdatesPulse {
+  0%, 100% { opacity: 1; transform: scale(1); }
+  50% { opacity: 0.45; transform: scale(0.85); }
+}
+
+.top-bar-updates-label {
+  color: var(--text-muted);
+  transition: color 0.25s;
+}
+
+.top-bar-updates-btn:hover .top-bar-updates-label,
+.top-bar-updates-btn[aria-expanded="true"] .top-bar-updates-label {
+  color: var(--text-main);
+}
+
+/* [hidden] must win over display:flex — otherwise the panel stays visible */
+.top-bar-updates-panel[hidden] {
+  display: none !important;
+  pointer-events: none;
+}
+
+.top-bar-updates-panel {
+  position: absolute;
+  right: 0;
+  top: calc(100% + 10px);
+  width: min(360px, calc(100vw - 32px));
+  max-height: min(70vh, 420px);
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  background: rgba(5, 10, 18, 0.97);
+  border: 1px solid var(--border-color);
+  box-shadow: 0 12px 40px rgba(0, 0, 0, 0.55), 0 0 1px color-mix(in srgb, var(--text-main) 50%, transparent);
+  z-index: 200;
+  text-align: left;
+  text-transform: none;
+  letter-spacing: normal;
+}
+
+.top-bar-updates-panel:not([hidden]) {
+  animation: tmUpdatesPanelIn 0.22s ease-out;
+}
+
+@keyframes tmUpdatesPanelIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+.top-bar-updates-head {
+  flex-shrink: 0;
+  padding: 12px 14px 10px;
+  font-family: 'Share Tech Mono', monospace;
+  font-size: 10px;
+  letter-spacing: 3px;
+  color: var(--text-main);
+  border-bottom: 1px solid var(--border-color);
+  background: rgba(0, 0, 0, 0.25);
+}
+
+.top-bar-updates-list {
+  list-style: none;
+  margin: 0;
+  padding: 8px 0;
+  overflow-y: auto;
+  flex: 1;
+  /* Firefox scrollbar styling */
+  scrollbar-width: thin;
+  scrollbar-color: var(--text-muted) rgba(0, 0, 0, 0.3);
+}
+
+.top-bar-updates-list::-webkit-scrollbar {
+  width: 4px;
+}
+
+.top-bar-updates-list::-webkit-scrollbar-track {
+  background: rgba(0, 0, 0, 0.3);
+}
+
+.top-bar-updates-list::-webkit-scrollbar-thumb {
+  background: var(--text-muted);
+  border-radius: 2px;
+}
+
+.top-bar-updates-list::-webkit-scrollbar-thumb:hover {
+  background: var(--text-main);
+}
+
+.top-bar-updates-list li {
+  margin: 0;
+  padding: 0;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.04);
+}
+
+.top-bar-updates-list li:last-child {
+  border-bottom: none;
+}
+
+.top-bar-updates-list a {
+  display: block;
+  padding: 10px 14px;
+  text-decoration: none;
+  color: inherit;
+  transition: background 0.15s;
+}
+
+.top-bar-updates-list a:hover,
+.top-bar-updates-list a:focus-visible {
+  background: rgba(255, 255, 255, 0.04);
+  outline: none;
+}
+
+.top-bar-updates-date {
+  font-family: 'Share Tech Mono', monospace;
+  font-size: 9px;
+  letter-spacing: 1px;
+  color: var(--text-muted);
+  opacity: 0.85;
+  margin-bottom: 4px;
+}
+
+.top-bar-updates-title {
+  font-family: 'Space Mono', monospace;
+  font-size: 11px;
+  color: var(--text-main);
+  line-height: 1.35;
+  margin-bottom: 4px;
+}
+
+.top-bar-updates-detail {
+  font-family: 'Courier Prime', Georgia, serif;
+  font-size: 11px;
+  line-height: 1.45;
+  color: var(--text-muted);
+  opacity: 0.92;
+}
+
+.top-bar-updates-foot {
+  flex-shrink: 0;
+  display: block;
+  padding: 10px 14px;
+  font-family: 'Share Tech Mono', monospace;
+  font-size: 9px;
+  letter-spacing: 2px;
+  text-align: center;
+  text-decoration: none;
+  text-transform: uppercase;
+  color: var(--text-main);
+  border-top: 1px solid var(--border-color);
+  background: rgba(0, 0, 0, 0.2);
+  transition: background 0.15s;
+}
+
+.top-bar-updates-foot:hover,
+.top-bar-updates-foot:focus-visible {
+  background: rgba(255, 255, 255, 0.06);
+  outline: none;
+}
+
+.top-bar-updates-msg {
+  padding: 14px;
+  font-family: 'Space Mono', monospace;
+  font-size: 10px;
+  color: var(--text-muted);
+  line-height: 1.5;
+}
+
+@media (max-width: 768px) {
+  .top-bar-updates-panel {
+    right: auto;
+    left: 50%;
+    transform: translateX(-50%);
+  }
+}
+
+#vitruvianMan {
+  margin: 0 auto;
+  display: block;
 }

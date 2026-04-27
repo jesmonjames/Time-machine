@@ -1,0 +1,44 @@
+[
+  {
+    "date": "2026-04-20",
+    "rank": 3,
+    "title": "About // Vitruvian anatomical map",
+    "detail": "Interactive SVG, proportional tooltips, seven-node chakra overlay, and full chakra grid scan—theme-synced strokes.",
+    "href": "pages/about.html"
+  },
+  {
+    "date": "2026-04-20",
+    "rank": 2,
+    "title": "Field journal // synthesis log",
+    "detail": "New synthesis-type entry linking the Vitruvian build to real-life modular rhythm and this journal as the audit trail.",
+    "href": "pages/journal.html"
+  },
+  {
+    "date": "2026-04-20",
+    "rank": 1,
+    "title": "Field journal // Cursor IDE benchmark",
+    "detail": "Logged install and prompting comparison vs VS Code and Antigravity-style agents.",
+    "href": "pages/journal.html"
+  },
+  {
+    "date": "2026-04-18",
+    "rank": 0,
+    "title": "Field journal // Unity 6.4 boot camp",
+    "detail": "Unity 6.4 baseline, 2D micro-prototype tutorial, AI-assisted debugging when the inspector drifted from notes.",
+    "href": "pages/journal.html"
+  },
+  {
+    "date": "2026-04-16",
+    "rank": 0,
+    "title": "Field journal // local AI stack",
+    "detail": "Ollama with Qwen2.5 and DeepSeek-Coder wired into the editor workflow.",
+    "href": "pages/journal.html"
+  },
+  {
+    "date": "2026-04-10",
+    "rank": 0,
+    "title": "Library // responsive pagination",
+    "detail": "Pagination reflow for small viewports—flex-based controls instead of brittle inline margins.",
+    "href": "pages/library.html"
+  }
+]

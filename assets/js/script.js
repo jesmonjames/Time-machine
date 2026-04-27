@@ -227,7 +227,7 @@ updateTime();
 
 // Theme Switcher Logic
 const themeBtns = document.querySelectorAll('.theme-btn');
-let savedTheme = localStorage.getItem('portfolio-theme') || 'theme-throat';
+let savedTheme = sessionStorage.getItem('portfolio-theme') || 'theme-throat';
 
 const chakraLogos = {
   'theme-root': '<svg viewBox="0 0 100 100" class="chakra-svg"><g class="chakra-spin"><circle cx="50" cy="25" r="15" fill="none" stroke="currentColor" stroke-width="2"/><circle cx="50" cy="75" r="15" fill="none" stroke="currentColor" stroke-width="2"/><circle cx="25" cy="50" r="15" fill="none" stroke="currentColor" stroke-width="2"/><circle cx="75" cy="50" r="15" fill="none" stroke="currentColor" stroke-width="2"/><rect x="35" y="35" width="30" height="30" fill="none" stroke="currentColor" stroke-width="2"/><circle cx="50" cy="50" r="22" fill="none" stroke="currentColor" stroke-width="2"/></g><text x="50" y="50" dominant-baseline="central" font-family="sans-serif" font-size="12" font-weight="bold" text-anchor="middle" fill="currentColor">लं</text></svg>',
@@ -278,7 +278,7 @@ if (!validThemes.includes(savedTheme)) {
 
 function applyTheme(themeName) {
   document.body.className = themeName;
-  localStorage.setItem('portfolio-theme', themeName);
+  sessionStorage.setItem('portfolio-theme', themeName);
   
   themeBtns.forEach(btn => {
     btn.classList.remove('active');

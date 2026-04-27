@@ -103,6 +103,17 @@
       <div class="sys-load" id="sysStat">
         LOAD: 0.28% | RAM: 14GB
       </div>
+      <div class="top-bar-updates-wrap" id="siteUpdatesWrap">
+        <button type="button" class="top-bar-updates-btn" id="siteUpdatesBtn" aria-expanded="false" aria-haspopup="true" aria-controls="siteUpdatesPanel">
+          <span class="top-bar-updates-ping" aria-hidden="true"></span>
+          <span class="top-bar-updates-label">UPDATES</span>
+        </button>
+        <div class="top-bar-updates-panel" id="siteUpdatesPanel" role="region" aria-label="Recent Time Machine updates" hidden>
+          <div class="top-bar-updates-head">LATEST UPLINK</div>
+          <ul class="top-bar-updates-list" id="siteUpdatesList"></ul>
+          <a href="pages/journal.html" class="top-bar-updates-foot">Field journal →</a>
+        </div>
+      </div>
     </header>
 
     <div class="main-layout">
