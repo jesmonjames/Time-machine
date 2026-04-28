@@ -19,9 +19,12 @@ function renderFilterTags() {
 }
 
 let currentFilter = 'all';
-function renderBooks(filter = currentFilter, page = currentPage) {
+let currentSearch = '';
+
+function renderBooks(filter = currentFilter, page = currentPage, searchQuery = currentSearch) {
   currentFilter = filter;
   currentPage = page;
+  currentSearch = searchQuery;
   const grid = document.getElementById('libraryGrid');
   // Fade out
   grid.classList.add('fading');
@@ -30,7 +33,10 @@ function renderBooks(filter = currentFilter, page = currentPage) {
     // Filter books
     const filteredBooks = books.filter(book => {
       const type = (book.type || 'other').toLowerCase();
-      return filter === 'all' || filter === type;
+      const matchesFilter = filter === 'all' || filter === type;
+      const matchesSearch = book.name.toLowerCase().includes(searchQuery.toLowerCase()) || 
+                            (book.author && book.author.toLowerCase().includes(searchQuery.toLowerCase()));
+      return matchesFilter && matchesSearch;
     });
     // Pagination
     const start = (page - 1) * booksPerPage;
@@ -97,7 +103,7 @@ function renderPagination(totalBooks = books.length, page = currentPage) {
   prevBtn.disabled = page === 1;
   prevBtn.className = 'pagination-btn';
   prevBtn.onclick = () => {
-    renderBooks(currentFilter, page - 1);
+    renderBooks(currentFilter, page - 1, currentSearch);
     setTimeout(() => {
       const firstCard = document.querySelector('.library-grid .book-card');
       if (firstCard) firstCard.focus();
@@ -111,7 +117,7 @@ function renderPagination(totalBooks = books.length, page = currentPage) {
     pageBtn.className = 'pagination-btn' + (i === page ? ' active' : '');
     pageBtn.disabled = i === page;
     pageBtn.onclick = () => {
-      renderBooks(currentFilter, i);
+      renderBooks(currentFilter, i, currentSearch);
       setTimeout(() => {
         const firstCard = document.querySelector('.library-grid .book-card');
         if (firstCard) firstCard.focus();
@@ -125,7 +131,7 @@ function renderPagination(totalBooks = books.length, page = currentPage) {
   nextBtn.disabled = page === totalPages;
   nextBtn.className = 'pagination-btn';
   nextBtn.onclick = () => {
-    renderBooks(currentFilter, page + 1);
+    renderBooks(currentFilter, page + 1, currentSearch);
     setTimeout(() => {
       const firstCard = document.querySelector('.library-grid .book-card');
       if (firstCard) firstCard.focus();
@@ -161,7 +167,7 @@ if (filterTags) {
       document.querySelectorAll('.filter-tag').forEach(t => t.classList.remove('active'));
       e.target.classList.add('active');
       const filter = e.target.getAttribute('data-filter');
-      renderBooks(filter, 1);
+      renderBooks(filter, 1, currentSearch);
     }
   });
 }
@@ -171,6 +177,67 @@ function toggleBook(btn) {
   const card = btn.closest('.book-card');
   card.classList.toggle('expanded');
   btn.textContent = card.classList.contains('expanded') ? 'COLLAPSE' : 'READ MORE';
+}
+
+// Search & Autocomplete Logic
+const searchInput = document.getElementById('librarySearch');
+const autocompleteList = document.getElementById('searchAutocomplete');
+
+if (searchInput) {
+  searchInput.addEventListener('input', (e) => {
+    const query = e.target.value.trim().toLowerCase();
+    
+    // Clear autocomplete if query is short
+    if (query.length < 2) {
+      autocompleteList.classList.add('hidden');
+      renderBooks(currentFilter, 1, query); // Still filter for short queries if user types them
+      return;
+    }
+
+    // Filter matches for autocomplete
+    const matches = books.filter(b => 
+      b.name.toLowerCase().includes(query) || 
+      (b.author && b.author.toLowerCase().includes(query))
+    ).slice(0, 6);
+
+    if (matches.length > 0) {
+      autocompleteList.innerHTML = matches.map(m => `
+        <li class="autocomplete-item" data-name="${m.name}">
+          <span style="color:var(--text-main)">${m.name}</span>
+          <br><small style="opacity:0.6">${m.author || ''}</small>
+        </li>
+      `).join('');
+      autocompleteList.classList.remove('hidden');
+    } else {
+      autocompleteList.classList.add('hidden');
+    }
+    
+    renderBooks(currentFilter, 1, query);
+  });
+
+  // Handle autocomplete selection
+  autocompleteList.addEventListener('click', (e) => {
+    const item = e.target.closest('.autocomplete-item');
+    if (item) {
+      const selectedName = item.getAttribute('data-name');
+      searchInput.value = selectedName;
+      autocompleteList.classList.add('hidden');
+      
+      // Pivot to 'all' when a specific book is selected to ensure it shows up regardless of current tag
+      document.querySelectorAll('.filter-tag').forEach(t => t.classList.remove('active'));
+      const allTag = document.querySelector('[data-filter="all"]');
+      if (allTag) allTag.classList.add('active');
+      
+      renderBooks('all', 1, selectedName);
+    }
+  });
+
+  // Close autocomplete on click outside
+  document.addEventListener('click', (e) => {
+    if (!searchInput.contains(e.target) && !autocompleteList.contains(e.target)) {
+      autocompleteList.classList.add('hidden');
+    }
+  });
 }
 
 // Accessibility

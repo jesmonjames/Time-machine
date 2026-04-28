@@ -2199,9 +2199,9 @@ body:not(.theme-desert) .card:nth-child(4)::before {
 }
 
 .pagination-btn {
-  background: #232b2b;
-  color: #e2e28f;
-  border: 2px solid #4b5320;
+  background: var(--bg-main);
+  color: var(--text-main);
+  border: 2px solid var(--border-color);
   font-family: 'Share Tech Mono', 'Courier New', Courier, monospace;
   font-size: 1.1em;
   margin: 0;
@@ -2228,18 +2228,18 @@ body:not(.theme-desert) .card:nth-child(4)::before {
 
 .pagination-btn.active,
 .pagination-btn:disabled {
-  background: #4b5320;
-  color: #fff;
-  border-color: #e2e28f;
+  background: rgba(0, 0, 0, 0.4);
+  color: var(--text-main);
+  border-color: var(--text-main);
   cursor: default;
   font-weight: bold;
-  box-shadow: 0 0 0 2px #e2e28f44;
+  box-shadow: 0 0 8px color-mix(in srgb, var(--text-main) 30%, transparent);
 }
 
 .pagination-btn:hover:not(:disabled):not(.active) {
-  background: #e2e28f;
-  color: #232b2b;
-  border-color: #4b5320;
+  background: rgba(255, 255, 255, 0.04);
+  color: var(--text-main);
+  border-color: var(--text-main);
 }
 
 /* Base fading transition for all grids */
@@ -2464,6 +2464,115 @@ body:not(.theme-desert) .card:nth-child(4)::before {
   font-size: 10px;
   color: var(--text-muted);
   line-height: 1.5;
+}
+
+/* SEARCH BAR STYLES */
+.library-search-wrap {
+  position: relative;
+  width: 100%;
+  margin-bottom: 25px;
+}
+
+.tactical-input-container {
+  display: flex;
+  align-items: center;
+  background: rgba(0, 0, 0, 0.3);
+  border: 1px solid var(--border-color);
+  padding: 10px 14px;
+  transition: all 0.3s ease;
+}
+
+.tactical-input-container:focus-within {
+  border-color: var(--text-main);
+  box-shadow: 0 0 12px color-mix(in srgb, var(--text-main) 25%, transparent);
+}
+
+.input-prefix {
+  color: var(--text-main);
+  font-family: 'Share Tech Mono', monospace;
+  margin-right: 12px;
+  user-select: none;
+  font-size: 1.2em;
+}
+
+.tactical-input {
+  background: transparent;
+  border: none;
+  color: var(--text-main);
+  font-family: 'Share Tech Mono', monospace;
+  font-size: 16px;
+  width: 100%;
+  outline: none;
+  letter-spacing: 1.5px;
+}
+
+.tactical-input::placeholder {
+  color: var(--text-muted);
+  opacity: 0.4;
+}
+
+.autocomplete-dropdown {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  width: 100%;
+  background: rgba(5, 5, 5, 0.95);
+  border: 1px solid var(--text-main);
+  border-top: none;
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  z-index: 100;
+  max-height: 250px;
+  overflow-y: auto;
+  backdrop-filter: blur(8px);
+  box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+
+  /* Scrollbar Styling */
+  scrollbar-width: thin;
+  scrollbar-color: var(--text-muted) rgba(0, 0, 0, 0.3);
+}
+
+.autocomplete-dropdown::-webkit-scrollbar {
+  width: 4px;
+}
+
+.autocomplete-dropdown::-webkit-scrollbar-track {
+  background: rgba(0, 0, 0, 0.2);
+}
+
+.autocomplete-dropdown::-webkit-scrollbar-thumb {
+  background: var(--text-muted);
+  border-radius: 2px;
+}
+
+.autocomplete-dropdown::-webkit-scrollbar-thumb:hover {
+  background: var(--text-main);
+}
+
+.autocomplete-dropdown.hidden {
+  display: none;
+}
+
+.autocomplete-item {
+  padding: 10px 15px;
+  color: var(--text-muted);
+  font-family: 'Space Mono', monospace;
+  font-size: 12px;
+  cursor: pointer;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+  transition: all 0.2s;
+}
+
+.autocomplete-item:hover,
+.autocomplete-item.focused {
+  background: rgba(255, 255, 255, 0.08);
+  color: var(--text-main);
+  padding-left: 20px;
+}
+
+.autocomplete-item:last-child {
+  border-bottom: none;
 }
 
 @media (max-width: 768px) {
