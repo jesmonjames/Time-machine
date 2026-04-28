@@ -482,10 +482,10 @@ h3 {
 /* MAIN LAYOUT */
 .main-layout {
   display: grid;
-  grid-template-columns: 320px 1fr;
+  grid-template-columns: 360px 1fr;
   gap: 60px;
   flex-grow: 1;
-  padding: 40px 0;
+  padding: 10px 0 40px; /* Reduced top padding */
   overflow-y: auto;
   overflow-x: hidden;
 }
@@ -504,18 +504,49 @@ h3 {
   border: 1px solid var(--bg-color);
 }
 
-/* SIDEBAR */
+/* SIDEBAR (GLOBAL PREMIUM TACTICAL STYLES) */
 .sidebar {
   display: flex;
   flex-direction: column;
-  gap: 10px;
-  /* Aggressively reduced gap */
+  gap: 12px;
   position: sticky;
-  top: 15px;
-  height: min-content;
-  /* Only as tall as its children */
-  z-index: 10;
+  top: 0;
+  height: calc(100vh - 170px);
+  overflow-y: auto;
+  scrollbar-width: thin;
+  scrollbar-color: var(--text-muted) transparent;
+  z-index: 100;
+  
+  /* Premium Glassmorphic Foundation */
+  background: var(--card-bg);
+  backdrop-filter: blur(20px) saturate(160%);
+  -webkit-backdrop-filter: blur(20px) saturate(160%);
+  border: 1px solid var(--border-color);
+  border-left: 4px solid var(--text-main);
+  padding: 20px 15px; /* Highly compact padding */ /* More compact padding */
+  border-radius: 12px;
+  box-shadow: 0 15px 45px rgba(0, 0, 0, 0.2);
+  overflow: hidden;
+  transition: all 0.3s ease;
 }
+
+/* Global Scanline Animation Overlay */
+.sidebar::after {
+  content: "";
+  position: absolute;
+  top: 0; left: 0; right: 0; height: 100%;
+  background: linear-gradient(transparent, color-mix(in srgb, var(--text-main) 6%, transparent), transparent);
+  background-size: 100% 400%;
+  animation: sidebarScan 10s linear infinite;
+  pointer-events: none;
+  z-index: 1;
+}
+
+@keyframes sidebarScan {
+  0% { background-position: 0% 0%; }
+  100% { background-position: 0% 100%; }
+}
+
 
 
 
@@ -540,10 +571,9 @@ h3 {
 }
 
 .hero h1 {
-  font-size: 32px;
-  /* Smaller font for better clearance */
+  font-size: 30px; /* Slightly smaller name */
   line-height: 1;
-  margin-bottom: 20px;
+  margin-bottom: 12px; /* Tighter margin */
   color: var(--text-main);
   transition: color 0.5s;
 }
@@ -553,7 +583,7 @@ h3 {
   flex-direction: row;
   align-items: center;
   gap: 10px;
-  margin-bottom: 18px;
+  margin-bottom: 12px;
   width: 100%;
 }
 
@@ -801,15 +831,19 @@ h3 {
 
 .chakra-logo-container {
   width: 100%;
-  height: 100px; /* Highly compact height */
+  height: 130px; /* Restored for desktop visibility */
   display: flex;
   justify-content: center;
   align-items: center;
   margin-bottom: 15px;
   position: relative;
-  border: 1px solid rgba(255, 255, 255, 0.05);
-  background: rgba(0, 0, 0, 0.2);
+  border: 1px solid var(--border-color);
+  background: color-mix(in srgb, var(--bg-color) 80%, transparent);
+  border-radius: 8px;
+  z-index: 2;
+  overflow: hidden;
 }
+
 
 .chakra-logo-container::before,
 .chakra-logo-container::after {
@@ -2604,58 +2638,46 @@ body:not(.theme-desert) .card:nth-child(4)::before {
   }
 
   .sidebar {
-    position: relative !important;
+    position: static !important;
     width: 100% !important;
     height: auto !important;
+    max-height: none !important;
+    overflow: visible !important;
     background: var(--card-bg) !important;
     backdrop-filter: blur(25px) saturate(180%) !important;
     -webkit-backdrop-filter: blur(25px) saturate(180%) !important;
     border: 1px solid var(--border-color) !important;
-    border-bottom: 3px solid var(--text-main) !important;
-    padding: 25px 20px !important;
+    border-left: 1px solid var(--border-color) !important;
+    border-bottom: 4px solid var(--text-main) !important;
+    padding: 20px 15px !important;
     display: flex !important;
     flex-direction: column !important;
     align-items: center !important;
+    border-radius: 0 0 24px 24px !important;
+    margin-bottom: 10px !important;
     box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15) !important;
     z-index: 100 !important;
-    margin-bottom: 10px !important;
-    border-radius: 0 0 24px 24px !important;
   }
 
-  /* Scanline animation overlay */
+  /* Adjust scanline for banner shape */
   .sidebar::after {
-    content: "";
-    position: absolute;
-    top: 0; left: 0; right: 0; height: 100%;
-    background: linear-gradient(transparent, color-mix(in srgb, var(--text-main) 8%, transparent), transparent);
-    background-size: 100% 400%;
-    animation: sidebarScan 8s linear infinite;
-    pointer-events: none;
-    z-index: 1;
     border-radius: 0 0 24px 24px;
+    background: linear-gradient(transparent, color-mix(in srgb, var(--text-main) 10%, transparent), transparent);
   }
 
-  @keyframes sidebarScan {
-    0% { background-position: 0% 0%; }
-    100% { background-position: 0% 100%; }
-  }
-
-  /* Pulse Logo */
+  /* Compact Logo for Banner */
   .sidebar .chakra-logo-container {
-    width: 70px !important;
-    height: 70px !important;
+    width: 75px !important;
+    height: 75px !important;
     margin: 0 0 18px !important;
     border-radius: 50% !important;
-    background: color-mix(in srgb, var(--bg-color) 80%, transparent) !important;
     border: 2px solid var(--text-main) !important;
-    box-shadow: 0 0 15px color-mix(in srgb, var(--text-main) 20%, transparent) !important;
-    z-index: 2;
+    box-shadow: 0 0 20px color-mix(in srgb, var(--text-main) 20%, transparent) !important;
   }
 
-  /* Tactical Name & Identity */
+  /* Centered Hero Identity */
   .sidebar .hero {
     text-align: center !important;
-    z-index: 2;
     margin-bottom: 18px !important;
     width: 100%;
   }
@@ -2664,8 +2686,6 @@ body:not(.theme-desert) .card:nth-child(4)::before {
     font-size: 26px !important;
     letter-spacing: 3px !important;
     margin-bottom: 12px !important;
-    color: var(--text-main) !important;
-    text-shadow: var(--text-glow);
   }
 
   .sidebar .hero-titles {
@@ -2690,50 +2710,46 @@ body:not(.theme-desert) .card:nth-child(4)::before {
     padding: 5px 12px !important;
     letter-spacing: 1px !important;
     color: var(--text-main) !important;
+    box-shadow: 0 0 8px color-mix(in srgb, var(--text-main) 10%, transparent) !important;
   }
 
-  /* Metadata Pill Strip */
+  /* Metadata Strip */
   .sidebar .metadata-panel {
     width: 100% !important;
     border-top: 1px solid var(--border-color) !important;
     padding-top: 18px !important;
     margin-top: 8px !important;
     overflow-x: auto !important;
-    -webkit-overflow-scrolling: touch;
-    z-index: 2;
   }
 
   .sidebar .sys-data {
     display: flex !important;
     flex-wrap: nowrap !important;
     justify-content: flex-start !important;
-    gap: 12px !important;
+    align-items: center !important;
+    gap: 10px !important;
     font-size: 9px !important;
-    padding-bottom: 8px;
+    padding: 5px 0 10px 0 !important;
+    width: max-content !important; /* Ensure it expands to fit all items */
   }
 
   .sidebar .sys-data p {
     margin: 0 !important;
-    white-space: nowrap !important;
-    background: color-mix(in srgb, var(--text-main) 3%, transparent) !important;
     padding: 5px 14px !important;
-    border: 1px solid var(--border-color) !important;
     border-radius: 20px !important;
-    color: var(--text-muted) !important;
-    opacity: 0.9 !important;
+    flex-shrink: 0 !important; /* Prevent text wrapping/shrinking */
+    white-space: nowrap !important;
   }
 
-  /* Action Button Overlay */
+  /* Action Button in Banner */
   .sidebar .tech-btn {
     width: auto !important;
-    min-width: 200px !important;
+    min-width: 220px !important;
     margin: 18px auto 0 !important;
     border-radius: 6px !important;
     font-size: 11px !important;
-    z-index: 2;
   }
 
-  /* Grid Adaptation */
   .content-grid, .full-width-grid {
     grid-template-columns: 1fr !important;
     gap: 20px !important;
