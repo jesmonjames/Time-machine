@@ -51,9 +51,12 @@ function renderFilterTags() {
 }
 
 let currentFilter = 'all';
-function renderNotes(filter = currentFilter, page = currentPage) {
+let currentSearch = '';
+
+function renderNotes(filter = currentFilter, page = currentPage, searchQuery = currentSearch) {
   currentFilter = filter;
   currentPage = page;
+  currentSearch = searchQuery;
   const grid = document.getElementById('journalGrid');
   // Fade out
   grid.classList.add('fading');
@@ -62,7 +65,11 @@ function renderNotes(filter = currentFilter, page = currentPage) {
     // Filter books
     const filteredNotes = notes.filter(note => {
       const type = (note.type || 'other').toLowerCase();
-      return filter === 'all' || filter === type;
+      const matchesFilter = filter === 'all' || filter === type;
+      const matchesSearch = note.title.toLowerCase().includes(searchQuery.toLowerCase()) || 
+                            (note.content && note.content.toLowerCase().includes(searchQuery.toLowerCase())) ||
+                            (note.description && note.description.toLowerCase().includes(searchQuery.toLowerCase()));
+      return matchesFilter && matchesSearch;
     });
     // Pagination
     const start = (page - 1) * notesPerPage;
@@ -129,7 +136,7 @@ function renderPagination(totalNotes = notes.length, page = currentPage) {
   prevBtn.disabled = page === 1;
   prevBtn.className = 'pagination-btn';
   prevBtn.onclick = () => {
-    renderNotes(currentFilter, page - 1);
+    renderNotes(currentFilter, page - 1, currentSearch);
     setTimeout(() => {
       const firstCard = document.querySelector('.journal-list .book-card');
       if (firstCard) firstCard.focus();
@@ -143,7 +150,7 @@ function renderPagination(totalNotes = notes.length, page = currentPage) {
     pageBtn.className = 'pagination-btn' + (i === page ? ' active' : '');
     pageBtn.disabled = i === page;
     pageBtn.onclick = () => {
-      renderNotes(currentFilter, i);
+      renderNotes(currentFilter, i, currentSearch);
       setTimeout(() => {
         const firstCard = document.querySelector('.journal-list .book-card');
         if (firstCard) firstCard.focus();
@@ -157,7 +164,7 @@ function renderPagination(totalNotes = notes.length, page = currentPage) {
   nextBtn.disabled = page === totalPages;
   nextBtn.className = 'pagination-btn';
   nextBtn.onclick = () => {
-    renderNotes(currentFilter, page + 1);
+    renderNotes(currentFilter, page + 1, currentSearch);
     setTimeout(() => {
       const firstCard = document.querySelector('.journal-list .book-card');
       if (firstCard) firstCard.focus();
@@ -193,7 +200,7 @@ if (filterTags) {
       document.querySelectorAll('.filter-tag').forEach(t => t.classList.remove('active'));
       e.target.classList.add('active');
       const filter = e.target.getAttribute('data-filter');
-      renderNotes(filter, 1);
+      renderNotes(filter, 1, currentSearch);
     }
   });
 }
@@ -203,6 +210,62 @@ function toggleBook(btn) {
   const card = btn.closest('.book-card');
   card.classList.toggle('expanded');
   btn.textContent = card.classList.contains('expanded') ? 'COLLAPSE' : 'READ MORE';
+}
+
+// Search & Autocomplete Logic
+const searchInput = document.getElementById('journalSearch');
+const autocompleteList = document.getElementById('searchAutocomplete');
+
+if (searchInput) {
+  searchInput.addEventListener('input', (e) => {
+    const query = e.target.value.trim().toLowerCase();
+    
+    if (query.length < 2) {
+      autocompleteList.classList.add('hidden');
+      renderNotes(currentFilter, 1, query);
+      return;
+    }
+
+    const matches = notes.filter(n => 
+      n.title.toLowerCase().includes(query) || 
+      (n.description && n.description.toLowerCase().includes(query))
+    ).slice(0, 6);
+
+    if (matches.length > 0) {
+      autocompleteList.innerHTML = matches.map(m => `
+        <li class="autocomplete-item" data-title="${m.title}">
+          <span style="color:var(--text-main)">${m.title}</span>
+          <br><small style="opacity:0.6">${m.date} &middot; ${m.type.toUpperCase()}</small>
+        </li>
+      `).join('');
+      autocompleteList.classList.remove('hidden');
+    } else {
+      autocompleteList.classList.add('hidden');
+    }
+    
+    renderNotes(currentFilter, 1, query);
+  });
+
+  autocompleteList.addEventListener('click', (e) => {
+    const item = e.target.closest('.autocomplete-item');
+    if (item) {
+      const selectedTitle = item.getAttribute('data-title');
+      searchInput.value = selectedTitle;
+      autocompleteList.classList.add('hidden');
+      
+      document.querySelectorAll('.filter-tag').forEach(t => t.classList.remove('active'));
+      const allTag = document.querySelector('[data-filter="all"]');
+      if (allTag) allTag.classList.add('active');
+      
+      renderNotes('all', 1, selectedTitle);
+    }
+  });
+
+  document.addEventListener('click', (e) => {
+    if (!searchInput.contains(e.target) && !autocompleteList.contains(e.target)) {
+      autocompleteList.classList.add('hidden');
+    }
+  });
 }
 
 // Accessibility

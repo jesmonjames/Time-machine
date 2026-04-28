@@ -112,6 +112,15 @@
           <div class="card-body">
             <p class="subtitle">Encrypted personal logs, experimental notes, and ongoing learning milestones.</p>
 
+            <!-- Search Bar -->
+            <div class="library-search-wrap" style="margin-bottom: 20px;">
+              <div class="tactical-input-container">
+                <span class="input-prefix">&gt;</span>
+                <input type="text" id="journalSearch" class="tactical-input" placeholder="QUERY_FIELD_LOGS..." autocomplete="off">
+              </div>
+              <ul id="searchAutocomplete" class="autocomplete-dropdown hidden"></ul>
+            </div>
+
             <!-- Filter Tags -->
             <div class="skills-tags" style="margin-bottom: 25px;" id="filterTags">
               <!-- Filter tags will be generated dynamically by JavaScript. -->
