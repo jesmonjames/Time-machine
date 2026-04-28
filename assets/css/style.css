@@ -2590,7 +2590,160 @@ body:not(.theme-desert) .card:nth-child(4)::before {
   }
 }
 
+/* ══════════════════════════════════════════════════
+   MOBILE SIDEBAR: TRENDING TACTICAL HEADER (MAX-WIDTH: 767px)
+   A premium glassmorphic banner for mobile resolutions.
+   ══════════════════════════════════════════════════ */
+@media (max-width: 767px) {
+  .main-layout {
+    display: flex !important;
+    flex-direction: column !important;
+    gap: 25px !important;
+    padding: 10px 15px !important;
+    overflow-x: hidden !important;
+  }
+
+  .sidebar {
+    position: relative !important;
+    width: 100% !important;
+    height: auto !important;
+    background: var(--card-bg) !important;
+    backdrop-filter: blur(25px) saturate(180%) !important;
+    -webkit-backdrop-filter: blur(25px) saturate(180%) !important;
+    border: 1px solid var(--border-color) !important;
+    border-bottom: 3px solid var(--text-main) !important;
+    padding: 25px 20px !important;
+    display: flex !important;
+    flex-direction: column !important;
+    align-items: center !important;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15) !important;
+    z-index: 100 !important;
+    margin-bottom: 10px !important;
+    border-radius: 0 0 24px 24px !important;
+  }
+
+  /* Scanline animation overlay */
+  .sidebar::after {
+    content: "";
+    position: absolute;
+    top: 0; left: 0; right: 0; height: 100%;
+    background: linear-gradient(transparent, color-mix(in srgb, var(--text-main) 8%, transparent), transparent);
+    background-size: 100% 400%;
+    animation: sidebarScan 8s linear infinite;
+    pointer-events: none;
+    z-index: 1;
+    border-radius: 0 0 24px 24px;
+  }
+
+  @keyframes sidebarScan {
+    0% { background-position: 0% 0%; }
+    100% { background-position: 0% 100%; }
+  }
+
+  /* Pulse Logo */
+  .sidebar .chakra-logo-container {
+    width: 70px !important;
+    height: 70px !important;
+    margin: 0 0 18px !important;
+    border-radius: 50% !important;
+    background: color-mix(in srgb, var(--bg-color) 80%, transparent) !important;
+    border: 2px solid var(--text-main) !important;
+    box-shadow: 0 0 15px color-mix(in srgb, var(--text-main) 20%, transparent) !important;
+    z-index: 2;
+  }
+
+  /* Tactical Name & Identity */
+  .sidebar .hero {
+    text-align: center !important;
+    z-index: 2;
+    margin-bottom: 18px !important;
+    width: 100%;
+  }
+
+  .sidebar .hero h1 {
+    font-size: 26px !important;
+    letter-spacing: 3px !important;
+    margin-bottom: 12px !important;
+    color: var(--text-main) !important;
+    text-shadow: var(--text-glow);
+  }
+
+  .sidebar .hero-titles {
+    flex-direction: row !important;
+    justify-content: center !important;
+    flex-wrap: wrap !important;
+    gap: 10px !important;
+  }
+
+  .sidebar .hero-titles-tags {
+    flex-direction: row !important;
+    flex-wrap: wrap !important;
+    justify-content: center !important;
+    gap: 8px !important;
+  }
+
+  .sidebar .hero-titles p {
+    font-size: 9px !important;
+    background: color-mix(in srgb, var(--text-main) 5%, transparent) !important;
+    border: 1px solid color-mix(in srgb, var(--text-main) 30%, transparent) !important;
+    border-radius: 6px !important;
+    padding: 5px 12px !important;
+    letter-spacing: 1px !important;
+    color: var(--text-main) !important;
+  }
+
+  /* Metadata Pill Strip */
+  .sidebar .metadata-panel {
+    width: 100% !important;
+    border-top: 1px solid var(--border-color) !important;
+    padding-top: 18px !important;
+    margin-top: 8px !important;
+    overflow-x: auto !important;
+    -webkit-overflow-scrolling: touch;
+    z-index: 2;
+  }
+
+  .sidebar .sys-data {
+    display: flex !important;
+    flex-wrap: nowrap !important;
+    justify-content: flex-start !important;
+    gap: 12px !important;
+    font-size: 9px !important;
+    padding-bottom: 8px;
+  }
+
+  .sidebar .sys-data p {
+    margin: 0 !important;
+    white-space: nowrap !important;
+    background: color-mix(in srgb, var(--text-main) 3%, transparent) !important;
+    padding: 5px 14px !important;
+    border: 1px solid var(--border-color) !important;
+    border-radius: 20px !important;
+    color: var(--text-muted) !important;
+    opacity: 0.9 !important;
+  }
+
+  /* Action Button Overlay */
+  .sidebar .tech-btn {
+    width: auto !important;
+    min-width: 200px !important;
+    margin: 18px auto 0 !important;
+    border-radius: 6px !important;
+    font-size: 11px !important;
+    z-index: 2;
+  }
+
+  /* Grid Adaptation */
+  .content-grid, .full-width-grid {
+    grid-template-columns: 1fr !important;
+    gap: 20px !important;
+  }
+}
+
 #vitruvianMan {
   margin: 0 auto;
   display: block;
 }
+
+
+
