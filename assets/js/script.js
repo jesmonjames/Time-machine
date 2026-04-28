@@ -392,19 +392,11 @@ function makeMove(index, player) {
       setTimeout(() => {
         const tttModal = document.getElementById('tttModal');
         if (tttModal) tttModal.style.display = 'none';
-
-        // Instead of redirecting, show the "LOCKED" modal
-        const lockModal = document.getElementById('lockModal');
-        if (lockModal) {
-          lockModal.style.display = 'flex';
+        document.body.style.overflow = 'auto';
+        if (typeof triggerMiniLoader === 'function') {
+           triggerMiniLoader(tttTargetUrl);
         } else {
-           // Fallback if lockModal missing
-           document.body.style.overflow = 'auto';
-           if (typeof triggerMiniLoader === 'function') {
-              triggerMiniLoader(tttTargetUrl);
-           } else {
-              window.location.href = tttTargetUrl;
-           }
+           window.location.href = tttTargetUrl;
         }
       }, 1000);
     } else if (result.winner === 'O') {
@@ -451,9 +443,3 @@ document.addEventListener('DOMContentLoaded', () => {
     tttResetBtn.onclick = resetTTT;
   }
 });
-
-function closeLockModal() {
-  const lockModal = document.getElementById('lockModal');
-  if (lockModal) lockModal.style.display = 'none';
-  document.body.style.overflow = 'auto';
-}
