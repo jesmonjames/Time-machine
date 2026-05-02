@@ -1,18 +1,26 @@
+/**
+ * JOURNAL MODULE
+ * Manages the chronological data stream of learning logs and project milestones.
+ */
+
 let notes = [];
 let currentPage = 1;
-const notesPerPage = 12;
+const notesPerPage = 12; // Optimized for the single-column vertical list
 
+// --- UI FEEDBACK ---
 const grid = document.getElementById('journalGrid');
 if (grid) {
   grid.innerHTML = '<div class="status-msg" style="color: var(--text-muted); padding: 20px;">[ .. ] INITIALIZING_DATA_STREAM...</div>';
 }
 
+// --- DATA UPLINK ---
 fetch('../assets/data/journal.json')
   .then(response => {
     if (!response.ok) throw new Error(`HTTP_ERROR_STATUS_${response.status}`);
     return response.json();
   })
   .then(data => {
+    // Sort by date (descending) to show newest updates first
     notes = data.sort((a, b) => b.date.localeCompare(a.date));
     renderFilterTags();
     renderNotes();
@@ -32,10 +40,9 @@ fetch('../assets/data/journal.json')
     }
   })
   .finally(() => {
-    // Force hide loader if fetch completes or fails
+    // Force dismiss the global mini-loader once data attempt finishes
     const ml = document.getElementById('miniLoader');
     if (ml) {
-      console.log('JOURNAL_SYSTEM: DISMISSING_LOADER_FORCE_MUTE');
       setTimeout(() => {
         ml.style.opacity = '0';
         setTimeout(() => ml.style.display = 'none', 300);
@@ -43,6 +50,9 @@ fetch('../assets/data/journal.json')
     }
   });
 
+/**
+ * Renders filter chips based on note categories (e.g. LEARNING, PROJECT).
+ */
 function renderFilterTags() {
   const filterTags = document.getElementById('filterTags');
   const types = Array.from(new Set(notes.map(b => (b.type || 'other').toLowerCase())));
@@ -52,17 +62,23 @@ function renderFilterTags() {
 
 let currentFilter = 'all';
 let currentSearch = '';
+let isInitial = true;
 
+/**
+ * Main render function for the journal list.
+ * Includes search matching across titles, descriptions, and full content.
+ */
 function renderNotes(filter = currentFilter, page = currentPage, searchQuery = currentSearch) {
   currentFilter = filter;
   currentPage = page;
   currentSearch = searchQuery;
   const grid = document.getElementById('journalGrid');
-  // Fade out
+  
+  // Tactical Transition
   grid.classList.add('fading');
   setTimeout(() => {
     grid.innerHTML = '';
-    // Filter books
+    
     const filteredNotes = notes.filter(note => {
       const type = (note.type || 'other').toLowerCase();
       const matchesFilter = filter === 'all' || filter === type;
@@ -71,16 +87,17 @@ function renderNotes(filter = currentFilter, page = currentPage, searchQuery = c
                             (note.description && note.description.toLowerCase().includes(searchQuery.toLowerCase()));
       return matchesFilter && matchesSearch;
     });
-    // Pagination
+
     const start = (page - 1) * notesPerPage;
     const end = start + notesPerPage;
     const pageNotes = filteredNotes.slice(start, end);
+
     pageNotes.forEach(note => {
       const type = (note.type || 'other').toLowerCase();
       const card = document.createElement('div');
       card.className = 'book-card';
       card.setAttribute('data-category', type);
-      card.setAttribute('tabindex', '0'); // Make focusable
+      card.setAttribute('tabindex', '0'); 
       card.innerHTML = `
         <div class="book-title">${note.title}</div>
         <div class="book-author">— ${note.date || ''} ${note.type ? '&middot; ' + note.type.toUpperCase() : ''}</div>
@@ -90,7 +107,8 @@ function renderNotes(filter = currentFilter, page = currentPage, searchQuery = c
       `;
       grid.appendChild(card);
     });
-    // Attach modal logic
+
+    // Re-attach tactical modal triggers
     document.querySelectorAll('.book-read-more').forEach(btn => {
       btn.onclick = function (e) {
         e.preventDefault();
@@ -105,17 +123,48 @@ function renderNotes(filter = currentFilter, page = currentPage, searchQuery = c
         setTimeout(() => { document.getElementById('closeNoteModal').focus(); }, 50);
       };
     });
+
     renderPagination(filteredNotes.length, page);
-    // Fade in
+
     setTimeout(() => {
       grid.classList.remove('fading');
       const firstCard = document.querySelector('.journal-list .book-card');
       if (firstCard) firstCard.focus();
     }, 10);
-  }, isInitial ? 0 : 400); // No delay on initial load
+  }, isInitial ? 0 : 400); 
 }
-let isInitial = true;
 
+// --- TACTICAL AI BRIDGE ---
+window.addEventListener('tacticalPageCommand', (e) => {
+  const { type, query } = e.detail;
+  if (type === 'search') {
+    const searchInput = document.getElementById('journalSearch');
+    if (searchInput) {
+      searchInput.value = query;
+      searchInput.dispatchEvent(new Event('input'));
+    }
+  } else if (type === 'open') {
+    const cards = document.querySelectorAll('.book-card');
+    cards.forEach(card => {
+      const title = card.querySelector('.book-title').textContent.toLowerCase();
+      if (title.includes(query.toLowerCase())) {
+        const btn = card.querySelector('.book-read-more');
+        if (btn) btn.click();
+      }
+    });
+  }
+});
+
+// Accessibility
+document.addEventListener('DOMContentLoaded', function () {
+  const style = document.createElement('style');
+  style.innerHTML = `.book-card { outline: none; }`;
+  document.head.appendChild(style);
+});
+
+/**
+ * Handles pagination UI generation.
+ */
 function renderPagination(totalNotes = notes.length, page = currentPage) {
   let pagination = document.getElementById('pagination');
   if (!pagination) {
@@ -125,12 +174,13 @@ function renderPagination(totalNotes = notes.length, page = currentPage) {
   }
   pagination.innerHTML = '';
   const totalPages = Math.ceil(totalNotes / notesPerPage);
+  
   if (totalPages <= 1) {
     pagination.style.display = 'none';
     return;
   }
   pagination.style.display = '';
-  // Prev button
+
   const prevBtn = document.createElement('button');
   prevBtn.textContent = 'Prev';
   prevBtn.disabled = page === 1;
@@ -143,7 +193,7 @@ function renderPagination(totalNotes = notes.length, page = currentPage) {
     }, 0);
   };
   pagination.appendChild(prevBtn);
-  // Page numbers
+
   for (let i = 1; i <= totalPages; i++) {
     const pageBtn = document.createElement('button');
     pageBtn.textContent = i;
@@ -158,7 +208,7 @@ function renderPagination(totalNotes = notes.length, page = currentPage) {
     };
     pagination.appendChild(pageBtn);
   }
-  // Next button
+
   const nextBtn = document.createElement('button');
   nextBtn.textContent = 'Next';
   nextBtn.disabled = page === totalPages;
@@ -173,7 +223,7 @@ function renderPagination(totalNotes = notes.length, page = currentPage) {
   pagination.appendChild(nextBtn);
 }
 
-// Modal close logic
+// --- MODAL ENGINE ---
 const closeNoteModal = document.getElementById('closeNoteModal');
 if (closeNoteModal) {
   closeNoteModal.onclick = function () {
@@ -192,10 +242,10 @@ if (noteDetailModal) {
   };
 }
 
-// Filter logic (case-insensitive)
-const filterTags = document.getElementById('filterTags');
-if (filterTags) {
-  filterTags.addEventListener('click', function (e) {
+// --- FILTER DELEGATION ---
+const filterTagsContainer = document.getElementById('filterTags');
+if (filterTagsContainer) {
+  filterTagsContainer.addEventListener('click', function (e) {
     if (e.target.classList.contains('filter-tag')) {
       document.querySelectorAll('.filter-tag').forEach(t => t.classList.remove('active'));
       e.target.classList.add('active');
@@ -205,14 +255,7 @@ if (filterTags) {
   });
 }
 
-// Read More toggle
-function toggleBook(btn) {
-  const card = btn.closest('.book-card');
-  card.classList.toggle('expanded');
-  btn.textContent = card.classList.contains('expanded') ? 'COLLAPSE' : 'READ MORE';
-}
-
-// Search & Autocomplete Logic
+// --- SEARCH & AUTOCOMPLETE ENGINE ---
 const searchInput = document.getElementById('journalSearch');
 const autocompleteList = document.getElementById('searchAutocomplete');
 
@@ -267,10 +310,3 @@ if (searchInput) {
     }
   });
 }
-
-// Accessibility
-document.addEventListener('DOMContentLoaded', function () {
-  const style = document.createElement('style');
-  style.innerHTML = `.book-card { outline: none; }`;
-  document.head.appendChild(style);
-});

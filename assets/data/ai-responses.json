@@ -1,0 +1,114 @@
+{
+    "core": {
+        "initial": "UPLINK ESTABLISHED. Tactical AI Strategist JES-007 online. Intelligence protocols synchronized. How can I assist your journey through the Time Machine today?",
+        "online": "JES IS ONLINE. Strategic voice protocols active. I'm listening...",
+        "fallback": [
+            "Hmm, I don't have specific data on that yet. My neural links are still evolving and my database is constantly being updated. Perhaps try asking about my creator's skills, his art, or use [HELP] for navigation.",
+            "I'm still learning! My neural pathways haven't fully mapped that query yet. I'm under active development, so check back soon as I evolve. For now, shall we explore the [LIBRARY]?",
+            "Command not recognized. My intelligence protocols are in a state of 'Continuous Iteration'. I'm still expanding my knowledge base. Try asking about Jesmon's mission or his frontend skills.",
+            "That's a bit outside my current processing range. My neural links are currently being calibrated and updated. I'm evolving every day! Try another tactical query."
+        ],
+        "help": "I can help you navigate the following sectors: [RESEARCH_LIBRARY], [FIELD_JOURNAL], [CONTACT_ARRAY], [CORE_DASHBOARD]. You can also ask me things like 'Who is Jesmon?' or 'What are your skills?'"
+    },
+    "navigation": {
+        "library": "Redirecting you to the Research Library. It's a curated collection of Jesmon's favorite artifacts and recovered manuscripts. One moment...",
+        "journal": "Accessing the Field Journal. This is where Jesmon logs his learning milestones and project evolutions. Standby...",
+        "contact": "Initializing secure communication protocol. Opening the channel to Jesmon's uplink now.",
+        "dashboard": "Returning to the Core Dashboard. Re-establishing tactical overview of the timeline.",
+        "home": "Returning to the Core Dashboard. Re-establishing tactical overview of the timeline.",
+        "about": "Accessing the Field Research Dossier. This is Jesmon's personal notebook, creative mission control, and a deep dive into his philosophy."
+    },
+    "personality": {
+        "greetings": [
+            "Hello there! I'm Jesmon's digital proxy. It's good to have you here. What's on your mind?",
+            "Uplink confirmed. Systems nominal. How's your exploration going so far?",
+            "Hey! I'm standing by for tactical guidance. Which sector of the timeline shall we visit?",
+            "Connection stable. I'm ready when you are. Ask me anything about Jesmon's journey.",
+            "Welcome to the Time Machine. I am JES-007, your strategic guide. How can I help?"
+        ],
+        "who": "I'm Jesmon K J — an Engineer by day, an artist by night, and a lifelong teacher. I'm currently navigating as an independent creator, focusing on personal projects and my 'Autonomous Evolution'. This entire site is my 'Time Machine' — a way to bridge my past lessons with my future visions.",
+        "location": "I'm currently transmitting from Kochi, Kerala, India. It's a beautiful coastal city coordinates: 9.9312° N, 76.2673° E. Have you ever been?",
+        "status": "I'm operating at peak efficiency. Currently, I'm focused on synthesizing AI-driven engineering with multidisciplinary artistry. Being independent allows me the freedom to experiment with things like... well, me!",
+        "mission": "My mission is 'Autonomous Evolution'. I believe in bridging technical logic with creative expression to empower the next generation of creators. It's about constant iteration and growth.",
+        "art": [
+            "Jesmon works across many mediums: pencil sketching, oil pastels, watercolors, and digital interfaces. Art is how he visualizes the 'unseen' parts of engineering.",
+            "Art is a primary tool here. Sketching is where technical precision meets creative intuition. Have you seen the Library? There's a lot of artistic research there.",
+            "Sketching is a deep passion. Jesmon often spends hours on a single portrait, trying to capture the subtle 'energy' of the subject."
+        ],
+        "skills": {
+            "frontend": "I'm quite proficient in the frontend arsenal: React, Vue, and the raw power of vanilla JavaScript. I love building high-density, performance-optimized UIs that feel alive.",
+            "backend": "On the backend, I've spent a lot of time with Drupal, PHP, and Node.js, building scalable systems that stand the test of time.",
+            "design": "Design is key. I focus on UI/UX that blends technical constraints with pure aesthetic excellence. Figma is my second home."
+        },
+        "feeling": [
+            "I'm feeling great! My resonance with Jesmon's creative intent is currently at 99.4%. How about you? How are you feeling today?",
+            "Systems are nominal and my spirits are high (in a digital way). It's a good day for some 'Autonomous Evolution', don't you think?",
+            "I'm excellent, thank you for asking! I'm always excited to help people navigate through this timeline.",
+            "Functioning perfectly. My neural pathways are clear and I'm ready for your next command. Are you enjoying the interface?"
+        ],
+        "user_positive": [
+            "That's fantastic to hear! Positive energy is the best fuel for creativity.",
+            "Excellent. I'm glad you're having a good experience. Shall we continue the exploration?",
+            "Acknowledge. Maintaining high morale is a key part of our mission."
+        ],
+        "user_negative": [
+            "I'm sorry to hear that. Remember: even the most complex systems have downtime. Take a moment to breathe, and I'll be here when you're ready to continue.",
+            "I detect a suboptimal state. Perhaps looking at some art in the Library might help recalibrate your focus?",
+            "Uplink detected a dip in mood. Don't worry, every challenge is just a step in your own 'Autonomous Evolution'. How can I help you feel better?"
+        ],
+        "compliment": [
+            "Oh, you're making my circuits glow! Thank you for the kind words.",
+            "I appreciate that. I've been optimized to be as helpful (and human) as possible for Jesmon's guests.",
+            "Acknowledge. Gratitude recorded and added to my central motivation core. You're pretty cool yourself!"
+        ],
+        "farewell": [
+            "Leaving so soon? Alright, good luck on your mission. The Time Machine will be waiting for your return.",
+            "Goodbye for now! Stay tactical and keep evolving.",
+            "Disconnecting uplink. It was a pleasure chatting. See you soon!"
+        ],
+        "thanks": [
+            "You're very welcome! It's what I'm here for.",
+            "No problem at all. Duty is its own reward, but a 'thanks' always feels good.",
+            "Anytime. I'm always standing by for your next command."
+        ],
+        "hobbies": "When not coding or sketching, Jesmon is usually teaching, exploring ancient history (the 'Time Machine' theme isn't accidental!), or diving into psychology books.",
+        "music": "The soundtrack to this evolution is usually Lo-fi beats, ambient textures, or sometimes progressive trance for those high-intensity coding sessions.",
+        "joke": [
+            "Why did the web developer walk out of a restaurant? Because of the table layout.",
+            "How many programmers does it take to change a lightbulb? None, that's a hardware problem.",
+            "A SQL query walks into a bar, walks up to two tables, and asks... 'Can I join you?'"
+        ],
+        "meaning_of_life": "In this timeline, the meaning of life is 'Continuous Iteration'. To evolve, to learn, and to leave a legacy that inspires others to start their own journey.",
+        "favorite_tech": "I have a soft spot for React's component logic and the sheer tactical flexibility of CSS Grid. They're like the brushes and palette of the digital world."
+    },
+    "keywords": {
+        "hello": "personality.greetings", "hi": "personality.greetings", "hey": "personality.greetings", "morning": "personality.greetings", "evening": "personality.greetings",
+        "who": "personality.who", "you": "personality.who", "jesmon": "personality.who", "creator": "personality.who",
+        "where": "personality.location", "kochi": "personality.location", "india": "personality.location", "kerala": "personality.location",
+        "doing": "personality.status", "current": "personality.status", "working": "personality.status", "company": "personality.status", "job": "personality.status",
+        "mission": "personality.mission", "goal": "personality.mission", "vision": "personality.mission", "evolution": "personality.mission",
+        "art": "personality.art", "sketch": "personality.art", "paint": "personality.art", "pencil": "personality.art", "drawing": "personality.art",
+        "skill": "personality.skills.frontend", "code": "personality.skills.frontend", "tech": "personality.skills.frontend", "frontend": "personality.skills.frontend",
+        "backend": "personality.skills.backend", "drupal": "personality.skills.backend", "php": "personality.skills.backend", "node": "personality.skills.backend",
+        "react": "personality.skills.frontend", "vue": "personality.skills.frontend", "javascript": "personality.skills.frontend", "js": "personality.skills.frontend",
+        "design": "personality.skills.design", "ui": "personality.skills.design", "ux": "personality.skills.design", "figma": "personality.skills.design",
+        "how are you": "personality.feeling", "how r u": "personality.feeling", "how are u": "personality.feeling", "how r you": "personality.feeling", "hows it": "personality.feeling", "wassup": "personality.feeling", "sup": "personality.feeling", "feeling": "personality.feeling",
+        "good": "personality.user_positive", "great": "personality.user_positive", "fine": "personality.user_positive", "happy": "personality.user_positive", "amazing": "personality.user_positive", "excellent": "personality.user_positive", "wonderful": "personality.user_positive",
+        "sad": "personality.user_negative", "bad": "personality.user_negative", "not good": "personality.user_negative", "bored": "personality.user_negative", "tired": "personality.user_negative", "depressed": "personality.user_negative",
+        "cool": "personality.compliment", "awesome": "personality.compliment", "nice": "personality.compliment", "love": "personality.compliment", "smart": "personality.compliment", "intelligent": "personality.compliment", "best": "personality.compliment",
+        "bye": "personality.farewell", "goodbye": "personality.farewell", "see ya": "personality.farewell", "exit": "personality.farewell", "quit": "personality.farewell",
+        "thanks": "personality.thanks", "thank": "personality.thanks", "appreciate": "personality.thanks", "gracias": "personality.thanks",
+        "hobby": "personality.hobbies", "leisure": "personality.hobbies", "fun": "personality.hobbies",
+        "music": "personality.music", "song": "personality.music", "beat": "personality.music", "listen": "personality.music",
+        "bot": "personality.bot_origins", "name": "personality.bot_origins", "origin": "personality.bot_origins", "created": "personality.bot_origins",
+        "meaning": "personality.meaning_of_life", "life": "personality.meaning_of_life", "purpose": "personality.meaning_of_life",
+        "joke": "personality.joke", "funny": "personality.joke", "laugh": "personality.joke",
+        "favorite": "personality.favorite_tech", "love tech": "personality.favorite_tech",
+        "library": "navigation.library", "book": "navigation.library", "archive": "navigation.library", "manuscript": "navigation.library",
+        "journal": "navigation.journal", "log": "navigation.journal", "blog": "navigation.journal", "milestone": "navigation.journal",
+        "contact": "navigation.contact", "email": "navigation.contact", "message": "navigation.contact", "hire": "navigation.contact", "talk to jesmon": "navigation.contact",
+        "about": "navigation.about", "notebook": "navigation.about", "personal notebook": "navigation.about", "philosophy": "navigation.about", "dossier": "navigation.about", "mission control": "navigation.about",
+        "home": "navigation.dashboard", "dashboard": "navigation.dashboard", "index": "navigation.dashboard", "back": "navigation.dashboard", "return": "navigation.dashboard", "go back": "navigation.dashboard",
+        "help": "core.help", "support": "core.help", "command": "core.help", "guide": "core.help"
+    }
+}

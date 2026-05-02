@@ -1,7 +1,13 @@
+/**
+ * LIBRARY MODULE
+ * Manages the fetching, filtering, pagination, and searching of the book collection.
+ */
+
 let books = [];
 let currentPage = 1;
-const booksPerPage = 12;
+const booksPerPage = 12; // Grid layout optimization
 
+// --- DATA INITIALIZATION ---
 fetch('../assets/data/books.json')
   .then(response => response.json())
   .then(data => {
@@ -11,6 +17,9 @@ fetch('../assets/data/books.json')
     renderPagination();
   });
 
+/**
+ * Dynamically generates category tags based on the book types in the database.
+ */
 function renderFilterTags() {
   const filterTags = document.getElementById('filterTags');
   const types = Array.from(new Set(books.map(b => (b.type || 'other').toLowerCase())));
@@ -21,16 +30,22 @@ function renderFilterTags() {
 let currentFilter = 'all';
 let currentSearch = '';
 
+/**
+ * Main render loop for the book grid.
+ * Handles filtering, search matching, and pagination slicing.
+ */
 function renderBooks(filter = currentFilter, page = currentPage, searchQuery = currentSearch) {
   currentFilter = filter;
   currentPage = page;
   currentSearch = searchQuery;
   const grid = document.getElementById('libraryGrid');
-  // Fade out
+  
+  // Tactical Fade Transition
   grid.classList.add('fading');
   setTimeout(() => {
     grid.innerHTML = '';
-    // Filter books
+    
+    // Core filtering logic
     const filteredBooks = books.filter(book => {
       const type = (book.type || 'other').toLowerCase();
       const matchesFilter = filter === 'all' || filter === type;
@@ -38,16 +53,19 @@ function renderBooks(filter = currentFilter, page = currentPage, searchQuery = c
                             (book.author && book.author.toLowerCase().includes(searchQuery.toLowerCase()));
       return matchesFilter && matchesSearch;
     });
-    // Pagination
+
+    // Pagination slicing
     const start = (page - 1) * booksPerPage;
     const end = start + booksPerPage;
     const pageBooks = filteredBooks.slice(start, end);
+
+    // Build Tactical Cards
     pageBooks.forEach(book => {
       const type = (book.type || 'other').toLowerCase();
       const card = document.createElement('div');
       card.className = 'book-card';
       card.setAttribute('data-category', type);
-      card.setAttribute('tabindex', '0'); // Make focusable
+      card.setAttribute('tabindex', '0'); 
       card.innerHTML = `
         <div class="book-title">${book.name}</div>
         <div class="book-author">— ${book.author || ''} ${book.type ? '&middot; ' + book.type.toUpperCase() : ''}</div>
@@ -57,7 +75,8 @@ function renderBooks(filter = currentFilter, page = currentPage, searchQuery = c
       `;
       grid.appendChild(card);
     });
-    // Attach modal logic
+
+    // Re-attach modal triggers
     document.querySelectorAll('.book-read-more').forEach(btn => {
       btn.onclick = function (e) {
         e.preventDefault();
@@ -72,17 +91,21 @@ function renderBooks(filter = currentFilter, page = currentPage, searchQuery = c
         setTimeout(() => { document.getElementById('closeBookModal').focus(); }, 50);
       };
     });
+
     renderPagination(filteredBooks.length, page);
-    // Fade in
+
+    // Fade back in
     setTimeout(() => {
       grid.classList.remove('fading');
-      // Focus first card after fade in
       const firstCard = document.querySelector('.library-grid .book-card');
       if (firstCard) firstCard.focus();
     }, 10);
   }, 400);
 }
 
+/**
+ * Renders pagination controls based on total counts.
+ */
 function renderPagination(totalBooks = books.length, page = currentPage) {
   let pagination = document.getElementById('pagination');
   if (!pagination) {
@@ -92,12 +115,14 @@ function renderPagination(totalBooks = books.length, page = currentPage) {
   }
   pagination.innerHTML = '';
   const totalPages = Math.ceil(totalBooks / booksPerPage);
+  
   if (totalPages <= 1) {
     pagination.style.display = 'none';
     return;
   }
   pagination.style.display = '';
-  // Prev button
+
+  // PREV ACTION
   const prevBtn = document.createElement('button');
   prevBtn.textContent = 'Prev';
   prevBtn.disabled = page === 1;
@@ -110,7 +135,8 @@ function renderPagination(totalBooks = books.length, page = currentPage) {
     }, 0);
   };
   pagination.appendChild(prevBtn);
-  // Page numbers
+
+  // NUMERIC PAGES
   for (let i = 1; i <= totalPages; i++) {
     const pageBtn = document.createElement('button');
     pageBtn.textContent = i;
@@ -125,7 +151,8 @@ function renderPagination(totalBooks = books.length, page = currentPage) {
     };
     pagination.appendChild(pageBtn);
   }
-  // Next button
+
+  // NEXT ACTION
   const nextBtn = document.createElement('button');
   nextBtn.textContent = 'Next';
   nextBtn.disabled = page === totalPages;
@@ -140,7 +167,7 @@ function renderPagination(totalBooks = books.length, page = currentPage) {
   pagination.appendChild(nextBtn);
 }
 
-// Modal close logic
+// --- MODAL ENGINE ---
 const closeBookModal = document.getElementById('closeBookModal');
 if (closeBookModal) {
   closeBookModal.onclick = function () {
@@ -159,10 +186,10 @@ if (bookDetailModal) {
   };
 }
 
-// Filter logic (case-insensitive)
-const filterTags = document.getElementById('filterTags');
-if (filterTags) {
-  filterTags.addEventListener('click', function (e) {
+// --- CATEGORY FILTERING ---
+const filterTagsContainer = document.getElementById('filterTags');
+if (filterTagsContainer) {
+  filterTagsContainer.addEventListener('click', function (e) {
     if (e.target.classList.contains('filter-tag')) {
       document.querySelectorAll('.filter-tag').forEach(t => t.classList.remove('active'));
       e.target.classList.add('active');
@@ -172,14 +199,7 @@ if (filterTags) {
   });
 }
 
-// Read More toggle
-function toggleBook(btn) {
-  const card = btn.closest('.book-card');
-  card.classList.toggle('expanded');
-  btn.textContent = card.classList.contains('expanded') ? 'COLLAPSE' : 'READ MORE';
-}
-
-// Search & Autocomplete Logic
+// --- SEARCH & AUTOCOMPLETE ENGINE ---
 const searchInput = document.getElementById('librarySearch');
 const autocompleteList = document.getElementById('searchAutocomplete');
 
@@ -190,11 +210,11 @@ if (searchInput) {
     // Clear autocomplete if query is short
     if (query.length < 2) {
       autocompleteList.classList.add('hidden');
-      renderBooks(currentFilter, 1, query); // Still filter for short queries if user types them
+      renderBooks(currentFilter, 1, query);
       return;
     }
 
-    // Filter matches for autocomplete
+    // Filter matches for tactical suggestions
     const matches = books.filter(b => 
       b.name.toLowerCase().includes(query) || 
       (b.author && b.author.toLowerCase().includes(query))
@@ -223,7 +243,7 @@ if (searchInput) {
       searchInput.value = selectedName;
       autocompleteList.classList.add('hidden');
       
-      // Pivot to 'all' when a specific book is selected to ensure it shows up regardless of current tag
+      // Pivot to 'all' to ensure the selection is visible regardless of current tag
       document.querySelectorAll('.filter-tag').forEach(t => t.classList.remove('active'));
       const allTag = document.querySelector('[data-filter="all"]');
       if (allTag) allTag.classList.add('active');
@@ -232,17 +252,10 @@ if (searchInput) {
     }
   });
 
-  // Close autocomplete on click outside
+  // Global dismiss for autocomplete
   document.addEventListener('click', (e) => {
     if (!searchInput.contains(e.target) && !autocompleteList.contains(e.target)) {
       autocompleteList.classList.add('hidden');
     }
   });
 }
-
-// Accessibility
-document.addEventListener('DOMContentLoaded', function () {
-  const style = document.createElement('style');
-  style.innerHTML = `.book-card { outline: none; }`;
-  document.head.appendChild(style);
-});

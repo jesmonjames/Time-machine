@@ -70,5 +70,13 @@
     "title": "Architectural Pivot Analysis — MEVN & Nuxt 3",
     "description": "Explored the theoretical roadmap for upgrading this vanilla portfolio into a robust MEVN stack leveraging Nuxt 3 and Serverless hosting.",
     "content": "Conducted a deep-dive architectural review into transitioning this static portfolio into a dynamic Next-Gen application using Vue 3 and Node.js. The objective was assessing how to pivot without breaking the live deployment or losing the tactical aesthetic.\n\nThe findings were highly decisive: moving to a modern framework unlocks massive capability. An integrated Node.js (Express) backend linked to a database kills the need for static JSON files and third-party form handlers, enabling purely native data operations like a hidden 'Classified Admin Center' for drafting entries directly via GUI.\n\nMore critically, the analysis illuminated the ideal path for Vercel deployment. Standard separate Express servers struggle in a serverless ecosystem unless explicitly mapped. But migrating directly to Nuxt 3 (Vue's meta-framework) resolves this natively. Nuxt's embedded 'server/api' engine automatically complies with Vercel's Serverless constraints without requiring configuration tweaks, offering SSR speeds alongside our robust tactical UI."
+  },
+  {
+    "id": 10,
+    "date": "2026-05-02",
+    "type": "learning",
+    "title": "Voice Comm Persistence // Multi-Page vs. SPA",
+    "description": "Analyzing browser-level security constraints for persistent voice interfaces during cross-page navigation.",
+    "content": "A recent milestone involved evaluating the transition of an interface agent to a 'Continuous Monitoring' state for hands-free interaction. This exploration highlighted the fundamental differences between multi-page and single-page architectures.\n\nImplementing persistent voice in a vanilla multi-page architecture (MPA) reveals a significant browser security constraint: the 'User Gesture' requirement. Modern browsers prevent microphone initialization until a user interacts with the document (click/keypress). Since standard architectures reload the entire document on every page transition, the SpeechRecognition instance is destroyed and must be re-initialized. This necessitates a user interaction on every new page before voice services can resume.\n\nIn contrast, an SPA framework (like Vue or Nuxt) allows the document state to remain persistent across 'navigation' as the page never truly reloads. This maintains the microphone permission and the AI link seamlessly. This comparison reinforces why transitioning to a modern meta-framework is essential for achieving high-fidelity, uninterrupted AI persistence in web environments."
   }
 ]

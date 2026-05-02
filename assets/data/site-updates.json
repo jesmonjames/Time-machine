@@ -1,5 +1,33 @@
 [
   {
+    "date": "2026-05-02",
+    "rank": 5,
+    "title": "AI // 'Humanly' Interaction Overhaul",
+    "detail": "Upgraded JES-007 with variable typing speeds, punctuation pauses, and a neural 'thinking' pulse for organic responses.",
+    "href": "pages/journal.html"
+  },
+  {
+    "date": "2026-05-02",
+    "rank": 4,
+    "title": "Voice // Always-Listening Mode",
+    "detail": "Enabled background wake-word detection for persistent, hands-free navigation across the entire portfolio.",
+    "href": "pages/journal.html"
+  },
+  {
+    "date": "2026-05-02",
+    "rank": 3,
+    "title": "UI // Page-Aware AI Bridge",
+    "detail": "Integrated a tactical bridge allowing the AI to directly open books and filter logs via voice/text commands.",
+    "href": "pages/journal.html"
+  },
+  {
+    "date": "2026-05-02",
+    "rank": 2,
+    "title": "Dossier // Responsive Modal Fix",
+    "detail": "Overhauled the high-density journal modal for mobile stability and long-form technical log scrolling.",
+    "href": "pages/journal.html"
+  },
+  {
     "date": "2026-04-27",
     "rank": 3,
     "title": "Field journal // MEVN & Nuxt 3 Pivot",

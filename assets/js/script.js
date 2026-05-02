@@ -1,7 +1,14 @@
+/**
+ * GLOBAL SYSTEM SCRIPT
+ * Manages core portfolio features: Loaders, Theme Engines, Tactical Tooltips, and Challenge Systems.
+ */
+
 // Global System Initialization
 document.addEventListener('DOMContentLoaded', function() {
-  // Global cross-page initializations can go here
+  // --- CROSS-PAGE BOOTSTRAP ---
+  // Any logic that needs to run on every page after DOM is ready
 });
+
 window.addEventListener("load", function() {
   const loader = document.getElementById("loader");
   const bootLog = document.getElementById("bootLog");
@@ -10,10 +17,14 @@ window.addEventListener("load", function() {
   const decryptText = document.getElementById("decryptText");
   const canvas = document.getElementById("loaderCanvas");
   
+  // Track if the system has performed a "Cold Boot" in this session
   const hasBooted = sessionStorage.getItem('sysBooted');
 
   if (!hasBooted) {
+    // --- COLD BOOT SEQUENCE (First Visit) ---
     sessionStorage.setItem('sysBooted', '1');
+    
+    // Initialize Matrix-style Binary Rain Background
     if(canvas) {
       const ctx = canvas.getContext("2d");
       canvas.width = window.innerWidth;
@@ -40,9 +51,10 @@ window.addEventListener("load", function() {
         canvas.height = window.innerHeight;
       });
       const rainInterval = setInterval(drawBinaryRain, 33);
-      setTimeout(() => clearInterval(rainInterval), 5000);
+      setTimeout(() => clearInterval(rainInterval), 5000); // Stop rain after boot
     }
   
+    // Tactical Boot Logs
     const logLeft = [
       "[ OK ] ALLOCATING VIRTUAL BUFFER...",
       "[ OK ] LOADING ENCRYPTION MODULES...",
@@ -72,6 +84,7 @@ window.addEventListener("load", function() {
       }
     }, 400);
   
+    // Progress Percentage Simulation
     let percent = 0;
     const perInt = setInterval(() => {
       percent += Math.floor(Math.random() * 5) + 1;
@@ -82,6 +95,7 @@ window.addEventListener("load", function() {
       if(decryptText) decryptText.textContent = `${percent}%`;
     }, 150);
   
+    // Completion Sequence
     setTimeout(() => {
       if(bootStatus) bootStatus.textContent = "UPLOADING TACTICAL INTERFACE...";
       setTimeout(() => {
@@ -93,10 +107,11 @@ window.addEventListener("load", function() {
       }, 1500);
     }, 4000);
   } else {
-    // Fast boot on return visits
+    // --- WARM BOOT (Fast skip for return visits) ---
     if (loader) loader.style.display = "none";
   }
   
+  // Cross-page "Mini Loader" for smooth navigation transitions
   const miniLoader = document.getElementById("miniLoader");
   if(miniLoader && (hasBooted || !loader)) {
     miniLoader.style.display = "flex";
@@ -119,11 +134,15 @@ window.addEventListener("load", function() {
     miniLoader.style.display = "none";
   }
 
-  // Initialize timeline items visibility
+  // Initial timeline items visibility check
   checkTimelineItems();
 });
 
-// Trigger dynamic out-transition military loader globally
+/**
+ * Trigger dynamic out-transition military loader globally.
+ * @param {string|function} action - URL to navigate to or function to execute.
+ * @param {boolean} isSlow - If true, the progress bar moves slower for effect.
+ */
 window.triggerMiniLoader = function(action, isSlow = false) {
   const miniLoader = document.getElementById("miniLoader");
   if(miniLoader) {
@@ -156,7 +175,7 @@ window.triggerMiniLoader = function(action, isSlow = false) {
   }
 };
 
-// Scroll/Navigate logic
+// --- NAVIGATION HOOKS ---
 const startBtn = document.getElementById("startJourney");
 if(startBtn) {
   startBtn.onclick = function() {
@@ -164,7 +183,8 @@ if(startBtn) {
   };
 }
 
-// Timeline effect (Fade in cards when scrolling)
+// --- TIMELINE SCROLL ENGINE ---
+// Fades in cards as they enter the viewport
 const timelineItems = document.querySelectorAll(".timeline-item");
 
 function checkTimelineItems() {
@@ -176,7 +196,7 @@ function checkTimelineItems() {
   });
 }
 
-// To support the new scrolling panel constraint in CSS Grid layout
+// Handle scroll events for the main layout grid or window
 const mainLayout = document.querySelector(".main-layout");
 if(mainLayout) {
   mainLayout.addEventListener("scroll", checkTimelineItems);
@@ -184,7 +204,8 @@ if(mainLayout) {
 window.addEventListener("scroll", checkTimelineItems);
 
 
-// Clock and Uptime
+// --- SYSTEM DATA ENGINE ---
+// Manages real-time Clock, Uptime, and Hardware Simulation
 const clockEl = document.getElementById("clock");
 const uptimeEl = document.getElementById("uptime");
 const sysStatEl = document.getElementById("sysStat");
@@ -197,7 +218,7 @@ function updateTime() {
     let hours = now.getHours();
     const ampm = hours >= 12 ? 'PM' : 'AM';
     hours = hours % 12;
-    hours = hours ? hours : 12; // the hour '0' should be '12'
+    hours = hours ? hours : 12;
     const hh = String(hours).padStart(2, '0');
     const mm = String(now.getMinutes()).padStart(2, '0');
     const ss = String(now.getSeconds()).padStart(2, '0');
@@ -225,7 +246,8 @@ setInterval(updateSysStats, 3000);
 updateSysStats();
 updateTime();
 
-// Theme Switcher Logic
+// --- THEME & CHAKRA ENGINE ---
+// Manages the 7-themed visual states and SVG logos
 const themeBtns = document.querySelectorAll('.theme-btn');
 let savedTheme = sessionStorage.getItem('portfolio-theme') || 'theme-throat';
 
@@ -240,8 +262,8 @@ const chakraLogos = {
 };
 
 
-
-// TACTICAL TOOLTIP ENGINE
+// --- TACTICAL TOOLTIP ENGINE ---
+// Renders the glassmorphic tactical tooltips on hover targets
 const tooltip = document.createElement('div');
 tooltip.id = 'tacticalTooltip';
 tooltip.innerHTML = '<span class="tt-label"></span><span class="tt-value"></span>';
@@ -276,7 +298,11 @@ if (!validThemes.includes(savedTheme)) {
   savedTheme = 'theme-throat';
 }
 
-function applyTheme(themeName) {
+/**
+ * Applies the selected theme and updates persistence.
+ * @param {string} themeName - Class name of the theme to apply.
+ */
+window.applyTheme = function(themeName) {
   document.body.className = themeName;
   sessionStorage.setItem('portfolio-theme', themeName);
   
@@ -293,7 +319,7 @@ function applyTheme(themeName) {
   }
 }
 
-// Initial application
+// Initial application on load
 applyTheme(savedTheme);
 
 themeBtns.forEach(btn => {
@@ -303,17 +329,22 @@ themeBtns.forEach(btn => {
   });
 });
 
-// TIC-TAC-TOE CHALLENGE LOGIC
+// --- TIC-TAC-TOE CHALLENGE LOGIC ---
+// Tactical gateway that requires a win to proceed to certain sectors
 let tttTargetUrl = '';
 let tttBoard = Array(9).fill(null);
 let tttActive = false;
 
+/**
+ * Entry point for navigation links protected by the TTT challenge.
+ * @param {string} url - Destination URL.
+ */
 function handleTacticalLink(url) {
   tttTargetUrl = url;
   const tttModal = document.getElementById('tttModal');
   if (tttModal) {
     tttModal.style.display = 'flex';
-    document.body.style.overflow = 'hidden';
+    document.body.style.overflow = 'hidden'; // Lock scroll
     resetTTT();
   } else {
     window.location.href = url;
@@ -356,6 +387,9 @@ function checkWinner(board) {
   return null;
 }
 
+/**
+ * Basic AI logic for the TTT challenge.
+ */
 function aiMove() {
   if (!tttActive) return;
   const available = tttBoard.map((v, i) => v === null ? i : null).filter(v => v !== null);
@@ -365,6 +399,9 @@ function aiMove() {
   makeMove(move, 'O');
 }
 
+/**
+ * Core game loop for TTT.
+ */
 function makeMove(index, player) {
   if (!tttActive || tttBoard[index] !== null) return;
   
@@ -384,6 +421,7 @@ function makeMove(index, player) {
   if (result) {
     tttActive = false;
     if (result.winner === 'X') {
+      // User won: Access granted
       if (tttStatus) {
         tttStatus.textContent = 'ACCESS_GRANTED // REDIRECTING...';
         tttStatus.style.color = 'var(--accent-green)';
@@ -393,25 +431,24 @@ function makeMove(index, player) {
         const tttModal = document.getElementById('tttModal');
         if (tttModal) tttModal.style.display = 'none';
         document.body.style.overflow = 'auto';
-        if (typeof triggerMiniLoader === 'function') {
-           triggerMiniLoader(tttTargetUrl);
-        } else {
-           window.location.href = tttTargetUrl;
-        }
+        triggerMiniLoader(tttTargetUrl);
       }, 1000);
     } else if (result.winner === 'O') {
+      // AI won: Access denied
       if (tttStatus) {
         tttStatus.textContent = 'ACCESS_DENIED // SYSTEM_WIN';
         tttStatus.style.color = 'var(--accent-red)';
       }
       if (tttReset) tttReset.style.display = 'block';
     } else {
+      // Draw: Access stalled
       if (tttStatus) {
         tttStatus.textContent = 'ACCESS_STALLED // DRAW';
       }
       if (tttReset) tttReset.style.display = 'block';
     }
   } else if (player === 'X') {
+    // Switch to AI turn
     setTimeout(aiMove, 500);
   }
 }
@@ -443,4 +480,3 @@ document.addEventListener('DOMContentLoaded', () => {
     tttResetBtn.onclick = resetTTT;
   }
 });
-
