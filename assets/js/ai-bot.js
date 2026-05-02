@@ -219,11 +219,22 @@ class TacticalBot {
 
     bindEvents() {
         const initVoiceOnFirstClick = () => {
+            // Unlock Speech Recognition
             if (!this.recognition && window.SpeechRecognition) {
                 this.initSpeechRecognition();
                 this.isVoiceActive = true;
                 this.updateVoiceUI(true);
             }
+            
+            // --- MOBILE AUDIO UNLOCK ---
+            // Mobile browsers (iOS/Android) block TTS until a user gesture.
+            // We prime the engine with an empty utterance to unlock the audio context.
+            if (this.synth) {
+                const silent = new SpeechSynthesisUtterance("");
+                silent.volume = 0;
+                this.synth.speak(silent);
+            }
+
             document.removeEventListener('click', initVoiceOnFirstClick);
         };
         document.addEventListener('click', initVoiceOnFirstClick);
