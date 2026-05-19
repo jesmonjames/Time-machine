@@ -21,7 +21,8 @@ class TacticalBot {
         // Using versioned keys to avoid conflicts with older deployments or other apps on the same domain.
         this.STORAGE_KEYS = {
             HISTORY: 'jes007_tactical_v2_history',
-            STATE: 'jes007_tactical_v2_isOpen'
+            STATE: 'jes007_tactical_v2_isOpen',
+            MIC_PERM: 'jes007_tactical_v2_mic_perm'
         };
 
         this.isOpen = localStorage.getItem(this.STORAGE_KEYS.STATE) === 'true';
@@ -208,6 +209,21 @@ class TacticalBot {
                     <svg viewBox="0 0 24 24" width="30" height="30" stroke="currentColor" stroke-width="1.5" fill="none" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path><circle cx="12" cy="10" r="2"></circle><line x1="12" y1="12" x2="12" y2="12.01"></line></svg>
                 </div>
             </div>
+            
+            <!-- Tactical Mic Permission Modal -->
+            <div class="tactical-modal-overlay" id="micPermissionModal">
+                <div class="tactical-modal-content">
+                    <div class="tactical-modal-title">SECURITY CLEARANCE REQUIRED</div>
+                    <div class="tactical-modal-body">
+                        Tactical AI JES-007 requires AUDIO_INPUT to enable wake-word ("Jesmon come online") and voice commands.<br><br>
+                        Please authorize microphone access to proceed.
+                    </div>
+                    <div class="tactical-modal-actions">
+                        <button class="tactical-btn decline" id="btnDeclineMic">[ DECLINE ]</button>
+                        <button class="tactical-btn authorize" id="btnAcceptMic">[ AUTHORIZE ]</button>
+                    </div>
+                </div>
+            </div>
         `;
         document.body.insertAdjacentHTML('beforeend', botHTML);
         this.container = document.querySelector('.ai-bot-container');
@@ -219,13 +235,6 @@ class TacticalBot {
 
     bindEvents() {
         const initVoiceOnFirstClick = () => {
-            // Unlock Speech Recognition
-            if (!this.recognition && window.SpeechRecognition) {
-                this.initSpeechRecognition();
-                this.isVoiceActive = true;
-                this.updateVoiceUI(true);
-            }
-            
             // --- MOBILE AUDIO UNLOCK ---
             // Mobile browsers (iOS/Android) block TTS until a user gesture.
             // We prime the engine with an empty utterance to unlock the audio context.
@@ -233,6 +242,15 @@ class TacticalBot {
                 const silent = new SpeechSynthesisUtterance("");
                 silent.volume = 0;
                 this.synth.speak(silent);
+            }
+
+            const micStatus = localStorage.getItem(this.STORAGE_KEYS.MIC_PERM);
+            if (micStatus === 'granted') {
+                if (!this.recognition && window.SpeechRecognition) {
+                    this.initSpeechRecognition();
+                    this.isVoiceActive = true;
+                    this.updateVoiceUI(true);
+                }
             }
 
             document.removeEventListener('click', initVoiceOnFirstClick);
@@ -244,10 +262,49 @@ class TacticalBot {
         });
         document.getElementById('aiBotClose').addEventListener('click', () => this.togglePanel());
         document.getElementById('aiBotSend').addEventListener('click', () => this.handleUserInput());
+        
+        // Microphone Modal Events
+        const micModal = document.getElementById('micPermissionModal');
+        if (micModal) {
+            document.getElementById('btnDeclineMic').addEventListener('click', () => {
+                localStorage.setItem(this.STORAGE_KEYS.MIC_PERM, 'denied');
+                micModal.classList.remove('active');
+                this.isVoiceActive = false;
+                this.updateVoiceUI(false);
+            });
+            
+            document.getElementById('btnAcceptMic').addEventListener('click', () => {
+                localStorage.setItem(this.STORAGE_KEYS.MIC_PERM, 'granted');
+                micModal.classList.remove('active');
+                if (!this.recognition && window.SpeechRecognition) {
+                    this.initSpeechRecognition();
+                }
+                this.isVoiceActive = true;
+                this.updateVoiceUI(true);
+                this.speak("Voice comms activated.");
+            });
+        }
+
         document.getElementById('aiBotVoiceToggle').addEventListener('click', () => {
+            const micStatus = localStorage.getItem(this.STORAGE_KEYS.MIC_PERM);
+            if (micStatus !== 'granted') {
+                if (micModal) micModal.classList.add('active');
+                return;
+            }
+
             this.isVoiceActive = !this.isVoiceActive;
             this.updateVoiceUI(this.isVoiceActive);
-            if (this.isVoiceActive) this.speak("Voice comms activated.");
+            if (this.isVoiceActive) {
+                if (!this.recognition && window.SpeechRecognition) {
+                    this.initSpeechRecognition();
+                }
+                this.speak("Voice comms activated.");
+            } else {
+                if (this.recognition) {
+                    this.recognition.stop();
+                    this.recognition = null;
+                }
+            }
         });
         this.input.addEventListener('keypress', (e) => {
             if (e.key === 'Enter') this.handleUserInput();

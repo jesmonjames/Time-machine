@@ -1,5 +1,19 @@
 [
   {
+    "date": "2026-05-19",
+    "rank": 7,
+    "title": "Interface // Guest Table Ordering",
+    "detail": "Integrated the Guest Table Ordering hotel dining interface demo into the Projects Laboratory and Artifact Archive archives.",
+    "href": "index.html"
+  },
+  {
+    "date": "2026-05-19",
+    "rank": 6,
+    "title": "UI & Logic // Tactical Upgrades",
+    "detail": "Implemented a tactical microphone permission modal (Permission Priming). Added a new synthesis journal log, and expanded the note modal to full width with a themed scrollbar.",
+    "href": "pages/journal.html"
+  },
+  {
     "date": "2026-05-02",
     "rank": 5,
     "title": "AI // 'Humanly' Interaction Overhaul",
