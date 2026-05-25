@@ -1,0 +1,109 @@
+{
+  "id": "aspnet",
+  "name": "ASP.NET",
+  "fullName": "ASP.NET Core Framework",
+  "color": "#512bd4",
+  "difficulty": "Advanced",
+  "estTime": "6 Hours",
+  "tagline": "The enterprise-grade back-end command station of .NET.",
+  "timeTravelLog": "Released by Microsoft in 2002, ASP.NET Core is the modern, cross-platform successor — rewritten from the ground up in 2016 for Linux, macOS, and Windows with blazing performance topping the TechEmpower benchmarks.",
+  "overview": "ASP.NET Core is Microsoft's open-source, cross-platform web framework for building modern web applications and APIs with C#. It provides Razor Pages, MVC architecture, Minimal APIs, built-in dependency injection, Entity Framework Core ORM, and first-class cloud deployment support.",
+  "syllabus": [
+    {
+      "title": "Module 1: ASP.NET Core Architecture & Project Setup",
+      "desc": "Understanding the program entry point, middleware pipeline, and DI container.",
+      "content": "Every ASP.NET Core app starts in Program.cs. WebApplication.CreateBuilder() sets up the host. Services are registered in the DI container (builder.Services.Add*). The app.Use* calls build the middleware pipeline — a chain of request-processing functions. app.Run() starts the Kestrel web server.",
+      "codeExample": "// Program.cs — Entry Point\nvar builder = WebApplication.CreateBuilder(args);\n\n// Register services into DI container\nbuilder.Services.AddControllers();\nbuilder.Services.AddDbContext<MissionDbContext>(options =>\n  options.UseSqlServer(builder.Configuration.GetConnectionString(\"Default\")));\nbuilder.Services.AddScoped<IMissionService, MissionService>();\n\nvar app = builder.Build();\n\n// Configure middleware pipeline\napp.UseHttpsRedirection();\napp.UseAuthentication();\napp.UseAuthorization();\napp.MapControllers();\n\napp.Run();",
+      "interactiveTip": "The order of middleware matters! UseAuthentication() must always come before UseAuthorization() in the pipeline. Reversing this is a common beginner mistake that silently breaks auth!"
+    },
+    {
+      "title": "Module 2: Controllers & Routing (MVC Architecture)",
+      "desc": "Building HTTP endpoints with attribute routing in the MVC controller model.",
+      "content": "ASP.NET Core MVC routes HTTP requests to Controller action methods based on route templates. [ApiController] enables automatic model validation and response formatting. [HttpGet], [HttpPost], [HttpPut], [HttpDelete] attribute decorators define HTTP verbs. Route parameters are bound from URL segments, query strings, or request bodies automatically.",
+      "codeExample": "[ApiController]\n[Route(\"api/[controller]\")]\npublic class MissionsController : ControllerBase\n{\n  private readonly IMissionService _missions;\n\n  public MissionsController(IMissionService missions)\n  {\n    _missions = missions; // Injected by DI\n  }\n\n  [HttpGet]                          // GET /api/missions\n  public async Task<IActionResult> GetAll()\n    => Ok(await _missions.GetAllAsync());\n\n  [HttpGet(\"{id}\")]                  // GET /api/missions/5\n  public async Task<IActionResult> GetById(int id)\n    => Ok(await _missions.GetByIdAsync(id));\n\n  [HttpPost]                         // POST /api/missions\n  public async Task<IActionResult> Create([FromBody] MissionDto dto)\n    => CreatedAtAction(nameof(GetById), new { id = dto.Id }, dto);\n}",
+      "interactiveTip": "Use CreatedAtAction() for POST responses instead of Ok() — it returns HTTP 201 with a Location header pointing to the new resource URL. This follows REST conventions properly!"
+    },
+    {
+      "title": "Module 3: Entity Framework Core (ORM & Migrations)",
+      "desc": "Querying and persisting data to databases using code-first Entity Framework ORM.",
+      "content": "Entity Framework Core is .NET's ORM — it maps C# classes to database tables. DbContext represents the database connection and set of tables. LINQ queries are translated to SQL automatically. Code-first migrations generate and track schema changes in version control. Add-Migration creates migration files. Update-Database applies them to the database.",
+      "codeExample": "// Entity model\npublic class Mission {\n  public int Id { get; set; }\n  public string Name { get; set; } = string.Empty;\n  public string Status { get; set; } = \"Active\";\n  public DateTime CreatedAt { get; set; } = DateTime.UtcNow;\n}\n\n// DbContext\npublic class MissionDbContext : DbContext {\n  public MissionDbContext(DbContextOptions<MissionDbContext> options)\n    : base(options) { }\n  public DbSet<Mission> Missions => Set<Mission>();\n}\n\n// Service usage with LINQ\npublic async Task<List<Mission>> GetActiveAsync()\n  => await _context.Missions\n    .Where(m => m.Status == \"Active\")\n    .OrderByDescending(m => m.CreatedAt)\n    .ToListAsync();",
+      "interactiveTip": "Never use .ToList() when you can use .ToListAsync() — all EF Core database operations should be awaited async to prevent thread blocking under concurrent load!"
+    },
+    {
+      "title": "Module 4: Authentication & JWT Authorization",
+      "desc": "Securing API endpoints with JWT bearer token authentication.",
+      "content": "ASP.NET Core's authentication middleware validates JWT tokens on every protected request. The JWT is generated on login using JwtSecurityTokenHandler with claims (user ID, roles) signed by a secret key. [Authorize] attribute protects entire controllers or specific actions. [AllowAnonymous] explicitly bypasses auth for login and register endpoints.",
+      "codeExample": "// Register JWT auth in Program.cs\nbuilder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)\n  .AddJwtBearer(options => {\n    options.TokenValidationParameters = new() {\n      ValidateIssuerSigningKey = true,\n      IssuerSigningKey = new SymmetricSecurityKey(\n        Encoding.UTF8.GetBytes(builder.Configuration[\"Jwt:Secret\"]!)),\n      ValidateIssuer = false,\n      ValidateAudience = false\n    };\n  });\n\n// Protect a controller\n[Authorize(Roles = \"Admin,Pilot\")]\n[ApiController]\n[Route(\"api/[controller]\")]\npublic class SecretMissionsController : ControllerBase { }",
+      "interactiveTip": "Store the JWT secret in appsettings.json only for development. For production, use Azure Key Vault, AWS Secrets Manager, or environment variables — never commit secrets to git repositories!"
+    },
+    {
+      "title": "Module 5: Minimal APIs (Streamlined Endpoint Design)",
+      "desc": "Building lightweight HTTP APIs with minimal boilerplate using .NET 6+ Minimal API syntax.",
+      "content": "Minimal APIs reduce ceremony for simple endpoints — no controllers, no [HttpGet] attributes, no class definitions. Route handlers are registered directly in Program.cs using app.MapGet(), app.MapPost(), etc. They support dependency injection, async handlers, model binding, and middleware — with far less code than traditional MVC.",
+      "codeExample": "// Minimal API — entire API in Program.cs!\nvar app = builder.Build();\n\n// GET /api/missions\napp.MapGet(\"/api/missions\", async (MissionDbContext db) =>\n  await db.Missions.ToListAsync());\n\n// GET /api/missions/{id}\napp.MapGet(\"/api/missions/{id}\", async (int id, MissionDbContext db) =>\n  await db.Missions.FindAsync(id)\n    is Mission m ? Results.Ok(m) : Results.NotFound());\n\n// POST /api/missions\napp.MapPost(\"/api/missions\", async (Mission m, MissionDbContext db) => {\n  db.Missions.Add(m);\n  await db.SaveChangesAsync();\n  return Results.Created($\"/api/missions/{m.Id}\", m);\n}).RequireAuthorization();\n\napp.Run();",
+      "interactiveTip": "Use Results.Ok(), Results.NotFound(), Results.Created(), and Results.Problem() instead of raw returns in Minimal APIs — they produce properly typed HTTP responses with correct status codes!"
+    },
+    {
+      "title": "Module 6: Middleware Pipeline & Error Handling",
+      "desc": "Building custom middleware and global error handling for production-grade APIs.",
+      "content": "Middleware are C# classes that handle HTTP requests and responses in the pipeline. Custom middleware wraps requests with logging, exception catching, rate limiting, or request transformation. Global exception handling via exception middleware prevents raw stack traces from leaking to API consumers — always return RFC 7807 ProblemDetails for consistent error responses.",
+      "codeExample": "// Custom Exception Handling Middleware\npublic class ErrorHandlingMiddleware {\n  private readonly RequestDelegate _next;\n  private readonly ILogger _logger;\n\n  public ErrorHandlingMiddleware(RequestDelegate next,\n    ILogger<ErrorHandlingMiddleware> logger) {\n    _next = next; _logger = logger;\n  }\n\n  public async Task InvokeAsync(HttpContext ctx) {\n    try {\n      await _next(ctx);\n    } catch (Exception ex) {\n      _logger.LogError(ex, \"Unhandled exception\");\n      ctx.Response.StatusCode = 500;\n      ctx.Response.ContentType = \"application/json\";\n      await ctx.Response.WriteAsJsonAsync(new {\n        status = 500, title = \"Server Error\",\n        detail = \"An internal error occurred.\"\n      });\n    }\n  }\n}",
+      "interactiveTip": "Register error handling middleware as the FIRST middleware in the pipeline (before UseHttpsRedirection) so it can catch exceptions thrown anywhere in the pipeline below it!"
+    },
+    {
+      "title": "Module 7: Deployment to Azure & Docker",
+      "desc": "Containerizing and deploying ASP.NET Core applications to the cloud.",
+      "content": "ASP.NET Core apps can be deployed as standalone executables, IIS-hosted applications, Docker containers, or serverless Azure Functions. A multi-stage Dockerfile builds the app in a full SDK image and then copies only the published output to a lightweight runtime image, dramatically reducing container size.",
+      "codeExample": "# Multi-stage Dockerfile\n# Stage 1: Build\nFROM mcr.microsoft.com/dotnet/sdk:8.0 AS build\nWORKDIR /src\nCOPY . .\nRUN dotnet restore\nRUN dotnet publish -c Release -o /app/publish\n\n# Stage 2: Runtime (small image)\nFROM mcr.microsoft.com/dotnet/aspnet:8.0 AS runtime\nWORKDIR /app\nCOPY --from=build /app/publish .\nEXPOSE 8080\nENV ASPNETCORE_URLS=http://+:8080\nENTRYPOINT [\"dotnet\", \"MissionControl.dll\"]\n\n# Build and run\n# docker build -t mission-control .\n# docker run -p 8080:8080 mission-control",
+      "interactiveTip": "Use multi-stage Docker builds — the SDK image is ~700MB but the runtime image is only ~200MB. Your final production container should contain ONLY the published output, not the build toolchain!"
+    }
+  ],
+  "sandboxInitialCode": "<!-- ASP.NET Core REST API Simulator (VanillaJS) -->\n<div style=\"background: #1a0a3e; border: 2px solid #512bd4; padding: 20px; font-family: monospace; border-radius: 8px; color: #fff;\">\n  <h3 style=\"color: #512bd4; margin-top: 0; text-align: center;\">&#9658; ASP.NET Core API Simulator</h3>\n  <p style=\"color: #888; font-size: 12px; text-align: center;\">Simulate REST endpoints for GET, POST, DELETE missions.</p>\n  <div style=\"display: flex; gap: 8px; margin-bottom: 15px; flex-wrap: wrap;\">\n    <button onclick=\"apiCall('GET')\" style=\"background: rgba(81,43,212,0.3); border: 1px solid #512bd4; color: #a78bfa; padding: 8px 14px; cursor: pointer; border-radius: 4px;\">GET /missions</button>\n    <button onclick=\"apiCall('POST')\" style=\"background: rgba(0,200,100,0.15); border: 1px solid #00c864; color: #00c864; padding: 8px 14px; cursor: pointer; border-radius: 4px;\">POST /missions</button>\n    <button onclick=\"apiCall('DELETE')\" style=\"background: rgba(255,60,60,0.15); border: 1px solid #ff3c3c; color: #ff3c3c; padding: 8px 14px; cursor: pointer; border-radius: 4px;\">DELETE /missions/1</button>\n  </div>\n  <div id=\"aspnet-response\" style=\"background: #000; padding: 15px; border-radius: 4px; border-left: 3px solid #512bd4; font-size: 13px; min-height: 120px; white-space: pre-wrap; color: #a78bfa;\">// Response will appear here...</div>\n</div>\n<script>\n  const missions = [\n    { id: 1, name: 'Operation Helios', status: 'Active' },\n    { id: 2, name: 'Deep Scan Alpha', status: 'Standby' }\n  ];\n  let nextId = 3;\n  window.apiCall = function(method) {\n    const el = document.getElementById('aspnet-response');\n    let response;\n    if (method === 'GET') {\n      response = { status: 200, body: missions };\n    } else if (method === 'POST') {\n      const newM = { id: nextId++, name: 'Mission ' + nextId, status: 'Planned' };\n      missions.push(newM);\n      response = { status: 201, location: '/missions/' + newM.id, body: newM };\n    } else if (method === 'DELETE') {\n      const idx = missions.findIndex(m => m.id === 1);\n      if (idx > -1) missions.splice(idx, 1);\n      response = { status: 204, body: null };\n    }\n    el.textContent = 'HTTP ' + response.status + '\\n' + JSON.stringify(response.body, null, 2);\n  };\n</script>",
+  "quiz": [
+    {
+      "question": "What is the primary role of WebApplication.CreateBuilder() in ASP.NET Core?",
+      "options": [
+        "Creates the SQL database schema",
+        "Sets up the host, configures the DI container, and loads application settings",
+        "Compiles the C# code to machine code",
+        "Creates a Docker container for the app"
+      ],
+      "answer": 1,
+      "explanation": "WebApplication.CreateBuilder() initializes the application host — loading configuration from appsettings.json and environment variables, setting up the DI container, and configuring the logging infrastructure."
+    },
+    {
+      "question": "What does the [Authorize] attribute do in ASP.NET Core?",
+      "options": [
+        "Logs all requests to the decorated endpoint",
+        "Restricts access to authenticated (and optionally role-authorized) users only",
+        "Generates Swagger documentation for the endpoint",
+        "Validates all input models automatically"
+      ],
+      "answer": 1,
+      "explanation": "[Authorize] causes ASP.NET Core's authorization middleware to reject unauthenticated requests with HTTP 401. Role-based restrictions can be added with [Authorize(Roles = \"Admin\")] for HTTP 403 on role mismatch."
+    },
+    {
+      "question": "In EF Core, what command generates a migration from model changes?",
+      "options": [
+        "dotnet ef database update",
+        "dotnet ef migrations apply",
+        "dotnet ef migrations add",
+        "dotnet ef schema push"
+      ],
+      "answer": 2,
+      "explanation": "'dotnet ef migrations add MigrationName' generates a migration file representing the diff between your current C# models and the last migration. 'dotnet ef database update' then applies it to the database."
+    }
+  ],
+  "quest": {
+    "title": "Quest: Build a Mission Tracker REST API",
+    "challenge": "Create a full ASP.NET Core REST API for mission management with full CRUD operations.",
+    "instructions": [
+      "1. Create a Mission entity with Id, Name, Status, and CreatedAt fields.",
+      "2. Set up DbContext with SQLite (simple for local dev) and run an initial migration.",
+      "3. Build a MissionsController with GET (all), GET (by id), POST, PUT, and DELETE endpoints.",
+      "4. Add JWT authentication — protect POST/PUT/DELETE behind [Authorize].",
+      "5. Add a global error handling middleware that catches unhandled exceptions and returns a ProblemDetails JSON response."
+    ]
+  }
+}

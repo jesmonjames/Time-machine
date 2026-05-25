@@ -1,0 +1,104 @@
+{
+  "id": "drupal",
+  "name": "Drupal",
+  "fullName": "Drupal CMS",
+  "color": "#0678be",
+  "difficulty": "Advanced",
+  "estTime": "5 Hours",
+  "tagline": "The enterprise-grade content management fortress.",
+  "timeTravelLog": "Created by Dries Buytaert in 2000 as a student message board, Drupal evolved into one of the most powerful CMSs in the galaxy — powering government portals, university systems, and multinational enterprise platforms.",
+  "overview": "Drupal is an open-source content management system written in PHP. It is renowned for its flexibility, security, and scalability — powering complex web applications that require granular access control, custom data structures, and multi-site architectures.",
+  "syllabus": [
+    {
+      "title": "Module 1: Drupal Architecture Overview",
+      "desc": "Understanding Drupal's layered architecture of core, modules, and themes.",
+      "content": "Drupal's architecture consists of four layers: Core (the engine — routing, database, caching), Modules (feature plugins that extend functionality), Themes (presentation layer — HTML/CSS/Twig templates), and Configuration (YAML-based exported site settings). Everything in Drupal is a plugin — even field types, views, and user roles are plugins defined through annotations and YAML.",
+      "codeExample": "/* Drupal Directory Structure */\n/web\n  /core          ← Drupal core (never modify!)\n  /modules\n    /contrib     ← Community modules (downloaded)\n    /custom      ← Your custom modules\n  /themes\n    /contrib     ← Community themes\n    /custom      ← Your custom theme\n  /sites\n    /default\n      settings.php     ← Database & config\n      /files           ← Uploaded media\ncomposer.json          ← Dependency manager",
+      "interactiveTip": "Never modify files inside /core — it will break on the next Drupal update! All customization belongs in /modules/custom and /themes/custom directories exclusively."
+    },
+    {
+      "title": "Module 2: Content Types & Field Architecture",
+      "desc": "Structuring your data model with Drupal's entity and field system.",
+      "content": "In Drupal, structured content is built via Content Types — reusable data blueprints (like Mission Report, Project, Blog Post). Each content type is composed of Fields (text, image, date, entity reference, etc.) configured through the admin UI or YAML config. Paragraphs module enables flexible, nested content layouts. Field formatters control how data renders in views.",
+      "codeExample": "# Exported content type config (YAML)\n# config/sync/node.type.mission_report.yml\nid: mission_report\nlabel: 'Mission Report'\ndescription: 'Classified mission field documentation'\nnew_revision: true\npreview_mode: 1\n\n# Field definition\n# config/sync/field.field.node.mission_report.field_clearance.yml\nentity_type: node\nbundle: mission_report\nfield_name: field_clearance\nlabel: 'Clearance Level'\nrequired: true",
+      "interactiveTip": "Export all config via drush config-export after making changes in the admin UI. Store config YAML in version control — this enables reproducible site builds and team collaboration!"
+    },
+    {
+      "title": "Module 3: Views (The Data Query Builder)",
+      "desc": "Building dynamic, filtered, paginated content displays without SQL queries.",
+      "content": "Views is Drupal's most powerful contrib module (included in core since Drupal 8). It provides a visual query builder that fetches content and renders it as lists, tables, grids, blocks, or JSON feeds. Every listing on a typical Drupal site is a View — recent posts, user tables, taxonomy term pages, and REST API endpoints.",
+      "codeExample": "# Views outputs multiple display types:\n# - Page: renders at a URL like /missions\n# - Block: embeds in regions via the Block Layout UI\n# - REST export: outputs JSON for decoupled frontends\n# - Attachment: attaches data to another display\n\n# Typical Views configuration:\nDisplay: Page\nPath: /missions/active\nFilter: Content Type = Mission Report\nFilter: Status = Active (exposed to user)\nSort: Post Date (descending)\nPager: Full pager, 10 per page\nFormat: Unformatted list of Mission Card view modes",
+      "interactiveTip": "Use Views contextual filters (Arguments) to create dynamic views that filter by URL parameters — e.g., /user/[uid]/missions automatically shows only that user's missions!"
+    },
+    {
+      "title": "Module 4: Custom Module Development",
+      "desc": "Extending Drupal with custom PHP modules using the Hook and Plugin API.",
+      "content": "Custom modules are PHP packages placed in /modules/custom/. Each module requires a .info.yml file (declaring module metadata) and one or more PHP files. Drupal's Hook system lets modules react to core events: hook_node_presave() fires before a node saves, hook_menu_links_discovered_alter() modifies navigation. Plugins extend Drupal's type system with new block types, field formatters, and more.",
+      "codeExample": "# web/modules/custom/jes_missions/jes_missions.info.yml\nname: 'JES Missions'\ndescription: 'Custom mission management module'\npackage: Custom\ntype: module\ncore_version_requirement: ^10\n\n# jes_missions.module\nuse Drupal\\Core\\Entity\\EntityInterface;\n\n/**\n * Implements hook_node_presave().\n * Auto-sets mission reference on save.\n */\nfunction jes_missions_node_presave(EntityInterface $node) {\n  if ($node->bundle() === 'mission_report') {\n    if ($node->get('field_clearance')->isEmpty()) {\n      $node->set('field_clearance', 'alpha');\n    }\n  }\n}",
+      "interactiveTip": "Use drush generate module to scaffold a new custom module with all required files pre-created. It generates the info.yml, module file, routing.yml, and services.yml in seconds!"
+    },
+    {
+      "title": "Module 5: Theming with Twig Templates",
+      "desc": "Building custom Drupal themes using the Twig templating engine.",
+      "content": "Drupal uses Twig as its templating language — a PHP-based engine with clean {{ variable }}, {% block %}, and {% include %} syntax. Custom themes override core templates by placing identically named .html.twig files in the theme's /templates directory. Theme hook suggestions allow overriding templates for specific content types, view modes, or individual nodes.",
+      "codeExample": "{# themes/custom/jes_theme/templates/node--mission-report.html.twig #}\n<article class=\"mission-card {{ node.bundle }}\" id=\"node-{{ node.id }}\">\n  <header class=\"mission-header\">\n    <h2 class=\"mission-title\">{{ label }}</h2>\n    {% if content.field_clearance %}\n      <span class=\"clearance-badge\">\n        {{ content.field_clearance }}\n      </span>\n    {% endif %}\n  </header>\n  <div class=\"mission-body\">\n    {{ content.body }}\n  </div>\n  {{ content.field_mission_sectors }}\n</article>",
+      "interactiveTip": "Enable Twig debugging in development: set twig_config.debug: true in services.yml. This adds HTML comments showing exact template file names — massively speeding up theme development!"
+    },
+    {
+      "title": "Module 6: Drupal Security & Access Control",
+      "desc": "Implementing Drupal's role-based permissions and security hardening.",
+      "content": "Drupal's permission system is highly granular. Roles (anonymous, authenticated, editor, administrator) are assigned granular permissions from a matrix of hundreds of options. Access control can be extended programmatically via hook_node_access() and custom access callbacks on routes. Drupal's Security Team actively maintains a security advisory program for all contrib modules.",
+      "codeExample": "# Role permission matrix in config\n# user.role.editor.yml\nid: editor\nlabel: Editor\nweight: 2\npermissions:\n  - 'create mission_report content'\n  - 'edit own mission_report content'\n  - 'delete own mission_report content'\n  - 'access content overview'\n\n# Programmatic access check in custom route\npublic function access(AccountInterface $account): AccessResult {\n  return AccessResult::allowedIf(\n    $account->hasPermission('administer missions')\n  )->cachePerPermissions();\n}",
+      "interactiveTip": "Never grant the 'administer permissions' permission to non-admin roles — it allows that role to grant itself any other permission, effectively creating a privilege escalation vulnerability!"
+    },
+    {
+      "title": "Module 7: Drush CLI & Deployment Workflow",
+      "desc": "Managing Drupal from the command line for development efficiency and deployments.",
+      "content": "Drush (Drupal Shell) is the command-line toolkit for managing Drupal. It handles cache clearing, database updates, configuration import/export, module installation, and SQL operations. A deployment workflow typically runs: composer install → drush updatedb → drush config-import → drush cache-rebuild in sequence to safely upgrade a production Drupal site.",
+      "codeExample": "# Essential Drush commands\ndrush cr                    # Rebuild all caches\ndrush cim                   # Import config from YAML files\ndrush cex                   # Export current config to YAML\ndrush updatedb              # Run pending database updates\ndrush en module_name        # Enable a module\ndrush pmu module_name       # Disable (uninstall) a module\ndrush sql-dump > backup.sql # Backup database\ndrush uli                   # Generate one-time admin login link\ndrush generate block        # Scaffold a custom Block plugin",
+      "interactiveTip": "Run drush deploy as a single deployment command — it runs updatedb, config-import, and cache-rebuild in the correct order. Add it to your CI/CD pipeline to ensure safe automated deployments!"
+    }
+  ],
+  "sandboxInitialCode": "<!-- Drupal Architecture Visualizer -->\n<div style=\"background: #0a1628; border: 2px solid #0678be; padding: 25px; font-family: monospace; border-radius: 8px; color: #ffffff;\">\n  <h3 style=\"color: #0678be; margin-top: 0; text-align: center;\">&#128308; Drupal Layer Explorer</h3>\n  <p style=\"color: #888; text-align: center; font-size: 12px;\">Click each layer to learn its role in the architecture.</p>\n  <div style=\"display: flex; flex-direction: column; gap: 8px; margin-top: 15px;\">\n    <div onclick=\"showDrupalLayer('theme')\" style=\"background: rgba(6,120,190,0.15); border: 1px solid #0678be; padding: 12px; cursor: pointer; border-radius: 4px; transition: all 0.2s;\" onmouseover=\"this.style.background='rgba(6,120,190,0.35)'\" onmouseout=\"this.style.background='rgba(6,120,190,0.15)'\">\n      &#127912; <strong>Theme Layer</strong> — Twig templates, CSS, JS\n    </div>\n    <div onclick=\"showDrupalLayer('module')\" style=\"background: rgba(6,120,190,0.1); border: 1px solid #0678be; padding: 12px; cursor: pointer; border-radius: 4px; transition: all 0.2s;\" onmouseover=\"this.style.background='rgba(6,120,190,0.3)'\" onmouseout=\"this.style.background='rgba(6,120,190,0.1)'\">\n      &#128268; <strong>Module Layer</strong> — PHP Plugins, Hooks, APIs\n    </div>\n    <div onclick=\"showDrupalLayer('core')\" style=\"background: rgba(6,120,190,0.07); border: 1px solid #0678be; padding: 12px; cursor: pointer; border-radius: 4px; transition: all 0.2s;\" onmouseover=\"this.style.background='rgba(6,120,190,0.25)'\" onmouseout=\"this.style.background='rgba(6,120,190,0.07)'\">\n      &#9881;&#65039; <strong>Drupal Core</strong> — Routing, Entity API, Cache\n    </div>\n    <div onclick=\"showDrupalLayer('db')\" style=\"background: rgba(6,120,190,0.04); border: 1px solid #0678be; padding: 12px; cursor: pointer; border-radius: 4px; transition: all 0.2s;\" onmouseover=\"this.style.background='rgba(6,120,190,0.2)'\" onmouseout=\"this.style.background='rgba(6,120,190,0.04)'\">\n      &#128451;&#65039; <strong>Database Layer</strong> — MySQL/PostgreSQL/SQLite\n    </div>\n  </div>\n  <div id=\"drupal-info\" style=\"margin-top: 15px; padding: 12px; background: rgba(255,255,255,0.05); border-left: 3px solid #0678be; color: #aaa; font-size: 13px; min-height: 50px;\">Select a layer above to learn about its role.</div>\n</div>\n<script>\n  const layers = {\n    'theme': 'THEME LAYER: Twig templates control HTML rendering. CSS/JS define visual presentation. Custom themes in /themes/custom/ override core templates using file naming conventions.',\n    'module': 'MODULE LAYER: PHP plugins extend Drupal functionality via Hooks (jes_missions_node_presave) and Plugin APIs (custom Block, Field Formatter, etc.). Lives in /modules/custom/.',\n    'core': 'DRUPAL CORE: The engine. Handles routing, entity storage, caching, form API, dependency injection, and configuration management. NEVER modify files here directly.',\n    'db': 'DATABASE LAYER: Drupal stores all entities, config, sessions, and cache in a relational database (MySQL/PostgreSQL). The Database API abstracts raw SQL — always use it, never raw queries.'\n  };\n  window.showDrupalLayer = function(k) {\n    document.getElementById('drupal-info').textContent = layers[k];\n  };\n</script>",
+  "quiz": [
+    {
+      "question": "What is the role of a 'View' in Drupal?",
+      "options": [
+        "A PHP class that renders a single node template",
+        "A visual query builder that displays lists, tables, or JSON feeds of content",
+        "A CSS framework for theming content layouts",
+        "A Twig template for the site's homepage"
+      ],
+      "answer": 1,
+      "explanation": "Views is Drupal's visual query builder — it fetches content based on configured filters, sorts, and relationships, then displays it as pages, blocks, tables, grids, or REST API endpoints without writing SQL."
+    },
+    {
+      "question": "Which command rebuilds all Drupal caches via Drush?",
+      "options": ["drush cc all", "drush flush", "drush cr", "drush cache-clear"],
+      "answer": 2,
+      "explanation": "'drush cr' (cache:rebuild) is the Drupal 8/9/10 command that rebuilds the service container, routing system, and all cache bins. It is the modern replacement for 'drush cc all' from Drupal 7."
+    },
+    {
+      "question": "Where should all Drupal customizations (modules and themes) be placed?",
+      "options": [
+        "Directly inside the /core directory",
+        "In /modules/contrib and /themes/contrib alongside downloaded modules",
+        "In /modules/custom and /themes/custom directories",
+        "In the /sites/default/files directory"
+      ],
+      "answer": 2,
+      "explanation": "Custom code always goes in /modules/custom/ and /themes/custom/. The /core directory is managed by Composer and overwritten on updates. /contrib directories are for downloaded community packages."
+    }
+  ],
+  "quest": {
+    "title": "Quest: Build a Mission Report Content Type",
+    "challenge": "Design and configure a complete Drupal content model for classified mission reports.",
+    "instructions": [
+      "1. Create a 'Mission Report' content type with fields: Title, Body, Clearance Level (select list), Sector (term reference), and Mission Date.",
+      "2. Export the configuration to YAML using drush cex.",
+      "3. Create a View that displays all Mission Reports filtered by Clearance Level (exposed filter).",
+      "4. Create an 'Editor' role with permission to create and edit only Mission Report content.",
+      "5. Override the node--mission-report.html.twig template to add a clearance badge to the header."
+    ]
+  }
+}

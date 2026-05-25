@@ -1,0 +1,109 @@
+{
+  "id": "html",
+  "name": "HTML",
+  "fullName": "HyperText Markup Language",
+  "color": "var(--accent-orange, #ff9900)",
+  "difficulty": "Beginner",
+  "estTime": "3 Hours",
+  "tagline": "The structural scaffolding of the worldwide web.",
+  "timeTravelLog": "Discovered in 1991 at CERN by Tim Berners-Lee. Designed to encode human knowledge and send it across the dimensions of the digital space-time continuum.",
+  "overview": "HTML is the standard markup language for creating web pages. It defines the structure of a web page using elements and tags, serving as the skeleton upon which CSS styles and JavaScript logic are applied.",
+  "syllabus": [
+    {
+      "title": "Module 1: The Core Grid (Elements & Tags)",
+      "desc": "Understand the basic tags like HTML, Head, Body, and structural elements.",
+      "content": "Every HTML document is like a digital space vessel. The <html> tag is the outer hull, the <head> contains the navigation controls (metadata), and the <body> is where the crew (visible content) resides. You use tags like <h1> for giant headlines and <p> for paragraphs. All tags must be properly opened and closed.",
+      "codeExample": "<h1>Mission Control</h1>\n<h2>Subsystem Alpha</h2>\n<p>Preparing spatial uplink...</p>",
+      "interactiveTip": "HTML tags are enclosed in angle brackets and usually come in pairs: an opening tag and a closing tag with a slash, e.g. <p> and </p>."
+    },
+    {
+      "title": "Module 2: Media Transmission (Images & Videos)",
+      "desc": "Learn how to embed visual and audio media inside web pages.",
+      "content": "To send visual signals, we use the <img> tag with a source (src) attribute pointing to an image file or URL. For video content, the <video> tag allows embedding playable media with controls. Both tags support alt/fallback text for accessibility and SEO.",
+      "codeExample": "<img src=\"https://images.unsplash.com/photo-1451187580459-43490279c0fa?w=300\" alt=\"Earth from space\" style=\"border-radius:8px;\">\n\n<video controls width=\"300\">\n  <source src=\"mission-clip.mp4\" type=\"video/mp4\">\n  Video not supported.\n</video>",
+      "interactiveTip": "The <img> tag is self-closing — it never needs a </img> closing tag! Always include an 'alt' attribute for screen readers."
+    },
+    {
+      "title": "Module 3: Wormhole Navigation (Anchors & Hyperlinks)",
+      "desc": "Creating hyperlink portals to travel between pages and external systems.",
+      "content": "The <a> (anchor) tag creates hyperlinks. The href attribute defines the destination — it can be a full URL, a relative page path, or even a section ID on the current page using a # hash. Using target=\"_blank\" opens the link in a new tab, like opening a parallel dimension.",
+      "codeExample": "<!-- External link -->\n<a href=\"https://nasa.gov\" target=\"_blank\">Jump to NASA Portal &nearr;</a>\n\n<!-- Internal page link -->\n<a href=\"about.html\">About Sector</a>\n\n<!-- Same-page anchor jump -->\n<a href=\"#systems\">Go to Systems Section</a>",
+      "interactiveTip": "Always add rel=\"noopener noreferrer\" when using target=\"_blank\" to prevent security vulnerabilities from malicious third-party pages!"
+    },
+    {
+      "title": "Module 4: Containers & Compartments (Divs vs Spans)",
+      "desc": "Grouping page elements using block and inline structural wrappers.",
+      "content": "To group elements and build compartments, we use <div> — a block-level box that occupies the full row width — and <span> — an inline tag for highlighting small runs of text without disrupting flow. Both are neutral containers styled completely by CSS.",
+      "codeExample": "<div style=\"border: 2px dashed cyan; padding: 15px; border-radius: 8px;\">\n  <h3>Subsystem 4</h3>\n  <p>Status: <span style=\"color: lime;\">ONLINE</span></p>\n</div>",
+      "interactiveTip": "Think of divs as storage boxes (block) and spans as sticky labels (inline). Never put block-level elements like <div> or <h1> inside a <span>!"
+    },
+    {
+      "title": "Module 5: Semantic Architecture (Header, Footer, Main, Section, Article)",
+      "desc": "Writing meaningful HTML that communicates structure to both humans and machines.",
+      "content": "Semantic elements carry meaning beyond just visual layout. <header> marks site-wide navigation decks, <main> wraps the core content, <section> groups related topics, <article> represents standalone content, and <footer> holds base coordinates. These improve SEO rankings and screen-reader accessibility dramatically.",
+      "codeExample": "<header>\n  <nav>[ NAVIGATION LINKS ]</nav>\n</header>\n\n<main>\n  <section>\n    <article>\n      <h2>Mission Report</h2>\n      <p>Status: All systems nominal.</p>\n    </article>\n  </section>\n</main>\n\n<footer>\n  <p>Coordinates: 9.9312 N, 76.2673 E</p>\n</footer>",
+      "interactiveTip": "Semantic HTML improves search engine ranking by giving crawlers exact context about your page structure. Always prefer semantic elements over generic divs!"
+    },
+    {
+      "title": "Module 6: Input Arrays (Forms, Inputs, Labels, Buttons)",
+      "desc": "Capturing user intelligence through interactive form field arrays.",
+      "content": "HTML Forms (<form>) collect user data and transmit it via HTTP. Inside forms, <input> elements capture text, numbers, checkboxes, radios, and passwords. <label> tags improve accessibility by linking visible text to input controls. <button> submits or triggers form actions.",
+      "codeExample": "<form action=\"/send\" method=\"POST\">\n  <label for=\"pilot-id\">Pilot Code:</label>\n  <input type=\"text\" id=\"pilot-id\" name=\"pilot\" placeholder=\"Enter ID...\">\n  \n  <label for=\"clearance\">Clearance Level:</label>\n  <select id=\"clearance\" name=\"level\">\n    <option value=\"alpha\">ALPHA</option>\n    <option value=\"omega\">OMEGA</option>\n  </select>\n  \n  <button type=\"submit\">TRANSMIT</button>\n</form>",
+      "interactiveTip": "Always pair <label> elements with <input> using matching 'for' and 'id' attributes. This allows clicking the label to focus the input field!"
+    },
+    {
+      "title": "Module 7: Meta Telemetry (Head Tags, Favicons & SEO)",
+      "desc": "Configuring hidden control signals in the <head> for browsers and search engines.",
+      "content": "The <head> element is the invisible mission control of every HTML page. It contains <title> (the browser tab text), <meta> tags for descriptions, keywords and viewport, <link> tags for stylesheets and favicons, and structured data scripts. These signals directly influence how your page appears in search results.",
+      "codeExample": "<head>\n  <meta charset=\"UTF-8\">\n  <meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\">\n  <title>Mission Control | JES-007</title>\n  <meta name=\"description\" content=\"Elite temporal engineering portfolio.\">\n  <link rel=\"icon\" href=\"/favicon.ico\">\n  <link rel=\"stylesheet\" href=\"/assets/css/style.css\">\n</head>",
+      "interactiveTip": "The meta viewport tag is critical for mobile responsiveness! Without it, mobile browsers render your page at desktop width and scale it down, making text tiny."
+    }
+  ],
+  "sandboxInitialCode": "<!-- Edit this code and press RUN SIMULATION to see changes in the viewer! -->\n<div style=\"background: #112233; color: #00ffcc; border: 2px solid #00ffcc; padding: 25px; font-family: monospace; border-radius: 8px; box-shadow: 0 0 15px rgba(0,255,204,0.3); text-align: center;\">\n  <h1 style=\"color: #ff9900; margin-top: 0;\">&#128752; Space Terminal</h1>\n  <p>Status: <span style=\"color: #00ff00; font-weight: bold;\">ACTIVE</span></p>\n  <hr style=\"border-color: #334455; margin: 15px 0;\">\n  <p>Try changing the h1 color above or adding a new paragraph!</p>\n  <a href=\"https://developer.mozilla.org/en-US/docs/Web/HTML\" target=\"_blank\" style=\"color:#ff9900;\">MDN HTML Docs &nearr;</a>\n</div>",
+  "quiz": [
+    {
+      "question": "What does HTML stand for?",
+      "options": [
+        "HyperText Markup Language",
+        "HighTech Multi Language",
+        "Hyperlink Transfer Modern Layout",
+        "Home Tool Markup Link"
+      ],
+      "answer": 0,
+      "explanation": "HTML stands for HyperText Markup Language — the standard language used to structure and define the content of web pages."
+    },
+    {
+      "question": "Which HTML tag is used to create a hyperlink?",
+      "options": [
+        "<link>",
+        "<a>",
+        "<href>",
+        "<anchor>"
+      ],
+      "answer": 1,
+      "explanation": "The <a> (anchor) tag creates hyperlinks. Its 'href' attribute specifies the destination URL or page path."
+    },
+    {
+      "question": "Which semantic element represents the primary content area of a page?",
+      "options": [
+        "<body>",
+        "<section>",
+        "<main>",
+        "<div>"
+      ],
+      "answer": 2,
+      "explanation": "<main> is the semantic element that wraps the dominant, unique content of the page — there should only be one per document."
+    }
+  ],
+  "quest": {
+    "title": "Quest: Code a Galactic Dashboard",
+    "challenge": "Build a complete page structure with semantic tags, a form, an image, and proper meta information in the head.",
+    "instructions": [
+      "1. Add a <header> with an <h1> title for your spaceship.",
+      "2. Add a <main> section containing an <article> with a mission description.",
+      "3. Add an <img> tag showing a space photo from any public URL.",
+      "4. Create a <form> with a text input for pilot name and a submit button.",
+      "5. Wrap everything properly and verify your semantic structure."
+    ]
+  }
+}

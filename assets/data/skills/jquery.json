@@ -1,0 +1,104 @@
+{
+  "id": "jquery",
+  "name": "jQuery",
+  "fullName": "jQuery JavaScript Library",
+  "color": "#0769ad",
+  "difficulty": "Beginner",
+  "estTime": "3 Hours",
+  "tagline": "The universal translator of the browser dimension wars.",
+  "timeTravelLog": "Released in 2006 by John Resig, jQuery solved the greatest crisis of the web era — inconsistent browser APIs. It unified DOM manipulation, events, and AJAX across all browser universes with a single syntax.",
+  "overview": "jQuery is a fast, small, and feature-rich JavaScript library that simplifies HTML document traversal, event handling, animation, and AJAX with an easy-to-use API that works across a multitude of browsers.",
+  "syllabus": [
+    {
+      "title": "Module 1: The $ Selector Engine",
+      "desc": "Using jQuery's powerful selector syntax to target any DOM element.",
+      "content": "jQuery's core is the $() function — it accepts any CSS selector string and returns a jQuery object wrapping all matched elements. You can chain methods on the result. $(document).ready() ensures your code runs only after the entire DOM is parsed and available.",
+      "codeExample": "// Wait for DOM to load\n$(document).ready(function() {\n  // Select by tag\n  $('h1').text('Mission Control');\n\n  // Select by class\n  $('.hud-panel').css('border-color', '#00ffcc');\n\n  // Select by ID\n  $('#launch-btn').addClass('active');\n\n  // Complex CSS selectors\n  $('ul.mission-list > li:first-child').addClass('primary');\n});",
+      "interactiveTip": "Modern shorthand: $(function() { ... }) is identical to $(document).ready() — it automatically defers execution until the DOM is fully parsed and ready!"
+    },
+    {
+      "title": "Module 2: DOM Manipulation (Read & Write Content)",
+      "desc": "Changing element text, HTML, attributes, and CSS properties on the fly.",
+      "content": "jQuery methods are getter/setter combos — called with no argument they read the current value; called with an argument they set it across all matched elements. .text() gets/sets text content. .html() gets/sets innerHTML. .val() gets/sets form input values. .attr() and .prop() handle attributes and properties.",
+      "codeExample": "// Read values\nconst currentStatus = $('#status-panel').text();\nconst inputValue = $('#pilot-input').val();\n\n// Write values\n$('#status-panel').text('SYSTEMS ONLINE');\n$('#pilot-input').val('JES-007');\n$('#mission-card').html('<strong>New Mission</strong> loaded.');\n\n// Attribute manipulation\n$('#nav-logo').attr('src', '/assets/new-logo.png');\n$('#link').attr('href', 'https://nasa.gov');",
+      "interactiveTip": "Avoid using .html() with untrusted user data — it's vulnerable to XSS injection! Use .text() for displaying user-provided strings safely without executing embedded HTML tags."
+    },
+    {
+      "title": "Module 3: CSS & Class Management",
+      "desc": "Dynamically styling elements by adding, removing, and toggling CSS classes.",
+      "content": "jQuery provides clean methods for CSS class management. .addClass() appends a class. .removeClass() strips a class. .toggleClass() flips a class on/off — perfect for interactive state toggles. .css() reads or sets inline CSS properties directly, accepting single properties or objects for batch updates.",
+      "codeExample": "// Class management\n$('#alert-panel').addClass('danger glow');\n$('.inactive-sectors').removeClass('hidden');\n$('#toggle-btn').toggleClass('active');\n\n// Check class presence\nif ($('#engine').hasClass('running')) {\n  console.log('Engine is running!');\n}\n\n// CSS property batch update\n$('.hud').css({\n  backgroundColor: '#001122',\n  borderColor: '#00ffcc',\n  boxShadow: '0 0 15px cyan'\n});",
+      "interactiveTip": "Prefer .addClass() and .removeClass() over .css() for styling — it separates concerns (HTML/CSS/JS) and makes styles maintainable from your stylesheet rather than scattered in JS code!"
+    },
+    {
+      "title": "Module 4: Event Handling (click, hover, keyup, on())",
+      "desc": "Listening and responding to user interactions across the page.",
+      "content": ".on() is the universal jQuery event binding method — it attaches any event listener to matched elements. Shorthand methods .click(), .hover(), .keyup(), .submit() are convenient aliases. Event delegation via .on(event, selector, handler) efficiently handles events on dynamically created elements.",
+      "codeExample": "// Click event\n$('#launch-btn').on('click', function() {\n  $(this).text('LAUNCHED!').prop('disabled', true);\n});\n\n// Hover (mouseenter + mouseleave)\n$('.mission-card').hover(\n  function() { $(this).addClass('hovered'); },\n  function() { $(this).removeClass('hovered'); }\n);\n\n// Event delegation — works on dynamically added elements\n$('#mission-list').on('click', '.item-btn', function() {\n  $(this).closest('.mission-item').remove();\n});",
+      "interactiveTip": "Always use event delegation ($parent.on(event, childSelector, handler)) for dynamically generated elements — events bound directly to elements that don't exist yet won't fire!"
+    },
+    {
+      "title": "Module 5: Animations (show, hide, fadeIn, slideToggle)",
+      "desc": "Adding smooth built-in animations to create engaging interactive feedback.",
+      "content": "jQuery ships with common animations for showing and hiding elements. .show()/.hide() toggle display visibility. .fadeIn()/.fadeOut() animate opacity. .slideDown()/.slideUp()/.slideToggle() animate height. All accept duration strings ('slow', 'fast') or millisecond values, and an optional callback function that fires when animation completes.",
+      "codeExample": "// Basic show/hide with duration\n$('#warning-panel').show(300);\n$('#details').hide('fast');\n\n// Fade transitions\n$('.dashboard').fadeIn(500);\n$('.loading-screen').fadeOut(400, function() {\n  // Runs after fadeOut completes\n  $(this).remove();\n});\n\n// Toggle with slide animation\n$('#settings-btn').on('click', function() {\n  $('#settings-panel').slideToggle(250);\n});",
+      "interactiveTip": "jQuery animations queue by default — multiple method calls chain one after another. Use .stop(true, true) before starting a new animation to clear the queue and jump to the end state!"
+    },
+    {
+      "title": "Module 6: AJAX ($.ajax, $.get, $.post)",
+      "desc": "Loading and sending data to servers without page reloads.",
+      "content": "jQuery's AJAX methods simplify XMLHttpRequest API. $.get() fetches data. $.post() sends form data. $.ajax() provides full control with method, headers, data, success, and error callbacks. $.getJSON() parses JSON responses automatically. All return Deferred objects (jQuery's Promise-like API) for chaining .done(), .fail(), and .always() handlers.",
+      "codeExample": "// Simple JSON fetch\n$.getJSON('/api/missions', function(data) {\n  $.each(data, function(i, mission) {\n    $('#list').append('<li>' + mission.name + '</li>');\n  });\n});\n\n// Full AJAX with error handling\n$.ajax({\n  url: '/api/launch',\n  method: 'POST',\n  contentType: 'application/json',\n  data: JSON.stringify({ pilotId: 'JES-007' }),\n  success: data => console.log('Launch confirmed:', data),\n  error: (xhr, status) => console.error('Uplink failed:', status)\n});",
+      "interactiveTip": "Modern projects use the native Fetch API or Axios instead of $.ajax. But in legacy codebases, $.ajax's built-in request queuing, global event hooks, and IE support make it invaluable!"
+    },
+    {
+      "title": "Module 7: jQuery Plugins & chaining",
+      "desc": "Extending jQuery with third-party plugins and mastering method chaining.",
+      "content": "jQuery's most powerful pattern is method chaining — each method returns the jQuery object, so multiple operations flow in a single readable line. Third-party plugins extend the $.fn namespace to add custom methods. Popular jQuery plugins include Slick (carousels), DataTables (sortable grids), Select2 (enhanced dropdowns), and Fancybox (lightboxes).",
+      "codeExample": "// Method chaining — one fluid expression\n$('#status-panel')\n  .addClass('alert-active')\n  .css('border-color', '#ff0055')\n  .text('CRITICAL ALERT')\n  .fadeIn(300)\n  .delay(3000)\n  .fadeOut(500);\n\n// Writing a simple jQuery plugin\n$.fn.glow = function(color) {\n  return this.css('box-shadow', '0 0 15px ' + (color || 'cyan'));\n};\n\n// Using the plugin\n$('.hud-panel').glow('#00ffcc');",
+      "interactiveTip": "Always return this from jQuery plugins — it preserves the jQuery object for further chaining. Without return this, your plugin breaks the chain and becomes a dead end!"
+    }
+  ],
+  "sandboxInitialCode": "<!-- jQuery Live Sandbox -->\n<script src=\"https://code.jquery.com/jquery-3.7.0.min.js\"></script>\n<div style=\"background: #0a1628; border: 2px solid #0769ad; padding: 25px; font-family: monospace; border-radius: 8px; text-align: center;\">\n  <h3 style=\"color: #0769ad; margin-top: 0;\">&#36; jQuery Event Lab</h3>\n  <div id=\"jq-status\" style=\"padding: 15px; background: rgba(7,105,173,0.1); border: 1px solid #0769ad; margin: 15px 0; color: #fff; min-height: 50px;\">Awaiting transmission...</div>\n  <div style=\"display: flex; gap: 10px; justify-content: center; flex-wrap: wrap;\">\n    <button id=\"jq-btn-ping\" style=\"background: #0769ad; color: white; border: none; padding: 10px 16px; cursor: pointer;\">PING</button>\n    <button id=\"jq-btn-toggle\" style=\"background: transparent; border: 2px solid #0769ad; color: #0769ad; padding: 10px 16px; cursor: pointer;\">TOGGLE GLOW</button>\n    <button id=\"jq-btn-clear\" style=\"background: transparent; border: 2px solid #ff4444; color: #ff4444; padding: 10px 16px; cursor: pointer;\">CLEAR</button>\n  </div>\n</div>\n<script>\n  let pingCount = 0;\n  let glowing = false;\n  $(function() {\n    $('#jq-btn-ping').on('click', function() {\n      pingCount++;\n      $('#jq-status').fadeOut(100).html('&gt; Ping #' + pingCount + ' — Signal received at ' + new Date().toLocaleTimeString()).fadeIn(200);\n    });\n    $('#jq-btn-toggle').on('click', function() {\n      glowing = !glowing;\n      const panel = $('#jq-status');\n      if (glowing) { panel.css('box-shadow', '0 0 20px #0769ad'); }\n      else { panel.css('box-shadow', 'none'); }\n    });\n    $('#jq-btn-clear').on('click', function() {\n      pingCount = 0;\n      $('#jq-status').fadeOut(200, function() {\n        $(this).html('Awaiting transmission...').fadeIn(200);\n      });\n    });\n  });\n</script>",
+  "quiz": [
+    {
+      "question": "What does the $() function in jQuery return?",
+      "options": ["A native DOM element", "A jQuery object wrapping all matched elements", "A raw CSS selector string", "A Promise for async operations"],
+      "answer": 1,
+      "explanation": "$() returns a jQuery object — a special wrapper around matched DOM elements that provides all jQuery methods for chaining. It can wrap single or multiple elements simultaneously."
+    },
+    {
+      "question": "Why is event delegation preferred for dynamically added elements?",
+      "options": [
+        "It makes code run faster on all browsers",
+        "It attaches the listener to a parent that already exists, so it catches events from future child elements",
+        "It is the only way to listen to custom events",
+        "It prevents memory leaks by auto-removing listeners"
+      ],
+      "answer": 1,
+      "explanation": "Event delegation attaches a listener to a parent element that exists in the DOM. When a child (even dynamically added later) triggers the event, it bubbles up to the parent where the handler catches it."
+    },
+    {
+      "question": "What does .toggleClass() do in jQuery?",
+      "options": [
+        "Creates a new CSS class and applies it",
+        "Switches between two different classes",
+        "Adds the class if absent, removes it if present",
+        "Reads the current class list of an element"
+      ],
+      "answer": 2,
+      "explanation": ".toggleClass() adds the specified class if the element doesn't have it, or removes it if it already does — perfect for binary state toggling like open/closed, active/inactive."
+    }
+  ],
+  "quest": {
+    "title": "Quest: Code the Interactive Mission Logger",
+    "challenge": "Build a jQuery-powered mission log that adds, highlights, and removes entries dynamically.",
+    "instructions": [
+      "1. Create a text input and an 'Add Entry' button.",
+      "2. On button click, use jQuery to append the input value as a new <li> inside a #mission-log <ul>.",
+      "3. Use event delegation to attach a 'Remove' button to each entry that removes its parent <li>.",
+      "4. Add a 'Highlight All' button that toggles a glowing yellow class on all log entries.",
+      "5. Add a 'Clear Log' button with a fadeOut animation before emptying the list."
+    ]
+  }
+}

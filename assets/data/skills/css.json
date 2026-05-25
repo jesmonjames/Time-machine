@@ -1,0 +1,109 @@
+{
+  "id": "css",
+  "name": "CSS",
+  "fullName": "Cascading Style Sheets",
+  "color": "var(--accent-blue, #00e5ff)",
+  "difficulty": "Beginner",
+  "estTime": "3.5 Hours",
+  "tagline": "The visual warp-drive of modern interfaces.",
+  "timeTravelLog": "Created in 1996 by Håkon Wium Lie to separate content from design, enabling developers to customize visual realities dynamically across time.",
+  "overview": "CSS is used to style and lay out web pages — to alter font, color, size, spacing, split content into columns, and add animations. It is the visual engine that transforms raw HTML skeletons into stunning interfaces.",
+  "syllabus": [
+    {
+      "title": "Module 1: Selectors & Colors (The Paintbrush)",
+      "desc": "Learn how to target elements and apply colors, borders, and text styles.",
+      "content": "CSS rules consist of a selector (who to target) and a declaration block (what to apply). Selectors can target HTML tags (p), classes (.hud), IDs (#core), or combinations. Color values can be named keywords, hex codes like #00ffcc, rgb(), or hsl() functions for precise control.",
+      "codeExample": "h1 {\n  color: #00ffcc;\n  text-shadow: 0 0 10px #00ffcc;\n}\n.hud-panel {\n  background-color: rgba(0, 0, 0, 0.5);\n  border: 1px solid #333;\n  color: #ffffff;\n}",
+      "interactiveTip": "Classes (.) are reusable across many elements. IDs (#) must be unique per page. Use classes for styling; reserve IDs for JavaScript targeting."
+    },
+    {
+      "title": "Module 2: The Box Model (Physical Space)",
+      "desc": "Understanding how every element's physical dimensions are calculated.",
+      "content": "Every HTML element is a rectangular box. From the inside out: Content → Padding (inner breathing space) → Border (the boundary line) → Margin (outer separation from other elements). Setting box-sizing: border-box makes padding and border included in the declared width, simplifying layout math significantly.",
+      "codeExample": ".cargo-bay {\n  width: 200px;\n  padding: 20px;       /* inner space */\n  border: 2px solid cyan;\n  margin: 15px;        /* outer space */\n  box-sizing: border-box;\n}",
+      "interactiveTip": "Apply box-sizing: border-box globally using *, *::before, *::after { box-sizing: border-box; } at the top of your stylesheet. It prevents many layout bugs!"
+    },
+    {
+      "title": "Module 3: Flexbox (Single-Axis Layout Engine)",
+      "desc": "Aligning elements horizontally or vertically in a single direction.",
+      "content": "Flexbox (display: flex) is the most efficient way to align items along one axis. The flex container controls direction (flex-direction), spacing (justify-content), and alignment (align-items). Children become flex items that shrink and grow responsively.",
+      "codeExample": ".nav-deck {\n  display: flex;\n  flex-direction: row;\n  justify-content: space-between;\n  align-items: center;\n  gap: 15px;\n}\n\n.centered-module {\n  display: flex;\n  justify-content: center;\n  align-items: center;\n}",
+      "interactiveTip": "Use gap instead of margin between flex children for cleaner, more predictable spacing that doesn't bleed to the outer edges!"
+    },
+    {
+      "title": "Module 4: CSS Grid (Two-Dimensional Layout)",
+      "desc": "Building complex, multi-column and multi-row dashboard architectures.",
+      "content": "CSS Grid (display: grid) manages both rows and columns simultaneously. You define the column structure with grid-template-columns. The 1fr unit represents one fraction of available space. gap controls spacing between cells. Grid is perfect for full dashboard layouts.",
+      "codeExample": ".control-deck {\n  display: grid;\n  grid-template-columns: 1fr 2fr 1fr;\n  grid-template-rows: auto 1fr auto;\n  gap: 20px;\n}\n\n.full-width-panel {\n  grid-column: 1 / -1; /* spans all columns */\n}",
+      "interactiveTip": "Use repeat() for cleaner grids: grid-template-columns: repeat(3, 1fr) is identical to 1fr 1fr 1fr but far more readable and scalable!"
+    },
+    {
+      "title": "Module 5: Positioning Anchors (Static, Relative, Absolute, Fixed, Sticky)",
+      "desc": "Controlling exactly where elements appear in the coordinate space.",
+      "content": "CSS position determines how elements are placed relative to their container or the viewport. Static is the default flow. Relative shifts without leaving flow. Absolute removes from flow, positions relative to nearest positioned ancestor. Fixed locks to the viewport (like a heads-up display overlay). Sticky toggles between relative and fixed at a scroll threshold.",
+      "codeExample": "/* HUD overlay fixed to screen */\n.heads-up-display {\n  position: fixed;\n  top: 0;\n  right: 0;\n  width: 300px;\n  z-index: 1000;\n}\n\n/* Badge on parent card */\n.status-badge {\n  position: absolute;\n  top: 10px;\n  right: 10px;\n}",
+      "interactiveTip": "For absolute positioning to work correctly, the parent element must be position: relative. Otherwise the absolutely positioned child will escape to the document root!"
+    },
+    {
+      "title": "Module 6: Responsive Media Queries",
+      "desc": "Ensuring your interface adapts gracefully across all screen coordinates.",
+      "content": "Media queries (@media) apply CSS rules conditionally based on viewport size, device orientation, or display type. The mobile-first approach writes base styles for small screens and progressively enhances for larger viewports using min-width breakpoints. Common breakpoints: 480px (mobile), 768px (tablet), 1024px (desktop).",
+      "codeExample": "/* Base: Mobile styles */\n.mission-grid {\n  grid-template-columns: 1fr;\n}\n\n/* Tablet: 2 columns */\n@media (min-width: 768px) {\n  .mission-grid {\n    grid-template-columns: 1fr 1fr;\n  }\n}\n\n/* Desktop: 3 columns */\n@media (min-width: 1024px) {\n  .mission-grid {\n    grid-template-columns: 1fr 1fr 1fr;\n  }\n}",
+      "interactiveTip": "Always start with mobile styles and use min-width in your media queries. This is mobile-first design — Google ranks it better for SEO!"
+    },
+    {
+      "title": "Module 7: Neon Animations (Transitions, Transforms & Keyframes)",
+      "desc": "Bringing interfaces to life with smooth, sci-fi level micro-animations.",
+      "content": "CSS transitions smoothly interpolate property changes between states (e.g. on :hover). Transforms apply non-destructive visual effects like scale, rotate, and translate. Keyframes (@keyframes) define complex multi-step animation sequences that loop or run once, perfect for glowing pulsations and scanning lines.",
+      "codeExample": "/* Smooth hover transition */\n.tech-btn {\n  transition: all 0.3s ease;\n}\n.tech-btn:hover {\n  transform: scale(1.05);\n  box-shadow: 0 0 20px cyan;\n}\n\n/* Looping glow pulse */\n@keyframes glow-pulse {\n  0%, 100% { box-shadow: 0 0 5px cyan; }\n  50% { box-shadow: 0 0 20px cyan; }\n}\n.radar-dot {\n  animation: glow-pulse 2s infinite;\n}",
+      "interactiveTip": "Use transform instead of changing width/height/top/left for animations. Transform does not trigger layout repaints and is processed on the GPU for silky 60fps!"
+    }
+  ],
+  "sandboxInitialCode": "<!-- CSS Live Sandbox: Create a glowing dashboard component! -->\n<style>\n  .cosmic-hud {\n    background: linear-gradient(135deg, #150022 0%, #001122 100%);\n    color: #ffffff;\n    border: 3px solid #ff0077;\n    padding: 30px;\n    border-radius: 15px;\n    box-shadow: 0 0 30px rgba(255, 0, 119, 0.4);\n    text-align: center;\n    font-family: 'Share Tech Mono', monospace;\n    max-width: 400px;\n    margin: 0 auto;\n  }\n  .pulse-btn {\n    background: transparent;\n    border: 2px solid #00ffcc;\n    color: #00ffcc;\n    padding: 10px 20px;\n    font-size: 14px;\n    letter-spacing: 2px;\n    cursor: pointer;\n    margin-top: 15px;\n    text-transform: uppercase;\n    box-shadow: 0 0 10px rgba(0, 255, 204, 0.2);\n    transition: all 0.3s ease;\n  }\n  .pulse-btn:hover {\n    background: #00ffcc;\n    color: #000000;\n    box-shadow: 0 0 20px #00ffcc;\n    transform: scale(1.05);\n  }\n</style>\n<div class=\"cosmic-hud\">\n  <h2 style=\"color: #00ffcc; margin-top: 0;\">&#127757; COMS_ARRAY: active</h2>\n  <p>Modify the border color, hover shadow, or add a keyframe animation!</p>\n  <button class=\"pulse-btn\">Send Ping</button>\n</div>",
+  "quiz": [
+    {
+      "question": "What does CSS stand for?",
+      "options": [
+        "Creative Style Sheets",
+        "Computer Style Sheets",
+        "Cascading Style Sheets",
+        "Control System Styles"
+      ],
+      "answer": 2,
+      "explanation": "CSS stands for Cascading Style Sheets — 'cascading' refers to how styles flow from parent to child elements, with more specific rules overriding general ones."
+    },
+    {
+      "question": "How do you select an element with class 'hud' in CSS?",
+      "options": [
+        "#hud",
+        ".hud",
+        "hud",
+        "*hud"
+      ],
+      "answer": 1,
+      "explanation": "Classes are selected with a dot prefix (.hud). IDs use a hash (#hud). Plain words target HTML element types (p, div, h1)."
+    },
+    {
+      "question": "Which CSS property creates space INSIDE an element, between its content and its border?",
+      "options": [
+        "margin",
+        "spacing",
+        "padding",
+        "inset"
+      ],
+      "answer": 2,
+      "explanation": "Padding is the interior space between an element's content and its border. Margin is the exterior space outside the border."
+    }
+  ],
+  "quest": {
+    "title": "Quest: Stylize the Wormhole Gateway",
+    "challenge": "Build a fully styled card component using flexbox, transitions, and a glowing box-shadow animation.",
+    "instructions": [
+      "1. Create a .wormhole-card div with a dark background, 2px cyan border, and 20px padding.",
+      "2. Add a headline and short description paragraph inside.",
+      "3. Style a button inside using transparent background and 2px border.",
+      "4. Add a :hover rule on the button that swaps background and text colors with a 0.3s transition.",
+      "5. Add a @keyframes pulse animation on the card border that fades intensity every 2 seconds."
+    ]
+  }
+}

@@ -1,0 +1,104 @@
+{
+  "id": "ui-ux",
+  "name": "UI/UX",
+  "fullName": "UI / UX Design",
+  "color": "#ff6b9d",
+  "difficulty": "Intermediate",
+  "estTime": "4 Hours",
+  "tagline": "Engineering the emotional contract between human and interface.",
+  "timeTravelLog": "The discipline was formalized in the 1990s as digital interfaces proliferated. Don Norman's 'The Design of Everyday Things' became the foundational scripture — establishing that good design must be both beautiful AND functional.",
+  "overview": "UI (User Interface) design focuses on visual aesthetics, layout, and interactive elements. UX (User Experience) design focuses on the overall journey, usability, and satisfaction of users. Together they form the complete discipline of human-computer interaction design.",
+  "syllabus": [
+    {
+      "title": "Module 1: The Design Principles (Gestalt & Visual Hierarchy)",
+      "desc": "Understanding how human perception groups and interprets visual information.",
+      "content": "Gestalt principles describe how humans perceive visual groups: Proximity (nearby elements are seen as related), Similarity (visually alike elements are grouped), Continuity (eyes follow smooth paths), Closure (we complete incomplete shapes), and Figure/Ground (foreground vs background separation). Visual hierarchy directs the eye using size, weight, color, and contrast to establish reading order.",
+      "codeExample": "/* Visual Hierarchy through CSS */\n.page-title {\n  font-size: 3rem;    /* Dominant: read first */\n  font-weight: 800;\n  color: #ffffff;\n}\n.section-label {\n  font-size: 0.7rem;  /* Subordinate: read last */\n  letter-spacing: 3px;\n  color: #888888;\n  text-transform: uppercase;\n}\n.body-text {\n  font-size: 1rem;    /* Mid-tier: supporting context */\n  color: #cccccc;\n  line-height: 1.7;\n}",
+      "interactiveTip": "Run a 'squint test' on your design — blur your eyes or squint at the screen. The elements you can still perceive are your visual hierarchy leaders. If everything blurs to the same tone, you have no hierarchy!"
+    },
+    {
+      "title": "Module 2: Color Theory for Digital Interfaces",
+      "desc": "Building accessible, emotionally resonant color systems for screens.",
+      "content": "Color communicates before words do. The 60-30-10 rule creates balanced palettes: 60% dominant (background), 30% secondary (containers), 10% accent (CTAs and highlights). HSL color model is ideal for creating harmonious palettes — adjust saturation and lightness while keeping the same hue for tints and shades. Always test contrast ratios for accessibility (WCAG AA requires 4.5:1).",
+      "codeExample": "/* 60-30-10 rule in CSS variables */\n:root {\n  /* 60% — Dominant Background */\n  --color-base: hsl(240, 15%, 8%);\n  \n  /* 30% — Secondary Surfaces */\n  --color-surface: hsl(240, 12%, 14%);\n  \n  /* 10% — Accent (CTAs, highlights) */\n  --color-accent: hsl(175, 100%, 60%);\n  \n  /* Semantic feedback colors */\n  --color-success: hsl(140, 70%, 45%);\n  --color-danger: hsl(0, 80%, 55%);\n  --color-warning: hsl(38, 90%, 50%);\n}",
+      "interactiveTip": "Use WebAIM Contrast Checker to verify your text-background color pairs meet WCAG requirements. Failing accessibility contrast checks can make your site legally non-compliant in many countries!"
+    },
+    {
+      "title": "Module 3: Typography Systems (Scale, Pairing & Readability)",
+      "desc": "Crafting readable, expressive type hierarchies for web interfaces.",
+      "content": "Typography carries 95% of web content. A type scale creates harmonious size progression: use a modular scale (ratio 1.25 or 1.333) to calculate heading sizes. Type pairing combines a display font (headings) with a legible body font — typically one serif + one sans-serif or two sans-serif fonts with distinct weights. Line height of 1.5-1.7 maximizes body text readability.",
+      "codeExample": "/* Modular type scale (ratio 1.25) */\n:root {\n  --text-xs: 0.64rem;    /* 10.24px */\n  --text-sm: 0.8rem;     /* 12.8px */\n  --text-base: 1rem;     /* 16px */\n  --text-lg: 1.25rem;    /* 20px */\n  --text-xl: 1.563rem;   /* 25px */\n  --text-2xl: 1.953rem;  /* 31px */\n  --text-3xl: 2.441rem;  /* 39px */\n  --text-4xl: 3.052rem;  /* 49px */\n}\n\nbody {\n  font-family: 'Inter', sans-serif;\n  font-size: var(--text-base);\n  line-height: 1.6;\n}",
+      "interactiveTip": "Limit yourself to 2 typefaces maximum per project. More creates visual noise. The classic pairing pattern: a geometric sans-serif for headings (e.g. Outfit) + a humanist sans for body (e.g. Inter)."
+    },
+    {
+      "title": "Module 4: UX Research & User Flows",
+      "desc": "Understanding users through research and mapping their journey through your interface.",
+      "content": "UX research uncovers real user needs before any pixel is placed. Methods include user interviews, usability testing, surveys, and card sorting. User flows diagram the path a user takes to complete a goal — from entry point through each decision to the final outcome. Personas represent archetypal user groups with specific goals and frustrations.",
+      "codeExample": "/* Example User Flow: Mission Submission */\n\n[ENTRY]\n  └─ Visit /missions page\n      └─ Click 'New Mission' button\n          └─ Fill mission form (name, sector, clearance)\n              ├─ [ERROR] Validation fails → Show inline errors\n              └─ [SUCCESS] Form valid → Submit\n                  ├─ [API ERROR] → Toast: \"Transmission failed. Retry?\"\n                  └─ [API SUCCESS] → Redirect to /missions/[id]\n                      └─ Toast: \"Mission logged successfully!\"",
+      "interactiveTip": "Always include error and empty states in your user flow diagrams — they are the most commonly forgotten states in early design, but the most frustrating experiences for users when absent!"
+    },
+    {
+      "title": "Module 5: Wireframing & Prototyping (Figma Workflow)",
+      "desc": "Rapidly sketching and iterating interface ideas before any code is written.",
+      "content": "Wireframes are low-fidelity skeletal layouts that communicate structure without visual styling. They are drawn quickly to explore layout options and gather feedback without investing in aesthetics. Prototypes are clickable mockups that simulate user flows. Figma is the industry-standard tool for both — supporting auto-layout, component libraries, and real-time collaboration.",
+      "codeExample": "/* Wireframe structure translated to CSS layout */\n\n/* Wireframe: [ HEADER ] */\n.app-header {\n  height: 60px;\n  border-bottom: 1px solid var(--color-surface);\n}\n\n/* Wireframe: [ SIDEBAR | MAIN ] */\n.app-shell {\n  display: grid;\n  grid-template-columns: 240px 1fr;\n}\n\n/* Wireframe: [ CARD GRID ] */\n.card-grid {\n  display: grid;\n  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));\n  gap: 20px;\n  padding: 20px;\n}",
+      "interactiveTip": "Start with paper wireframes — literally sketch on paper before opening Figma. Paper sketching is 10x faster than digital tools for early exploration and encourages more creative iteration!"
+    },
+    {
+      "title": "Module 6: Micro-Interactions & Motion Design",
+      "desc": "Using subtle animations to communicate state, guide attention, and delight users.",
+      "content": "Micro-interactions are small, purposeful animations that respond to user actions: button hover effects, form validation feedback, loading spinners, notification toasts. Motion design principles: duration (150-400ms for UI transitions), easing (ease-in-out for state changes, spring physics for personality), and purpose (every animation must communicate meaning, not just decorate).",
+      "codeExample": "/* Loading skeleton animation */\n@keyframes skeleton-pulse {\n  0%, 100% { opacity: 0.4; }\n  50% { opacity: 0.9; }\n}\n.skeleton {\n  background: #333;\n  border-radius: 4px;\n  animation: skeleton-pulse 1.5s ease-in-out infinite;\n}\n\n/* Form field focus interaction */\n.field-input {\n  border-bottom: 2px solid #444;\n  transition: border-color 0.25s ease;\n  outline: none;\n}\n.field-input:focus {\n  border-color: #00ffcc;\n}",
+      "interactiveTip": "Always use prefers-reduced-motion to disable or reduce animations for users with vestibular disorders: @media (prefers-reduced-motion: reduce) { * { animation-duration: 0.01ms !important; } }"
+    },
+    {
+      "title": "Module 7: Design Systems & Component Libraries",
+      "desc": "Building scalable, consistent design languages for product teams.",
+      "content": "A design system is a collection of reusable components, tokens, and documentation that enables teams to build consistent UIs at scale. Design tokens (colors, spacing, typography, radii) are the atomic units. Components are pattern libraries. Documentation ensures all team members implement patterns consistently. Examples: Google's Material Design, Apple's Human Interface Guidelines, Shopify's Polaris.",
+      "codeExample": "/* Design Token System */\n:root {\n  /* Color Tokens */\n  --token-color-primary: hsl(175, 100%, 50%);\n  --token-color-danger: hsl(0, 80%, 55%);\n  \n  /* Spacing Scale */\n  --token-space-1: 4px;\n  --token-space-2: 8px;\n  --token-space-4: 16px;\n  --token-space-6: 24px;\n  --token-space-8: 32px;\n  \n  /* Radius Scale */\n  --token-radius-sm: 4px;\n  --token-radius-md: 8px;\n  --token-radius-full: 9999px;\n\n  /* Type Tokens */\n  --token-font-sans: 'Inter', system-ui, sans-serif;\n  --token-font-mono: 'Share Tech Mono', monospace;\n}",
+      "interactiveTip": "Design tokens should be named semantically (--color-danger), not by their value (--color-red). When your brand refreshes, you change the token value once — every component updates automatically!"
+    }
+  ],
+  "sandboxInitialCode": "<!-- UI/UX Interaction Design Sandbox -->\n<style>\n  .ux-demo { background: #0f0f1a; padding: 25px; border: 2px solid #ff6b9d; border-radius: 12px; font-family: 'Segoe UI', sans-serif; max-width: 400px; }\n  .ux-input { width: 100%; padding: 12px; background: transparent; border: none; border-bottom: 2px solid #444; color: #fff; font-size: 16px; outline: none; transition: border-color 0.25s; box-sizing: border-box; }\n  .ux-input:focus { border-color: #ff6b9d; }\n  .ux-label { font-size: 11px; color: #ff6b9d; text-transform: uppercase; letter-spacing: 2px; margin-top: 20px; display: block; }\n  .ux-btn { margin-top: 20px; width: 100%; padding: 14px; background: #ff6b9d; color: #fff; border: none; font-weight: 700; letter-spacing: 2px; font-size: 14px; cursor: pointer; border-radius: 6px; transition: all 0.3s; text-transform: uppercase; }\n  .ux-btn:hover { background: #e05588; transform: translateY(-2px); box-shadow: 0 8px 20px rgba(255,107,157,0.3); }\n  .ux-feedback { margin-top: 15px; font-size: 13px; color: #888; min-height: 20px; }\n</style>\n<div class=\"ux-demo\">\n  <h3 style=\"color: #ff6b9d; margin: 0 0 5px;\">&#10024; UI/UX Live Demo</h3>\n  <p style=\"color: #666; font-size: 13px; margin: 0 0 20px;\">Micro-interactions & form states</p>\n  <span class=\"ux-label\">Mission Code</span>\n  <input class=\"ux-input\" id=\"ux-code\" placeholder=\"e.g. HELIOS-007\" oninput=\"validateCode()\">\n  <span class=\"ux-label\">Pilot Name</span>\n  <input class=\"ux-input\" placeholder=\"Enter name...\">\n  <button class=\"ux-btn\" onclick=\"submitUx()\">Transmit Mission</button>\n  <div class=\"ux-feedback\" id=\"ux-feedback\"></div>\n</div>\n<script>\n  window.validateCode = function() {\n    const val = document.getElementById('ux-code').value;\n    const fb = document.getElementById('ux-feedback');\n    if (!val) { fb.innerHTML = ''; return; }\n    if (val.length < 5) { fb.innerHTML = '&#9888;&#65039; Code must be at least 5 characters.'; fb.style.color = '#ff9800'; }\n    else { fb.innerHTML = '&#10003; Valid format!'; fb.style.color = '#00c853'; }\n  };\n  window.submitUx = function() {\n    const fb = document.getElementById('ux-feedback');\n    fb.innerHTML = '&gt; Transmitting&hellip;'; fb.style.color = '#ff6b9d';\n    setTimeout(() => { fb.innerHTML = '&#9654;&#65039; Mission received! Pilot cleared for launch.'; fb.style.color = '#00c853'; }, 1500);\n  };\n</script>",
+  "quiz": [
+    {
+      "question": "Which Gestalt principle explains why navigation links grouped close together are perceived as one unit?",
+      "options": ["Similarity", "Continuity", "Proximity", "Closure"],
+      "answer": 2,
+      "explanation": "The Gestalt Proximity principle states that elements placed close together are perceived as a group. Navigation links, bullet points, and form field groups all rely on this principle to communicate relatedness."
+    },
+    {
+      "question": "What does the 60-30-10 color rule describe?",
+      "options": [
+        "Pixel dimensions for responsive breakpoints",
+        "The proportion ratio of dominant, secondary, and accent colors in a palette",
+        "The maximum number of colors allowed per component",
+        "A contrast ratio requirement from WCAG guidelines"
+      ],
+      "answer": 1,
+      "explanation": "The 60-30-10 rule is a color balance guideline: 60% dominant color (background), 30% secondary color (surfaces and cards), 10% accent color (CTAs, highlights, interactive elements)."
+    },
+    {
+      "question": "What is a Design Token?",
+      "options": [
+        "A Figma plugin for generating HTML code",
+        "A named, reusable variable representing a design decision (color, spacing, typography)",
+        "A unique authentication code for design software licenses",
+        "A CSS class that changes dynamically on user interaction"
+      ],
+      "answer": 1,
+      "explanation": "Design tokens are named variables representing design decisions. They create a single source of truth for the design system — changing a token value (--color-primary) updates every component that uses it automatically."
+    }
+  ],
+  "quest": {
+    "title": "Quest: Design & Build a Micro-Interaction Form",
+    "challenge": "Create a mission submission form with live validation, focus animations, and success state micro-interactions.",
+    "instructions": [
+      "1. Design a form with 3 fields: Mission Name, Sector (dropdown), and Priority Level (radio buttons).",
+      "2. Implement CSS micro-interactions: animated underline on focus, color change on valid input.",
+      "3. Add real-time validation feedback below each field using JavaScript.",
+      "4. Show a loading animation on the submit button for 1.5s before displaying a success message.",
+      "5. Add a skeleton loading placeholder that animates while data loads (simulate with setTimeout)."
+    ]
+  }
+}

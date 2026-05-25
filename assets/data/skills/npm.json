@@ -1,0 +1,109 @@
+{
+  "id": "npm",
+  "name": "NPM",
+  "fullName": "Node Package Manager",
+  "color": "#cb3837",
+  "difficulty": "Beginner",
+  "estTime": "2.5 Hours",
+  "tagline": "The universal cargo manifest of the JavaScript galaxy.",
+  "timeTravelLog": "Created by Isaac Z. Schlueter in 2010, NPM became the world's largest software registry with over 2 million packages — transforming how code was shared, versioned, and composed across all dimensions of JavaScript.",
+  "overview": "NPM (Node Package Manager) is the default package manager for Node.js. It enables developers to install, share, and manage third-party libraries, run project scripts, and manage project dependencies through the package.json manifest file.",
+  "syllabus": [
+    {
+      "title": "Module 1: The package.json Manifest",
+      "desc": "Understanding the project configuration file that defines your project's identity and dependencies.",
+      "content": "package.json is the central manifest of any Node.js/JavaScript project. It declares the project name, version, description, entry point, scripts, dependencies, and devDependencies. Run npm init to generate it interactively, or npm init -y to accept all defaults instantly. Every project must have a package.json before installing any packages.",
+      "codeExample": "{\n  \"name\": \"mission-control-ui\",\n  \"version\": \"1.0.0\",\n  \"description\": \"JES-007 Mission Control Interface\",\n  \"main\": \"src/index.js\",\n  \"scripts\": {\n    \"dev\": \"vite\",\n    \"build\": \"vite build\",\n    \"test\": \"vitest\",\n    \"lint\": \"eslint src/\"\n  },\n  \"dependencies\": {\n    \"vue\": \"^3.4.0\"\n  },\n  \"devDependencies\": {\n    \"vite\": \"^5.0.0\",\n    \"eslint\": \"^8.0.0\"\n  }\n}",
+      "interactiveTip": "The ^ (caret) before version numbers means 'compatible with' — NPM will install the latest minor/patch version within the same major. Use exact versions (no ^) for critical dependencies in production apps!"
+    },
+    {
+      "title": "Module 2: Installing & Removing Packages",
+      "desc": "Adding, updating, and removing third-party packages from your project.",
+      "content": "npm install (or npm i) installs all packages listed in package.json. Adding a package name installs it as a production dependency (--save is default). The --save-dev flag installs it as a devDependency — only used during development, not shipped to production. npm uninstall removes a package and its entry from package.json.",
+      "codeExample": "# Install all dependencies from package.json\nnpm install\n\n# Install a production dependency\nnpm install vue\nnpm install axios\n\n# Install a development dependency\nnpm install --save-dev vite\nnpm install -D eslint prettier\n\n# Install a specific version\nnpm install lodash@4.17.21\n\n# Remove a package\nnpm uninstall vue\n\n# Install globally (system-wide CLI tool)\nnpm install -g typescript\nnpx tsc --version",
+      "interactiveTip": "Always use npm install --save-dev for build tools, test runners, and linters — they should NOT be bundled into production. Production bundles only need 'dependencies', not 'devDependencies'!"
+    },
+    {
+      "title": "Module 3: Scripts & Automation (npm run)",
+      "desc": "Automating build, test, lint, and deployment tasks using npm scripts.",
+      "content": "The scripts section of package.json defines runnable automation commands. npm run scriptName executes any script. Special lifecycle scripts (preinstall, postbuild) run automatically before/after their paired command. NPM scripts have PATH access to locally installed binaries — you can use local tools like vite or eslint without global installs.",
+      "codeExample": "// package.json scripts\n\"scripts\": {\n  \"dev\": \"vite --port 3000\",\n  \"build\": \"vite build\",\n  \"preview\": \"vite preview\",\n  \"test\": \"vitest run\",\n  \"test:watch\": \"vitest\",\n  \"lint\": \"eslint src/ --ext .js,.vue\",\n  \"lint:fix\": \"eslint src/ --fix\",\n  \"format\": \"prettier --write src/\",\n  // Lifecycle scripts\n  \"prebuild\": \"npm run lint\",     // Runs BEFORE build\n  \"postbuild\": \"echo Build done\"  // Runs AFTER build\n}",
+      "interactiveTip": "Chain scripts with && for sequential execution or use npm-run-all package for parallel execution: 'start': 'npm-run-all --parallel dev watch:css' — massively improves complex project workflows!"
+    },
+    {
+      "title": "Module 4: The node_modules Directory & .gitignore",
+      "desc": "Understanding how packages are stored and why they must never be committed to git.",
+      "content": "npm install populates the node_modules folder with all dependency code — which can grow to hundreds of thousands of files and gigabytes of data. This folder must ALWAYS be listed in .gitignore. Anyone cloning the project simply runs npm install to regenerate it from package.json. The package-lock.json file pins exact resolved versions for reproducible installs.",
+      "codeExample": "# .gitignore — Essential for any Node project\nnode_modules/\ndist/\n.env\n.env.local\n.DS_Store\n*.log\n.vite/\n.nuxt/\n\n# package-lock.json — SHOULD be committed!\n# It locks exact dependency versions for reproducible builds\n# Commit it: git add package-lock.json\n\n# Why commit lock file?\n# → Ensures every developer on the team installs\n#   EXACTLY the same dependency versions\n# → Prevents 'works on my machine' bugs",
+      "interactiveTip": "Use npm ci instead of npm install in CI/CD pipelines — it installs EXACTLY the versions in package-lock.json (no range resolution), is faster, and treats the lockfile as immutable!"
+    },
+    {
+      "title": "Module 5: Semantic Versioning (semver)",
+      "desc": "Reading and interpreting NPM version numbers to manage dependencies safely.",
+      "content": "NPM packages use Semantic Versioning (semver): MAJOR.MINOR.PATCH format. MAJOR changes break backward compatibility. MINOR additions are backward-compatible. PATCH fixes bugs with no breaking changes. Version range symbols: ^ (caret) allows compatible minor/patch updates, ~ (tilde) allows only patch updates, exact version installs only that version.",
+      "codeExample": "/* Semantic Versioning Reference */\n// vue@\"3.4.2\" means:\n//   MAJOR: 3 (breaking API changes from v2)\n//   MINOR: 4 (new backward-compat features)\n//   PATCH: 2 (bug fixes)\n\n// Version ranges:\n\"vue\": \"^3.4.0\"   // >=3.4.0 <4.0.0 (compatible)\n\"vue\": \"~3.4.0\"   // >=3.4.0 <3.5.0 (patch only)\n\"vue\": \"3.4.0\"    // Exactly 3.4.0 only\n\"vue\": \"*\"        // Any version (dangerous!)\n\"vue\": \">=3.0.0\"  // Greater than or equal to 3.0.0\n\n// Check for outdated packages:\n// npm outdated\n// Update safely:\n// npm update (respects ranges)",
+      "interactiveTip": "Run npm audit regularly to check for known security vulnerabilities in your dependencies. Run npm audit fix to auto-remediate safe fixes. Review npm audit fix --force output carefully — it can introduce breaking changes!"
+    },
+    {
+      "title": "Module 6: NPX & Running Without Installing",
+      "desc": "Executing NPM packages directly without permanent global installation.",
+      "content": "npx (Node Package Execute) runs a package's CLI binary without permanently installing it globally. It downloads the package, runs it, then discards the temporary copy. This is perfect for scaffolding tools used once per project. npx also runs locally installed binaries from node_modules/.bin without specifying the full path.",
+      "codeExample": "# Create projects without global installs\nnpx create-react-app my-app\nnpx create-vite@latest my-app -- --template vue\nnpx nuxi init my-nuxt-app\n\n# Run a package once without installing\nnpx json-server --watch db.json --port 3001\nnpx serve dist/\nnpx lighthouse https://mysite.com\n\n# Run locally installed binary\nnpx eslint src/\nnpx prettier --write .\n\n# Force use latest version\nnpx --yes create-vite@latest ./",
+      "interactiveTip": "Always use npx -y (or --yes) in automated scripts and CI pipelines to automatically confirm download prompts — otherwise the command waits for human input and hangs your automation pipeline!"
+    },
+    {
+      "title": "Module 7: Workspaces & Monorepo Management",
+      "desc": "Managing multi-package repositories using NPM Workspaces.",
+      "content": "NPM Workspaces enable monorepo architectures — a single repository containing multiple packages that share node_modules. Packages are defined in the root package.json's workspaces field. NPM installs all workspace packages' dependencies into a single root node_modules, deduplicating shared packages. Packages can reference each other by name.",
+      "codeExample": "// Root package.json for monorepo\n{\n  \"name\": \"mission-monorepo\",\n  \"private\": true,\n  \"workspaces\": [\n    \"apps/*\",\n    \"packages/*\"\n  ]\n}\n\n// Structure:\n// apps/web/         → Vue frontend\n// apps/api/         → Express backend\n// packages/shared/  → Shared types and utilities\n\n// Install all workspace deps from root:\n// npm install\n\n// Run script in specific workspace:\n// npm run dev --workspace=apps/web\n\n// Install package in specific workspace:\n// npm install axios --workspace=apps/api",
+      "interactiveTip": "In workspaces, use \"shared\": \"workspace:*\" in a dependent app's package.json to reference local packages — NPM symlinks them automatically during install, enabling local-first development!"
+    }
+  ],
+  "sandboxInitialCode": "<!-- NPM Command Explorer Sandbox -->\n<div style=\"background: #1a0000; border: 2px solid #cb3837; padding: 20px; font-family: monospace; border-radius: 8px;\">\n  <h3 style=\"color: #cb3837; margin-top: 0; text-align: center;\">&#128230; NPM Command Terminal</h3>\n  <p style=\"color: #888; font-size: 12px; text-align: center;\">Click commands to see what they do!</p>\n  <div style=\"display: flex; flex-direction: column; gap: 8px; margin-bottom: 15px;\">\n    <button onclick=\"explainNpm('install')\" style=\"background: rgba(203,56,55,0.1); border: 1px solid #444; color: #fff; padding: 10px 15px; text-align: left; cursor: pointer; border-radius: 4px; font-family: monospace;\">&gt; npm install</button>\n    <button onclick=\"explainNpm('run-dev')\" style=\"background: rgba(203,56,55,0.1); border: 1px solid #444; color: #fff; padding: 10px 15px; text-align: left; cursor: pointer; border-radius: 4px; font-family: monospace;\">&gt; npm run dev</button>\n    <button onclick=\"explainNpm('install-d')\" style=\"background: rgba(203,56,55,0.1); border: 1px solid #444; color: #fff; padding: 10px 15px; text-align: left; cursor: pointer; border-radius: 4px; font-family: monospace;\">&gt; npm install -D eslint</button>\n    <button onclick=\"explainNpm('audit')\" style=\"background: rgba(203,56,55,0.1); border: 1px solid #444; color: #fff; padding: 10px 15px; text-align: left; cursor: pointer; border-radius: 4px; font-family: monospace;\">&gt; npm audit</button>\n    <button onclick=\"explainNpm('ci')\" style=\"background: rgba(203,56,55,0.1); border: 1px solid #444; color: #fff; padding: 10px 15px; text-align: left; cursor: pointer; border-radius: 4px; font-family: monospace;\">&gt; npm ci</button>\n  </div>\n  <div id=\"npm-explanation\" style=\"background: #000; padding: 15px; border-left: 3px solid #cb3837; color: #ccc; font-size: 13px; line-height: 1.7; min-height: 80px;\">Select a command above to learn what it does...</div>\n</div>\n<script>\n  const cmds = {\n    'install': 'npm install — Reads package.json and installs ALL listed dependencies into node_modules/. Creates or updates package-lock.json with resolved versions. Always run after cloning a project!',\n    'run-dev': 'npm run dev — Executes the \"dev\" script from package.json. Typically starts a local development server (Vite, webpack-dev-server, nodemon) with hot-reload and source maps enabled.',\n    'install-d': 'npm install -D eslint — Installs ESLint as a devDependency. The -D flag adds it under \"devDependencies\" in package.json. Dev deps are excluded from production builds — keeping your bundle lean.',\n    'audit': 'npm audit — Scans all installed dependencies against the NPM vulnerability database. Reports known security issues with severity levels. Run npm audit fix to auto-patch safe vulnerabilities.',\n    'ci': 'npm ci (clean install) — Installs EXACTLY the versions in package-lock.json without any range resolution. Faster, strict, and deterministic — the standard for CI/CD pipelines and deployment automation.'\n  };\n  window.explainNpm = function(k) {\n    document.getElementById('npm-explanation').textContent = cmds[k];\n  };\n</script>",
+  "quiz": [
+    {
+      "question": "What is the difference between 'dependencies' and 'devDependencies' in package.json?",
+      "options": [
+        "There is no difference — both install the same way",
+        "'dependencies' are for production; 'devDependencies' are tools only needed during development (linters, test runners, bundlers)",
+        "'devDependencies' install globally; 'dependencies' install locally",
+        "'dependencies' are outdated packages; 'devDependencies' are the latest versions"
+      ],
+      "answer": 1,
+      "explanation": "'dependencies' are packages needed at runtime in production (vue, axios, lodash). 'devDependencies' are only needed during development and building (eslint, vite, prettier, vitest) — they are excluded from production deployments."
+    },
+    {
+      "question": "What does the ^ (caret) prefix mean in a version like \"^3.4.0\"?",
+      "options": [
+        "Exactly version 3.4.0 — no updates",
+        "Any version greater than 3.4.0 including major versions",
+        "Compatible versions ≥3.4.0 and <4.0.0 — minor and patch updates allowed",
+        "Only patch updates — versions ≥3.4.0 and <3.5.0"
+      ],
+      "answer": 2,
+      "explanation": "The ^ (caret) allows compatible updates — it permits installing the latest minor and patch versions within the same major version. ^3.4.0 will install up to 3.99.99 but not 4.0.0 which may have breaking changes."
+    },
+    {
+      "question": "Why should node_modules be added to .gitignore?",
+      "options": [
+        "Git cannot track binary files inside node_modules",
+        "It contains sensitive API keys and secrets",
+        "It can contain hundreds of thousands of files totaling GBs — teammates regenerate it with npm install",
+        "node_modules is encrypted and cannot be shared"
+      ],
+      "answer": 2,
+      "explanation": "node_modules can contain 300,000+ files and multiple gigabytes of code. It is completely regenerable from package.json + package-lock.json via npm install — there is never a reason to commit it to version control."
+    }
+  ],
+  "quest": {
+    "title": "Quest: Configure a Full Project Toolchain",
+    "challenge": "Set up a professional JavaScript project with NPM scripts, ESLint, Prettier, and a build pipeline.",
+    "instructions": [
+      "1. Run npm init -y to create package.json in a new folder.",
+      "2. Install Vite as a devDependency and write a 'dev', 'build', and 'preview' npm script.",
+      "3. Install ESLint and Prettier as devDependencies and configure them via .eslintrc.json and .prettierrc.",
+      "4. Add a 'lint' and 'format' npm script for running each tool on the src/ directory.",
+      "5. Create a .gitignore that excludes node_modules/, dist/, and .env files."
+    ]
+  }
+}

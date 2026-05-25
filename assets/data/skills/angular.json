@@ -1,0 +1,99 @@
+{
+  "id": "angular",
+  "name": "Angular",
+  "fullName": "Angular Framework",
+  "color": "#dd0031",
+  "difficulty": "Advanced",
+  "estTime": "6 Hours",
+  "tagline": "The enterprise battle station of front-end engineering.",
+  "timeTravelLog": "Re-architected by Google in 2016 as a complete TypeScript-native platform. Built for mission-critical enterprise systems demanding strict architecture, testability, and long-term maintainability.",
+  "overview": "Angular is a TypeScript-powered front-end platform and framework for building scalable, maintainable web applications. It provides a full-featured toolkit including a CLI, dependency injection, reactive state with RxJS, and a comprehensive testing ecosystem.",
+  "syllabus": [
+    {
+      "title": "Module 1: Components & Templates (The Building Grid)",
+      "desc": "Angular's core building block — decorated classes with HTML templates.",
+      "content": "An Angular component is a TypeScript class decorated with @Component, which specifies its HTML template, CSS styles, and selector. The selector is the custom tag name used to embed the component in other templates. Angular's change detection automatically updates the view when component data changes.",
+      "codeExample": "import { Component } from '@angular/core';\n\n@Component({\n  selector: 'app-mission-card',\n  template: `\n    <div class=\"card\">\n      <h2>{{ title }}</h2>\n      <p>Status: {{ isActive ? 'ONLINE' : 'OFFLINE' }}</p>\n      <button (click)=\"toggleStatus()\">Toggle</button>\n    </div>\n  `,\n  styles: [`\n    .card { border: 1px solid cyan; padding: 20px; }\n  `]\n})\nexport class MissionCardComponent {\n  title = 'Operation Helios';\n  isActive = true;\n  toggleStatus() { this.isActive = !this.isActive; }\n}",
+      "interactiveTip": "Angular uses {{ }} for text interpolation (one-way binding from component to view), (event) for event binding, [property] for property binding, and [(ngModel)] for two-way binding."
+    },
+    {
+      "title": "Module 2: Modules & Dependency Injection (NgModule Architecture)",
+      "desc": "Organizing code into cohesive feature modules and injecting shared services.",
+      "content": "NgModules organize an application into cohesive blocks of functionality. The @NgModule decorator lists declarations (components), imports (other modules), providers (services), and bootstrap (root component). Angular's dependency injection system automatically creates and injects service instances — eliminating manual instantiation.",
+      "codeExample": "@NgModule({\n  declarations: [AppComponent, MissionCardComponent],\n  imports: [BrowserModule, ReactiveFormsModule, RouterModule],\n  providers: [MissionService, AuthGuard],\n  bootstrap: [AppComponent]\n})\nexport class AppModule {}\n\n// Service injection in component\n@Component({ selector: 'app-missions', template: '...' })\nexport class MissionsComponent {\n  constructor(private missionService: MissionService) {}\n  \n  ngOnInit() {\n    this.missions = this.missionService.getAll();\n  }\n}",
+      "interactiveTip": "Modern Angular (v17+) uses standalone components by default, eliminating NgModules entirely. standalone: true in @Component lets you import dependencies directly!"
+    },
+    {
+      "title": "Module 3: Routing & Guards (Navigation Architecture)",
+      "desc": "Configuring page routes, lazy loading, and access control guards.",
+      "content": "Angular Router maps URL paths to components. Route guards (CanActivate) protect routes from unauthorized access. Lazy loading uses dynamic import() to split feature modules — loading JavaScript only when the user navigates to that section, dramatically improving initial load performance.",
+      "codeExample": "const routes: Routes = [\n  { path: '', component: HomeComponent },\n  { path: 'dashboard', component: DashboardComponent,\n    canActivate: [AuthGuard] },\n  // Lazy loading\n  { path: 'missions',\n    loadChildren: () => import('./missions/missions.module')\n      .then(m => m.MissionsModule) },\n  { path: '**', redirectTo: '' }\n];",
+      "interactiveTip": "Always implement lazy loading for feature modules — it ensures users only download code for sections they actually visit, reducing initial bundle size by 40-70%!"
+    },
+    {
+      "title": "Module 4: Services & HTTP Client (Data Command Center)",
+      "desc": "Creating injectable services that fetch and manage shared application data.",
+      "content": "Services are injectable TypeScript classes annotated with @Injectable. They centralize business logic, API calls, and state management. Angular's HttpClient returns RxJS Observables for all HTTP calls — supporting type safety, error handling, retry logic, and request cancellation far beyond native fetch.",
+      "codeExample": "@Injectable({ providedIn: 'root' })\nexport class MissionService {\n  private apiUrl = '/api/missions';\n  \n  constructor(private http: HttpClient) {}\n  \n  getMissions(): Observable<Mission[]> {\n    return this.http.get<Mission[]>(this.apiUrl)\n      .pipe(\n        retry(3),\n        catchError(err => {\n          console.error('Uplink failed', err);\n          return throwError(() => err);\n        })\n      );\n  }\n}",
+      "interactiveTip": "Use the AsyncPipe (| async) in templates to automatically subscribe and unsubscribe from Observables — it prevents the most common memory leak in Angular applications!"
+    },
+    {
+      "title": "Module 5: Reactive Forms (FormGroup & FormControl)",
+      "desc": "Building type-safe, testable forms with validation using Reactive Forms.",
+      "content": "Reactive Forms define form structure entirely in the TypeScript component using FormGroup and FormControl — making them fully testable and predictable. Built-in validators (Validators.required, Validators.email, Validators.minLength) and async validators enable rich validation without template clutter.",
+      "codeExample": "import { FormGroup, FormControl, Validators } from '@angular/forms';\n\nexport class MissionFormComponent {\n  missionForm = new FormGroup({\n    pilotName: new FormControl('', [\n      Validators.required,\n      Validators.minLength(3)\n    ]),\n    destination: new FormControl('', Validators.required),\n    clearance: new FormControl('alpha')\n  });\n\n  onSubmit() {\n    if (this.missionForm.valid) {\n      console.log(this.missionForm.value);\n    }\n  }\n}",
+      "interactiveTip": "Always check form.valid before submission and display formControl.errors in the template for field-level feedback. Touch tracking with formControl.touched prevents premature error display!"
+    },
+    {
+      "title": "Module 6: RxJS Observables (Reactive Data Streams)",
+      "desc": "Handling asynchronous data streams, events, and real-time signals.",
+      "content": "RxJS (Reactive Extensions for JavaScript) is Angular's core async toolkit. Observables emit values over time — unlike Promises which emit once. Operators like map, filter, switchMap, debounceTime, and takeUntil transform streams declaratively. BehaviorSubject acts as a state store that emits current value immediately to new subscribers.",
+      "codeExample": "import { BehaviorSubject, interval } from 'rxjs';\nimport { map, filter, debounceTime } from 'rxjs/operators';\n\n// Search input stream with debounce\nthis.searchControl.valueChanges.pipe(\n  debounceTime(300),\n  filter(query => query.length >= 2),\n  switchMap(query => this.missionService.search(query))\n).subscribe(results => this.displayResults(results));\n\n// State management with BehaviorSubject\nconst fuelLevel$ = new BehaviorSubject<number>(100);\nfuelLevel$.next(85); // Update value\nfuelLevel$.subscribe(val => console.log('Fuel:', val));",
+      "interactiveTip": "switchMap cancels the previous Observable when a new value arrives — essential for search autocomplete to prevent stale HTTP responses from overwriting fresh results!"
+    },
+    {
+      "title": "Module 7: Signals & Angular 17+ Modern APIs",
+      "desc": "Adopting Angular's modern signal-based reactivity for fine-grained rendering.",
+      "content": "Angular 17+ introduces Signals — a fine-grained reactivity system that tracks dependencies at the expression level, enabling Angular to skip expensive change detection cycles. signal() creates a writable reactive value, computed() derives reactive values, and effect() runs side effects when signals change.",
+      "codeExample": "import { signal, computed, effect } from '@angular/core';\n\nexport class ThrusterComponent {\n  thrust = signal(0);\n  fuelBurn = computed(() => this.thrust() * 2.5);\n\n  constructor() {\n    effect(() => {\n      console.log(`Thrust: ${this.thrust()}, Burn: ${this.fuelBurn()}`);\n      if (this.thrust() > 90) {\n        console.warn('THRUSTER OVERLOAD!');\n      }\n    });\n  }\n\n  boost() {\n    this.thrust.update(val => Math.min(100, val + 10));\n  }\n}",
+      "interactiveTip": "Signals are the future of Angular reactivity! They eliminate Zone.js overhead and enable OnPush change detection automatically — dramatically improving rendering performance!"
+    }
+  ],
+  "sandboxInitialCode": "<!-- Angular component simulation (VanillaJS preview) -->\n<div style=\"background: #1a0008; color: #dd0031; border: 2px solid #dd0031; padding: 25px; font-family: monospace; border-radius: 8px;\">\n  <h2 style=\"color: #ffffff; text-align: center; margin-top: 0;\">&#9654; Angular Mission Card Component</h2>\n  <div style=\"border: 1px solid #dd0031; padding: 20px; border-radius: 5px; margin: 15px 0;\">\n    <h3 id=\"mission-title\" style=\"margin: 0 0 10px; color: #ffffff;\">Operation Helios</h3>\n    <p>Status: <span id=\"status-badge\" style=\"color: lime;\">ONLINE</span></p>\n    <div style=\"margin: 10px 0;\">\n      <span style=\"color:#888;\">Fuel Level: </span>\n      <progress id=\"fuel-bar\" value=\"75\" max=\"100\" style=\"accent-color: #dd0031; width: 150px;\"></progress>\n      <span id=\"fuel-text\" style=\"color:#fff;\"> 75%</span>\n    </div>\n  </div>\n  <div style=\"display: flex; gap: 10px; justify-content: center;\">\n    <button onclick=\"toggleStatus()\" style=\"background: #dd0031; color: white; border: none; padding: 10px 20px; cursor: pointer; font-weight: bold;\">Toggle Status</button>\n    <button onclick=\"drainFuel()\" style=\"background: transparent; border: 2px solid #dd0031; color: #dd0031; padding: 10px 20px; cursor: pointer;\">Burn Fuel (-10%)</button>\n  </div>\n</div>\n<script>\n  let isOnline = true, fuel = 75;\n  window.toggleStatus = function() {\n    isOnline = !isOnline;\n    const badge = document.getElementById('status-badge');\n    badge.textContent = isOnline ? 'ONLINE' : 'OFFLINE';\n    badge.style.color = isOnline ? 'lime' : '#ff4444';\n  };\n  window.drainFuel = function() {\n    fuel = Math.max(0, fuel - 10);\n    document.getElementById('fuel-bar').value = fuel;\n    document.getElementById('fuel-text').textContent = ' ' + fuel + '%';\n  };\n</script>",
+  "quiz": [
+    {
+      "question": "What decorator marks a class as an Angular component?",
+      "options": ["@NgComponent", "@Component", "@Injectable", "@Directive"],
+      "answer": 1,
+      "explanation": "@Component is the decorator that tells Angular this class is a component. It requires at minimum a selector (custom tag name) and a template (HTML structure)."
+    },
+    {
+      "question": "What is the purpose of the CanActivate route guard?",
+      "options": [
+        "To pre-render route HTML on the server",
+        "To prevent unauthorized navigation to a route",
+        "To activate CSS animations on route change",
+        "To cache the route in browser localStorage"
+      ],
+      "answer": 1,
+      "explanation": "CanActivate is a lifecycle guard that runs before a route loads. It returns true to allow navigation or false (or a redirect) to block it — commonly used for authentication checks."
+    },
+    {
+      "question": "What RxJS operator should you use to cancel previous HTTP calls when a new value arrives?",
+      "options": ["mergeMap", "concatMap", "exhaustMap", "switchMap"],
+      "answer": 3,
+      "explanation": "switchMap unsubscribes from the previous inner Observable when a new source value arrives — preventing stale responses from overwriting fresh data in search autocomplete and live filtering!"
+    }
+  ],
+  "quest": {
+    "title": "Quest: Code the Mission Roster Service",
+    "challenge": "Build an Angular component and service that fetches missions, displays them with a filter, and guards an admin route.",
+    "instructions": [
+      "1. Create a MissionService with an getMissions() method returning Observable<Mission[]> via HttpClient.",
+      "2. Create a MissionsComponent that injects MissionService and uses the AsyncPipe to render the list.",
+      "3. Add a search input that filters missions using a BehaviorSubject and debounceTime(300).",
+      "4. Create an AdminComponent and protect its route with a CanActivate guard that checks localStorage for an 'adminToken'.",
+      "5. Use lazy loading to load the admin module only when navigating to /admin."
+    ]
+  }
+}

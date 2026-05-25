@@ -1,0 +1,104 @@
+{
+  "id": "photoshop",
+  "name": "Photoshop",
+  "fullName": "Adobe Photoshop",
+  "color": "#31a8ff",
+  "difficulty": "Intermediate",
+  "estTime": "4 Hours",
+  "tagline": "The pixel-bending reality forge of digital visionaries.",
+  "timeTravelLog": "Created in 1987 by Thomas and John Knoll, Photoshop became the standard for digital image manipulation — a tool so culturally dominant that 'photoshopped' became a verb in global dictionaries.",
+  "overview": "Adobe Photoshop is the industry-standard raster graphics editor used for photo manipulation, digital painting, UI asset creation, compositing, and print design. It operates on a layer-based, non-destructive editing workflow.",
+  "syllabus": [
+    {
+      "title": "Module 1: The Photoshop Workspace & Non-Destructive Workflow",
+      "desc": "Navigating the interface and understanding the foundational principle of non-destructive editing.",
+      "content": "Photoshop's workspace consists of the Menu Bar, Toolbar (left), Options Bar (top), Panels (right: Layers, Properties, Color), and the Canvas. Non-destructive editing means preserving original data so it can be recovered: use Smart Objects instead of rasterizing, Adjustment Layers instead of direct color edits, Layer Masks instead of erasing, and Smart Filters instead of permanent filters.",
+      "codeExample": "/* Non-Destructive Workflow Checklist */\n\n✓ Convert layers to Smart Objects before transforming\n  (Right-click layer > Convert to Smart Object)\n\n✓ Use Adjustment Layers for all color corrections\n  (Layer > New Adjustment Layer > Curves/Levels/Hue)\n\n✓ Never erase — use Layer Masks instead\n  (Layer > Layer Mask > Reveal All)\n\n✓ Apply filters to Smart Objects (Smart Filters)\n  (Smart Filters appear as a sub-layer, editable anytime)\n\n✓ Save in .PSD format to preserve all layers",
+      "interactiveTip": "Turn on 'File > Save As a Copy' workflow to always maintain your master PSD with all layers intact while exporting flat JPEG/PNG files for delivery — never flatten your master file!"
+    },
+    {
+      "title": "Module 2: The Layer System (Masking, Groups & Blending)",
+      "desc": "Working with Photoshop's foundational layer architecture for complex compositions.",
+      "content": "Everything in Photoshop lives on a layer. Layer masks use black-to-hide/white-to-reveal logic to non-destructively hide portions of a layer. Layer Groups organize related layers into folders. Clipping Masks confine a layer's visibility to the shape of the layer below. Blend Modes (Multiply, Screen, Overlay, Luminosity) control how layers interact with each other visually.",
+      "codeExample": "/* Layer Mask Logic */\nBlack on mask = HIDDEN (transparent)\nWhite on mask = VISIBLE\nGrey on mask = SEMI-TRANSPARENT\n\n/* Painting on a mask */\n1. Click the mask thumbnail in Layers panel\n2. Press D (set default black/white colors)\n3. Press B (brush tool)\n4. Paint black to hide / white to reveal\n\n/* Clipping Mask shortcut */\nAlt+Ctrl+G (Cmd+Opt+G on Mac)\n→ Clips the active layer to the shape of the layer below",
+      "interactiveTip": "Press Alt and click a Layer Mask thumbnail to view the mask itself in greyscale directly on the canvas — indispensable for inspecting complex mask edges and fixing semi-transparent fringe artifacts!"
+    },
+    {
+      "title": "Module 3: Selection Tools (The Path to Perfect Cutouts)",
+      "desc": "Mastering Photoshop's selection tools to isolate subjects with precision.",
+      "content": "Selections define which pixels are affected by operations. Quick Selection Tool and Magic Wand work by color/tonal similarity. Lasso tools draw freeform selections. Select > Subject uses AI to automatically select the main subject. Select and Mask workspace refines hair and fur edges. Pen Tool creates precision vector paths convertable to selections for complex edge subjects.",
+      "codeExample": "/* Subject Extraction Workflow */\n1. Select > Subject           (AI auto-selection)\n2. Select > Select and Mask   (Refine mode opens)\n3. Use Refine Edge Brush      (paint over hair/fur edges)\n4. Set Output to: Layer Mask  (non-destructive)\n5. OK — subject is now on a transparent background\n\n/* Pen Tool Path Selection (complex shapes) */\n1. Draw path with Pen Tool (P)\n2. Right-click path > Make Selection\n3. Feather: 0.5px for natural edges\n4. Add Layer Mask from selection",
+      "interactiveTip": "After Select > Subject, go to Select and Mask and use the Refine Edge Brush on hair and fur areas — it samples the edge pixels and intelligently preserves strands that flat selections would clip."
+    },
+    {
+      "title": "Module 4: Color Correction & Photo Retouching",
+      "desc": "Correcting exposures, tones, and colors using professional grading workflows.",
+      "content": "Professional color work in Photoshop uses Adjustment Layers and the Histogram. The Levels and Curves adjustment layers are the most powerful tools — Levels sets black and white points, Curves controls any tonal range precisely. Hue/Saturation adjusts global or channel-specific color. Camera Raw Filter (on Smart Objects) provides complete RAW-like processing controls non-destructively.",
+      "codeExample": "/* Professional Color Grading Workflow */\n\nStep 1: Fix Exposure\n  → Layer > New Adjustment Layer > Curves\n  → Set black/white points using the dropper tools\n\nStep 2: Color Balance\n  → New Adjustment Layer > Color Balance\n  → Adjust Shadows, Midtones, Highlights separately\n\nStep 3: Selective Color\n  → New Adjustment Layer > Hue/Saturation\n  → Target specific color channels (Reds, Blues, etc.)\n\nStep 4: Final Grade\n  → Filter > Camera Raw Filter (on Smart Object)\n  → Apply split toning and micro-contrast",
+      "interactiveTip": "Read the Histogram BEFORE editing: a histogram pushed to the far right edge means overexposed highlights with lost data. Pull the Curves white point left to recover it — if the data isn't there, it cannot be recovered!"
+    },
+    {
+      "title": "Module 5: Exporting Assets for Web (Export As & Slices)",
+      "desc": "Generating optimized image assets from Photoshop files for web delivery.",
+      "content": "Photoshop's Export As dialog (File > Export > Export As) is the modern asset export tool. It supports PNG (with transparency), JPG (with quality slider), WebP, and GIF. For multiple assets, Generator (File > Generate > Image Assets) auto-exports layers named with file extensions. Artboards enable multi-device export sets in a single document.",
+      "codeExample": "/* Export As Best Practices */\n\nFor photos (no transparency):\n  → Format: JPEG, Quality: 70-85%\n  → Check: Convert to sRGB (web standard)\n  → Metadata: None (reduces file size)\n\nFor UI elements (needs transparency):\n  → Format: PNG-24 (full color + alpha)\n  → OR: WebP with transparency (60% smaller)\n\nFor icons and logos:\n  → Export to Illustrator/SVG instead\n  → PNGs at 1x, 2x, 3x for device pixel ratios",
+      "interactiveTip": "Enable File > Generate > Image Assets to use automatic asset generation — name a layer 'button@2x.png 75%' and Photoshop automatically saves it as a 2x PNG at 75% quality every time you save!"
+    },
+    {
+      "title": "Module 6: Digital Painting & Brush Engine",
+      "desc": "Using Photoshop's advanced brush engine for concept art and digital illustration.",
+      "content": "Photoshop's Brush Engine is one of the most sophisticated in digital art. Brush Presets control size, hardness, opacity, and flow. Brush Settings panel (Window > Brush Settings) configures dynamics: Size Jitter (pressure-sensitive), Scatter (spray patterns), Texture (canvas grain), and Color Dynamics (hue variation per stroke). Kyle T. Webster's free brushes are the industry standard for concept art.",
+      "codeExample": "/* Essential Brush Settings for Digital Painting */\n\nFor base blocking:\n  → Hardness: 90-100%\n  → Opacity: 100%, Flow: 100%\n  → Mode: Normal\n\nFor texture and blending:\n  → Hardness: 0%\n  → Opacity: 15-30%, Flow: 30%\n  → Transfer > Opacity Jitter: Pen Pressure\n\nFor stippling/hatching effects:\n  → Brush Settings > Shape Dynamics: Size Jitter\n  → Scattering > Scatter: 150%\n  → Count: 3",
+      "interactiveTip": "Set the brush shortcut: [ decreases size, ] increases size. Hold Alt (Mac: Option) + Right-click and drag left-right to resize, up-down to change hardness — the fastest brush control method in Photoshop!"
+    },
+    {
+      "title": "Module 7: Compositing & Special Effects",
+      "desc": "Building multi-image composites and cinematic visual effects with blend modes and filters.",
+      "content": "Compositing merges multiple images into a seamless, believable final image. Key techniques: matching light direction and color temperature between source images, using blend modes (Screen to add light, Multiply to add shadow), displacement maps for realistic surface wrapping, luminosity masks for precise tonal selections, and Smart Filters for non-destructive lens flares and glow effects.",
+      "codeExample": "/* Cinematic Color Grading Effect */\n\n1. Add Solid Color fill layer (e.g. teal #006b7d)\n   → Set Blend Mode: Soft Light, Opacity: 20%\n   → This tints the shadows with cool tones\n\n2. Add Curves Adjustment Layer\n   → Pull Red channel slightly down in Shadows\n   → Pull Blue channel up in Midtones\n   → Creates film-grade teal-orange split tone\n\n3. Add Lens Flare (on Smart Object)\n   → Filter > Render > Lens Flare\n   → Blend Mode: Screen (removes black background)\n   → Locks it to Smart Filter for easy repositioning",
+      "interactiveTip": "Use Screen blend mode to composite light elements (lens flares, sparks, lightning) — it discards the black background automatically, leaving only the bright pixels — like a key light without cutting."
+    }
+  ],
+  "sandboxInitialCode": "<!-- Photoshop CSS Effect Sandbox: Replicate Photoshop effects with CSS! -->\n<style>\n  .ps-canvas { background: #1e1e1e; padding: 25px; border: 2px solid #31a8ff; border-radius: 8px; text-align: center; font-family: sans-serif; }\n  .ps-image { width: 100%; max-width: 340px; height: 200px; background: linear-gradient(135deg, #0a0a2e 0%, #001a3e 50%, #003366 100%); border-radius: 8px; display: flex; align-items: center; justify-content: center; font-size: 60px; position: relative; overflow: hidden; transition: all 0.4s ease; cursor: pointer; margin: 0 auto; }\n  .ps-overlay { position: absolute; inset: 0; background: radial-gradient(ellipse at center, transparent 40%, rgba(0,0,0,0.8) 100%); pointer-events: none; }\n  .ps-effect-name { color: #31a8ff; font-size: 12px; letter-spacing: 2px; margin-top: 12px; text-transform: uppercase; }\n  .ps-controls { display: flex; gap: 8px; justify-content: center; flex-wrap: wrap; margin-top: 15px; }\n  .ps-btn { background: transparent; border: 1px solid #31a8ff; color: #31a8ff; padding: 7px 12px; font-size: 11px; cursor: pointer; border-radius: 4px; letter-spacing: 1px; transition: all 0.2s; }\n  .ps-btn:hover { background: rgba(49,168,255,0.15); }\n</style>\n<div class=\"ps-canvas\">\n  <h3 style=\"color: #31a8ff; margin-top: 0;\">&#127912; CSS Photoshop FX Lab</h3>\n  <div class=\"ps-image\" id=\"ps-canvas-el\">\n    <div class=\"ps-overlay\"></div>\n    &#127752;\n  </div>\n  <div class=\"ps-effect-name\" id=\"ps-effect-label\">No Effect</div>\n  <div class=\"ps-controls\">\n    <button class=\"ps-btn\" onclick=\"applyPsEffect('none')\">ORIGINAL</button>\n    <button class=\"ps-btn\" onclick=\"applyPsEffect('glow')\">GLOW</button>\n    <button class=\"ps-btn\" onclick=\"applyPsEffect('duotone')\">DUOTONE</button>\n    <button class=\"ps-btn\" onclick=\"applyPsEffect('grain')\">GRAIN</button>\n    <button class=\"ps-btn\" onclick=\"applyPsEffect('vignette')\">VIGNETTE</button>\n  </div>\n</div>\n<script>\n  const effects = {\n    'none': { filter: '', label: 'No Effect' },\n    'glow': { filter: 'brightness(1.3) saturate(1.5)', boxShadow: '0 0 30px #31a8ff', label: 'Screen + Glow (Blend Mode)' },\n    'duotone': { filter: 'grayscale(1) sepia(0.8) hue-rotate(160deg) saturate(3)', label: 'Duotone (Hue/Sat Adjustment)' },\n    'grain': { filter: 'contrast(1.1) brightness(0.9) saturate(0.8)', label: 'Film Grain (Texture Layer)' },\n    'vignette': { filter: 'brightness(0.85) contrast(1.2)', label: 'Vignette + Curves Grading' }\n  };\n  window.applyPsEffect = function(k) {\n    const el = document.getElementById('ps-canvas-el');\n    el.style.filter = effects[k].filter || '';\n    el.style.boxShadow = effects[k].boxShadow || '';\n    document.getElementById('ps-effect-label').textContent = effects[k].label;\n  };\n</script>",
+  "quiz": [
+    {
+      "question": "What is the benefit of using Adjustment Layers over direct image editing in Photoshop?",
+      "options": [
+        "Adjustment Layers render faster on slow computers",
+        "They are permanently applied so the file size is smaller",
+        "They are non-destructive — editable or deletable at any time without damaging original pixels",
+        "They automatically sync to Adobe Cloud storage"
+      ],
+      "answer": 2,
+      "explanation": "Adjustment Layers sit above the pixel layers and apply color corrections non-destructively. The original image data is never changed — you can modify, hide, or delete the adjustment at any time."
+    },
+    {
+      "question": "What does a BLACK area on a Layer Mask do?",
+      "options": [
+        "Makes that area fully visible",
+        "Permanently deletes those pixels from the layer",
+        "Makes that area transparent (hidden)",
+        "Locks those pixels from further editing"
+      ],
+      "answer": 2,
+      "explanation": "Layer Masks follow the rule: Black hides, White reveals. Black areas of a mask make the corresponding layer content transparent. Grey creates partial transparency proportional to the shade."
+    },
+    {
+      "question": "Which blend mode is best for compositing a lens flare onto an image?",
+      "options": ["Multiply", "Overlay", "Screen", "Difference"],
+      "answer": 2,
+      "explanation": "Screen blend mode discards dark pixels — making black areas transparent — and adds bright pixels on top. This perfectly composites light effects (lens flares, glow, sparks) by removing their black backgrounds automatically."
+    }
+  ],
+  "quest": {
+    "title": "Quest: Design a Sci-Fi Mission Poster",
+    "challenge": "Composite a cinematic mission poster using multiple layers, masks, and color grading.",
+    "instructions": [
+      "1. Place a space photo as the background (convert to Smart Object).",
+      "2. Place an astronaut/subject photo on a new layer and extract it using Select > Subject + Select and Mask.",
+      "3. Apply a teal-orange color grade using two Curves Adjustment Layers — one for teal shadows, one for warm highlights.",
+      "4. Add text for 'MISSION: HELIOS' using the Type tool with a clipping mask glow effect.",
+      "5. Export the final composition as a WebP file at 85% quality optimized for web."
+    ]
+  }
+}

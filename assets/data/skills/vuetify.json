@@ -1,0 +1,104 @@
+{
+  "id": "vuetify",
+  "name": "Vuetify",
+  "fullName": "Vuetify UI Component Library",
+  "color": "#1867c0",
+  "difficulty": "Intermediate",
+  "estTime": "4 Hours",
+  "tagline": "Material Design engineering at warp factor 9.",
+  "timeTravelLog": "First launched in 2016, Vuetify brought Google's Material Design specification to Vue.js — enabling developers to build polished, consistent UIs without a single line of custom CSS.",
+  "overview": "Vuetify is a comprehensive Vue UI library built on Material Design principles. It provides 80+ pre-built components, a 12-column grid system, pre-configured themes, and responsive utilities — dramatically reducing development time for professional applications.",
+  "syllabus": [
+    {
+      "title": "Module 1: Installation & Vuetify Plugin Setup",
+      "desc": "Bootstrapping a project with Vuetify, themes, and global configuration.",
+      "content": "Vuetify is installed as a Vue plugin. After installation, it is registered globally in main.js/ts. The createVuetify() factory accepts theme configuration, default component props, locale settings, and icon font selection. All Vuetify components become auto-imported globally once the plugin is registered.",
+      "codeExample": "// main.js\nimport { createApp } from 'vue';\nimport { createVuetify } from 'vuetify';\nimport 'vuetify/styles';\nimport App from './App.vue';\n\nconst vuetify = createVuetify({\n  theme: {\n    defaultTheme: 'dark',\n    themes: {\n      dark: {\n        colors: {\n          primary: '#00ffcc',\n          secondary: '#ff0077',\n          surface: '#1e1e2e'\n        }\n      }\n    }\n  }\n});\n\nconst app = createApp(App);\napp.use(vuetify);\napp.mount('#app');",
+      "interactiveTip": "Vuetify 3 uses CSS variables for theming. Once you define colors in createVuetify(), they propagate as CSS variables throughout all components — changing one value updates the entire design system!"
+    },
+    {
+      "title": "Module 2: Layout & Grid System (v-container, v-row, v-col)",
+      "desc": "Building responsive 12-column grid layouts using Vuetify's Material grid.",
+      "content": "Vuetify's grid system wraps CSS flexbox in semantic Material Design components. v-container centers content with auto margins. v-row creates a horizontal flex row. v-col takes up column space with responsive breakpoint props: cols (all sizes), sm (≥600px), md (≥960px), lg (≥1280px), xl (≥1920px).",
+      "codeExample": "<v-container>\n  <v-row>\n    <!-- Full width on mobile, half on tablet, 1/3 on desktop -->\n    <v-col cols=\"12\" sm=\"6\" md=\"4\">\n      <v-card>Alpha Sector</v-card>\n    </v-col>\n    <v-col cols=\"12\" sm=\"6\" md=\"4\">\n      <v-card>Beta Sector</v-card>\n    </v-col>\n    <v-col cols=\"12\" sm=\"12\" md=\"4\">\n      <v-card>Gamma Sector</v-card>\n    </v-col>\n  </v-row>\n</v-container>",
+      "interactiveTip": "Use the justify and align props on v-row to control flex alignment: <v-row justify=\"center\" align=\"center\"> centers all children both horizontally and vertically!"
+    },
+    {
+      "title": "Module 3: Data Display Components (v-card, v-list, v-chip)",
+      "desc": "Presenting structured data in Material Design containers.",
+      "content": "v-card is the foundational Material container — it supports title, subtitle, text, actions, media, and image slots. v-list renders structured item lists with icons, metadata, and interactive states. v-chip displays compact labels, tags, or filters with optional close buttons and color variants.",
+      "codeExample": "<v-card elevation=\"4\" rounded=\"lg\">\n  <v-img src=\"/mission-banner.jpg\" height=\"200\" cover></v-img>\n  <v-card-title>Mission Helios</v-card-title>\n  <v-card-subtitle>Sector Alpha — Year 2089</v-card-subtitle>\n  <v-card-text>\n    Primary objective: establish deep space uplink.\n  </v-card-text>\n  <v-card-actions>\n    <v-chip color=\"success\">ACTIVE</v-chip>\n    <v-spacer />\n    <v-btn variant=\"tonal\" color=\"primary\">View Details</v-btn>\n  </v-card-actions>\n</v-card>",
+      "interactiveTip": "Use elevation prop on v-card (0–24) to control shadow depth — higher values create more prominent floating effects matching Material Design elevation guidelines."
+    },
+    {
+      "title": "Module 4: Form Components (v-text-field, v-select, v-btn)",
+      "desc": "Building Material Design forms with built-in validation and styling.",
+      "content": "Vuetify wraps HTML form elements in styled components with built-in label animation, validation, and error states. v-text-field handles text input with floating labels. v-select creates a styled dropdown. v-btn renders Material buttons with variants: flat, outlined, tonal, elevated. All support v-model for reactive binding.",
+      "codeExample": "<v-form @submit.prevent=\"submitMission\">\n  <v-text-field\n    v-model=\"pilotName\"\n    label=\"Pilot Name\"\n    variant=\"outlined\"\n    :rules=\"[v => !!v || 'Required']\"\n    prepend-inner-icon=\"mdi-account\"\n  ></v-text-field>\n\n  <v-select\n    v-model=\"sector\"\n    label=\"Sector\"\n    :items=\"['Alpha', 'Beta', 'Gamma']\"\n    variant=\"outlined\"\n  ></v-select>\n\n  <v-btn type=\"submit\" color=\"primary\" block>LAUNCH</v-btn>\n</v-form>",
+      "interactiveTip": "The :rules prop on Vuetify inputs accepts an array of functions — each receives the input value and returns true (valid) or an error string (invalid). Chain multiple rules for complex validation!"
+    },
+    {
+      "title": "Module 5: Navigation Components (v-app-bar, v-navigation-drawer)",
+      "desc": "Building responsive navigation systems with Material Design standards.",
+      "content": "v-app-bar creates a fixed top navigation bar with built-in scroll behavior. v-navigation-drawer creates a sliding side panel — collapsible on mobile, permanent on desktop. v-bottom-navigation creates mobile tab bars. All work together with v-app as the root layout container that coordinates component positioning.",
+      "codeExample": "<v-app>\n  <v-app-bar color=\"surface\" elevation=\"1\">\n    <v-app-bar-title>Mission Control</v-app-bar-title>\n    <v-btn icon=\"mdi-bell\"></v-btn>\n    <v-btn icon=\"mdi-cog\"></v-btn>\n  </v-app-bar>\n\n  <v-navigation-drawer v-model=\"drawer\" :rail=\"rail\">\n    <v-list-item prepend-icon=\"mdi-rocket\" title=\"Navigation\"></v-list-item>\n    <v-divider></v-divider>\n    <v-list-item to=\"/dashboard\" title=\"Dashboard\"></v-list-item>\n    <v-list-item to=\"/missions\" title=\"Missions\"></v-list-item>\n  </v-navigation-drawer>\n</v-app>",
+      "interactiveTip": "Use :rail=\"true\" on v-navigation-drawer to collapse the drawer to icon-only mode — perfect for sidebar navigation that saves space on smaller viewports!"
+    },
+    {
+      "title": "Module 6: Dialogs, Snackbars & Overlays",
+      "desc": "Creating user feedback layers with modals, notifications, and tooltips.",
+      "content": "v-dialog creates modal overlays bound to a boolean v-model. v-snackbar displays brief non-intrusive notifications at screen edges. v-tooltip shows contextual hints on hover. v-overlay creates a custom backdrop layer. All support transitions, positioning, and color theming from the global Vuetify configuration.",
+      "codeExample": "<!-- Dialog (Modal) -->\n<v-btn @click=\"dialog = true\">Open Mission Brief</v-btn>\n<v-dialog v-model=\"dialog\" max-width=\"500\">\n  <v-card>\n    <v-card-title>Mission Brief: Helios</v-card-title>\n    <v-card-text>Classified coordinates: 9.93°N, 76.26°E</v-card-text>\n    <v-card-actions>\n      <v-btn @click=\"dialog = false\">Close</v-btn>\n    </v-card-actions>\n  </v-card>\n</v-dialog>\n\n<!-- Snackbar (Toast notification) -->\n<v-snackbar v-model=\"snack\" color=\"success\">Mission Saved!</v-snackbar>",
+      "interactiveTip": "Set location=\"top\" on v-snackbar to show notifications at the top of the screen — better for critical alerts that must not be obscured by mobile keyboard when a form is open!"
+    },
+    {
+      "title": "Module 7: Data Tables & Advanced Components",
+      "desc": "Rendering sortable, searchable, paginated data tables for mission systems.",
+      "content": "v-data-table renders feature-rich data tables with column sorting, pagination, search filtering, and row selection all built in. Simply provide items (array) and headers (column definitions). The component handles all DOM rendering, pagination math, and sort logic automatically. Custom cell rendering is achieved via named slots.",
+      "codeExample": "<v-data-table\n  :headers=\"headers\"\n  :items=\"missions\"\n  :search=\"search\"\n  items-per-page=\"5\"\n>\n  <template #top>\n    <v-text-field v-model=\"search\" label=\"Search Missions\" prepend-icon=\"mdi-magnify\"></v-text-field>\n  </template>\n  <template #item.status=\"{ item }\">\n    <v-chip :color=\"item.status === 'Active' ? 'success' : 'warning'\">\n      {{ item.status }}\n    </v-chip>\n  </template>\n</v-data-table>",
+      "interactiveTip": "Named slots in v-data-table follow the pattern #item.columnKey to override how a specific column renders. You can inject any Vuetify component — chips, avatars, buttons — for rich cell display!"
+    }
+  ],
+  "sandboxInitialCode": "<!-- Vuetify Material Card Simulation -->\n<link href=\"https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap\" rel=\"stylesheet\">\n<div style=\"background: #121212; min-height: 200px; padding: 25px; font-family: Roboto, sans-serif;\">\n  <div style=\"background: #1e1e2e; border-radius: 12px; overflow: hidden; max-width: 380px; margin: 0 auto; box-shadow: 0 4px 20px rgba(0,0,0,0.5);\">\n    <div style=\"background: linear-gradient(135deg, #1867c0, #00ffcc); height: 120px; display: flex; align-items: flex-end; padding: 15px;\">\n      <h2 style=\"color: #fff; margin: 0; font-weight: 500;\">Mission Helios</h2>\n    </div>\n    <div style=\"padding: 20px;\">\n      <p style=\"color: #b0b0c0; font-size: 14px; margin: 0 0 15px;\">Sector Alpha — Year 2089. Deep space recon mission requiring elite pilot clearance.</p>\n      <div style=\"display: flex; gap: 8px; flex-wrap: wrap;\">\n        <span style=\"background: rgba(24,103,192,0.2); color: #1867c0; border: 1px solid #1867c0; border-radius: 20px; padding: 4px 12px; font-size: 12px;\">CLASSIFIED</span>\n        <span id=\"status-chip\" style=\"background: rgba(0,200,83,0.2); color: #00c853; border: 1px solid #00c853; border-radius: 20px; padding: 4px 12px; font-size: 12px; cursor: pointer;\" onclick=\"toggleStatus()\">ACTIVE</span>\n      </div>\n    </div>\n    <div style=\"padding: 8px 20px 15px; display: flex; gap: 10px; border-top: 1px solid rgba(255,255,255,0.08);\">\n      <button onclick=\"toggleStatus()\" style=\"background: rgba(24,103,192,0.15); border: 1px solid #1867c0; color: #1867c0; padding: 8px 16px; cursor: pointer; border-radius: 5px; font-size: 13px;\">Toggle Status</button>\n    </div>\n  </div>\n</div>\n<script>\n  let active = true;\n  window.toggleStatus = function() {\n    active = !active;\n    const chip = document.getElementById('status-chip');\n    chip.textContent = active ? 'ACTIVE' : 'STANDBY';\n    chip.style.background = active ? 'rgba(0,200,83,0.2)' : 'rgba(255,152,0,0.2)';\n    chip.style.color = active ? '#00c853' : '#ff9800';\n    chip.style.borderColor = active ? '#00c853' : '#ff9800';\n  };\n</script>",
+  "quiz": [
+    {
+      "question": "Which Vuetify component creates the root application layout?",
+      "options": ["v-container", "v-layout", "v-app", "v-main"],
+      "answer": 2,
+      "explanation": "v-app is the mandatory root component that coordinates the positioning of all Vuetify layout components (app-bar, navigation-drawer, main, footer). All Vuetify apps must be wrapped in v-app."
+    },
+    {
+      "question": "What does the 'elevation' prop control in Vuetify?",
+      "options": [
+        "The z-index stacking order",
+        "The box-shadow depth to simulate Material Design physical elevation",
+        "The component's vertical scroll position",
+        "The number of nested grid columns"
+      ],
+      "answer": 1,
+      "explanation": "Elevation (0-24) controls the box-shadow depth of components like v-card and v-btn — simulating physical elevation as defined in the Material Design specification."
+    },
+    {
+      "question": "How does Vuetify's grid system handle responsiveness?",
+      "options": [
+        "JavaScript reads window width and swaps classes manually",
+        "Breakpoint props (cols, sm, md, lg) on v-col set column spans at different screen sizes",
+        "A separate responsive.json config maps breakpoints to templates",
+        "The v-row component uses a ResizeObserver internally"
+      ],
+      "answer": 1,
+      "explanation": "Vuetify v-col accepts breakpoint props that map to CSS media queries — cols (always), sm (≥600px), md (≥960px), lg (≥1280px), xl (≥1920px). These control how many of the 12 columns each item spans."
+    }
+  ],
+  "quest": {
+    "title": "Quest: Code the Mission Dashboard Layout",
+    "challenge": "Build a full Vuetify layout with a navigation drawer, app bar, and a responsive grid of mission cards.",
+    "instructions": [
+      "1. Wrap the entire app in v-app with a dark theme.",
+      "2. Add a v-app-bar with the title 'Mission Control' and two icon buttons.",
+      "3. Add a v-navigation-drawer with 4 list items for navigation links.",
+      "4. In v-main, use v-container with v-row to render 6 v-cards in a responsive 3-column grid.",
+      "5. Each card should display a mission name, status chip (green/orange), and an action button."
+    ]
+  }
+}

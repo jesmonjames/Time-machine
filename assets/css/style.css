@@ -1194,6 +1194,7 @@ body:not(.theme-desert) .card:nth-child(4)::before {
   text-transform: uppercase;
   transition: all 0.2s;
   letter-spacing: 1px;
+  text-decoration: none;
 }
 
 .skills-tags .tag:hover,

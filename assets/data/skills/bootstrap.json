@@ -1,0 +1,104 @@
+{
+  "id": "bootstrap",
+  "name": "Bootstrap",
+  "fullName": "Bootstrap 5 CSS Framework",
+  "color": "#7952b3",
+  "difficulty": "Beginner",
+  "estTime": "3 Hours",
+  "tagline": "Rapid mission scaffolding with precision utility engineering.",
+  "timeTravelLog": "Originally created at Twitter in 2011, Bootstrap became the most-used open-source CSS framework ever. Bootstrap 5 dropped jQuery dependency, making it lighter and faster than ever.",
+  "overview": "Bootstrap 5 is a powerful, mobile-first CSS framework providing a responsive grid, pre-styled components, and utility classes. It enables rapid UI construction without writing extensive custom CSS.",
+  "syllabus": [
+    {
+      "title": "Module 1: CDN Setup & Utility Philosophy",
+      "desc": "Adding Bootstrap to a project and understanding the utility-first mindset.",
+      "content": "Bootstrap can be added via CDN link tags in the HTML head — no build tools required. Its utility classes apply single CSS properties directly in HTML: mt-3 adds margin-top, p-4 adds padding, text-center centers text. This eliminates repetitive CSS for common styling patterns.",
+      "codeExample": "<!-- Bootstrap 5 CDN in <head> -->\n<link rel=\"stylesheet\" href=\"https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css\">\n<script defer src=\"https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js\"></script>\n\n<!-- Utility classes in action -->\n<div class=\"mt-4 p-3 text-center bg-dark text-white rounded shadow\">\n  Mission Control Interface\n</div>",
+      "interactiveTip": "Bootstrap 5 removed jQuery as a dependency — the bundle.min.js includes Popper.js for dropdowns and tooltips. Always use bootstrap.bundle.min.js, NOT bootstrap.min.js alone!"
+    },
+    {
+      "title": "Module 2: Responsive Grid (Containers, Rows, Cols)",
+      "desc": "Building adaptive 12-column layouts that reflow across all screen sizes.",
+      "content": "Bootstrap's 12-column grid uses container > row > col structure. Column classes specify how many of the 12 columns an element should span: col-6 = 50% width. Breakpoint prefixes make columns responsive: col-sm-6 col-md-4 col-lg-3 — each breakpoint applies from that size upward.",
+      "codeExample": "<div class=\"container\">\n  <div class=\"row g-3\">\n    <!-- 12 on mobile, 6 on tablet, 4 on desktop -->\n    <div class=\"col-12 col-sm-6 col-md-4\">\n      <div class=\"card h-100\">Alpha Sector</div>\n    </div>\n    <div class=\"col-12 col-sm-6 col-md-4\">\n      <div class=\"card h-100\">Beta Sector</div>\n    </div>\n    <div class=\"col-12 col-sm-12 col-md-4\">\n      <div class=\"card h-100\">Gamma Sector</div>\n    </div>\n  </div>\n</div>",
+      "interactiveTip": "The g-3 class on the row sets a gutter (gap) between columns — g-1 through g-5. This replaces the old padding-based gutter method and applies both horizontal and vertical gutters!"
+    },
+    {
+      "title": "Module 3: Components (Cards, Badges, Alerts, Buttons)",
+      "desc": "Using Bootstrap's pre-built UI components to build interfaces instantly.",
+      "content": "Bootstrap ships dozens of pre-styled components. Cards provide flexible content containers. Badges display status indicators. Alerts show dismissible notification bars. Buttons come in 8 semantic color variants with filled, outlined, and link styles. All components are mobile-ready and accessible out of the box.",
+      "codeExample": "<!-- Card component -->\n<div class=\"card border-info bg-dark text-white\" style=\"max-width:320px\">\n  <div class=\"card-body\">\n    <h5 class=\"card-title\">\n      Sector 7 <span class=\"badge bg-success ms-2\">ONLINE</span>\n    </h5>\n    <p class=\"card-text text-secondary\">Deep space telemetry active.</p>\n    <a href=\"#\" class=\"btn btn-outline-info btn-sm\">View Data</a>\n  </div>\n</div>\n\n<!-- Alert -->\n<div class=\"alert alert-warning alert-dismissible fade show\" role=\"alert\">\n  Fuel reserves at 15% — initiate refuel protocol!\n  <button type=\"button\" class=\"btn-close\" data-bs-dismiss=\"alert\"></button>\n</div>",
+      "interactiveTip": "Bootstrap buttons accept block-level display using the d-grid class on the parent: <div class=\"d-grid\"><button class=\"btn btn-primary\"> — this is the Bootstrap 5 way of creating full-width buttons!"
+    },
+    {
+      "title": "Module 4: Navbar & Navigation",
+      "desc": "Building responsive navigation bars that collapse gracefully on mobile.",
+      "content": "Bootstrap's navbar component creates a fully responsive navigation system. The navbar-toggler button is shown on mobile and triggers the collapsible menu via data-bs-toggle. Use navbar-expand-{breakpoint} to control when the menu collapses. Supports dropdowns, brand logos, and form controls inline.",
+      "codeExample": "<nav class=\"navbar navbar-expand-lg navbar-dark bg-dark px-3\">\n  <a class=\"navbar-brand\" href=\"#\">JES-007</a>\n  <button class=\"navbar-toggler\" type=\"button\"\n    data-bs-toggle=\"collapse\"\n    data-bs-target=\"#navMenu\">\n    <span class=\"navbar-toggler-icon\"></span>\n  </button>\n  <div class=\"collapse navbar-collapse\" id=\"navMenu\">\n    <ul class=\"navbar-nav ms-auto\">\n      <li class=\"nav-item\"><a class=\"nav-link\" href=\"#\">Home</a></li>\n      <li class=\"nav-item\"><a class=\"nav-link\" href=\"#\">Skills</a></li>\n      <li class=\"nav-item\"><a class=\"nav-link\" href=\"#\">Contact</a></li>\n    </ul>\n  </div>\n</nav>",
+      "interactiveTip": "The data-bs-toggle and data-bs-target attributes are Bootstrap's JavaScript attribute API — they wire interactive behavior without writing any JavaScript code yourself!"
+    },
+    {
+      "title": "Module 5: Modals, Dropdowns & Offcanvas",
+      "desc": "Adding interactive overlay components using Bootstrap's JavaScript data API.",
+      "content": "Modals create dialog overlays. Dropdowns create togglable menus. Offcanvas creates side panels that slide in from any edge. All are activated via data attributes (data-bs-toggle) without writing JavaScript. Bootstrap's JavaScript library handles the toggle logic, animation, backdrop, and keyboard escape automatically.",
+      "codeExample": "<!-- Trigger button -->\n<button class=\"btn btn-primary\" data-bs-toggle=\"modal\" data-bs-target=\"#missionModal\">\n  View Mission Brief\n</button>\n\n<!-- Modal Structure -->\n<div class=\"modal fade\" id=\"missionModal\">\n  <div class=\"modal-dialog modal-dialog-centered\">\n    <div class=\"modal-content bg-dark text-white\">\n      <div class=\"modal-header border-secondary\">\n        <h5 class=\"modal-title\">Mission: Helios</h5>\n        <button class=\"btn-close btn-close-white\" data-bs-dismiss=\"modal\"></button>\n      </div>\n      <div class=\"modal-body\">Classified coordinates: 9.93°N, 76.26°E</div>\n    </div>\n  </div>\n</div>",
+      "interactiveTip": "Bootstrap modals can be controlled via JavaScript: const modal = new bootstrap.Modal('#missionModal'); modal.show(); — useful when you need to trigger modals programmatically after an API call!"
+    },
+    {
+      "title": "Module 6: Flexbox & Spacing Utilities",
+      "desc": "Fine-tuning layout, alignment, and spacing using Bootstrap's utility vocabulary.",
+      "content": "Bootstrap exposes full Flexbox control via utility classes: d-flex, justify-content-{value}, align-items-{value}, flex-column, gap-{n}. Spacing utilities follow the pattern {property}{sides}-{size}: mt-3 (margin top), px-4 (padding x-axis), ms-auto (margin-start auto to push elements right).",
+      "codeExample": "<!-- Flex center alignment -->\n<div class=\"d-flex justify-content-center align-items-center gap-3 py-4\">\n  <span class=\"badge bg-primary\">ALPHA</span>\n  <span class=\"badge bg-info\">BETA</span>\n  <span class=\"badge bg-warning\">GAMMA</span>\n</div>\n\n<!-- Push item to far right with ms-auto -->\n<div class=\"d-flex align-items-center\">\n  <span>Mission Status</span>\n  <span class=\"ms-auto badge bg-success\">ONLINE</span>\n</div>",
+      "interactiveTip": "ms-auto (margin-start: auto) pushes a flex item to the far right of the container. It is Bootstrap's replacement for float: right — modern, predictable, and side-effect free!"
+    },
+    {
+      "title": "Module 7: Dark Mode & Custom Theming (Bootstrap 5.3+)",
+      "desc": "Enabling built-in dark mode and customizing Bootstrap design tokens.",
+      "content": "Bootstrap 5.3 introduced a native color mode system. Setting data-bs-theme=\"dark\" on <html> or any parent element switches the entire UI to dark mode automatically. Custom themes override Sass variables before compilation, or CSS custom properties at runtime for zero-build customization.",
+      "codeExample": "<!-- Enable dark mode globally -->\n<html data-bs-theme=\"dark\">\n\n<!-- Toggle dark mode with JS -->\n<button onclick=\"toggleTheme()\">Toggle Theme</button>\n<script>\n  function toggleTheme() {\n    const html = document.documentElement;\n    const current = html.getAttribute('data-bs-theme');\n    html.setAttribute('data-bs-theme', current === 'dark' ? 'light' : 'dark');\n  }\n</script>\n\n<!-- Override Bootstrap CSS variables locally -->\n<div style=\"--bs-primary: #00ffcc; --bs-primary-rgb: 0, 255, 204;\">\n  <button class=\"btn btn-primary\">Neon Button</button>\n</div>",
+      "interactiveTip": "Bootstrap 5.3's CSS variable overrides work without Sass — set --bs-primary at the :root level in your stylesheet to change the primary color across all components site-wide!"
+    }
+  ],
+  "sandboxInitialCode": "<!-- Bootstrap 5 Live Sandbox -->\n<link rel=\"stylesheet\" href=\"https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css\">\n<script defer src=\"https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js\"></script>\n\n<div data-bs-theme=\"dark\" style=\"padding: 20px; background: #111;\">\n  <div class=\"card border-purple\" style=\"max-width: 400px; margin: 0 auto; border-color: #7952b3 !important;\">\n    <div class=\"card-header\" style=\"background: rgba(121,82,179,0.2); border-color: #7952b3;\">\n      <span class=\"badge\" style=\"background: #7952b3;\">Bootstrap 5</span> Mission Card\n    </div>\n    <div class=\"card-body\">\n      <h5 class=\"card-title\">Operation Nexus <span class=\"badge bg-success ms-2\" id=\"bs-status-badge\">ACTIVE</span></h5>\n      <p class=\"card-text text-secondary\">Modify classes to see Bootstrap utilities in action!</p>\n      <div class=\"d-flex gap-2\">\n        <button class=\"btn btn-sm\" style=\"background: #7952b3; color: #fff;\" onclick=\"toggleBsStatus()\">Toggle Status</button>\n        <button class=\"btn btn-sm btn-outline-info\">Details</button>\n      </div>\n    </div>\n  </div>\n</div>\n<script>\n  window.toggleBsStatus = function() {\n    const badge = document.getElementById('bs-status-badge');\n    const isActive = badge.textContent === 'ACTIVE';\n    badge.textContent = isActive ? 'STANDBY' : 'ACTIVE';\n    badge.className = 'badge ms-2 ' + (isActive ? 'bg-warning text-dark' : 'bg-success');\n  };\n</script>",
+  "quiz": [
+    {
+      "question": "What does the Bootstrap class 'mt-4' apply?",
+      "options": ["margin-bottom: 4px", "margin-top with spacing scale 4", "max-width: 400px", "media-trigger at 4th breakpoint"],
+      "answer": 1,
+      "explanation": "Bootstrap spacing utilities follow the pattern {property}{sides}-{size}. 'm' = margin, 't' = top, '4' = spacing scale 4 (which is 1.5rem by default in Bootstrap's $spacer scale)."
+    },
+    {
+      "question": "How do you make a Bootstrap 5 navbar collapse on mobile?",
+      "options": [
+        "Add a CSS @media query to hide nav items below 768px",
+        "Use navbar-collapse class with data-bs-toggle on the toggler button",
+        "Import a separate mobile.css from the CDN",
+        "Set navbar-mobile=\"true\" as an attribute"
+      ],
+      "answer": 1,
+      "explanation": "Bootstrap's collapse functionality is driven by the data-bs-toggle and data-bs-target attributes — no custom JavaScript needed. The navbar-expand-{breakpoint} class controls when the collapse triggers."
+    },
+    {
+      "question": "Which Bootstrap 5.3+ attribute enables dark mode for the entire page?",
+      "options": [
+        "class=\"dark-mode\" on the body",
+        "data-bs-theme=\"dark\" on the html element",
+        "Setting --bs-dark: true in CSS variables",
+        "Including bootstrap.dark.css from CDN"
+      ],
+      "answer": 1,
+      "explanation": "Bootstrap 5.3 introduced a native color mode system. data-bs-theme=\"dark\" on the <html> tag (or any parent container) activates dark mode styles across all Bootstrap components within that scope."
+    }
+  ],
+  "quest": {
+    "title": "Quest: Code the Mission Control Interface",
+    "challenge": "Build a responsive Bootstrap 5 dashboard with a navbar, hero section, and a 3-column card grid.",
+    "instructions": [
+      "1. Add Bootstrap 5 CDN links to an HTML file and enable dark mode with data-bs-theme=\"dark\".",
+      "2. Create a navbar with brand name and 3 nav links that collapse on mobile.",
+      "3. Add a full-width hero section using jumbotron-style utilities (text-center, py-5, bg-dark).",
+      "4. Create a container with 6 mission cards in a responsive 3-column grid (col-12 col-sm-6 col-lg-4).",
+      "5. Each card must have a title, status badge (bg-success or bg-warning), and an outline button."
+    ]
+  }
+}

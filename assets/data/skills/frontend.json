@@ -1,0 +1,109 @@
+{
+  "id": "frontend",
+  "name": "Frontend",
+  "fullName": "Frontend Development",
+  "color": "var(--accent-cyan, #00e5ff)",
+  "difficulty": "Intermediate",
+  "estTime": "4 Hours",
+  "tagline": "Architecting the visible universe of the digital frontier.",
+  "timeTravelLog": "Frontend engineering as a discipline emerged in the early 2000s as websites evolved from static documents into complex interactive applications — birthing an entirely new engineering specialty.",
+  "overview": "Frontend development encompasses all the technologies and techniques used to build the user-facing layer of web applications — from HTML structure and CSS aesthetics to JavaScript behavior, performance optimization, and accessibility.",
+  "syllabus": [
+    {
+      "title": "Module 1: The Frontend Triad (HTML + CSS + JS Coordination)",
+      "desc": "Understanding how HTML, CSS, and JavaScript work as a unified system.",
+      "content": "Every frontend system is built on three coordinated layers: HTML defines the structural skeleton (what exists), CSS defines the visual presentation (how it looks), and JavaScript defines the behavioral logic (how it responds). Separating these layers is called 'Separation of Concerns' — a core frontend engineering principle that keeps codebases maintainable.",
+      "codeExample": "<!-- HTML: Structure -->\n<button id=\"warp-btn\" class=\"neon-btn\">ACTIVATE WARP</button>\n\n<!-- CSS: Presentation (in style.css) -->\n.neon-btn {\n  border: 2px solid #00ffcc;\n  color: #00ffcc;\n  background: transparent;\n  transition: all 0.3s ease;\n}\n.neon-btn:hover { background: #00ffcc; color: #000; }\n\n// JavaScript: Behavior (in main.js)\ndocument.getElementById('warp-btn').addEventListener('click', () => {\n  document.body.classList.toggle('warp-active');\n});",
+      "interactiveTip": "Violations of Separation of Concerns — like styling in JS or logic in HTML — make code 10x harder to maintain and debug. Always keep structure, style, and behavior in separate files!"
+    },
+    {
+      "title": "Module 2: Browser Architecture (Critical Rendering Path)",
+      "desc": "How the browser transforms HTML, CSS, and JS into pixels on screen.",
+      "content": "Understanding the browser's rendering pipeline is essential for performance. The browser parses HTML to build the DOM tree, parses CSS to build the CSSOM tree, combines them into a Render Tree, calculates Layout (geometry), then Paints pixels. JavaScript can block parsing unless marked async or defer. Render-blocking resources are the #1 cause of slow page loads.",
+      "codeExample": "<!-- BLOCKING: parser stops here to download & execute -->\n<script src=\"heavy-lib.js\"></script>\n\n<!-- DEFERRED: downloads in parallel, executes after DOM parse -->\n<script src=\"main.js\" defer></script>\n\n<!-- ASYNC: downloads in parallel, executes immediately when ready -->\n<script src=\"analytics.js\" async></script>\n\n<!-- PRELOAD: downloads immediately at highest priority -->\n<link rel=\"preload\" href=\"hero-font.woff2\" as=\"font\" crossorigin>",
+      "interactiveTip": "Always use defer on your main scripts and async on non-critical third-party scripts. This prevents render-blocking and can improve Time To Interactive by 30-60% on first load!"
+    },
+    {
+      "title": "Module 3: Performance Engineering (Core Web Vitals)",
+      "desc": "Measuring and optimizing frontend performance for real-world users.",
+      "content": "Google's Core Web Vitals measure real user experience: LCP (Largest Contentful Paint) measures perceived load speed — target under 2.5s. CLS (Cumulative Layout Shift) measures visual stability — target under 0.1. INP (Interaction to Next Paint) measures responsiveness to inputs — target under 200ms. These directly impact SEO rankings.",
+      "codeExample": "// Measure Core Web Vitals with web-vitals library\nimport { getLCP, getCLS, getINP } from 'web-vitals';\n\ngetLCP(metric => console.log('LCP:', metric.value));\ngetCLS(metric => console.log('CLS:', metric.value));\ngetINP(metric => console.log('INP:', metric.value));\n\n// Prevent CLS: always set width and height on images\n<img src=\"mission-photo.jpg\" width=\"800\" height=\"600\" alt=\"Mission\" loading=\"lazy\">\n\n// Lazy load below-fold images\n<img src=\"deep-space.jpg\" loading=\"lazy\" decoding=\"async\">",
+      "interactiveTip": "The single biggest CLS fix: always set width and height attributes on <img> tags. Without them, the browser reserves no space and content shifts down when the image loads — crashing your CLS score!"
+    },
+    {
+      "title": "Module 4: Responsive Design (Mobile-First Architecture)",
+      "desc": "Building interfaces that adapt flawlessly across all screen dimensions.",
+      "content": "Mobile-first design writes base CSS for the smallest screen, then progressively enhances for larger viewports using min-width media queries. Key techniques: flexible grids (CSS Grid / Flexbox), fluid images (max-width: 100%), viewport meta tag, and CSS clamp() for fluid typography that scales smoothly between breakpoints.",
+      "codeExample": "/* Mobile-first base styles */\n.mission-grid {\n  display: grid;\n  grid-template-columns: 1fr;\n  gap: 15px;\n  padding: 15px;\n}\n\n/* Progressive enhancement */\n@media (min-width: 768px) {\n  .mission-grid { grid-template-columns: 1fr 1fr; }\n}\n@media (min-width: 1024px) {\n  .mission-grid { grid-template-columns: repeat(3, 1fr); }\n}\n\n/* Fluid typography */\nh1 { font-size: clamp(1.5rem, 4vw, 3rem); }",
+      "interactiveTip": "Test every design on actual mobile devices — Chrome DevTools device emulation is helpful for initial checks, but real touch hardware reveals scroll jank, tap target issues, and font rendering that emulators miss!"
+    },
+    {
+      "title": "Module 5: Accessibility (WCAG & ARIA)",
+      "desc": "Engineering inclusive interfaces usable by everyone, including assistive technology users.",
+      "content": "Web Content Accessibility Guidelines (WCAG) define four principles: Perceivable, Operable, Understandable, and Robust. Key practices include proper semantic HTML, sufficient color contrast ratios (4.5:1 for normal text), keyboard navigability, focus indicators, meaningful alt text, and ARIA roles for complex custom widgets.",
+      "codeExample": "<!-- Semantic HTML for built-in accessibility -->\n<button type=\"button\" id=\"launch-btn\" aria-label=\"Launch Mission Helios\">\n  LAUNCH\n</button>\n\n<!-- ARIA live region for dynamic updates -->\n<div id=\"status-feed\" aria-live=\"polite\" aria-atomic=\"true\">\n  Status: All Systems Nominal\n</div>\n\n<!-- Skip navigation link for keyboard users -->\n<a href=\"#main-content\" class=\"skip-link\">Skip to main content</a>\n\n<!-- Always include alt text -->\n<img src=\"radar.png\" alt=\"Circular radar screen showing 3 contacts at bearing 045\">",
+      "interactiveTip": "Install the Axe DevTools Chrome extension for instant accessibility audit reports. All automated tests together catch about 30% of accessibility issues — always combine with manual keyboard testing!"
+    },
+    {
+      "title": "Module 6: Asset Optimization (Images, Fonts & Bundlers)",
+      "desc": "Minimizing payload sizes to achieve sub-second load times.",
+      "content": "Asset optimization is critical for performance: Use WebP/AVIF formats for images (60-80% smaller than JPEG). Use WOFF2 for fonts with font-display: swap to prevent invisible text. Bundle and minify JavaScript with Vite or webpack. Tree-shake unused code. Code-split large bundles per route. Serve assets via CDN with cache-control headers.",
+      "codeExample": "/* CSS font with swap for performance */\n@font-face {\n  font-family: 'InterStella';\n  src: url('/fonts/interstella.woff2') format('woff2');\n  font-display: swap; /* Prevents invisible text flash */\n}\n\n<!-- Responsive image with WebP and fallback -->\n<picture>\n  <source srcset=\"hero.avif\" type=\"image/avif\">\n  <source srcset=\"hero.webp\" type=\"image/webp\">\n  <img src=\"hero.jpg\" alt=\"Space station\" width=\"1200\" height=\"630\">\n</picture>",
+      "interactiveTip": "Google's Lighthouse tool (F12 → Lighthouse tab) gives a comprehensive audit score covering Performance, Accessibility, SEO, and Best Practices — run it on every page before launch!"
+    },
+    {
+      "title": "Module 7: Frontend Toolchain (Vite, ESLint, Git Workflow)",
+      "desc": "Setting up a professional development environment and code quality pipeline.",
+      "content": "A professional frontend toolkit includes: a fast dev server and bundler (Vite), a linter (ESLint) for code quality, a formatter (Prettier) for style consistency, a version control system (Git), and a CI/CD pipeline for automated deployment. Mastering the toolchain is as important as mastering the languages themselves.",
+      "codeExample": "# Initialize a Vite + Vanilla JS project\nnpm create vite@latest my-mission-app -- --template vanilla\ncd my-mission-app && npm install\n\n# Install ESLint and Prettier\nnpm install -D eslint prettier\n\n# Git workflow\ngit init\ngit add .\ngit commit -m \"feat: initialize mission control UI\"\ngit push -u origin main\n\n# Build for production\nnpm run build   # outputs minified files to /dist",
+      "interactiveTip": "Use Conventional Commits format for all commit messages: feat:, fix:, docs:, refactor:, perf:, test:, chore:. This enables auto-generated changelogs and makes git history scannable at a glance!"
+    }
+  ],
+  "sandboxInitialCode": "<!-- Frontend Engineering Sandbox: Build something responsive! -->\n<style>\n  .fe-grid {\n    display: grid;\n    grid-template-columns: 1fr;\n    gap: 12px;\n    padding: 15px;\n    background: #0a0f1e;\n    border: 2px solid #00e5ff;\n    border-radius: 8px;\n    font-family: 'Segoe UI', sans-serif;\n  }\n  @media (min-width: 500px) { .fe-grid { grid-template-columns: 1fr 1fr; } }\n  .fe-card {\n    background: rgba(0,229,255,0.05);\n    border: 1px solid rgba(0,229,255,0.3);\n    border-radius: 6px;\n    padding: 15px;\n    color: #ffffff;\n    transition: transform 0.2s, box-shadow 0.2s;\n    cursor: pointer;\n  }\n  .fe-card:hover {\n    transform: translateY(-3px);\n    box-shadow: 0 8px 20px rgba(0,229,255,0.2);\n  }\n  .fe-label { font-size: 10px; color: #00e5ff; text-transform: uppercase; letter-spacing: 1px; }\n</style>\n<div class=\"fe-grid\">\n  <div class=\"fe-card\"><div class=\"fe-label\">Module 1</div><h3 style=\"margin:8px 0 0;\">HTML</h3><p style=\"color:#888;font-size:13px;margin:5px 0 0;\">Structure</p></div>\n  <div class=\"fe-card\"><div class=\"fe-label\">Module 2</div><h3 style=\"margin:8px 0 0;\">CSS</h3><p style=\"color:#888;font-size:13px;margin:5px 0 0;\">Presentation</p></div>\n  <div class=\"fe-card\"><div class=\"fe-label\">Module 3</div><h3 style=\"margin:8px 0 0;\">JavaScript</h3><p style=\"color:#888;font-size:13px;margin:5px 0 0;\">Behavior</p></div>\n  <div class=\"fe-card\"><div class=\"fe-label\">Module 4</div><h3 style=\"margin:8px 0 0;\">Performance</h3><p style=\"color:#888;font-size:13px;margin:5px 0 0;\">Speed</p></div>\n</div>",
+  "quiz": [
+    {
+      "question": "What does 'mobile-first' design mean?",
+      "options": [
+        "Building a native mobile app before the web version",
+        "Writing base CSS for small screens and using min-width media queries to enhance for larger screens",
+        "Hiding all desktop content on mobile using display:none",
+        "Loading a separate CSS file for mobile users"
+      ],
+      "answer": 1,
+      "explanation": "Mobile-first means writing your baseline styles for small screens, then using min-width media queries to progressively add or modify styles as the viewport grows. This produces leaner, faster code."
+    },
+    {
+      "question": "What is LCP (Largest Contentful Paint) measuring?",
+      "options": [
+        "The file size of the largest image on the page",
+        "The total number of DOM nodes",
+        "When the largest visible content element finishes rendering",
+        "How long JavaScript takes to execute"
+      ],
+      "answer": 2,
+      "explanation": "LCP measures the render time of the largest image or text block visible to the user. A good LCP is under 2.5 seconds. It is a key Core Web Vital that Google uses as a search ranking signal."
+    },
+    {
+      "question": "What does the 'defer' attribute on a script tag do?",
+      "options": [
+        "Prevents the script from loading until the user interacts",
+        "Downloads the script in parallel and executes it after the HTML parsing completes",
+        "Makes the script run only on mobile devices",
+        "Loads the script only if the previous script succeeded"
+      ],
+      "answer": 1,
+      "explanation": "defer downloads the script in parallel with HTML parsing and executes it after the DOM is fully parsed. It is non-blocking and respects script order — ideal for all main application scripts."
+    }
+  ],
+  "quest": {
+    "title": "Quest: Build a Fully Optimized Profile Page",
+    "challenge": "Create a performance-optimized, accessible, mobile-first personal page using semantic HTML.",
+    "instructions": [
+      "1. Write semantic HTML with header, main, section, and footer — no divs for structural layout.",
+      "2. Add proper meta tags: charset, viewport, description, and a title.",
+      "3. Use CSS Grid with mobile-first media queries for a 2-column bio + skills layout.",
+      "4. Add alt text to all images and ensure all buttons have accessible labels.",
+      "5. Add defer to all script tags and use font-display: swap on any custom fonts."
+    ]
+  }
+}

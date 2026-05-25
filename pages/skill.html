@@ -1,0 +1,626 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <!-- PRIMARY SEO -->
+  <title>Temporal Skill Academy | Interactive Learning Module</title>
+  <meta name="description"
+    content="Interactive educational terminal for learning core web and development skills, featuring real-time code execution, step-by-step modules, and graded quizzes.">
+  <meta name="keywords"
+    content="Skill Academy, interactive coding, code sandbox, programming quiz, learn development, Time Machine portfolio">
+  <meta name="author" content="Jesmon K J">
+  <meta name="robots" content="index, follow">
+
+  <link rel="stylesheet" href="../assets/css/style.css">
+  <link rel="stylesheet" href="../assets/css/ai-bot.css">
+  <link
+    href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700&family=Space+Mono:ital,wght@0,400;0,700;1,400&family=Black+Ops+One&family=Stardos+Stencil:wght@400;700&family=Goldman:wght@400;700&family=Wallpoet&family=Share+Tech+Mono&family=Roboto+Mono:wght@400;700&family=Courier+Prime:wght@400;700&display=swap"
+    rel="stylesheet">
+
+  <style>
+    /* ACADEMY STYLE OVERRIDES */
+    .academy-header-card {
+      background: linear-gradient(135deg, rgba(0, 0, 0, 0.4) 0%, rgba(255, 255, 255, 0.02) 100%);
+      border: 2px solid var(--border-color);
+      padding: 30px;
+      margin-bottom: 30px;
+      border-radius: 4px;
+      position: relative;
+    }
+
+    .academy-title-badge {
+      display: inline-block;
+      font-family: 'Share Tech Mono', monospace;
+      font-size: 11px;
+      letter-spacing: 2px;
+      padding: 4px 10px;
+      background: var(--text-main);
+      color: var(--bg-color);
+      margin-bottom: 15px;
+      font-weight: bold;
+      text-transform: uppercase;
+      box-shadow: var(--text-glow);
+    }
+
+    .academy-header-grid {
+      display: grid;
+      grid-template-columns: 2fr 1fr;
+      gap: 30px;
+      align-items: center;
+    }
+
+    .academy-meta-chips {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 15px;
+      margin-top: 15px;
+    }
+
+    .meta-chip {
+      font-family: 'Share Tech Mono', monospace;
+      font-size: 11px;
+      border: 1px solid var(--border-color);
+      padding: 4px 10px;
+      background: rgba(0, 0, 0, 0.3);
+      color: var(--text-muted);
+    }
+
+    .meta-chip span {
+      color: var(--text-main);
+      font-weight: bold;
+    }
+
+    /* ACCORDION CURRICULUM */
+    .module-accordion-item {
+      border: 1px solid var(--border-color);
+      background: rgba(0, 0, 0, 0.15);
+      margin-bottom: 12px;
+      transition: all 0.3s ease;
+    }
+
+    .module-accordion-item.active {
+      border-color: var(--text-main);
+      box-shadow: 0 0 15px rgba(255, 255, 255, 0.03);
+    }
+
+    .module-header {
+      padding: 15px 20px;
+      cursor: pointer;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      background: rgba(0, 0, 0, 0.3);
+      font-family: 'Share Tech Mono', monospace;
+      font-size: 14px;
+      letter-spacing: 1px;
+      user-select: none;
+      transition: background 0.2s;
+    }
+
+    .module-header:hover {
+      background: rgba(255, 255, 255, 0.03);
+    }
+
+    .module-body {
+      display: none;
+      padding: 20px;
+      border-top: 1px solid var(--border-color);
+      font-size: 13px;
+      line-height: 1.7;
+      color: var(--text-muted);
+      animation: tacticalFadeIn 0.3s ease-out;
+    }
+
+    .module-accordion-item.active .module-body {
+      display: block;
+    }
+
+    .code-snippet-box {
+      background: #000;
+      border: 1px solid var(--border-color);
+      padding: 15px;
+      font-family: 'Space Mono', monospace;
+      font-size: 11px;
+      color: var(--text-main);
+      overflow-x: auto;
+      margin: 15px 0;
+      white-space: pre;
+    }
+
+    .interactive-tip-box {
+      border-left: 3px solid var(--text-main);
+      padding-left: 15px;
+      font-style: italic;
+      margin-top: 15px;
+      font-size: 12px;
+      color: var(--text-main);
+    }
+
+    /* CODE SANDBOX */
+    .sandbox-container {
+      display: flex;
+      flex-direction: column;
+      border: 1px solid var(--border-color);
+      background: #000;
+    }
+
+    .sandbox-editor-header {
+      padding: 10px 20px;
+      background: rgba(255, 255, 255, 0.05);
+      border-bottom: 1px solid var(--border-color);
+      font-family: 'Share Tech Mono', monospace;
+      font-size: 12px;
+      color: var(--text-main);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .sandbox-textarea {
+      width: 100%;
+      height: 180px;
+      background: #050b14;
+      color: #00ffcc;
+      border: none;
+      padding: 15px;
+      font-family: 'Space Mono', monospace;
+      font-size: 12px;
+      line-height: 1.5;
+      resize: vertical;
+      outline: none;
+      box-sizing: border-box;
+    }
+
+    .sandbox-preview-label {
+      padding: 8px 20px;
+      background: rgba(255, 255, 255, 0.02);
+      border-top: 1px solid var(--border-color);
+      border-bottom: 1px solid var(--border-color);
+      font-family: 'Share Tech Mono', monospace;
+      font-size: 11px;
+      color: var(--text-muted);
+    }
+
+    .sandbox-preview-pane {
+      background: #ffffff;
+      color: #000000;
+      min-height: 180px;
+      padding: 20px;
+      box-sizing: border-box;
+      position: relative;
+      overflow: auto;
+    }
+
+    /* CYBER QUIZ */
+    .quiz-question-card {
+      border: 1px solid var(--border-color);
+      background: rgba(0, 0, 0, 0.2);
+      padding: 20px;
+      margin-bottom: 20px;
+      border-radius: 4px;
+    }
+
+    .quiz-question-title {
+      font-family: 'Share Tech Mono', monospace;
+      font-size: 14px;
+      color: var(--text-main);
+      margin-bottom: 15px;
+      line-height: 1.5;
+    }
+
+    .quiz-options-list {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    .quiz-option-btn {
+      background: rgba(0, 0, 0, 0.4);
+      border: 1px solid var(--border-color);
+      color: var(--text-muted);
+      padding: 12px 18px;
+      font-family: 'Space Mono', monospace;
+      font-size: 12px;
+      text-align: left;
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+
+    .quiz-option-btn:hover {
+      border-color: var(--text-main);
+      color: var(--text-main);
+      background: rgba(255, 255, 255, 0.02);
+    }
+
+    .quiz-option-btn.selected {
+      border-color: var(--text-main);
+      color: var(--bg-color);
+      background: var(--text-main);
+      box-shadow: var(--text-glow);
+    }
+
+    .quiz-option-btn.correct {
+      border-color: var(--accent-green);
+      background: rgba(0, 255, 100, 0.1);
+      color: var(--accent-green);
+    }
+
+    .quiz-option-btn.incorrect {
+      border-color: var(--accent-red);
+      background: rgba(255, 0, 80, 0.1);
+      color: var(--accent-red);
+    }
+
+    .quiz-feedback-box {
+      margin-top: 15px;
+      padding: 12px 15px;
+      font-size: 12px;
+      line-height: 1.6;
+      display: none;
+      animation: tacticalFadeIn 0.3s ease-out;
+    }
+
+    .quiz-feedback-box.correct {
+      display: block;
+      border-left: 3px solid var(--accent-green);
+      background: rgba(0, 255, 100, 0.04);
+      color: var(--accent-green);
+    }
+
+    .quiz-feedback-box.incorrect {
+      display: block;
+      border-left: 3px solid var(--accent-red);
+      background: rgba(255, 0, 80, 0.04);
+      color: var(--accent-red);
+    }
+
+    /* SHARE SUBSYSTEM */
+    .share-deck {
+      display: flex;
+      flex-direction: column;
+      gap: 15px;
+      border: 1px solid var(--border-color);
+      background: rgba(0, 0, 0, 0.3);
+      padding: 20px;
+    }
+
+    .share-input-wrapper {
+      display: flex;
+      gap: 10px;
+    }
+
+    .share-url-box {
+      flex-grow: 1;
+      background: #000;
+      border: 1px solid var(--border-color);
+      color: var(--text-main);
+      padding: 10px 15px;
+      font-family: 'Space Mono', monospace;
+      font-size: 11px;
+      outline: none;
+      cursor: text;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+    }
+
+    .share-copy-btn {
+      background: transparent;
+      border: 1px solid var(--text-main);
+      color: var(--text-main);
+      font-family: 'Share Tech Mono', monospace;
+      padding: 10px 20px;
+      cursor: pointer;
+      text-transform: uppercase;
+      font-size: 11px;
+      letter-spacing: 1px;
+      transition: all 0.2s;
+    }
+
+    .share-copy-btn:hover {
+      background: var(--text-main);
+      color: var(--bg-color);
+      box-shadow: var(--text-glow);
+    }
+
+    /* TOAST ALERT */
+    .cyber-toast {
+      position: fixed;
+      bottom: 80px;
+      right: 30px;
+      background: var(--bg-color);
+      border: 1px solid var(--text-main);
+      box-shadow: 0 0 25px rgba(0, 0, 0, 0.8), inset 0 0 10px var(--text-main);
+      color: var(--text-main);
+      padding: 15px 25px;
+      font-family: 'Space Mono', monospace;
+      font-size: 11px;
+      z-index: 9999;
+      display: none;
+      animation: toastSlideIn 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+      letter-spacing: 1px;
+    }
+
+    @keyframes toastSlideIn {
+      from {
+        transform: translateY(30px);
+        opacity: 0;
+      }
+
+      to {
+        transform: translateY(0);
+        opacity: 1;
+      }
+    }
+
+    /* PROGRESS SYNC BAR */
+    .sync-progress-container {
+      width: 100%;
+      background: rgba(0, 0, 0, 0.4);
+      border: 1px solid var(--border-color);
+      height: 14px;
+      position: relative;
+      overflow: hidden;
+      margin-top: 10px;
+    }
+
+    .sync-progress-fill {
+      height: 100%;
+      background: var(--text-main);
+      width: 0%;
+      transition: width 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+      box-shadow: var(--text-glow);
+    }
+
+    .sync-percentage-lbl {
+      position: absolute;
+      right: 10px;
+      top: 50%;
+      transform: translateY(-50%);
+      font-size: 8px;
+      font-family: 'Share Tech Mono', monospace;
+      color: #fff;
+      mix-blend-mode: difference;
+    }
+  </style>
+
+</head>
+
+<body class="theme-throat">
+
+  <div class="mini-loader" id="miniLoader">
+    <div class="mini-loader-content">
+      <div class="mini-spinner"></div>
+      <div id="miniLoadText" style="letter-spacing: 2px;">SYNCING... 0%</div>
+    </div>
+  </div>
+
+  <div class="dashboard">
+    <!-- TOP BAR -->
+    <header class="top-bar">
+      <div class="status-indicator">
+        <span class="dot green animated-pulse"></span> ONLINE | JES-007 | <strong>CLASSIFIED: TS/SCI</strong>
+      </div>
+      <div class="coordinates">
+        DYNAMIC LEARNING MODULE // <span id="moduleName">UNKNOWN</span>
+      </div>
+      <div class="time-display" id="clock">00:00:00</div>
+      <div class="sys-load" id="sysStat">LOAD: 0.15% | RAM: 14GB</div>
+    </header>
+
+    <div class="main-layout">
+      <!-- SIDEBAR -->
+      <aside class="sidebar">
+        <div class="chakra-logo-container" id="chakraLogo">
+          <!-- Dynamically injected SVG -->
+        </div>
+        <div class="hero">
+          <div class="hero-label">TIME MACHINE</div>
+          <h1>JESMON<br>K J</h1>
+          <div class="hero-titles">
+            <div class="hero-titles-tags">
+              <p>[ ROLE: ENGINEER | TEACHER ]</p>
+              <p>[ AREA: ARTIST | CREATOR ]</p>
+            </div>
+            <div class="hero-icons" style="display: flex; gap: 10px; margin-left: auto;">
+              <a href="library.html" class="lib-icon-btn" aria-label="My Library">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                  stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20" />
+                  <path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z" />
+                </svg>
+              </a>
+              <a href="journal.html" class="lib-icon-btn" aria-label="My Journal">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                  stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20" />
+                  <path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z" />
+                  <line x1="10" y1="8" x2="16" y2="8"></line>
+                  <line x1="10" y1="12" x2="16" y2="12"></line>
+                  <line x1="10" y1="16" x2="13" y2="16"></line>
+                </svg>
+              </a>
+            </div>
+          </div>
+          <button onclick="triggerMiniLoader('../index.html')" class="tech-btn">BACK_TO_DASHBOARD &larr;</button>
+        </div>
+
+        <div class="metadata-panel">
+          <div class="sys-data">
+            <p>LAT: 9.9312&deg; N</p>
+            <p>LNG: 76.2673&deg; E</p>
+            <p>ALT: 3 M</p>
+            <p>UNIT: JES-007</p>
+            <p>UPTIME: <span id="uptime">00:00:00</span></p>
+          </div>
+        </div>
+      </aside>
+
+      <!-- CONTENT GRID AREA -->
+      <div class="full-width-grid" style="padding-bottom: 100px;">
+        <div style="margin-bottom: 25px; display: flex; gap: 15px;">
+          <button onclick="triggerMiniLoader('../index.html')" class="tech-btn" style="margin-top:0; width:auto;">DISCONNECT_STATION &larr;</button>
+        </div>
+
+        <!-- ACADEMY HEADER CARD -->
+        <section class="academy-header-card">
+          <div class="academy-header-grid">
+            <div>
+              <div class="academy-title-badge" id="skillNameBadge">SKILL TRAINING CELL</div>
+              <h2 id="skillFullName" style="font-family: 'Black Ops One', system-ui; font-size: 28px; color: var(--text-main); margin: 0; text-transform: uppercase; letter-spacing: 2px;">LOADING...</h2>
+              <p id="skillTagline" style="font-size: 13px; color: var(--text-muted); margin: 10px 0 0 0; line-height: 1.6;"></p>
+              
+              <div class="academy-meta-chips">
+                <div class="meta-chip">LEVEL: <span id="skillDifficulty">...</span></div>
+                <div class="meta-chip">EST. TIME: <span id="skillEstTime">...</span></div>
+                <div class="meta-chip">ACADEMY STATUS: <span style="color: var(--accent-green); font-weight: bold;">[ACTIVE]</span></div>
+              </div>
+            </div>
+            
+            <div style="border-left: 1px dashed var(--border-color); padding-left: 30px;">
+              <h4 style="font-family: 'Share Tech Mono', monospace; font-size: 11px; color: var(--text-main); margin: 0 0 5px 0; letter-spacing: 1px;">SYNAPSE SYNC RATIO</h4>
+              <div class="sync-progress-container">
+                <div class="sync-progress-fill" id="syncProgress"></div>
+                <div class="sync-percentage-lbl" id="syncProgressText">0%</div>
+              </div>
+              <p style="font-size: 10px; color: var(--text-muted); margin: 8px 0 0 0; line-height: 1.4;">Uncover modules and complete graded quizzes to achieve a 100% sync connection.</p>
+            </div>
+          </div>
+        </section>
+
+        <!-- TWO COLUMN LAYOUT -->
+        <div style="display: grid; grid-template-columns: 1.2fr 1fr; gap: 30px; align-items: start;">
+          
+          <!-- LEFT SIDE: METHODOLOGY & CURRICULUM -->
+          <div style="display: flex; flex-direction: column; gap: 30px;">
+            <!-- OVERVIEW -->
+            <section class="card">
+              <div class="card-header">
+                <h2>TEMPORAL FIELD DECONSTRUCTION</h2>
+                <div class="leds"><span class="dot active"></span></div>
+              </div>
+              <div class="card-body" style="padding: 20px;">
+                <p id="skillOverview" style="font-size: 13px; line-height: 1.7; color: var(--text-muted); margin: 0;"></p>
+                <div style="background: rgba(255,255,255,0.02); border: 1px solid var(--border-color); padding: 15px; margin-top: 20px;">
+                  <strong style="font-family: 'Share Tech Mono', monospace; font-size: 11px; color: var(--text-main); display: block; margin-bottom: 5px;">TIME TRAVEL LOG:</strong>
+                  <p id="skillTimeTravelLog" style="font-family: 'Courier Prime', monospace; font-size: 11px; color: var(--text-muted); margin: 0; line-height: 1.5;"></p>
+                </div>
+              </div>
+            </section>
+
+            <!-- ACCORDION SYLLABUS -->
+            <section class="card">
+              <div class="card-header">
+                <h2>ACADEMY CURRICULUM</h2>
+                <div class="leds"><span class="dot orange"></span></div>
+              </div>
+              <div class="card-body" style="padding: 20px;" id="syllabusAccordion">
+                <!-- Injected dynamically by JS -->
+              </div>
+            </section>
+
+            <!-- MISSION QUEST -->
+            <section class="card">
+              <div class="card-header">
+                <h2>GALACTIC FIELD MISSION</h2>
+                <div class="leds"><span class="dot active"></span></div>
+              </div>
+              <div class="card-body" style="padding: 20px;">
+                <h3 id="questTitle" style="font-family: 'Share Tech Mono', monospace; font-size: 15px; color: var(--text-main); margin-top: 0;">Loading mission details...</h3>
+                <p id="questChallenge" style="font-size: 13px; color: var(--text-muted); line-height: 1.6; margin-bottom: 15px;"></p>
+                <div style="background: rgba(0,0,0,0.3); border: 1px solid var(--border-color); padding: 20px;">
+                  <strong style="font-family: 'Share Tech Mono', monospace; font-size: 11px; color: var(--text-main); display: block; margin-bottom: 10px;">TACTICAL INSTRUCTIONS:</strong>
+                  <ul id="questInstructions" style="font-family: 'Space Mono', monospace; font-size: 11px; color: var(--text-muted); line-height: 1.8; list-style-type: none; padding-left: 0; margin: 0;">
+                    <!-- Injected dynamically -->
+                  </ul>
+                </div>
+              </div>
+            </section>
+          </div>
+
+          <!-- RIGHT SIDE: LIVE RUNNER & CYBER QUIZ -->
+          <div style="display: flex; flex-direction: column; gap: 30px;">
+            <!-- INTERACTIVE SANDBOX -->
+            <section class="card">
+              <div class="card-header">
+                <h2>INTERACTIVE SIMULATOR // SANDBOX</h2>
+                <div class="leds"><span class="dot blue"></span></div>
+              </div>
+              <div class="card-body" style="padding: 20px;">
+                <p class="subtitle" style="margin-bottom: 15px;">Edit the source code and run calculations to see visual simulation renders in real time.</p>
+                
+                <div class="sandbox-container">
+                  <div class="sandbox-editor-header">
+                    <span>📄 SOURCE_CODE.html</span>
+                    <button onclick="runSimulation()" style="background: var(--text-main); color: var(--bg-color); border: none; padding: 4px 10px; font-family: 'Share Tech Mono', monospace; font-size: 11px; font-weight: bold; cursor: pointer; box-shadow: var(--text-glow);">RUN SIMULATION</button>
+                  </div>
+                  <textarea id="sandboxCode" class="sandbox-textarea" spellcheck="false"></textarea>
+                  
+                  <div class="sandbox-preview-label">🖥️ VISUAL_PREVIEW_PANE</div>
+                  <div id="sandboxPreview" class="sandbox-preview-pane"></div>
+                </div>
+              </div>
+            </section>
+
+            <!-- CYBER QUEST QUIZ -->
+            <section class="card">
+              <div class="card-header">
+                <h2>CYBER QUEST // GRADED_QUIZ</h2>
+                <div class="leds"><span class="dot red"></span></div>
+              </div>
+              <div class="card-body" style="padding: 20px;" id="quizContainer">
+                <!-- Injected dynamically by JS -->
+              </div>
+            </section>
+
+            <!-- TRANSMIT LINK (SHARE) -->
+            <section class="card">
+              <div class="card-header">
+                <h2>SECURE TRANSMITTER // SHARE</h2>
+                <div class="leds"><span class="dot green"></span></div>
+              </div>
+              <div class="card-body" style="padding: 20px;">
+                <p style="font-size: 13px; color: var(--text-muted); line-height: 1.6; margin-top: 0; margin-bottom: 15px;">Copy this secure transmission link to share this interactive learning terminal directly with kids or other trainees.</p>
+                <div class="share-deck">
+                  <div class="share-input-wrapper">
+                    <div class="share-url-box" id="shareUrlBox">https://jesmonjames.github.io/Time-machine/pages/skill.html?skill=html</div>
+                    <button class="share-copy-btn" onclick="copyDeepLink()">COPY LINK</button>
+                  </div>
+                </div>
+              </div>
+            </section>
+          </div>
+
+        </div>
+
+      </div>
+    </div>
+
+    <!-- BOTTOM BAR -->
+    <footer class="bottom-bar">
+      <div class="themes" id="themeButtons">
+        <button class="theme-btn" data-theme="theme-crown">CROWN</button>
+        <button class="theme-btn" data-theme="theme-third-eye">THIRD EYE</button>
+        <button class="theme-btn" data-theme="theme-throat">THROAT</button>
+        <button class="theme-btn" data-theme="theme-heart">HEART</button>
+        <button class="theme-btn" data-theme="theme-solar">SOLAR</button>
+        <button class="theme-btn" data-theme="theme-sacral">SACRAL</button>
+        <button class="theme-btn" data-theme="theme-root">ROOT</button>
+      </div>
+    </footer>
+  </div>
+
+  <!-- CYBER TOAST ALERT -->
+  <div class="cyber-toast" id="cyberToast">
+    [ SECURE LINK UPLINKED TO COMMUNICATIONS ARRAY ]
+  </div>
+
+  <script src="../assets/js/script.js"></script>
+  <script src="../assets/js/skill.js" defer></script>
+  <script src="../assets/js/ai-bot.js" defer></script>
+</body>
+
+</html>

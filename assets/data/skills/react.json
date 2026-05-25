@@ -1,0 +1,109 @@
+{
+  "id": "react",
+  "name": "React",
+  "fullName": "React.js Framework",
+  "color": "#61dafb",
+  "difficulty": "Advanced",
+  "estTime": "6 Hours",
+  "tagline": "The UI modular engine of modern galaxy maps.",
+  "timeTravelLog": "Created by Jordan Walke at Facebook in 2013 to optimize state-to-view rendering speed. Revolutionized interface design via the virtual DOM and component-first architecture.",
+  "overview": "React is an open-source front-end library for building user interfaces from isolated, reusable components. Its declarative model, virtual DOM diffing, and rich hook system make it the industry standard for modern web applications.",
+  "syllabus": [
+    {
+      "title": "Module 1: Components & JSX (The Modular Units)",
+      "desc": "How React breaks every UI into isolated, reusable building blocks.",
+      "content": "In React, everything is a component — a JavaScript function that returns JSX (HTML-like syntax). Components can be nested inside each other to form complex dashboard layouts. JSX is transpiled by Babel into React.createElement() calls, meaning it is valid JavaScript — not actual HTML.",
+      "codeExample": "// Functional component\nfunction StatusBadge() {\n  return (\n    <div className=\"badge\">\n      <span>Status: ONLINE</span>\n    </div>\n  );\n}\n\n// Parent component nesting children\nexport default function Dashboard() {\n  return (\n    <main>\n      <StatusBadge />\n      <h1>Mission Control</h1>\n    </main>\n  );\n}",
+      "interactiveTip": "In JSX, use className instead of class (class is a reserved JS keyword). Also all tags must be closed — self-close singletons like <br /> and <img />!"
+    },
+    {
+      "title": "Module 2: Props (Data Uplink to Child Components)",
+      "desc": "Passing configuration and data from parent systems to child modules.",
+      "content": "Props (properties) are read-only inputs passed from parent to child components, like function parameters. They allow components to be reused with different data. Destructuring props in the function signature gives cleaner, more readable code. Children prop allows nesting arbitrary JSX inside a component.",
+      "codeExample": "// Define the component with props\nfunction TelemetryCard({ title, value, unit }) {\n  return (\n    <div className=\"card\">\n      <h3>{title}</h3>\n      <span>{value} {unit}</span>\n    </div>\n  );\n}\n\n// Use with different data\n<TelemetryCard title=\"Speed\" value={12} unit=\"Warp\" />\n<TelemetryCard title=\"Fuel\" value={98} unit=\"%\" />",
+      "interactiveTip": "Props are read-only! A component must never modify its own props. If a child needs to update parent data, the parent must pass down a callback function as a prop."
+    },
+    {
+      "title": "Module 3: State (useState — Dynamic Memory Cells)",
+      "desc": "How components remember and react to changing data over time.",
+      "content": "State is a component's internal memory. Unlike props, state is owned and controlled by the component itself. The useState hook returns a state value and a setter function. Calling the setter triggers React to re-render the component with the new value — updating the UI automatically.",
+      "codeExample": "import { useState } from 'react';\n\nfunction ThrusterControl() {\n  const [thrust, setThrust] = useState(0);\n  const [warning, setWarning] = useState(false);\n\n  const boost = () => {\n    const newThrust = thrust + 10;\n    setThrust(newThrust);\n    setWarning(newThrust > 80);\n  };\n\n  return (\n    <div>\n      <p>Thrust: {thrust}%</p>\n      {warning && <p style={{color:'red'}}>OVERLOAD WARNING!</p>}\n      <button onClick={boost}>Boost</button>\n    </div>\n  );\n}",
+      "interactiveTip": "Never mutate state directly (state.value = newVal). Always use the setter function. React compares old and new values to decide whether to re-render."
+    },
+    {
+      "title": "Module 4: useEffect (Lifecycle & Side Effects)",
+      "desc": "Running code after renders — for data fetching, subscriptions, and timers.",
+      "content": "useEffect runs side effects after the component renders. The dependency array controls when it re-fires: empty [] means run once on mount, [value] means run when value changes, no array means run after every render. Return a cleanup function to unsubscribe from timers or event listeners on unmount.",
+      "codeExample": "import { useState, useEffect } from 'react';\n\nfunction MissionClock() {\n  const [time, setTime] = useState(new Date());\n\n  useEffect(() => {\n    // Run after mount\n    const interval = setInterval(() => {\n      setTime(new Date());\n    }, 1000);\n\n    // Cleanup on unmount\n    return () => clearInterval(interval);\n  }, []); // Empty array = run once\n\n  return <p>{time.toLocaleTimeString()}</p>;\n}",
+      "interactiveTip": "Missing cleanup functions in useEffect are one of the most common React memory leaks! Always return a cleanup function from effects that create timers or subscriptions."
+    },
+    {
+      "title": "Module 5: List Rendering (Arrays to JSX)",
+      "desc": "Rendering dynamic collections of data as repeating interface components.",
+      "content": "To render lists in React, use the .map() array method inside JSX to transform data arrays into arrays of React elements. Each element must have a unique key prop — this allows React's reconciler to efficiently identify which items changed, added, or removed during re-renders.",
+      "codeExample": "const missions = [\n  { id: 1, name: 'Alpha Centauri', status: 'Active' },\n  { id: 2, name: 'Proxima Base', status: 'Standby' },\n  { id: 3, name: 'Kepler-442', status: 'Complete' },\n];\n\nfunction MissionList() {\n  return (\n    <ul>\n      {missions.map(mission => (\n        <li key={mission.id}>\n          {mission.name} — {mission.status}\n        </li>\n      ))}\n    </ul>\n  );\n}",
+      "interactiveTip": "Never use array index as the key if the list can reorder or filter — use stable, unique IDs from your data. Index keys cause subtle rendering bugs with stateful list items!"
+    },
+    {
+      "title": "Module 6: Context API (Global State Network)",
+      "desc": "Sharing data across distant components without prop drilling chains.",
+      "content": "React Context provides a way to share data (like themes, auth status, or user settings) across the entire component tree without manually passing props through every intermediate layer. createContext() creates the channel, Provider wraps the tree with a value, and useContext() reads that value from any descendant.",
+      "codeExample": "import { createContext, useContext, useState } from 'react';\n\nconst ThemeContext = createContext('dark');\n\nfunction App() {\n  const [theme, setTheme] = useState('dark');\n  return (\n    <ThemeContext.Provider value={theme}>\n      <Dashboard />\n      <button onClick={() => setTheme('light')}>Switch Theme</button>\n    </ThemeContext.Provider>\n  );\n}\n\nfunction Dashboard() {\n  const theme = useContext(ThemeContext);\n  return <div className={`panel ${theme}`}>Theme: {theme}</div>;\n}",
+      "interactiveTip": "Context is not a replacement for all state management — for large applications with complex updates, consider Zustand or Redux Toolkit alongside Context."
+    },
+    {
+      "title": "Module 7: Custom Hooks (Reusable Logic Extraction)",
+      "desc": "Bundling stateful logic into portable, reusable hook functions.",
+      "content": "Custom hooks are regular JavaScript functions whose names start with 'use' and that call other hooks internally. They allow you to extract component logic into shareable units — for example, useFetch(), useLocalStorage(), or useDebounce(). This keeps components clean and focused on rendering.",
+      "codeExample": "// Custom hook\nfunction useTelemetry(endpoint) {\n  const [data, setData] = useState(null);\n  const [loading, setLoading] = useState(true);\n\n  useEffect(() => {\n    fetch(endpoint)\n      .then(res => res.json())\n      .then(json => {\n        setData(json);\n        setLoading(false);\n      });\n  }, [endpoint]);\n\n  return { data, loading };\n}\n\n// Usage in any component\nfunction SensorPanel() {\n  const { data, loading } = useTelemetry('/api/sensors');\n  if (loading) return <p>Loading...</p>;\n  return <div>{data.reading}</div>;\n}",
+      "interactiveTip": "Custom hooks must start with 'use' so that React's linter can enforce the Rules of Hooks correctly. They cannot be called conditionally — always call hooks at the top level!"
+    }
+  ],
+  "sandboxInitialCode": "<!-- React Simulation Sandbox: Dynamic JSX Rendering -->\n<div style=\"background: #20232a; color: #61dafb; border: 2px solid #61dafb; padding: 25px; font-family: sans-serif; border-radius: 10px; text-align: center;\">\n  <h2 style=\"color: #ffffff; margin-top: 0;\">&#9883; React State Simulator</h2>\n  <p style=\"color: #888; font-size: 13px;\">Simulating useState and re-renders via vanilla JS for preview!</p>\n  <div id=\"thrust-display\" style=\"font-size: 28px; font-weight: bold; color: #61dafb; margin: 15px 0;\">Thrust: 0%</div>\n  <div id=\"warning-display\" style=\"height: 24px; margin-bottom: 10px;\"></div>\n  <button onclick=\"boost()\" style=\"background: #61dafb; color: #20232a; border: none; padding: 12px 24px; font-weight: bold; border-radius: 5px; cursor: pointer; font-size: 14px; margin-right: 10px;\">BOOST +10</button>\n  <button onclick=\"reset()\" style=\"background: transparent; border: 2px solid #61dafb; color: #61dafb; padding: 12px 24px; font-weight: bold; border-radius: 5px; cursor: pointer; font-size: 14px;\">RESET</button>\n</div>\n<script>\n  let thrust = 0;\n  function render() {\n    document.getElementById('thrust-display').textContent = 'Thrust: ' + thrust + '%';\n    document.getElementById('thrust-display').style.color = thrust > 80 ? '#ff0055' : '#61dafb';\n    const warn = document.getElementById('warning-display');\n    warn.textContent = thrust > 80 ? '⚠️ OVERLOAD WARNING!' : '';\n    warn.style.color = '#ff0055';\n  }\n  window.boost = function() { thrust = Math.min(100, thrust + 10); render(); };\n  window.reset = function() { thrust = 0; render(); };\n</script>",
+  "quiz": [
+    {
+      "question": "What is the Virtual DOM in React?",
+      "options": [
+        "A 3D rendering of the interface",
+        "A lightweight in-memory copy of the real DOM used for efficient updates",
+        "An encrypted storage database",
+        "A browser plugin for testing layouts"
+      ],
+      "answer": 1,
+      "explanation": "React maintains a virtual copy of the DOM in memory. It diffs old and new virtual trees to determine the minimal set of real DOM updates needed, making React extremely efficient."
+    },
+    {
+      "question": "What happens when you call a useState setter function?",
+      "options": [
+        "Only the CSS changes",
+        "The entire page reloads",
+        "The component re-renders with the new state value",
+        "State changes are batched and applied on page close"
+      ],
+      "answer": 2,
+      "explanation": "Calling a useState setter schedules a re-render of the component (and its children) with the updated state value. React batches multiple state updates for efficiency."
+    },
+    {
+      "question": "Why must each list item in React have a unique 'key' prop?",
+      "options": [
+        "To add styling to list items",
+        "To help React identify which items changed and update only those efficiently",
+        "To transmit items to the server",
+        "To lock items from being deleted"
+      ],
+      "answer": 1,
+      "explanation": "Keys give React a stable identity for each list element. Without keys, React must re-render the entire list on any change — with keys it can update only the affected items."
+    }
+  ],
+  "quest": {
+    "title": "Quest: Code the Engine Core Logger",
+    "challenge": "Build a React component that logs temperature readings and warns the crew when levels are critical.",
+    "instructions": [
+      "1. Create a component with a temperature state initialized to 100.",
+      "2. Add a 'Heat Up' button that increases temperature by 5 on each click.",
+      "3. Display the current temperature with a dynamic color: green below 120, orange between 120-140, red above 140.",
+      "4. Show a CRITICAL WARNING message when temperature exceeds 140.",
+      "5. Add a 'Cool Down' button that decreases temperature by 10."
+    ]
+  }
+}
