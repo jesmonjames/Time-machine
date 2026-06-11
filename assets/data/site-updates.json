@@ -1,5 +1,12 @@
 [
   {
+    "date": "2026-06-12",
+    "rank": 8,
+    "title": "Interface // Metro Display Replica",
+    "detail": "Integrated the Metro Display Replica telemetry interface demo into the Projects Laboratory and Artifact Archive archives.",
+    "href": "index.html"
+  },
+  {
     "date": "2026-05-19",
     "rank": 7,
     "title": "Interface // Guest Table Ordering",

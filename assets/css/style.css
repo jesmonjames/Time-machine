@@ -560,6 +560,7 @@ h3 {
   top: 0;
   height: calc(100vh - 170px);
   overflow-y: auto;
+  overflow-x: visible;
   scrollbar-width: thin;
   scrollbar-color: var(--text-muted) transparent;
   z-index: 100;
@@ -570,10 +571,9 @@ h3 {
   -webkit-backdrop-filter: blur(20px) saturate(160%);
   border: 1px solid var(--border-color);
   border-left: 4px solid var(--text-main);
-  padding: 20px 15px; /* Highly compact padding */ /* More compact padding */
+  padding: 20px 15px;
   border-radius: 12px;
   box-shadow: 0 15px 45px rgba(0, 0, 0, 0.2);
-  overflow: hidden;
   transition: all 0.3s ease;
 }
 
@@ -671,6 +671,7 @@ h3 {
   flex-shrink: 0;
   align-self: center;
   margin-left: auto;
+  overflow: visible;
 }
 
 .lib-icon-btn svg {
@@ -689,9 +690,9 @@ h3 {
 .lib-icon-btn::after {
   content: attr(aria-label);
   position: absolute;
-  left: 50%;
-  bottom: calc(100% + 8px);
-  transform: translateX(-50%);
+  right: calc(100% + 8px);
+  top: 50%;
+  transform: translateY(-50%);
   background: var(--bg-color);
   color: var(--text-main);
   border: 1px solid var(--text-main);
@@ -704,7 +705,7 @@ h3 {
   pointer-events: none;
   opacity: 0;
   transition: opacity 0.2s ease;
-  z-index: 100;
+  z-index: 200;
   box-shadow: 0 0 8px var(--text-main);
 }
 
