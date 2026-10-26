@@ -1,5 +1,12 @@
 [
   {
+    "date": "2026-10-26",
+    "rank": 9,
+    "title": "Interface // smartJO Watch",
+    "detail": "Integrated the smartJO Watch wearable face prototype into the Projects Laboratory and Artifact Archive, with live glow, ring-speed and accent controls plus sensor-driven compass, tilt and battery telemetry.",
+    "href": "index.html"
+  },
+  {
     "date": "2026-06-12",
     "rank": 8,
     "title": "Interface // Metro Display Replica",
