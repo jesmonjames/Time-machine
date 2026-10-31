@@ -277,5 +277,47 @@
         "author": "Robert Greene",
         "type": "strategy",
         "detailed_description": "A famous guide exploring historical strategies used by powerful figures to gain influence and control."
+    },
+    {
+        "name": "I Too Had a Love Story",
+        "author": "Ravinder Singh",
+        "type": "romance",
+        "short_description": "A true love story that ends in heartbreak — an emotional autobiographical novel.",
+        "detailed_description": "I Too Had a Love Story is the debut novel of Ravinder Singh, based on his own life. The story follows Ravin, a software engineer who, on his friends' suggestion, creates a profile on a matrimonial website. He connects with Khushi, a girl from Delhi, and they fall deeply in love through long calls and heartfelt conversations, despite never meeting initially. Their chemistry blossoms when they finally meet in person and begin planning for marriage. But tragedy strikes when Khushi meets with a devastating accident just before their wedding — and does not survive. The book is a moving tribute to a love that was real, brief, and eternal. It is one of India's most beloved contemporary romantic novels, known for making readers cry and feel deeply. The book carries the dedication: 'To the loving memory of the girl whom I loved, yet could not marry.'"
+    },
+    {
+        "name": "Pride and Prejudice",
+        "author": "Jane Austen",
+        "type": "romance",
+        "short_description": "A timeless classic about love, class, and the courage to defy first impressions.",
+        "detailed_description": "Pride and Prejudice, first published in 1813, is one of the most celebrated novels in English literature. The story centres on Elizabeth Bennet, the second of five daughters in the Bennet family, as she navigates love, social expectations, and her own sharp wit. When the wealthy and seemingly arrogant Mr. Fitzwilliam Darcy enters her world, Elizabeth is immediately put off by his pride, while Darcy is unsettled by his growing attraction to her. Through misunderstandings, revelations, and the interference of society's rigid class system, both characters are forced to confront their own prejudices and pride. The novel brilliantly critiques the social conventions of 19th-century England — particularly the pressure on women to marry for financial security rather than love. With its iconic characters, sharp dialogue, and deep emotional intelligence, Pride and Prejudice remains a masterclass in romantic storytelling and social commentary. The famous opening line — 'It is a truth universally acknowledged, that a single man in possession of a good fortune, must be in want of a wife' — is one of the most quoted in literary history."
+    },
+    {
+        "name": "The New Testament",
+        "author": "Various Authors (Apostles & Disciples of Jesus Christ)",
+        "type": "spirituality",
+        "short_description": "The sacred scriptures of Christianity — the life, teachings, death, and resurrection of Jesus Christ.",
+        "detailed_description": "The New Testament is the second and concluding part of the Christian Bible, composed of 27 books written in Greek during the first century AD. It begins with the four Gospels — Matthew, Mark, Luke, and John — each offering an account of the life, ministry, miracles, death by crucifixion, and resurrection of Jesus Christ. The Acts of the Apostles follows, narrating the birth of the early Christian church and the missionary journeys of Paul and other apostles. The Epistles, a collection of 21 letters mostly written by the Apostle Paul, address early Christian communities across the Roman Empire, teaching on faith, grace, love, ethics, and salvation. The final book, Revelation (Apocalypse), is a prophetic and visionary text attributed to John, describing the end of times, divine judgment, and the ultimate triumph of God. At its core, the New Testament carries the message of love, forgiveness, redemption, and eternal life through faith in Jesus Christ. It has profoundly shaped Western civilization, moral philosophy, art, literature, and law. The Sermon on the Mount, the Beatitudes, the Lord's Prayer, and the Parable of the Prodigal Son are among its most enduring and universally known passages."
+    },
+    {
+        "name": "Graamyam",
+        "author": "Suresh Tripunithura",
+        "type": "fiction",
+        "short_description": "A Malayalam novel rooted in the sights, sounds, and soul of Kerala's rural village life.",
+        "detailed_description": "Graamyam, meaning 'rustic' or 'of the village', is a Malayalam novel by Suresh Tripunithura — an author, botanist, and officer from Kerala's Ernakulam district. The novel is deeply rooted in a traditional Kerala village setting, capturing the rich textures of rural life, nature, and the intricate social relationships that define village communities. Through vivid descriptions of green landscapes, ponds, trees, and the rhythms of countryside living, the story explores human emotions, interpersonal bonds, and the quiet tension between age-old village traditions and the slow encroachment of modern change. Suresh Tripunithura, known for weaving environmental consciousness into his literary work, brings a naturalist's eye to the narrative, making the village itself feel like a living, breathing character. Graamyam is a poignant reflection on nostalgia, belonging, and the changing face of Kerala's countryside."
+    },
+    {
+        "name": "History of Saint George (Malayalam)",
+        "author": "Unknown",
+        "type": "history",
+        "short_description": "A Malayalam account of the life, martyrdom, and miracles of Saint George — the great Christian warrior-martyr.",
+        "detailed_description": "This Malayalam work narrates the life and legacy of Saint George (Mar Geevarghese), one of the most revered saints in Christian tradition and especially venerated among the Christian communities of Kerala. Saint George, believed to have lived in the 3rd century AD in Cappadocia (present-day Turkey), was a Roman soldier of high rank who converted to Christianity and refused to renounce his faith under the orders of Emperor Diocletian. He endured prolonged torture and was ultimately martyred around 303 AD, making him one of the earliest and most celebrated Christian martyrs. The legendary account of Saint George slaying a dragon — widely depicted in Christian iconography — symbolizes the triumph of faith and good over evil. In Kerala, Saint George holds extraordinary significance; countless churches are dedicated to him across the state, and grand annual feasts (perunals) are celebrated in his honour. This Malayalam text preserves and retells the story of his courage, miracles, and sainthood for Kerala's faithful, serving both as a devotional reading and a historical chronicle of one of Christianity's most beloved figures. The author of this edition remains unknown, reflecting its origins in the oral and manuscript traditions of the Kerala Church."
+    },
+    {
+        "name": "Computer Gurukulam Hardware",
+        "author": "S K Mohan",
+        "type": "technology",
+        "short_description": "A comprehensive Malayalam guide to computer hardware fundamentals and components.",
+        "detailed_description": "Computer Gurukulam Hardware by S K Mohan is an educational Malayalam-language book that serves as a foundational guide to understanding computer hardware. The book covers the essential components of a computer system including the motherboard, CPU, RAM, hard drives, power supply units, input/output devices, and peripheral connections. It explains how each hardware component functions individually and how they interconnect to form a working computer system. Written in accessible Malayalam, the book is designed to help students, beginners, and technology enthusiasts in Kerala grasp the fundamentals of computer hardware without the barrier of technical English jargon. It also touches on topics like hardware troubleshooting, assembly, and maintenance, making it a practical reference for anyone looking to understand the physical architecture of computers. As part of the Gurukulam series, it reflects a tradition of making computer education accessible to Malayalam-speaking learners."
     }
 ]

@@ -11,7 +11,7 @@ const booksPerPage = 12; // Grid layout optimization
 fetch('../assets/data/books.json')
   .then(response => response.json())
   .then(data => {
-    books = data;
+    books = data.reverse(); // Show latest added books first
     renderFilterTags();
     renderBooks();
     renderPagination();
