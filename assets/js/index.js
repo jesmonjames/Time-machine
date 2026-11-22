@@ -105,10 +105,10 @@ document.addEventListener('DOMContentLoaded', () => {
     list.innerHTML = `<li class="top-bar-updates-msg">${escapeHtml(msg)}</li>`;
   }
 
-  // Cache-bust so newly published uplinks appear immediately.
+  // Cache-bust so newly published updates appear immediately.
   fetch(`${UPDATES_URL}?v=${Date.now()}`, { cache: 'no-store' })
     .then((r) => {
-      if (!r.ok) throw new Error('UPLINK_FAIL');
+      if (!r.ok) throw new Error('FETCH_FAIL');
       return r.json();
     })
     .then((data) => {

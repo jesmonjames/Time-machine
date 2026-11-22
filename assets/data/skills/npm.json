@@ -5,15 +5,15 @@
   "color": "#cb3837",
   "difficulty": "Beginner",
   "estTime": "2.5 Hours",
-  "tagline": "The universal cargo manifest of the JavaScript galaxy.",
-  "timeTravelLog": "Created by Isaac Z. Schlueter in 2010, NPM became the world's largest software registry with over 2 million packages — transforming how code was shared, versioned, and composed across all dimensions of JavaScript.",
+  "tagline": "The package manager for the JavaScript ecosystem.",
+  "timeTravelLog": "Created by Isaac Z. Schlueter in 2010, NPM became the world's largest software registry with over 2 million packages — transforming how JavaScript code is shared, versioned and composed.",
   "overview": "NPM (Node Package Manager) is the default package manager for Node.js. It enables developers to install, share, and manage third-party libraries, run project scripts, and manage project dependencies through the package.json manifest file.",
   "syllabus": [
     {
       "title": "Module 1: The package.json Manifest",
       "desc": "Understanding the project configuration file that defines your project's identity and dependencies.",
       "content": "package.json is the central manifest of any Node.js/JavaScript project. It declares the project name, version, description, entry point, scripts, dependencies, and devDependencies. Run npm init to generate it interactively, or npm init -y to accept all defaults instantly. Every project must have a package.json before installing any packages.",
-      "codeExample": "{\n  \"name\": \"mission-control-ui\",\n  \"version\": \"1.0.0\",\n  \"description\": \"JES-007 Mission Control Interface\",\n  \"main\": \"src/index.js\",\n  \"scripts\": {\n    \"dev\": \"vite\",\n    \"build\": \"vite build\",\n    \"test\": \"vitest\",\n    \"lint\": \"eslint src/\"\n  },\n  \"dependencies\": {\n    \"vue\": \"^3.4.0\"\n  },\n  \"devDependencies\": {\n    \"vite\": \"^5.0.0\",\n    \"eslint\": \"^8.0.0\"\n  }\n}",
+      "codeExample": "{\n  \"name\": \"project-dashboard-ui\",\n  \"version\": \"1.0.0\",\n  \"description\": \"JES-01 Project Dashboard Interface\",\n  \"main\": \"src/index.js\",\n  \"scripts\": {\n    \"dev\": \"vite\",\n    \"build\": \"vite build\",\n    \"test\": \"vitest\",\n    \"lint\": \"eslint src/\"\n  },\n  \"dependencies\": {\n    \"vue\": \"^3.4.0\"\n  },\n  \"devDependencies\": {\n    \"vite\": \"^5.0.0\",\n    \"eslint\": \"^8.0.0\"\n  }\n}",
       "interactiveTip": "The ^ (caret) before version numbers means 'compatible with' — NPM will install the latest minor/patch version within the same major. Use exact versions (no ^) for critical dependencies in production apps!"
     },
     {
@@ -55,7 +55,7 @@
       "title": "Module 7: Workspaces & Monorepo Management",
       "desc": "Managing multi-package repositories using NPM Workspaces.",
       "content": "NPM Workspaces enable monorepo architectures — a single repository containing multiple packages that share node_modules. Packages are defined in the root package.json's workspaces field. NPM installs all workspace packages' dependencies into a single root node_modules, deduplicating shared packages. Packages can reference each other by name.",
-      "codeExample": "// Root package.json for monorepo\n{\n  \"name\": \"mission-monorepo\",\n  \"private\": true,\n  \"workspaces\": [\n    \"apps/*\",\n    \"packages/*\"\n  ]\n}\n\n// Structure:\n// apps/web/         → Vue frontend\n// apps/api/         → Express backend\n// packages/shared/  → Shared types and utilities\n\n// Install all workspace deps from root:\n// npm install\n\n// Run script in specific workspace:\n// npm run dev --workspace=apps/web\n\n// Install package in specific workspace:\n// npm install axios --workspace=apps/api",
+      "codeExample": "// Root package.json for monorepo\n{\n  \"name\": \"project-monorepo\",\n  \"private\": true,\n  \"workspaces\": [\n    \"apps/*\",\n    \"packages/*\"\n  ]\n}\n\n// Structure:\n// apps/web/         → Vue frontend\n// apps/api/         → Express backend\n// packages/shared/  → Shared types and utilities\n\n// Install all workspace deps from root:\n// npm install\n\n// Run script in specific workspace:\n// npm run dev --workspace=apps/web\n\n// Install package in specific workspace:\n// npm install axios --workspace=apps/api",
       "interactiveTip": "In workspaces, use \"shared\": \"workspace:*\" in a dependent app's package.json to reference local packages — NPM symlinks them automatically during install, enabling local-first development!"
     }
   ],
@@ -96,7 +96,7 @@
     }
   ],
   "quest": {
-    "title": "Quest: Configure a Full Project Toolchain",
+    "title": "Project: Configure a Full Project Toolchain",
     "challenge": "Set up a professional JavaScript project with NPM scripts, ESLint, Prettier, and a build pipeline.",
     "instructions": [
       "1. Run npm init -y to create package.json in a new folder.",

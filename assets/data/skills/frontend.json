@@ -5,7 +5,7 @@
   "color": "var(--accent-cyan, #00e5ff)",
   "difficulty": "Intermediate",
   "estTime": "4 Hours",
-  "tagline": "Architecting the visible universe of the digital frontier.",
+  "tagline": "Building the user-facing layer of modern web applications.",
   "timeTravelLog": "Frontend engineering as a discipline emerged in the early 2000s as websites evolved from static documents into complex interactive applications — birthing an entirely new engineering specialty.",
   "overview": "Frontend development encompasses all the technologies and techniques used to build the user-facing layer of web applications — from HTML structure and CSS aesthetics to JavaScript behavior, performance optimization, and accessibility.",
   "syllabus": [
@@ -13,7 +13,7 @@
       "title": "Module 1: The Frontend Triad (HTML + CSS + JS Coordination)",
       "desc": "Understanding how HTML, CSS, and JavaScript work as a unified system.",
       "content": "Every frontend system is built on three coordinated layers: HTML defines the structural skeleton (what exists), CSS defines the visual presentation (how it looks), and JavaScript defines the behavioral logic (how it responds). Separating these layers is called 'Separation of Concerns' — a core frontend engineering principle that keeps codebases maintainable.",
-      "codeExample": "<!-- HTML: Structure -->\n<button id=\"warp-btn\" class=\"neon-btn\">ACTIVATE WARP</button>\n\n<!-- CSS: Presentation (in style.css) -->\n.neon-btn {\n  border: 2px solid #00ffcc;\n  color: #00ffcc;\n  background: transparent;\n  transition: all 0.3s ease;\n}\n.neon-btn:hover { background: #00ffcc; color: #000; }\n\n// JavaScript: Behavior (in main.js)\ndocument.getElementById('warp-btn').addEventListener('click', () => {\n  document.body.classList.toggle('warp-active');\n});",
+      "codeExample": "<!-- HTML: Structure -->\n<button id=\"sync-btn\" class=\"neon-btn\">ACTIVATE SYNC</button>\n\n<!-- CSS: Presentation (in style.css) -->\n.neon-btn {\n  border: 2px solid #00ffcc;\n  color: #00ffcc;\n  background: transparent;\n  transition: all 0.3s ease;\n}\n.neon-btn:hover { background: #00ffcc; color: #000; }\n\n// JavaScript: Behavior (in main.js)\ndocument.getElementById('sync-btn').addEventListener('click', () => {\n  document.body.classList.toggle('sync-active');\n});",
       "interactiveTip": "Violations of Separation of Concerns — like styling in JS or logic in HTML — make code 10x harder to maintain and debug. Always keep structure, style, and behavior in separate files!"
     },
     {
@@ -27,35 +27,35 @@
       "title": "Module 3: Performance Engineering (Core Web Vitals)",
       "desc": "Measuring and optimizing frontend performance for real-world users.",
       "content": "Google's Core Web Vitals measure real user experience: LCP (Largest Contentful Paint) measures perceived load speed — target under 2.5s. CLS (Cumulative Layout Shift) measures visual stability — target under 0.1. INP (Interaction to Next Paint) measures responsiveness to inputs — target under 200ms. These directly impact SEO rankings.",
-      "codeExample": "// Measure Core Web Vitals with web-vitals library\nimport { getLCP, getCLS, getINP } from 'web-vitals';\n\ngetLCP(metric => console.log('LCP:', metric.value));\ngetCLS(metric => console.log('CLS:', metric.value));\ngetINP(metric => console.log('INP:', metric.value));\n\n// Prevent CLS: always set width and height on images\n<img src=\"mission-photo.jpg\" width=\"800\" height=\"600\" alt=\"Mission\" loading=\"lazy\">\n\n// Lazy load below-fold images\n<img src=\"deep-space.jpg\" loading=\"lazy\" decoding=\"async\">",
+      "codeExample": "// Measure Core Web Vitals with web-vitals library\nimport { getLCP, getCLS, getINP } from 'web-vitals';\n\ngetLCP(metric => console.log('LCP:', metric.value));\ngetCLS(metric => console.log('CLS:', metric.value));\ngetINP(metric => console.log('INP:', metric.value));\n\n// Prevent CLS: always set width and height on images\n<img src=\"project-photo.jpg\" width=\"800\" height=\"600\" alt=\"Project\" loading=\"lazy\">\n\n// Lazy load below-fold images\n<img src=\"product-preview.jpg\" loading=\"lazy\" decoding=\"async\">",
       "interactiveTip": "The single biggest CLS fix: always set width and height attributes on <img> tags. Without them, the browser reserves no space and content shifts down when the image loads — crashing your CLS score!"
     },
     {
       "title": "Module 4: Responsive Design (Mobile-First Architecture)",
       "desc": "Building interfaces that adapt flawlessly across all screen dimensions.",
       "content": "Mobile-first design writes base CSS for the smallest screen, then progressively enhances for larger viewports using min-width media queries. Key techniques: flexible grids (CSS Grid / Flexbox), fluid images (max-width: 100%), viewport meta tag, and CSS clamp() for fluid typography that scales smoothly between breakpoints.",
-      "codeExample": "/* Mobile-first base styles */\n.mission-grid {\n  display: grid;\n  grid-template-columns: 1fr;\n  gap: 15px;\n  padding: 15px;\n}\n\n/* Progressive enhancement */\n@media (min-width: 768px) {\n  .mission-grid { grid-template-columns: 1fr 1fr; }\n}\n@media (min-width: 1024px) {\n  .mission-grid { grid-template-columns: repeat(3, 1fr); }\n}\n\n/* Fluid typography */\nh1 { font-size: clamp(1.5rem, 4vw, 3rem); }",
+      "codeExample": "/* Mobile-first base styles */\n.project-grid {\n  display: grid;\n  grid-template-columns: 1fr;\n  gap: 15px;\n  padding: 15px;\n}\n\n/* Progressive enhancement */\n@media (min-width: 768px) {\n  .project-grid { grid-template-columns: 1fr 1fr; }\n}\n@media (min-width: 1024px) {\n  .project-grid { grid-template-columns: repeat(3, 1fr); }\n}\n\n/* Fluid typography */\nh1 { font-size: clamp(1.5rem, 4vw, 3rem); }",
       "interactiveTip": "Test every design on actual mobile devices — Chrome DevTools device emulation is helpful for initial checks, but real touch hardware reveals scroll jank, tap target issues, and font rendering that emulators miss!"
     },
     {
       "title": "Module 5: Accessibility (WCAG & ARIA)",
       "desc": "Engineering inclusive interfaces usable by everyone, including assistive technology users.",
       "content": "Web Content Accessibility Guidelines (WCAG) define four principles: Perceivable, Operable, Understandable, and Robust. Key practices include proper semantic HTML, sufficient color contrast ratios (4.5:1 for normal text), keyboard navigability, focus indicators, meaningful alt text, and ARIA roles for complex custom widgets.",
-      "codeExample": "<!-- Semantic HTML for built-in accessibility -->\n<button type=\"button\" id=\"launch-btn\" aria-label=\"Launch Mission Helios\">\n  LAUNCH\n</button>\n\n<!-- ARIA live region for dynamic updates -->\n<div id=\"status-feed\" aria-live=\"polite\" aria-atomic=\"true\">\n  Status: All Systems Nominal\n</div>\n\n<!-- Skip navigation link for keyboard users -->\n<a href=\"#main-content\" class=\"skip-link\">Skip to main content</a>\n\n<!-- Always include alt text -->\n<img src=\"radar.png\" alt=\"Circular radar screen showing 3 contacts at bearing 045\">",
+      "codeExample": "<!-- Semantic HTML for built-in accessibility -->\n<button type=\"button\" id=\"run-btn\" aria-label=\"Run project report\">\n  RUN\n</button>\n\n<!-- ARIA live region for dynamic updates -->\n<div id=\"status-feed\" aria-live=\"polite\" aria-atomic=\"true\">\n  Status: All Systems Normal\n</div>\n\n<!-- Skip navigation link for keyboard users -->\n<a href=\"#main-content\" class=\"skip-link\">Skip to main content</a>\n\n<!-- Always include alt text -->\n<img src=\"network.png\" alt=\"Network diagram showing three connected nodes\">",
       "interactiveTip": "Install the Axe DevTools Chrome extension for instant accessibility audit reports. All automated tests together catch about 30% of accessibility issues — always combine with manual keyboard testing!"
     },
     {
       "title": "Module 6: Asset Optimization (Images, Fonts & Bundlers)",
       "desc": "Minimizing payload sizes to achieve sub-second load times.",
       "content": "Asset optimization is critical for performance: Use WebP/AVIF formats for images (60-80% smaller than JPEG). Use WOFF2 for fonts with font-display: swap to prevent invisible text. Bundle and minify JavaScript with Vite or webpack. Tree-shake unused code. Code-split large bundles per route. Serve assets via CDN with cache-control headers.",
-      "codeExample": "/* CSS font with swap for performance */\n@font-face {\n  font-family: 'InterStella';\n  src: url('/fonts/interstella.woff2') format('woff2');\n  font-display: swap; /* Prevents invisible text flash */\n}\n\n<!-- Responsive image with WebP and fallback -->\n<picture>\n  <source srcset=\"hero.avif\" type=\"image/avif\">\n  <source srcset=\"hero.webp\" type=\"image/webp\">\n  <img src=\"hero.jpg\" alt=\"Space station\" width=\"1200\" height=\"630\">\n</picture>",
+      "codeExample": "/* CSS font with swap for performance */\n@font-face {\n  font-family: 'Inter';\n  src: url('/fonts/inter.woff2') format('woff2');\n  font-display: swap; /* Prevents invisible text flash */\n}\n\n<!-- Responsive image with WebP and fallback -->\n<picture>\n  <source srcset=\"hero.avif\" type=\"image/avif\">\n  <source srcset=\"hero.webp\" type=\"image/webp\">\n  <img src=\"hero.jpg\" alt=\"Dashboard preview\" width=\"1200\" height=\"630\">\n</picture>",
       "interactiveTip": "Google's Lighthouse tool (F12 → Lighthouse tab) gives a comprehensive audit score covering Performance, Accessibility, SEO, and Best Practices — run it on every page before launch!"
     },
     {
       "title": "Module 7: Frontend Toolchain (Vite, ESLint, Git Workflow)",
       "desc": "Setting up a professional development environment and code quality pipeline.",
       "content": "A professional frontend toolkit includes: a fast dev server and bundler (Vite), a linter (ESLint) for code quality, a formatter (Prettier) for style consistency, a version control system (Git), and a CI/CD pipeline for automated deployment. Mastering the toolchain is as important as mastering the languages themselves.",
-      "codeExample": "# Initialize a Vite + Vanilla JS project\nnpm create vite@latest my-mission-app -- --template vanilla\ncd my-mission-app && npm install\n\n# Install ESLint and Prettier\nnpm install -D eslint prettier\n\n# Git workflow\ngit init\ngit add .\ngit commit -m \"feat: initialize mission control UI\"\ngit push -u origin main\n\n# Build for production\nnpm run build   # outputs minified files to /dist",
+      "codeExample": "# Initialize a Vite + Vanilla JS project\nnpm create vite@latest my-project-app -- --template vanilla\ncd my-project-app && npm install\n\n# Install ESLint and Prettier\nnpm install -D eslint prettier\n\n# Git workflow\ngit init\ngit add .\ngit commit -m \"feat: initialize project dashboard UI\"\ngit push -u origin main\n\n# Build for production\nnpm run build   # outputs minified files to /dist",
       "interactiveTip": "Use Conventional Commits format for all commit messages: feat:, fix:, docs:, refactor:, perf:, test:, chore:. This enables auto-generated changelogs and makes git history scannable at a glance!"
     }
   ],
@@ -96,10 +96,10 @@
     }
   ],
   "quest": {
-    "title": "Quest: Build a Fully Optimized Profile Page",
+    "title": "Project: Build a Fully Optimized Profile Page",
     "challenge": "Create a performance-optimized, accessible, mobile-first personal page using semantic HTML.",
     "instructions": [
-      "1. Write semantic HTML with header, main, section, and footer — no divs for structural layout.",
+      "1. Write semantic HTML with header, main, section, and footer - no divs for structural layout.",
       "2. Add proper meta tags: charset, viewport, description, and a title.",
       "3. Use CSS Grid with mobile-first media queries for a 2-column bio + skills layout.",
       "4. Add alt text to all images and ensure all buttons have accessible labels.",

@@ -5,15 +5,15 @@
   "color": "#00c58e",
   "difficulty": "Advanced",
   "estTime": "5 Hours",
-  "tagline": "The server-rendered reactor core for advanced web architectures.",
+  "tagline": "A Vue framework for server-rendered and static applications.",
   "timeTravelLog": "Launched in 2016 by Sebastien Chopin to bring Server-Side Rendering (SSR) and automated file-based routing to Vue.js interfaces, reducing config overhead to near zero.",
   "overview": "Nuxt.js is an open-source framework that makes web development intuitive and powerful. It handles SSR, static generation, file-system routing, and modular plugin architecture — all with zero manual configuration.",
   "syllabus": [
     {
       "title": "Module 1: File-System Routing (Pages Directory)",
       "desc": "How Nuxt automatically converts files into routable URL endpoints.",
-      "content": "Nuxt eliminates manual router configuration. Every .vue file inside the pages/ directory automatically becomes a web route. The file name defines the path: pages/index.vue → /, pages/about.vue → /about, pages/ship/engine.vue → /ship/engine. Nested directories create nested routes.",
-      "codeExample": "// pages/index.vue        → renders at /\n// pages/about.vue        → renders at /about\n// pages/ship/index.vue   → renders at /ship\n// pages/ship/engine.vue  → renders at /ship/engine\n\n// Example: pages/index.vue\n<template>\n  <div>\n    <h1>Mission Control — Index</h1>\n    <NuxtLink to=\"/about\">About Sector</NuxtLink>\n  </div>\n</template>",
+      "content": "Nuxt eliminates manual router configuration. Every .vue file inside the pages/ directory automatically becomes a web route. The file name defines the path: pages/index.vue → /, pages/about.vue → /about, pages/app/engine.vue → /app/engine. Nested directories create nested routes.",
+      "codeExample": "// pages/index.vue        → renders at /\n// pages/about.vue        → renders at /about\n// pages/app/index.vue   → renders at /app\n// pages/app/engine.vue  → renders at /app/engine\n\n// Example: pages/index.vue\n<template>\n  <div>\n    <h1>Project Dashboard — Index</h1>\n    <NuxtLink to=\"/about\">About Us</NuxtLink>\n  </div>\n</template>",
       "interactiveTip": "Use <NuxtLink> instead of <a> for internal navigation in Nuxt — it handles client-side routing with prefetching, making navigation instant without full page reloads!"
     },
     {
@@ -26,8 +26,8 @@
     {
       "title": "Module 3: Dynamic Routes (Bracket Syntax)",
       "desc": "Building routes that respond to dynamic ID parameters.",
-      "content": "Dynamic route segments are defined using square brackets in the filename. pages/ship/[id].vue creates a route matching /ship/anything — the id value is extracted as a route parameter. useRoute().params.id reads the active parameter value inside the component.",
-      "codeExample": "// pages/mission/[id].vue\n<template>\n  <div>\n    <h1>Mission ID: {{ missionId }}</h1>\n    <p>{{ missionData?.title }}</p>\n  </div>\n</template>\n\n<script setup>\nconst route = useRoute();\nconst missionId = route.params.id;\n\n// Fetch data based on ID\nconst { data: missionData } = await useFetch(`/api/missions/${missionId}`);\n</script>",
+      "content": "Dynamic route segments are defined using square brackets in the filename. pages/app/[id].vue creates a route matching /app/anything — the id value is extracted as a route parameter. useRoute().params.id reads the active parameter value inside the component.",
+      "codeExample": "// pages/project/[id].vue\n<template>\n  <div>\n    <h1>Project ID: {{ projectId }}</h1>\n    <p>{{ projectData?.title }}</p>\n  </div>\n</template>\n\n<script setup>\nconst route = useRoute();\nconst projectId = route.params.id;\n\n// Fetch data based on ID\nconst { data: projectData } = await useFetch(`/api/projects/${projectId}`);\n</script>",
       "interactiveTip": "Wrap dynamic segments in double brackets [[id]] to make the parameter optional. This creates a catch-all route that also matches the parent path without a parameter!"
     },
     {
@@ -41,25 +41,25 @@
       "title": "Module 5: Module Plugins & Configuration (nuxt.config.ts)",
       "desc": "Extending Nuxt capabilities with zero-config module integrations.",
       "content": "Nuxt's module system enables powerful features via single-line installations. Modules handle bundler configuration, auto-imports, and plugin registration behind the scenes. Popular modules include @pinia/nuxt (global state), @nuxt/image (optimized images), @nuxtjs/tailwindcss, and @nuxt/ui.",
-      "codeExample": "// nuxt.config.ts\nexport default defineNuxtConfig({\n  modules: [\n    '@pinia/nuxt',\n    '@nuxt/image',\n    '@nuxtjs/tailwindcss'\n  ],\n\n  // Runtime config (public variables)\n  runtimeConfig: {\n    public: {\n      apiBase: process.env.NUXT_API_BASE\n    }\n  },\n\n  // Custom head tags\n  app: {\n    head: { title: 'Mission Control' }\n  }\n});",
+      "codeExample": "// nuxt.config.ts\nexport default defineNuxtConfig({\n  modules: [\n    '@pinia/nuxt',\n    '@nuxt/image',\n    '@nuxtjs/tailwindcss'\n  ],\n\n  // Runtime config (public variables)\n  runtimeConfig: {\n    public: {\n      apiBase: process.env.NUXT_API_BASE\n    }\n  },\n\n  // Custom head tags\n  app: {\n    head: { title: 'Project Dashboard' }\n  }\n});",
       "interactiveTip": "Use useRuntimeConfig() inside components to safely access environment variables at runtime — never hardcode API keys or sensitive values in component scripts!"
     },
     {
       "title": "Module 6: Server API Routes (server/api/)",
       "desc": "Writing full-stack backend endpoints directly inside the Nuxt project.",
       "content": "Nuxt provides a server/ directory that uses Nitro under the hood. Files inside server/api/ automatically become HTTP API endpoints. Server routes run only on the server — perfect for secure database queries, API proxies, or authentication logic that should never be exposed to the client browser.",
-      "codeExample": "// server/api/missions.get.ts\nexport default defineEventHandler(async (event) => {\n  // This code only runs on the server!\n  const missions = await db.query('SELECT * FROM missions');\n  return missions;\n});\n\n// server/api/missions/[id].get.ts\nexport default defineEventHandler(async (event) => {\n  const id = getRouterParam(event, 'id');\n  return await db.find('missions', id);\n});",
-      "interactiveTip": "Use useFetch('/api/missions') in your Vue components to call server API routes. Nuxt handles SSR data fetching, deduplication, and client-side updates automatically!"
+      "codeExample": "// server/api/projects.get.ts\nexport default defineEventHandler(async (event) => {\n  // This code only runs on the server!\n  const projects = await db.query('SELECT * FROM projects');\n  return projects;\n});\n\n// server/api/projects/[id].get.ts\nexport default defineEventHandler(async (event) => {\n  const id = getRouterParam(event, 'id');\n  return await db.find('projects', id);\n});",
+      "interactiveTip": "Use useFetch('/api/projects') in your Vue components to call server API routes. Nuxt handles SSR data fetching, deduplication, and client-side updates automatically!"
     },
     {
       "title": "Module 7: Production Build & Deployment",
-      "desc": "Building and deploying your Nuxt application for the live universe.",
+      "desc": "Building and deploying your Nuxt application for production.",
       "content": "Nuxt supports multiple output modes: SSR (Node.js server), static generation (HTML files for CDN hosting), and edge rendering. nuxt build compiles SSR output. nuxt generate pre-renders all pages as static files. nuxi preview serves the built output locally for final checks before launch.",
       "codeExample": "# Development server\nnpx nuxi dev\n\n# Build for SSR (Node.js server output)\nnpx nuxi build\n\n# Static generation (HTML for CDN / GitHub Pages)\nnpx nuxi generate\n\n# Preview the production build locally\nnpx nuxi preview",
       "interactiveTip": "For static GitHub Pages deployment, use nuxt generate and deploy the .output/public directory. For Vercel or Netlify, the SSR build deploys automatically with zero config!"
     }
   ],
-  "sandboxInitialCode": "<!-- Nuxt directory routing simulation -->\n<div style=\"background: #002e3b; color: #00c58e; border: 2px solid #00c58e; padding: 25px; font-family: monospace; border-radius: 8px; text-align: left;\">\n  <h3 style=\"color: #ffffff; margin-top: 0; text-align: center;\">&#128154; Nuxt File-System Deck</h3>\n  <p style=\"color: #888; text-align: center; font-size:12px;\">Click files to simulate Nuxt automatic routing!</p>\n  <div style=\"display: grid; grid-template-columns: 180px 1fr; gap: 15px; margin-top: 20px;\">\n    <div style=\"border-right: 1px solid #005a73; padding-right: 10px;\">\n      <strong style=\"color:#fff;\">&#128193; pages/</strong>\n      <div onclick=\"loadNuxtRoute('home')\" style=\"cursor:pointer; padding:6px; color:#fff; transition:color 0.2s;\" onmouseover=\"this.style.color='#00c58e'\" onmouseout=\"this.style.color='#fff'\">&#128196; index.vue</div>\n      <div onclick=\"loadNuxtRoute('about')\" style=\"cursor:pointer; padding:6px; color:#fff;\" onmouseover=\"this.style.color='#00c58e'\" onmouseout=\"this.style.color='#fff'\">&#128196; about.vue</div>\n      <div onclick=\"loadNuxtRoute('ship')\" style=\"cursor:pointer; padding:6px; color:#fff;\" onmouseover=\"this.style.color='#00c58e'\" onmouseout=\"this.style.color='#fff'\">&#128196; ship/[id].vue</div>\n    </div>\n    <div style=\"background: rgba(0,0,0,0.3); padding: 15px; border-radius: 4px;\">\n      <div><strong>Route:</strong> <span id=\"nuxt-url\" style=\"color:#ffd54f;\">/</span></div>\n      <div><strong>Mode:</strong> <span style=\"color:#00c58e;\">SSR (Server-Side Rendered)</span></div>\n      <hr style=\"border-color: #005a73; margin: 10px 0;\">\n      <div id=\"nuxt-page-content\">Welcome to Nuxt.js! The index.vue is automatically mapped to /.</div>\n    </div>\n  </div>\n</div>\n<script>\n  const routes = {\n    'home': { url: '/', content: '<strong>index.vue</strong> → Route: /<br>Auto-rendered as SSR. Perfect SEO out of the box.' },\n    'about': { url: '/about', content: '<strong>about.vue</strong> → Route: /about<br>No router config needed. File name = URL path.' },\n    'ship': { url: '/ship/JES-007', content: '<strong>ship/[id].vue</strong> → Route: /ship/:id<br>Dynamic! useRoute().params.id = \"JES-007\"' }\n  };\n  window.loadNuxtRoute = function(k) {\n    document.getElementById('nuxt-url').innerHTML = routes[k].url;\n    document.getElementById('nuxt-page-content').innerHTML = routes[k].content;\n  };\n</script>",
+  "sandboxInitialCode": "<!-- Nuxt directory routing simulation -->\n<div style=\"background: #002e3b; color: #00c58e; border: 2px solid #00c58e; padding: 25px; font-family: monospace; border-radius: 8px; text-align: left;\">\n  <h3 style=\"color: #ffffff; margin-top: 0; text-align: center;\">&#128154; Nuxt File-System Demo</h3>\n  <p style=\"color: #888; text-align: center; font-size:12px;\">Click files to simulate Nuxt automatic routing!</p>\n  <div style=\"display: grid; grid-template-columns: 180px 1fr; gap: 15px; margin-top: 20px;\">\n    <div style=\"border-right: 1px solid #005a73; padding-right: 10px;\">\n      <strong style=\"color:#fff;\">&#128193; pages/</strong>\n      <div onclick=\"loadNuxtRoute('home')\" style=\"cursor:pointer; padding:6px; color:#fff; transition:color 0.2s;\" onmouseover=\"this.style.color='#00c58e'\" onmouseout=\"this.style.color='#fff'\">&#128196; index.vue</div>\n      <div onclick=\"loadNuxtRoute('about')\" style=\"cursor:pointer; padding:6px; color:#fff;\" onmouseover=\"this.style.color='#00c58e'\" onmouseout=\"this.style.color='#fff'\">&#128196; about.vue</div>\n      <div onclick=\"loadNuxtRoute('app')\" style=\"cursor:pointer; padding:6px; color:#fff;\" onmouseover=\"this.style.color='#00c58e'\" onmouseout=\"this.style.color='#fff'\">&#128196; app/[id].vue</div>\n    </div>\n    <div style=\"background: rgba(0,0,0,0.3); padding: 15px; border-radius: 4px;\">\n      <div><strong>Route:</strong> <span id=\"nuxt-url\" style=\"color:#ffd54f;\">/</span></div>\n      <div><strong>Mode:</strong> <span style=\"color:#00c58e;\">SSR (Server-Side Rendered)</span></div>\n      <hr style=\"border-color: #005a73; margin: 10px 0;\">\n      <div id=\"nuxt-page-content\">Welcome to Nuxt.js! The index.vue is automatically mapped to /.</div>\n    </div>\n  </div>\n</div>\n<script>\n  const routes = {\n    'home': { url: '/', content: '<strong>index.vue</strong> → Route: /<br>Auto-rendered as SSR. Perfect SEO out of the box.' },\n    'about': { url: '/about', content: '<strong>about.vue</strong> → Route: /about<br>No router config needed. File name = URL path.' },\n    'app': { url: '/app/JES-01', content: '<strong>app/[id].vue</strong> → Route: /app/:id<br>Dynamic! useRoute().params.id = \"JES-01\"' }\n  };\n  window.loadNuxtRoute = function(k) {\n    document.getElementById('nuxt-url').innerHTML = routes[k].url;\n    document.getElementById('nuxt-page-content').innerHTML = routes[k].content;\n  };\n</script>",
   "quiz": [
     {
       "question": "How does Nuxt generate routes for your application?",
@@ -86,9 +86,9 @@
     {
       "question": "How do you create a dynamic route in Nuxt that accepts an 'id' parameter?",
       "options": [
-        "Create pages/ship.dynamic.vue",
-        "Create pages/ship/{id}.vue",
-        "Create pages/ship/[id].vue",
+        "Create pages/app.dynamic.vue",
+        "Create pages/app/{id}.vue",
+        "Create pages/app/[id].vue",
         "Add id to the nuxt.config routes array"
       ],
       "answer": 2,
@@ -96,13 +96,13 @@
     }
   ],
   "quest": {
-    "title": "Quest: Code the Mission Detail Dynamic Route",
-    "challenge": "Design a dynamic Nuxt page that fetches and displays mission data based on a URL parameter.",
+    "title": "Project: Build a Detail Page with Dynamic Routes",
+    "challenge": "Design a dynamic Nuxt page that fetches and displays record data based on a URL parameter.",
     "instructions": [
-      "1. Create the file pages/mission/[id].vue.",
+      "1. Create the file pages/items/[id].vue.",
       "2. Read the id parameter using useRoute().params.id.",
-      "3. Fetch data from /api/missions/{id} using useFetch().",
-      "4. Display the mission title, status, and coordinates.",
+      "3. Fetch data from /api/items/{id} using useFetch().",
+      "4. Display the item title, status, and description.",
       "5. Show a loading state while data is fetching and an error state if the ID is invalid."
     ]
   }

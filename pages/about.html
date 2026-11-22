@@ -5,23 +5,25 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 <!-- PRIMARY SEO -->
-<title>About Jesmon K J | Field Research Dossier</title>
-<meta name="description" content="Field Research Dossier of Jesmon K J (Jesmon James) — UI/UX Engineer, Artist and Teacher. Explore the methodologies and creative philosophy behind the Time Machine protocol.">
+<title>About Jesmon K J | UI/UX Engineer &amp; Frontend Developer</title>
+<meta name="description" content="About Jesmon K J (Jesmon James) — UI/UX Engineer, Frontend Developer, Artist and Teacher based in Kochi, India. Background, approach and core disciplines.">
 <meta name="keywords" content="Jesmon K J, Jesmon James, about Jesmon, Jesmon KJ about, UI engineer artist Kerala, Jesmon portfolio about">
 <meta name="author" content="Jesmon K J">
 <meta name="robots" content="index, follow">
 <link rel="canonical" href="https://jesmonjames.github.io/Time-machine/pages/about.html">
+<link rel="icon" type="image/svg+xml" href="../assets/favicon.svg">
+<meta name="theme-color" content="#070c18">
 
 <!-- OPEN GRAPH -->
 <meta property="og:type" content="profile">
 <meta property="og:url" content="https://jesmonjames.github.io/Time-machine/pages/about.html">
 <meta property="og:title" content="About Jesmon K J | Jesmon James">
-<meta property="og:description" content="Field Research Dossier of Jesmon K J (Jesmon James) — UI/UX Engineer, Artist and Teacher.">
+<meta property="og:description" content="Background, approach and core disciplines of Jesmon K J (Jesmon James) — UI/UX Engineer, Artist and Teacher.">
 <meta property="og:site_name" content="Jesmon K J — Time Machine Portfolio">
 
 <link rel="stylesheet" href="../assets/css/style.css">
 <link rel="stylesheet" href="../assets/css/ai-bot.css">
-<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700&family=Space+Mono:ital,wght@0,400;0,700;1,400&family=Black+Ops+One&family=Stardos+Stencil:wght@400;700&family=Goldman:wght@400;700&family=Wallpoet&family=Share+Tech+Mono&family=Roboto+Mono:wght@400;700&family=Courier+Prime:wght@400;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Space+Grotesk:wght@500;600;700&family=Space+Mono:ital,wght@0,400;0,700;1,400&family=Black+Ops+One&family=Stardos+Stencil:wght@400;700&family=Goldman:wght@400;700&family=Share+Tech+Mono&family=Roboto+Mono:wght@400;700&family=Courier+Prime:wght@400;700&display=swap" rel="stylesheet">
 
 <style>
   /* ── VITRUVIAN TOOLTIP ── */
@@ -134,14 +136,14 @@
   #vtTooltip .tt-val {
     color: var(--text-main) !important;
   }
-  /* ── CHAKRA GRID ── */
-  .chakra-grid {
+  /* ── VITRUVIAN PROPORTION ATLAS ── */
+  .proportion-grid {
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
     gap: 12px;
     margin-top: 22px;
   }
-  .chakra-card {
+  .proportion-card {
     position: relative;
     border: 1px solid;
     padding: 14px 14px 12px;
@@ -150,62 +152,61 @@
     transition: transform 0.2s ease, box-shadow 0.2s ease, background 0.2s ease;
     overflow: hidden;
   }
-  .chakra-card::before {
+  .proportion-card::before {
     content: '';
     position: absolute;
     top: 0; left: 0; right: 0;
     height: 2px;
-    background: var(--ck-color);
+    background: var(--vp-color, var(--text-main));
     opacity: 0.8;
   }
-  .chakra-card:hover {
+  .proportion-card:hover {
     transform: translateY(-3px);
-    box-shadow: 0 0 20px var(--ck-color);
+    box-shadow: 0 0 20px var(--vp-color, var(--text-main));
     background: rgba(0,0,0,0.4);
   }
-  .ck-header {
+  .vp-header {
     display: flex;
     align-items: center;
     gap: 10px;
     margin-bottom: 8px;
   }
-  .ck-dot {
+  .vp-dot {
     width: 10px;
     height: 10px;
-    border-radius: 50%;
-    background: var(--ck-color);
-    box-shadow: 0 0 8px var(--ck-color);
+    border: 1px solid var(--vp-color, var(--text-main));
+    background: transparent;
     flex-shrink: 0;
-    animation: ckPulse 2.5s infinite;
+    animation: vpPulse 2.5s infinite;
   }
-  @keyframes ckPulse {
-    0%, 100% { opacity: 1; box-shadow: 0 0 8px var(--ck-color); }
-    50%       { opacity: 0.5; box-shadow: 0 0 16px var(--ck-color); }
+  @keyframes vpPulse {
+    0%, 100% { opacity: 1; box-shadow: 0 0 8px var(--vp-color, var(--text-main)); }
+    50%       { opacity: 0.5; box-shadow: 0 0 16px var(--vp-color, var(--text-main)); }
   }
-  .ck-num {
+  .vp-num {
     font-family: 'Share Tech Mono', monospace;
     font-size: 9px;
     opacity: 0.45;
     letter-spacing: 2px;
-    color: var(--ck-color);
+    color: var(--vp-color, var(--text-main));
   }
-  .ck-name {
+  .vp-name {
     font-family: 'Black Ops One', system-ui;
     font-size: 11px;
-    color: var(--ck-color);
+    color: var(--vp-color, var(--text-main));
     letter-spacing: 1px;
     text-transform: uppercase;
     flex: 1;
   }
-  .ck-sanskrit {
-    font-family: 'Courier Prime', monospace;
+  .vp-symbol {
+    font-family: 'Share Tech Mono', monospace;
     font-size: 16px;
-    color: var(--ck-color);
+    color: var(--vp-color, var(--text-main));
     opacity: 0.7;
     margin-bottom: 7px;
     letter-spacing: 1px;
   }
-  .ck-row {
+  .vp-row {
     display: flex;
     justify-content: space-between;
     font-family: 'Space Mono', monospace;
@@ -216,12 +217,12 @@
     border-bottom: 1px solid rgba(255,255,255,0.05);
     padding-bottom: 3px;
   }
-  .ck-row span:last-child {
-    color: var(--ck-color);
+  .vp-row span:last-child {
+    color: var(--vp-color, var(--text-main));
     opacity: 0.85;
     text-align: right;
   }
-  .ck-qualities {
+  .vp-note {
     margin-top: 7px;
     font-family: 'Space Mono', monospace;
     font-size: 8px;
@@ -229,13 +230,12 @@
     opacity: 0.65;
     line-height: 1.7;
   }
-  /* pulsing ring on SVG chakra points */
-  .ck-ring { fill: none; }
+  .vp-ring { fill: none; }
 
   /* ══════════════════════════════════════════════
-     CHAKRA GRID FULLSCREEN OVERLAY
+     VITRUVIAN PROPORTION ATLAS — FULLSCREEN OVERLAY
   ══════════════════════════════════════════════ */
-  #chakraGridOverlay {
+  #vitruvianAtlasOverlay {
     display: none;
     position: fixed;
     inset: 0;
@@ -244,27 +244,27 @@
     backdrop-filter: blur(14px);
     overflow-y: auto;
     padding: 0;
-    animation: cgOverlayIn 0.35s cubic-bezier(0.22, 1, 0.36, 1);
+    animation: vaOverlayIn 0.35s cubic-bezier(0.22, 1, 0.36, 1);
   }
-  #chakraGridOverlay.closing {
-    animation: cgOverlayOut 0.28s ease forwards;
+  #vitruvianAtlasOverlay.closing {
+    animation: vaOverlayOut 0.28s ease forwards;
   }
-  @keyframes cgOverlayIn {
+  @keyframes vaOverlayIn {
     from { opacity: 0; transform: scale(0.97) translateY(24px); }
     to   { opacity: 1; transform: scale(1)    translateY(0); }
   }
-  @keyframes cgOverlayOut {
+  @keyframes vaOverlayOut {
     from { opacity: 1; transform: scale(1)    translateY(0); }
     to   { opacity: 0; transform: scale(0.97) translateY(16px); }
   }
-  #cgOverlayInner {
+  #vaOverlayInner {
     max-width: 1280px;
     margin: 0 auto;
     padding: 36px 28px 48px;
     min-height: 100vh;
     box-sizing: border-box;
   }
-  #cgOverlayHeader {
+  #vaOverlayHeader {
     display: flex;
     align-items: center;
     justify-content: space-between;
@@ -272,14 +272,14 @@
     padding-bottom: 16px;
     border-bottom: 1px solid rgba(255,255,255,0.08);
   }
-  #cgOverlayTitle {
+  #vaOverlayTitle {
     font-family: 'Black Ops One', system-ui;
     font-size: 20px;
     color: var(--text-main);
     letter-spacing: 4px;
     text-transform: uppercase;
   }
-  #cgOverlaySubtitle {
+  #vaOverlaySubtitle {
     font-family: 'Share Tech Mono', monospace;
     font-size: 10px;
     color: var(--text-muted);
@@ -287,7 +287,7 @@
     opacity: 0.55;
     margin-top: 4px;
   }
-  #cgOverlayClose {
+  #vaOverlayClose {
     background: none;
     border: 1px solid var(--text-main);
     color: var(--text-main);
@@ -303,37 +303,35 @@
     gap: 8px;
     position: relative;
   }
-  #cgOverlayClose:hover {
+  #vaOverlayClose:hover {
     background: var(--text-main);
     color: #000;
     box-shadow: 0 0 18px var(--text-main);
   }
-  /* override grid for fullscreen layout */
-  #chakraGridOverlay .chakra-grid {
+  #vitruvianAtlasOverlay .proportion-grid {
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
     gap: 18px;
     margin-top: 0;
   }
-  #chakraGridOverlay .chakra-card {
+  #vitruvianAtlasOverlay .proportion-card {
     padding: 20px 18px 16px;
   }
-  #chakraGridOverlay .ck-sanskrit {
+  #vitruvianAtlasOverlay .vp-symbol {
     font-size: 22px;
     margin-bottom: 12px;
   }
-  #chakraGridOverlay .ck-row {
+  #vitruvianAtlasOverlay .vp-row {
     font-size: 10px;
     margin-bottom: 4px;
     padding-bottom: 4px;
   }
-  #chakraGridOverlay .ck-qualities {
+  #vitruvianAtlasOverlay .vp-note {
     font-size: 9px;
     margin-top: 10px;
     line-height: 1.9;
   }
-  /* scan-open button */
-  #btnOpenChakraGrid {
+  #btnOpenVitruvianAtlas {
     display: inline-flex;
     align-items: center;
     gap: 10px;
@@ -350,7 +348,7 @@
     position: relative;
     overflow: hidden;
   }
-  #btnOpenChakraGrid::before {
+  #btnOpenVitruvianAtlas::before {
     content: '';
     position: absolute;
     inset: 0;
@@ -358,17 +356,17 @@
     opacity: 0;
     transition: opacity 0.25s ease;
   }
-  #btnOpenChakraGrid:hover {
+  #btnOpenVitruvianAtlas:hover {
     box-shadow: 0 0 24px var(--text-main);
     color: #000;
   }
-  #btnOpenChakraGrid:hover::before { opacity: 1; }
-  #btnOpenChakraGrid span { position: relative; z-index: 1; }
-  .cg-scan-dot {
+  #btnOpenVitruvianAtlas:hover::before { opacity: 1; }
+  #btnOpenVitruvianAtlas span { position: relative; z-index: 1; }
+  .va-scan-dot {
     width: 8px; height: 8px;
-    border-radius: 50%;
-    background: var(--text-main);
-    animation: ckPulse 2s infinite;
+    border: 1px solid var(--text-main);
+    background: transparent;
+    animation: vpPulse 2s infinite;
     position: relative; z-index: 1;
     flex-shrink: 0;
   }
@@ -386,19 +384,19 @@
   }
 
   @media (max-width: 600px) {
-    #cgOverlayHeader {
+    #vaOverlayHeader {
       flex-direction: column;
       align-items: flex-start;
       gap: 16px;
     }
-    #cgOverlayClose { width: 100%; justify-content: center; }
-    #cgOverlayTitle { font-size: 16px; letter-spacing: 2px; }
-    
-    #cgOverlayInner { padding: 24px 16px; }
-    
-    #ckHintBar { font-size: 8px; letter-spacing: 1px; }
-    
-    .chakra-grid {
+    #vaOverlayClose { width: 100%; justify-content: center; }
+    #vaOverlayTitle { font-size: 16px; letter-spacing: 2px; }
+
+    #vaOverlayInner { padding: 24px 16px; }
+
+    #vpHintBar { font-size: 8px; letter-spacing: 1px; }
+
+    .proportion-grid {
       grid-template-columns: 1fr !important;
     }
   }
@@ -408,7 +406,7 @@
   }
 </style>
 </head>
-<body class="theme-throat">
+<body class="theme-circle">
 
 <!-- TOOLTIP ELEMENT -->
 <div id="vtTooltip">
@@ -417,10 +415,10 @@
   <div class="tt-desc" id="ttDesc"></div>
 </div>
 
-<div class="mini-loader" id="miniLoader">
+<div class="mini-loader" id="miniLoader" style="display: none;" aria-hidden="true">
   <div class="mini-loader-content">
     <div class="mini-spinner"></div>
-    <div id="miniLoadText" style="letter-spacing: 2px;">SYNCING... 0%</div>
+    <div id="miniLoadText" style="letter-spacing: 2px;">LOADING... 0%</div>
   </div>
 </div>
 
@@ -428,20 +426,20 @@
   <!-- TOP BAR -->
   <header class="top-bar">
     <div class="status-indicator">
-      <span class="dot green animated-pulse"></span> ONLINE | JES-007 | <strong>CLASSIFIED: TS/SCI</strong>
+      <span class="dot green animated-pulse"></span> OPEN TO OPPORTUNITIES <strong>&middot; KOCHI, IN</strong>
     </div>
     <div class="coordinates">
-      LAT: 9.9312&deg; N &middot; LNG: 76.2673&deg; E &middot; ALT: 3 M &middot; EST. 2026
+      ABOUT &middot; EXPERIENCE &middot; EDUCATION
     </div>
     <div class="time-display" id="clock">00:00:00</div>
-    <div class="sys-load" id="sysStat">LOAD: 0.15% | RAM: 14GB</div>
+    <div class="sys-load" id="sysStat">9+ YRS &middot; UI ENGINEERING</div>
   </header>
 
   <div class="main-layout">
     
     <!-- LEFT SIDEBAR -->
     <aside class="sidebar">
-      <div class="chakra-logo-container" id="chakraLogo">
+      <div class="vitruvian-logo-container" id="vitruvianLogo">
         <!-- Dynamically injected SVG -->
       </div>
       <div class="hero">
@@ -449,8 +447,8 @@
         <h1>JESMON<br>K J</h1>
         <div class="hero-titles">
             <div class="hero-titles-tags">
-              <p>[ ROLE: ENGINEER | TEACHER ]</p>
-              <p>[ AREA: ARTIST | CREATOR ]</p>
+              <p>[ UI/UX ENGINEER &middot; FRONTEND ]</p>
+              <p>[ ARTIST &middot; TEACHER ]</p>
             </div>
             <div class="hero-icons" style="display: flex; gap: 10px; margin-left: auto;">
               <a href="library.html" class="lib-icon-btn" aria-label="My Library">
@@ -475,11 +473,11 @@
 
       <div class="metadata-panel">
         <div class="sys-data">
-          <p>LAT: 9.9312&deg; N</p>
-          <p>LNG: 76.2673&deg; E</p>
-          <p>ALT: 3 M</p>
-          <p>UNIT: JES-007</p>
-          <p>UPTIME: <span id="uptime">00:00:00</span></p>
+          <p>KOCHI, INDIA</p>
+          <p>UI/UX ENGINEER</p>
+          <p>OPEN TO WORK</p>
+          <p>EN &middot; ML</p>
+          <p><a href="mailto:kjjesmon@gmail.com">EMAIL</a></p>
         </div>
       </div>
     </aside>
@@ -492,15 +490,15 @@
       ══════════════════════════════════════════════ -->
       <section class="card timeline-item vitruvian-section">
         <div class="card-header">
-          <h2>ANATOMICAL MAP // HUMAN.CONSTANT</h2>
+          <h2>PROPORTIONAL STUDY // VITRUVIAN MAN</h2>
           <div class="leds"><span class="dot green animated-pulse"></span></div>
         </div>
         <div class="card-body" style="padding: 20px 10px; text-align: center;">
           <p class="subtitle" style="margin-bottom: 4px; font-size:12px; letter-spacing:2px;">
-            FIELD SPECIMEN: JES-007 &bull; DA VINCI PROPORTIONAL ANALYSIS &bull; REF: <em>De Architectura</em>, Vitruvius, ~25 BC
+            SUBJECT: JESMON K J &bull; DA VINCI PROPORTIONAL ANALYSIS &bull; REF: <em>De Architectura</em>, Vitruvius, ~25 BC
           </p>
           <p style="font-family: var(--font-mono); font-size:10px; color:var(--text-muted); opacity:0.6; margin-bottom:18px; letter-spacing:1px;">
-            [ HOVER ANY ELEMENT TO DECODE PROPORTIONAL DATA ]
+            [ HOVER ANY ELEMENT TO EXPLORE PROPORTIONAL DATA ]
           </p>
 
           <!-- ══════════════════ VITRUVIAN MAN SVG ══════════════════ -->
@@ -781,7 +779,7 @@
               &#966; = 1.618 &nbsp;|&nbsp; &#960; = 3.14159 &nbsp;|&nbsp; &#8730;2 = 1.414 &nbsp;|&nbsp; &#8730;5 = 2.236
             </text>
             <text x="330" y="678" class="meas-label" text-anchor="middle" font-size="7.5" opacity="0.4">
-              [ UNIT: JES-007 | DATUM: NAVEL | REF: DE ARCHITECTURA III.1 ]
+              [ UNIT: JES-01 | DATUM: NAVEL | REF: DE ARCHITECTURA III.1 ]
             </text>
 
             <!-- ══════ ANIMATED SCAN LINE ══════ -->
@@ -793,124 +791,112 @@
             </line>
 
             <!-- ══════════════════════════════════════════════
-                 7 CHAKRA ENERGY CENTRES
-                 Mapped on sushumna (spinal axis) x=330
-                 Each: pulsing glow dot + outer ring + leader line + label
+                 VITRUVIAN PROPORTION DATUMS
+                 Seven measurable landmarks on the same figure.
             ══════════════════════════════════════════════ -->
 
-            <!-- 1. SAHASRARA (Crown) – y=112, violet -->
+            <!-- CIRCLE APEX -->
             <g class="vt-hover"
-              data-tt-title="SAHASRARA — CROWN CHAKRA ● 7"
-              data-tt-val="Position: Crown | Vitruvian: Top of circle | y = 0H"
-              data-tt-desc="The thousand-petalled lotus. Governs cosmic consciousness and the connection to universal intelligence. Vitruvian parallel: the crown of the figure touches the outer circle — the boundary between human form and infinite space. Element: Thought/Space. Bija: OM. Sense: Beyond sense.">
-              <!-- outer pulse ring -->
-              <circle cx="330" cy="112" r="10" class="ck-ring" stroke="#b39ddb" stroke-width="0.8" opacity="0.6">
-                <animate attributeName="r" values="8;14;8" dur="2.8s" repeatCount="indefinite"/>
-                <animate attributeName="opacity" values="0.6;0.1;0.6" dur="2.8s" repeatCount="indefinite"/>
+              data-tt-title="CIRCLE APEX — CANON"
+              data-tt-val="R = 0.742·H | centre = navel"
+              data-tt-desc="The top of the circumscribed circle marks the limit of the figure in the spread pose. Da Vinci placed the circle's origin at the navel, giving radius about 74.2% of total height.">
+              <circle cx="330" cy="85" r="8" class="vp-ring" stroke-width="0.8" opacity="0.5">
+                <animate attributeName="r" values="6;11;6" dur="3s" repeatCount="indefinite"/>
+                <animate attributeName="opacity" values="0.5;0.1;0.5" dur="3s" repeatCount="indefinite"/>
               </circle>
-              <!-- core dot -->
-              <circle cx="330" cy="112" r="5" fill="#b39ddb" opacity="0.95" filter="url(#vt-glow-strong)"/>
-              <!-- leader line to left label -->
-              <line x1="325" y1="112" x2="255" y2="112" stroke="#b39ddb" stroke-width="0.7" opacity="0.5" stroke-dasharray="2 4"/>
-              <text x="250" y="114" font-family="Share Tech Mono,monospace" font-size="7" fill="#b39ddb" text-anchor="end" opacity="0.85">SAHASRARA</text>
-              <text x="250" y="123" font-family="Space Mono,monospace" font-size="6.5" fill="#b39ddb" text-anchor="end" opacity="0.5">OM · CROWN</text>
+              <circle cx="330" cy="85" r="3.5" class="vt-filled" opacity="0.9"/>
+              <line x1="325" y1="85" x2="255" y2="85" stroke-width="0.6" opacity="0.4" stroke-dasharray="2 4"/>
+              <text x="250" y="87" font-family="Share Tech Mono,monospace" font-size="7" text-anchor="end" opacity="0.85">CIRCLE APEX</text>
+              <text x="250" y="96" font-family="Space Mono,monospace" font-size="6.5" text-anchor="end" opacity="0.5">R = 0.742·H</text>
             </g>
 
-            <!-- 2. AJNA (Third Eye) – y=133, indigo -->
+            <!-- HEAD MODULE -->
             <g class="vt-hover"
-              data-tt-title="AJNA — THIRD EYE CHAKRA ● 6"
-              data-tt-val="Position: Brow | Vitruvian: 1/8 H from crown | y = 0.125H"
-              data-tt-desc="The command centre. Governs intuition, perception, visualisation and inner wisdom. Vitruvian parallel: at 1/8 H — the same module as the full head — it marks where rational observation meets visionary intellect. Element: Light. Bija: AUM. Sense: Extra-sensory perception.">
-              <circle cx="330" cy="133" r="9" class="ck-ring" stroke="#7c4dff" stroke-width="0.8" opacity="0.55">
-                <animate attributeName="r" values="7;13;7" dur="3s" repeatCount="indefinite"/>
-                <animate attributeName="opacity" values="0.55;0.1;0.55" dur="3s" repeatCount="indefinite"/>
+              data-tt-title="HEAD MODULE — 1/8 H"
+              data-tt-val="M = H ÷ 8"
+              data-tt-desc="The head is the measuring module for the whole figure. Eight head-lengths stack from crown to sole, and every other landmark can be written as a fraction of this unit.">
+              <circle cx="330" cy="141" r="9" class="vp-ring" stroke-width="0.7" opacity="0.45">
+                <animate attributeName="r" values="7;12;7" dur="3.2s" repeatCount="indefinite"/>
               </circle>
-              <circle cx="330" cy="133" r="4.5" fill="#7c4dff" opacity="0.95" filter="url(#vt-glow-strong)"/>
-              <line x1="325" y1="133" x2="255" y2="133" stroke="#7c4dff" stroke-width="0.7" opacity="0.5" stroke-dasharray="2 4"/>
-              <text x="250" y="135" font-family="Share Tech Mono,monospace" font-size="7" fill="#7c4dff" text-anchor="end" opacity="0.85">AJNA</text>
-              <text x="250" y="144" font-family="Space Mono,monospace" font-size="6.5" fill="#7c4dff" text-anchor="end" opacity="0.5">AUM · BROW</text>
+              <circle cx="330" cy="141" r="3.5" class="vt-filled" opacity="0.85"/>
+              <line x1="325" y1="141" x2="255" y2="141" stroke-width="0.6" opacity="0.4" stroke-dasharray="2 4"/>
+              <text x="250" y="143" font-family="Share Tech Mono,monospace" font-size="7" text-anchor="end" opacity="0.85">HEAD MODULE</text>
+              <text x="250" y="152" font-family="Space Mono,monospace" font-size="6.5" text-anchor="end" opacity="0.5">M = H/8</text>
             </g>
 
-            <!-- 3. VISHUDDHA (Throat) – y=180, cyan -->
+            <!-- NECK PIVOT -->
             <g class="vt-hover"
-              data-tt-title="VISHUDDHA — THROAT CHAKRA ● 5"
-              data-tt-val="Position: Thyroid | Vitruvian: 2/8 H mark | y = 0.25H"
-              data-tt-desc="The purification centre. Governs speech, creative expression, truth and resonance. Vitruvian parallel: sits at 2/8 H — where the neck module pivots the head (the master module) onto the torso. Architecturally analogous to the capital connecting column to entablature. Element: Sound/Ether. Bija: HAM. Sense: Hearing.">
-              <circle cx="330" cy="180" r="9" class="ck-ring" stroke="#00bcd4" stroke-width="0.8" opacity="0.55">
-                <animate attributeName="r" values="7;13;7" dur="3.2s" repeatCount="indefinite"/>
-                <animate attributeName="opacity" values="0.55;0.1;0.55" dur="3.2s" repeatCount="indefinite"/>
+              data-tt-title="NECK PIVOT — 2/8 H"
+              data-tt-val="Width ≈ H/20 | module transition"
+              data-tt-desc="The neck transfers the head module onto the torso. In the architectural analogy it behaves like a capital — a narrow transition between column shaft and entablature.">
+              <circle cx="330" cy="180" r="8" class="vp-ring" stroke-width="0.7" opacity="0.45">
+                <animate attributeName="r" values="6;11;6" dur="3.4s" repeatCount="indefinite"/>
               </circle>
-              <circle cx="330" cy="180" r="4.5" fill="#00bcd4" opacity="0.95" filter="url(#vt-glow-strong)"/>
-              <line x1="325" y1="180" x2="255" y2="180" stroke="#00bcd4" stroke-width="0.7" opacity="0.5" stroke-dasharray="2 4"/>
-              <text x="250" y="182" font-family="Share Tech Mono,monospace" font-size="7" fill="#00bcd4" text-anchor="end" opacity="0.85">VISHUDDHA</text>
-              <text x="250" y="191" font-family="Space Mono,monospace" font-size="6.5" fill="#00bcd4" text-anchor="end" opacity="0.5">HAM · THROAT</text>
+              <circle cx="330" cy="180" r="3.5" class="vt-filled" opacity="0.85"/>
+              <line x1="325" y1="180" x2="255" y2="180" stroke-width="0.6" opacity="0.4" stroke-dasharray="2 4"/>
+              <text x="250" y="182" font-family="Share Tech Mono,monospace" font-size="7" text-anchor="end" opacity="0.85">NECK PIVOT</text>
+              <text x="250" y="191" font-family="Space Mono,monospace" font-size="6.5" text-anchor="end" opacity="0.5">2/8 H</text>
             </g>
 
-            <!-- 4. ANAHATA (Heart) – y=228, green -->
+            <!-- SHOULDER SPAN -->
             <g class="vt-hover"
-              data-tt-title="ANAHATA — HEART CHAKRA ● 4"
-              data-tt-val="Position: Cardiac plexus | Vitruvian: 3/8 H | y = 0.375H"
-              data-tt-desc="The unstruck sound. Governs love, compassion, equilibrium and relationship. Vitruvian parallel: at 3/8 H — the geometric midpoint of the torso's golden rectangle — the heart is structurally central to both the body and the human experience. The bridge between lower and upper chakras, as the square bridges earth and circle (heaven). Element: Air. Bija: YAM. Sense: Touch.">
-              <circle cx="330" cy="228" r="10" class="ck-ring" stroke="#4caf50" stroke-width="0.8" opacity="0.55">
-                <animate attributeName="r" values="8;14;8" dur="3.4s" repeatCount="indefinite"/>
-                <animate attributeName="opacity" values="0.55;0.1;0.55" dur="3.4s" repeatCount="indefinite"/>
+              data-tt-title="SHOULDER SPAN — H/4"
+              data-tt-val="W = H/4 = 2 head-widths"
+              data-tt-desc="Shoulder breadth is one quarter of total height, or two head-widths. Vitruvius used this module to reason about column spacing and intercolumniation in classical architecture.">
+              <circle cx="330" cy="196" r="8" class="vp-ring" stroke-width="0.7" opacity="0.45">
+                <animate attributeName="r" values="6;11;6" dur="3.6s" repeatCount="indefinite"/>
               </circle>
-              <circle cx="330" cy="228" r="5" fill="#4caf50" opacity="0.95" filter="url(#vt-glow-strong)"/>
-              <line x1="325" y1="228" x2="255" y2="228" stroke="#4caf50" stroke-width="0.7" opacity="0.5" stroke-dasharray="2 4"/>
-              <text x="250" y="230" font-family="Share Tech Mono,monospace" font-size="7" fill="#4caf50" text-anchor="end" opacity="0.85">ANAHATA</text>
-              <text x="250" y="239" font-family="Space Mono,monospace" font-size="6.5" fill="#4caf50" text-anchor="end" opacity="0.5">YAM · HEART</text>
+              <circle cx="330" cy="196" r="3.5" class="vt-filled" opacity="0.85"/>
+              <line x1="325" y1="196" x2="255" y2="196" stroke-width="0.6" opacity="0.4" stroke-dasharray="2 4"/>
+              <text x="250" y="198" font-family="Share Tech Mono,monospace" font-size="7" text-anchor="end" opacity="0.85">SHOULDER SPAN</text>
+              <text x="250" y="207" font-family="Space Mono,monospace" font-size="6.5" text-anchor="end" opacity="0.5">H/4</text>
             </g>
 
-            <!-- 5. MANIPURA (Solar Plexus) – y=268, amber -->
+            <!-- GOLDEN SECTION -->
             <g class="vt-hover"
-              data-tt-title="MANIPURA — SOLAR PLEXUS CHAKRA ● 3"
-              data-tt-val="Position: Navel above | Vitruvian: approaching φ·H | y = 0.44H"
-              data-tt-desc="The city of jewels. Governs personal power, will, transformation and identity. Vitruvian parallel: positioned near the golden-section transition zone — between the navel (1/φ) and the midpoint — it represents the energetic engine that drives upward aspiration. Element: Fire. Bija: RAM. Sense: Sight.">
-              <circle cx="330" cy="268" r="9" class="ck-ring" stroke="#ffc107" stroke-width="0.8" opacity="0.55">
-                <animate attributeName="r" values="7;13;7" dur="3.6s" repeatCount="indefinite"/>
-                <animate attributeName="opacity" values="0.55;0.1;0.55" dur="3.6s" repeatCount="indefinite"/>
+              data-tt-title="GOLDEN SECTION — H/φ"
+              data-tt-val="φ = 1.618 | 0.618·H"
+              data-tt-desc="The golden-section rail divides the body into unequal but related parts. It is the proportional idea behind the torso rectangle and the diagonal construction lines drawn across the square.">
+              <circle cx="330" cy="287" r="8" class="vp-ring" stroke-width="0.7" opacity="0.45">
+                <animate attributeName="r" values="6;11;6" dur="3.8s" repeatCount="indefinite"/>
               </circle>
-              <circle cx="330" cy="268" r="4.5" fill="#ffc107" opacity="0.95" filter="url(#vt-glow-strong)"/>
-              <line x1="325" y1="268" x2="255" y2="268" stroke="#ffc107" stroke-width="0.7" opacity="0.5" stroke-dasharray="2 4"/>
-              <text x="250" y="270" font-family="Share Tech Mono,monospace" font-size="7" fill="#ffc107" text-anchor="end" opacity="0.85">MANIPURA</text>
-              <text x="250" y="279" font-family="Space Mono,monospace" font-size="6.5" fill="#ffc107" text-anchor="end" opacity="0.5">RAM · SOLAR</text>
+              <circle cx="330" cy="287" r="3.5" class="vt-filled" opacity="0.85"/>
+              <line x1="325" y1="287" x2="255" y2="287" stroke-width="0.6" opacity="0.4" stroke-dasharray="2 4"/>
+              <text x="250" y="289" font-family="Share Tech Mono,monospace" font-size="7" text-anchor="end" opacity="0.85">GOLDEN SECTION</text>
+              <text x="250" y="298" font-family="Space Mono,monospace" font-size="6.5" text-anchor="end" opacity="0.5">H/φ</text>
             </g>
 
-            <!-- 6. SVADHISTHANA (Sacral) – y=307, orange -->
+            <!-- NAVEL DATUM -->
             <g class="vt-hover"
-              data-tt-title="SVADHISTHANA — SACRAL CHAKRA ● 2"
-              data-tt-val="Position: Sacrum | Vitruvian: φ·H zone | y = 0.50H"
-              data-tt-desc="One's own abode. Governs creativity, pleasure, sexuality and fluidity. Vitruvian parallel: sits precisely in the navel zone — the Vitruvian golden section point. The outer circle is centred here, making this chakra literally the origin point of the entire geometric system. Element: Water. Bija: VAM. Sense: Taste.">
-              <circle cx="330" cy="307" r="9" class="ck-ring" stroke="#ff9800" stroke-width="0.8" opacity="0.55">
-                <animate attributeName="r" values="7;13;7" dur="3.8s" repeatCount="indefinite"/>
-                <animate attributeName="opacity" values="0.55;0.1;0.55" dur="3.8s" repeatCount="indefinite"/>
+              data-tt-title="NAVEL DATUM — CIRCLE CENTRE"
+              data-tt-val="Origin of circumscribed circle"
+              data-tt-desc="The navel is the geometric origin of the circle and the reference from which radius is measured. Treating it as a datum is the diagram's practical lesson: choose one reference, then measure everything against it.">
+              <circle cx="330" cy="330" r="9" class="vp-ring" stroke-width="0.7" opacity="0.45">
+                <animate attributeName="r" values="7;12;7" dur="4s" repeatCount="indefinite"/>
               </circle>
-              <circle cx="330" cy="307" r="4.5" fill="#ff9800" opacity="0.95" filter="url(#vt-glow-strong)"/>
-              <line x1="325" y1="307" x2="255" y2="307" stroke="#ff9800" stroke-width="0.7" opacity="0.5" stroke-dasharray="2 4"/>
-              <text x="250" y="309" font-family="Share Tech Mono,monospace" font-size="7" fill="#ff9800" text-anchor="end" opacity="0.85">SVADHISTHANA</text>
-              <text x="250" y="318" font-family="Space Mono,monospace" font-size="6.5" fill="#ff9800" text-anchor="end" opacity="0.5">VAM · SACRAL</text>
+              <circle cx="330" cy="330" r="3.5" class="vt-filled" opacity="0.9"/>
+              <line x1="325" y1="330" x2="255" y2="330" stroke-width="0.6" opacity="0.4" stroke-dasharray="2 4"/>
+              <text x="250" y="332" font-family="Share Tech Mono,monospace" font-size="7" text-anchor="end" opacity="0.85">NAVEL DATUM</text>
+              <text x="250" y="341" font-family="Space Mono,monospace" font-size="6.5" text-anchor="end" opacity="0.5">CIRCLE ORIGIN</text>
             </g>
 
-            <!-- 7. MULADHARA (Root) – y=375, red -->
+            <!-- BASELINE -->
             <g class="vt-hover"
-              data-tt-title="MULADHARA — ROOT CHAKRA ● 1"
-              data-tt-val="Position: Coccyx/Perineum | Vitruvian: Base of square | y = 0.58H"
-              data-tt-desc="The root support. Governs survival, groundedness, physical existence and primal energy. Vitruvian parallel: at the base of the torso — where the figure meets the earth — it corresponds to the foundation of the Vitruvian square. Just as a building's strength begins at its base, all higher chakra function depends on a stable root. Element: Earth. Bija: LAM. Sense: Smell.">
-              <circle cx="330" cy="375" r="10" class="ck-ring" stroke="#f44336" stroke-width="0.8" opacity="0.55">
-                <animate attributeName="r" values="8;14;8" dur="4s" repeatCount="indefinite"/>
-                <animate attributeName="opacity" values="0.55;0.1;0.55" dur="4s" repeatCount="indefinite"/>
+              data-tt-title="BASELINE — 8/8 H"
+              data-tt-val="Sole = 0H | foundation module"
+              data-tt-desc="The sole closes the eight-head stack and anchors the square. It is the body's baseline: the point from which height, reach and every upper module are measured.">
+              <circle cx="330" cy="562" r="8" class="vp-ring" stroke-width="0.7" opacity="0.45">
+                <animate attributeName="r" values="6;11;6" dur="4.2s" repeatCount="indefinite"/>
               </circle>
-              <circle cx="330" cy="375" r="5" fill="#f44336" opacity="0.95" filter="url(#vt-glow-strong)"/>
-              <line x1="325" y1="375" x2="255" y2="375" stroke="#f44336" stroke-width="0.7" opacity="0.5" stroke-dasharray="2 4"/>
-              <text x="250" y="377" font-family="Share Tech Mono,monospace" font-size="7" fill="#f44336" text-anchor="end" opacity="0.85">MULADHARA</text>
-              <text x="250" y="386" font-family="Space Mono,monospace" font-size="6.5" fill="#f44336" text-anchor="end" opacity="0.5">LAM · ROOT</text>
+              <circle cx="330" cy="562" r="3.5" class="vt-filled" opacity="0.85"/>
+              <line x1="325" y1="562" x2="255" y2="562" stroke-width="0.6" opacity="0.4" stroke-dasharray="2 4"/>
+              <text x="250" y="564" font-family="Share Tech Mono,monospace" font-size="7" text-anchor="end" opacity="0.85">BASELINE</text>
+              <text x="250" y="573" font-family="Space Mono,monospace" font-size="6.5" text-anchor="end" opacity="0.5">8/8 H</text>
             </g>
 
-            <!-- Sushumna spine axis line (subtle) -->
-            <line x1="330" y1="107" x2="330" y2="380"
-              stroke="rgba(255,255,255,0.06)" stroke-width="2" stroke-linecap="round"/>
-
-
+            <!-- Central proportional axis -->
+            <line x1="330" y1="85" x2="330" y2="562"
+              stroke-width="1.4" opacity="0.06" stroke-dasharray="2 7"/>
           </svg>
           <!-- ══════════════════ END SVG ══════════════════ -->
 
@@ -942,25 +928,25 @@
               data-tt-desc="Vitruvius documented 4 ancient measurement systems all encoding the same body. 1 cubit = 6 palms = 24 digits. The body's fractal-like self-similarity across scales (digit → palm → cubit → height) anticipates modern fractal geometry.">8 HEADS = 4 CUBITS</span>
           </div>
 
-          <!-- CHAKRA HINT BAR -->
+          <!-- VITRUVIAN DATUM HINT -->
           <div style="margin-top:22px; text-align:center;">
-            <p id="ckHintBar" style="font-family:var(--font-mono); font-size:9px; letter-spacing:2px; color:var(--text-muted); opacity:0.55; padding:10px 0; border-top:1px solid var(--border-color); border-bottom:1px solid var(--border-color);">
-              &#9679;&nbsp; CLICK ANY CHAKRA NODE ON THE DIAGRAM TO OPEN DETAILED SCAN
+            <p id="vpHintBar" style="font-family:var(--font-mono); font-size:9px; letter-spacing:2px; color:var(--text-muted); opacity:0.55; padding:10px 0; border-top:1px solid var(--border-color); border-bottom:1px solid var(--border-color);">
+              &#9679;&nbsp; HOVER ANY PROPORTION DATUM TO READ ITS MODULE VALUE
             </p>
           </div>
 
-          <!-- OPEN CHAKRA GRID BUTTON -->
+          <!-- OPEN PROPORTION ATLAS BUTTON -->
           <div style="text-align:center; margin-top:28px; margin-bottom:6px;">
-            <button id="btnOpenChakraGrid" onclick="openChakraGridOverlay()" aria-label="Open full chakra system scan">
-              <div class="cg-scan-dot"></div>
-              <span>&#9678;&nbsp; SCAN CHAKRA SYSTEM &mdash; ALL 7 NODES</span>
+            <button id="btnOpenVitruvianAtlas" onclick="openVitruvianAtlas()" aria-label="Open the Vitruvian proportion atlas">
+              <span class="va-scan-dot"></span>
+              <span>&#9678;&nbsp; OPEN PROPORTION ATLAS &mdash; 7 MODULES</span>
             </button>
           </div>
 
         </div><!-- /.card-body -->
         <div class="card-footer">
-          <span>BODY: MAPPED &nbsp;|&nbsp; &#9679; 7 CHAKRA NODES ACTIVE</span>
-          <span style="margin-left:auto; opacity:0.5; font-size:11px;">&#966; 1.618 &middot; LAM&rarr;OM &middot; JES-007</span>
+          <span>BODY: MAPPED &nbsp;|&nbsp; &#9679; 7 PROPORTION DATUMS ACTIVE</span>
+          <span style="margin-left:auto; opacity:0.5; font-size:11px;">&#966; 1.618 &middot; H = 8 HEADS &middot; JES-01</span>
         </div>
       </section>
 
@@ -969,68 +955,68 @@
       ══════════════════════════════════════════════ -->
       <section class="card timeline-item" style="margin-top: 24px;">
         <div class="card-header">
-          <h2>RESEARCH_DOSSIER // FIELD_CHRONICLE</h2>
+          <h2>PROFILE // BACKGROUND</h2>
           <div class="leds"><span class="dot green"></span></div>
         </div>
         <div class="card-body">
-          <p class="subtitle">Authenticated operative logs and core protocols.</p>
+          <p class="subtitle">Background, approach and core disciplines.</p>
           <div style="font-family: var(--font-mono); font-size: 14px; line-height: 1.8; color: var(--text-muted);">
-            <p style="margin-bottom: 30px; font-size: 18px; color: var(--text-main); font-family: 'Share Tech Mono', monospace; letter-spacing: 2px;">
-              &gt; GREETINGS. I AM <strong style="color: var(--text-main); text-shadow: var(--text-glow);">JESMON K J</strong>.
+            <p class="profile-greeting" style="margin-bottom: 30px; font-size: 18px; color: var(--text-main); font-family: 'Share Tech Mono', monospace; letter-spacing: 2px;">
+              &gt; HELLO, I AM <strong style="color: var(--text-main); text-shadow: var(--text-glow);">JESMON K J</strong>.
             </p>
             
             <p style="margin-bottom: 30px; border-left: 2px solid var(--text-main); padding-left: 20px; font-style: italic;">
-              I operate at the intersection of data, design, and human experience. My mission is to transform raw information into systems that communicate, perform, and endure.
+              I work at the intersection of engineering, design and human experience &mdash; turning complex information into clear, reliable digital products.
             </p>
 
             <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 20px; margin-bottom: 40px;">
               <div style="border: 1px solid rgba(255,255,255,0.05); padding: 15px; background: rgba(255,255,255,0.02);">
-                <span style="display: block; font-family: 'Share Tech Mono', monospace; color: var(--text-main); margin-bottom: 10px; font-size: 12px; letter-spacing: 1px;">[ DESIGNATION: ENGINEER ]</span>
-                <p style="margin: 0;">I architect resilient digital structures.</p>
+                <span style="display: block; font-family: 'Share Tech Mono', monospace; color: var(--text-main); margin-bottom: 10px; font-size: 12px; letter-spacing: 1px;">[ ENGINEERING ]</span>
+                <p style="margin: 0;">I design and build resilient, accessible interfaces.</p>
               </div>
               <div style="border: 1px solid rgba(255,255,255,0.05); padding: 15px; background: rgba(255,255,255,0.02);">
-                <span style="display: block; font-family: 'Share Tech Mono', monospace; color: var(--text-main); margin-bottom: 10px; font-size: 12px; letter-spacing: 1px;">[ DESIGNATION: ARTIST ]</span>
-                <p style="margin: 0;">I craft experiences where thoughts becomes expression.</p>
+                <span style="display: block; font-family: 'Share Tech Mono', monospace; color: var(--text-main); margin-bottom: 10px; font-size: 12px; letter-spacing: 1px;">[ ART &amp; ILLUSTRATION ]</span>
+                <p style="margin: 0;">I explore ideas through drawing, colour and visual studies.</p>
               </div>
               <div style="border: 1px solid rgba(255,255,255,0.05); padding: 15px; background: rgba(255,255,255,0.02);">
-                <span style="display: block; font-family: 'Share Tech Mono', monospace; color: var(--text-main); margin-bottom: 10px; font-size: 12px; letter-spacing: 1px;">[ DESIGNATION: TEACHER ]</span>
-                <p style="margin: 0;">I illuminate pathways for those ready to advance.</p>
+                <span style="display: block; font-family: 'Share Tech Mono', monospace; color: var(--text-main); margin-bottom: 10px; font-size: 12px; letter-spacing: 1px;">[ TEACHING ]</span>
+                <p style="margin: 0;">I help learners build confidence through practical, structured guidance.</p>
               </div>
             </div>
 
             <p style="margin-bottom: 30px; letter-spacing: 1px; font-family: 'Share Tech Mono', monospace; color: var(--text-muted);">
-              Every project is an <strong>operation</strong>. Every line of code is <strong>deliberate</strong>. Every system is built with <strong>purpose</strong>.
+              Every project is a <strong>collaboration</strong>. Every line of code is <strong>deliberate</strong>. Every system is built with <strong>purpose</strong>.
             </p>
 
             <p style="margin-bottom: 40px; color: var(--text-main); text-shadow: var(--text-glow); border: 1px dashed var(--border-color); padding: 20px; text-align: center; letter-spacing: 1px; font-size: 13px;">
-              MY TERMINAL REMAINS ACTIVE &mdash; ALWAYS SCANNING THE HORIZON, ALWAYS PREPARED FOR WHAT COMES NEXT.
+              I AM ALWAYS LEARNING, ALWAYS BUILDING &mdash; AND OPEN TO THE NEXT CHALLENGE.
             </p>
 
             <p style="font-size: 11px; color: var(--text-muted); opacity: 0.4; letter-spacing: 3px; text-align: right;">
-              [ END_OF_TRANSMISSION ]
+              [ END OF PROFILE ]
             </p>
           </div>
         </div>
         <div class="card-footer">
-          <span>STATUS: DECRYPTED</span>
+          <span>STATUS: AVAILABLE FOR WORK</span>
         </div>
       </section>
 
       <!-- FOOTER -->
       <footer class="bottom-bar" style="margin-top: 60px;">
         <div class="themes" id="themeButtons">
-          <button class="theme-btn" data-theme="theme-crown">CROWN</button>
-          <button class="theme-btn" data-theme="theme-third-eye">THIRD EYE</button>
-          <button class="theme-btn" data-theme="theme-throat">THROAT</button>
-          <button class="theme-btn" data-theme="theme-heart">HEART</button>
-          <button class="theme-btn" data-theme="theme-solar">SOLAR</button>
-          <button class="theme-btn" data-theme="theme-sacral">SACRAL</button>
-          <button class="theme-btn" data-theme="theme-root">ROOT</button>
+          <button class="theme-btn" data-theme="theme-canon">CANON</button>
+          <button class="theme-btn" data-theme="theme-golden">GOLDEN</button>
+          <button class="theme-btn" data-theme="theme-circle">CIRCLE</button>
+          <button class="theme-btn" data-theme="theme-square">SQUARE</button>
+          <button class="theme-btn" data-theme="theme-cubit">CUBIT</button>
+          <button class="theme-btn" data-theme="theme-module">MODULE</button>
+          <button class="theme-btn" data-theme="theme-base">BASE</button>
         </div>
         <div class="stats">
           <span class="dot orange animated-pulse"></span> READING LOG
           <span class="separator"> &nbsp;|&nbsp; </span>
-          2 SECTIONS &nbsp;|&nbsp; 7 CHAKRAS MAPPED
+          2 SECTIONS &nbsp;|&nbsp; 7 PROPORTION MODULES
         </div>
       </footer>
 
@@ -1039,263 +1025,115 @@
 </div>
 
 <!-- ═══════════════════════════════════════════════════════════
-     CHAKRA GRID FULLSCREEN OVERLAY
+     VITRUVIAN PROPORTION ATLAS — FULLSCREEN OVERLAY
 ═══════════════════════════════════════════════════════════ -->
-<div id="chakraGridOverlay" role="dialog" aria-modal="true" aria-label="Chakra System Full Scan">
-  <div id="cgOverlayInner">
+<div id="vitruvianAtlasOverlay" role="dialog" aria-modal="true" aria-label="Vitruvian proportion atlas">
+  <div id="vaOverlayInner">
 
-    <!-- Header -->
-    <div id="cgOverlayHeader">
+    <div id="vaOverlayHeader">
       <div>
-        <div id="cgOverlayTitle">&#9678; CHAKRA SYSTEM &mdash; FULL SCAN</div>
-        <div id="cgOverlaySubtitle">7 ENERGY CENTRES &nbsp;|&nbsp; SUSHUMNA AXIS &nbsp;|&nbsp; UNIT: JES-007</div>
+        <div id="vaOverlayTitle">&#9678; VITRUVIAN PROPORTION ATLAS</div>
+        <div id="vaOverlaySubtitle">7 MEASURE MODULES &nbsp;|&nbsp; CIRCLE / SQUARE / NAVEL DATUM &nbsp;|&nbsp; UNIT: JES-01</div>
       </div>
-      <button id="cgOverlayClose" onclick="closeChakraGridOverlay()" aria-label="Close chakra scan">
-        <span>&#10005; CLOSE SCAN</span>
+      <button id="vaOverlayClose" onclick="closeVitruvianAtlas()" aria-label="Close proportion atlas">
+        <span>&#10005; CLOSE ATLAS</span>
       </button>
     </div>
 
-    <!-- Chakra Grid -->
-    <div class="chakra-grid">
+    <div class="proportion-grid">
 
-      <!-- 7. SAHASRARA -->
-      <div class="chakra-card vt-hover" style="--ck-color:#b39ddb; border-color:rgba(179,157,219,0.3);"
-        data-tt-title="OM — BIJA SEED OF SAHASRARA"
-        data-tt-val="Frequency: 963 Hz | Keynote: B"
-        data-tt-desc="Sahasrara has no bija in the traditional sense — its mantra is silence and OM. 963 Hz is associated with awakening the crown and activating the pineal gland. Vitruvian position: the exact apex of the outer circle — the point at which the geometric system of the body meets infinite space.">
-        <div class="ck-header">
-          <div class="ck-dot"></div>
-          <span class="ck-num">#7</span>
-          <span class="ck-name">SAHASRARA</span>
-        </div>
-        <div class="ck-sanskrit">अं &nbsp;OM</div>
-        <div class="ck-row"><span>REGION</span><span>Crown · Cerebral cortex</span></div>
-        <div class="ck-row"><span>ELEMENT</span><span>Thought · Consciousness</span></div>
-        <div class="ck-row"><span>SENSE</span><span>Beyond sense</span></div>
-        <div class="ck-row"><span>GLAND</span><span>Pituitary</span></div>
-        <div class="ck-row"><span>VITRUVIAN</span><span>Crown · Circle apex</span></div>
-        <div class="ck-row"><span>FREQUENCY</span><span>963 Hz · Keynote B</span></div>
-        <div class="ck-qualities">▸ Unity · Bliss · Cosmic awareness<br>▸ Dissolution of ego · Enlightenment</div>
+      <div class="proportion-card vt-hover" data-tt-title="CIRCUMSCRIBED CIRCLE"
+        data-tt-val="R = 0.742·H | centre = navel"
+        data-tt-desc="The circle that encloses the spread figure. Radius is measured from the navel datum to crown or sole in the ideal construction.">
+        <div class="vp-header"><div class="vp-dot"></div><span class="vp-num">01</span><span class="vp-name">CIRCLE</span></div>
+        <div class="vp-symbol">&#9678; H</div>
+        <div class="vp-row"><span>MEASURE</span><span>R = 0.742·H</span></div>
+        <div class="vp-row"><span>DATUM</span><span>Navel centre</span></div>
+        <div class="vp-row"><span>POSE</span><span>Arms + legs spread</span></div>
+        <div class="vp-row"><span>USE</span><span>Radial module</span></div>
+        <div class="vp-note">&#9656; Circle and square share one body.<br>&#9656; The navel is the origin of every radius.</div>
       </div>
 
-      <!-- 6. AJNA -->
-      <div class="chakra-card vt-hover" style="--ck-color:#7c4dff; border-color:rgba(124,77,255,0.3);"
-        data-tt-title="AUM — BIJA MANTRA OF AJNA"
-        data-tt-val="Frequency: 852 Hz | Keynote: A"
-        data-tt-desc="Chanting AUM (the primordial sound) activates the third eye of perception. 852 Hz is linked to returning to spiritual order and awakening intuition. Vitruvian position: 1/8 H from crown — within the head module itself, at the seat of reason and vision.">
-        <div class="ck-header">
-          <div class="ck-dot"></div>
-          <span class="ck-num">#6</span>
-          <span class="ck-name">AJNA</span>
-        </div>
-        <div class="ck-sanskrit">ओं &nbsp;AUM</div>
-        <div class="ck-row"><span>REGION</span><span>Pineal · Brow centre</span></div>
-        <div class="ck-row"><span>ELEMENT</span><span>Light · Tamas</span></div>
-        <div class="ck-row"><span>SENSE</span><span>Extra-perception</span></div>
-        <div class="ck-row"><span>GLAND</span><span>Pineal</span></div>
-        <div class="ck-row"><span>VITRUVIAN</span><span>Brow · within 1/8 H</span></div>
-        <div class="ck-row"><span>FREQUENCY</span><span>852 Hz · Keynote A</span></div>
-        <div class="ck-qualities">▸ Intuition · Insight · Wisdom<br>▸ Perception · Inner vision</div>
+      <div class="proportion-card vt-hover" data-tt-title="VITRUVIAN SQUARE"
+        data-tt-val="Side = H = span | ratio 1:1"
+        data-tt-desc="Height and fingertip-to-fingertip span are equal in the canonical figure, producing the square that carries the body.">
+        <div class="vp-header"><div class="vp-dot"></div><span class="vp-num">02</span><span class="vp-name">SQUARE</span></div>
+        <div class="vp-symbol">&#9633; 1:1</div>
+        <div class="vp-row"><span>MEASURE</span><span>Side = H</span></div>
+        <div class="vp-row"><span>DATUM</span><span>Sole → crown</span></div>
+        <div class="vp-row"><span>POSE</span><span>Arms horizontal</span></div>
+        <div class="vp-row"><span>USE</span><span>Bilateral order</span></div>
+        <div class="vp-note">&#9656; Span equals height.<br>&#9656; The square is the module grid for architecture.</div>
       </div>
 
-      <!-- 5. VISHUDDHA -->
-      <div class="chakra-card vt-hover" style="--ck-color:#00bcd4; border-color:rgba(0,188,212,0.3);"
-        data-tt-title="HAM — BIJA MANTRA OF VISHUDDHA"
-        data-tt-val="Frequency: 741 Hz | Keynote: G"
-        data-tt-desc="Chanting HAM purifies and activates the throat energy. 741 Hz awakens intuition and supports solving problems through clear expression. The throat in Vitruvian anatomy is the critical transition between head (module) and body — analogous to the capital of a column.">
-        <div class="ck-header">
-          <div class="ck-dot"></div>
-          <span class="ck-num">#5</span>
-          <span class="ck-name">VISHUDDHA</span>
-        </div>
-        <div class="ck-sanskrit">हं &nbsp;HAM</div>
-        <div class="ck-row"><span>REGION</span><span>Thyroid · Larynx</span></div>
-        <div class="ck-row"><span>ELEMENT</span><span>Sound · Ākāśa</span></div>
-        <div class="ck-row"><span>SENSE</span><span>Hearing · Śravanaa</span></div>
-        <div class="ck-row"><span>GLAND</span><span>Thyroid</span></div>
-        <div class="ck-row"><span>VITRUVIAN</span><span>Neck module · 2/8 H</span></div>
-        <div class="ck-row"><span>FREQUENCY</span><span>741 Hz · Keynote G</span></div>
-        <div class="ck-qualities">▸ Expression · Truth · Resonance<br>▸ Creative voice · Authenticity</div>
+      <div class="proportion-card vt-hover" data-tt-title="HEAD MODULE"
+        data-tt-val="M = H/8 | eight heads"
+        data-tt-desc="The head is the repeatable unit. Eight stacked head-lengths describe the full figure, so all other measures can be expressed as head fractions.">
+        <div class="vp-header"><div class="vp-dot"></div><span class="vp-num">03</span><span class="vp-name">MODULE</span></div>
+        <div class="vp-symbol">M H/8</div>
+        <div class="vp-row"><span>MEASURE</span><span>1 head = H/8</span></div>
+        <div class="vp-row"><span>DATUM</span><span>Crown → chin</span></div>
+        <div class="vp-row"><span>POSE</span><span>Upright figure</span></div>
+        <div class="vp-row"><span>USE</span><span>Base unit</span></div>
+        <div class="vp-note">&#9656; H = 8 heads = 4 cubits.<br>&#9656; One module repeats through the whole diagram.</div>
       </div>
 
-      <!-- 4. ANAHATA -->
-      <div class="chakra-card vt-hover" style="--ck-color:#4caf50; border-color:rgba(76,175,80,0.3);"
-        data-tt-title="YAM — BIJA MANTRA OF ANAHATA"
-        data-tt-val="Frequency: 639 Hz | Keynote: F"
-        data-tt-desc="Chanting YAM opens the heart to unconditional love and compassion. 639 Hz enhances communication, understanding and relationships. The Vitruvian heart sits at the geometric centre of the torso's golden rectangle — structurally and spiritually central.">
-        <div class="ck-header">
-          <div class="ck-dot"></div>
-          <span class="ck-num">#4</span>
-          <span class="ck-name">ANAHATA</span>
-        </div>
-        <div class="ck-sanskrit">यं &nbsp;YAM</div>
-        <div class="ck-row"><span>REGION</span><span>Cardiac plexus</span></div>
-        <div class="ck-row"><span>ELEMENT</span><span>Air · Vāyu</span></div>
-        <div class="ck-row"><span>SENSE</span><span>Touch · Sparśa</span></div>
-        <div class="ck-row"><span>GLAND</span><span>Thymus</span></div>
-        <div class="ck-row"><span>VITRUVIAN</span><span>Heart · 3/8 H bridge</span></div>
-        <div class="ck-row"><span>FREQUENCY</span><span>639 Hz · Keynote F</span></div>
-        <div class="ck-qualities">▸ Love · Compassion · Balance<br>▸ Bridge of upper · lower energy</div>
+      <div class="proportion-card vt-hover" data-tt-title="CUBIT DIVISION"
+        data-tt-val="1 cubit = 6 palms = 24 digits"
+        data-tt-desc="Vitruvius recorded several ancient units that all resolve to the same body. A cubit groups six palms, and a palm groups four digits.">
+        <div class="vp-header"><div class="vp-dot"></div><span class="vp-num">04</span><span class="vp-name">CUBIT</span></div>
+        <div class="vp-symbol">6P &middot; 24D</div>
+        <div class="vp-row"><span>MEASURE</span><span>H = 4 cubits</span></div>
+        <div class="vp-row"><span>DATUM</span><span>Eight-module stack</span></div>
+        <div class="vp-row"><span>POSE</span><span>Upright figure</span></div>
+        <div class="vp-row"><span>USE</span><span>Ancient units</span></div>
+        <div class="vp-note">&#9656; Digit → palm → cubit → height.<br>&#9656; The body becomes a scale of measures.</div>
       </div>
 
-      <!-- 3. MANIPURA -->
-      <div class="chakra-card vt-hover" style="--ck-color:#ffc107; border-color:rgba(255,193,7,0.3);"
-        data-tt-title="RAM — BIJA MANTRA OF MANIPURA"
-        data-tt-val="Frequency: 528 Hz | Keynote: E"
-        data-tt-desc="Chanting RAM ignites the inner fire of will and transformation. 528 Hz is known as the 'miracle tone' — associated with DNA repair and transformation of consciousness. The solar plexus governs action and identity.">
-        <div class="ck-header">
-          <div class="ck-dot"></div>
-          <span class="ck-num">#3</span>
-          <span class="ck-name">MANIPURA</span>
-        </div>
-        <div class="ck-sanskrit">रं &nbsp;RAM</div>
-        <div class="ck-row"><span>REGION</span><span>Solar plexus · Navel</span></div>
-        <div class="ck-row"><span>ELEMENT</span><span>Fire · Tejas</span></div>
-        <div class="ck-row"><span>SENSE</span><span>Sight · Rūpa</span></div>
-        <div class="ck-row"><span>GLAND</span><span>Pancreas</span></div>
-        <div class="ck-row"><span>VITRUVIAN</span><span>Upper abdomen · 3/8 H</span></div>
-        <div class="ck-row"><span>FREQUENCY</span><span>528 Hz · Keynote E</span></div>
-        <div class="ck-qualities">▸ Will · Power · Transformation<br>▸ Self-esteem · Discipline</div>
+      <div class="proportion-card vt-hover" data-tt-title="GOLDEN SECTION"
+        data-tt-val="φ = 1.618 | 0.618·H"
+        data-tt-desc="The golden-section rail splits the figure into unequal but related parts, echoed in the torso rectangle and diagonal construction lines.">
+        <div class="vp-header"><div class="vp-dot"></div><span class="vp-num">05</span><span class="vp-name">GOLDEN</span></div>
+        <div class="vp-symbol">&#966; 1.618</div>
+        <div class="vp-row"><span>MEASURE</span><span>H/φ = 0.618·H</span></div>
+        <div class="vp-row"><span>DATUM</span><span>Vertical rail</span></div>
+        <div class="vp-row"><span>POSE</span><span>Square interior</span></div>
+        <div class="vp-row"><span>USE</span><span>Division line</span></div>
+        <div class="vp-note">&#9656; Whole : larger = larger : smaller.<br>&#9656; The rails make that relation visible.</div>
       </div>
 
-      <!-- 2. SVADHISTHANA -->
-      <div class="chakra-card vt-hover" style="--ck-color:#ff9800; border-color:rgba(255,152,0,0.3);"
-        data-tt-title="VAM — BIJA MANTRA OF SVADHISTHANA"
-        data-tt-val="Frequency: 417 Hz | Keynote: D"
-        data-tt-desc="Chanting VAM activates the sacral creative energy. 417 Hz facilitates change and undoing difficult situations. This mantra resonates with fluid creativity and the reproductive life-force.">
-        <div class="ck-header">
-          <div class="ck-dot"></div>
-          <span class="ck-num">#2</span>
-          <span class="ck-name">SVADHISTHANA</span>
-        </div>
-        <div class="ck-sanskrit">वं &nbsp;VAM</div>
-        <div class="ck-row"><span>REGION</span><span>Sacrum · Lower abdomen</span></div>
-        <div class="ck-row"><span>ELEMENT</span><span>Water · Āpa</span></div>
-        <div class="ck-row"><span>SENSE</span><span>Taste · Rasa</span></div>
-        <div class="ck-row"><span>GLAND</span><span>Gonads</span></div>
-        <div class="ck-row"><span>VITRUVIAN</span><span>Navel · φ origin</span></div>
-        <div class="ck-row"><span>FREQUENCY</span><span>417 Hz · Keynote D</span></div>
-        <div class="ck-qualities">▸ Creativity · Pleasure · Emotion<br>▸ Fluidity · Desire · Sexuality</div>
+      <div class="proportion-card vt-hover" data-tt-title="SHOULDER MODULE"
+        data-tt-val="W = H/4 = 2 head-widths"
+        data-tt-desc="Shoulder breadth is two head-widths. In classical architecture this relationship appears as a spacing rule between columns.">
+        <div class="vp-header"><div class="vp-dot"></div><span class="vp-num">06</span><span class="vp-name">SQUARE WIDTH</span></div>
+        <div class="vp-symbol">H/4</div>
+        <div class="vp-row"><span>MEASURE</span><span>W = H/4</span></div>
+        <div class="vp-row"><span>DATUM</span><span>Shoulder line</span></div>
+        <div class="vp-row"><span>POSE</span><span>Arms horizontal</span></div>
+        <div class="vp-row"><span>USE</span><span>Intercolumniation</span></div>
+        <div class="vp-note">&#9656; Two head-widths across the shoulders.<br>&#9656; Symmetry becomes a structural rule.</div>
       </div>
 
-      <!-- 1. MULADHARA -->
-      <div class="chakra-card vt-hover" style="--ck-color:#f44336; border-color:rgba(244,67,54,0.3);"
-        data-tt-title="LAM — BIJA MANTRA OF MULADHARA"
-        data-tt-val="Frequency: 396 Hz | Keynote: C"
-        data-tt-desc="Chanting LAM activates the root energy centre. 396 Hz is the Solfeggio frequency associated with releasing fear and guilt, establishing the physical foundation of consciousness.">
-        <div class="ck-header">
-          <div class="ck-dot"></div>
-          <span class="ck-num">#1</span>
-          <span class="ck-name">MULADHARA</span>
-        </div>
-        <div class="ck-sanskrit">लं &nbsp;LAM</div>
-        <div class="ck-row"><span>REGION</span><span>Coccyx · Perineum</span></div>
-        <div class="ck-row"><span>ELEMENT</span><span>Earth · Pṛthivī</span></div>
-        <div class="ck-row"><span>SENSE</span><span>Smell · Gandha</span></div>
-        <div class="ck-row"><span>GLAND</span><span>Adrenal</span></div>
-        <div class="ck-row"><span>VITRUVIAN</span><span>Base of Square</span></div>
-        <div class="ck-row"><span>FREQUENCY</span><span>396 Hz · Keynote C</span></div>
-        <div class="ck-qualities">▸ Survival · Grounding · Stability<br>▸ Physical identity · Primal energy</div>
+      <div class="proportion-card vt-hover" data-tt-title="CANON"
+        data-tt-val="De Architectura III.1 | ~25 BC"
+        data-tt-desc="The completed canon: circle, square, axis and modules agreeing with the figure. Vitruvius framed this commensurability as the basis of beautiful architecture.">
+        <div class="vp-header"><div class="vp-dot"></div><span class="vp-num">07</span><span class="vp-name">CANON</span></div>
+        <div class="vp-symbol">V</div>
+        <div class="vp-row"><span>MEASURE</span><span>All modules</span></div>
+        <div class="vp-row"><span>DATUM</span><span>Navel + axis</span></div>
+        <div class="vp-row"><span>POSE</span><span>Dual pose</span></div>
+        <div class="vp-row"><span>USE</span><span>Design system</span></div>
+        <div class="vp-note">&#9656; Parts agree with each other and the whole.<br>&#9656; The diagram becomes a build method.</div>
       </div>
 
-    </div><!-- /.chakra-grid -->
+    </div><!-- /.proportion-grid -->
 
-    <!-- Footer -->
     <div style="margin-top:32px; padding-top:16px; border-top:1px solid rgba(255,255,255,0.06); text-align:center; font-family:'Share Tech Mono',monospace; font-size:9px; color:var(--text-muted); letter-spacing:2px; opacity:0.4;">
-      &#9679; 7 CHAKRA NODES ACTIVE &nbsp;|&nbsp; &phi; 1.618 &middot; LAM&rarr;OM &middot; JES-007
+      &#9679; 7 PROPORTION MODULES ACTIVE &nbsp;|&nbsp; &#966; 1.618 &middot; H = 8 HEADS &middot; JES-01
     </div>
 
-  </div><!-- /#cgOverlayInner -->
-</div><!-- /#chakraGridOverlay -->
-
-<!-- CHAKRA MODAL -->
-<div id="ckModal" style="
-  display:none; position:fixed; inset:0; z-index:9998;
-  background:rgba(0,0,0,0.82); backdrop-filter:blur(8px);
-  justify-content:center; align-items:center;
-  padding:20px;
-" onclick="if(event.target===this)closeCkModal()">
-  <div id="ckModalBox" style="
-    position:relative;
-    max-width:480px; width:100%;
-    border:1px solid var(--ck-modal-color,#00ccff);
-    background:rgba(5,10,25,0.97);
-    padding:30px 28px 24px;
-    box-shadow:0 0 40px var(--ck-modal-color,#00ccff), 0 0 80px rgba(0,0,0,0.9);
-    animation:ckModalIn 0.25s ease;
-  ">
-    <!-- top accent bar -->
-    <div id="ckModalBar" style="position:absolute;top:0;left:0;right:0;height:3px;background:var(--ck-modal-color,#00ccff);opacity:0.9;"></div>
-
-    <!-- close btn -->
-    <button onclick="closeCkModal()" style="
-      position:absolute;top:14px;right:16px;
-      background:none;border:none;color:var(--ck-modal-color,#00ccff);
-      font-size:18px;cursor:pointer;opacity:0.7;font-family:monospace;
-      transition:opacity 0.15s;
-    " onmouseover="this.style.opacity=1" onmouseout="this.style.opacity=0.7">&#10005;</button>
-
-    <!-- number + name -->
-    <div style="display:flex;align-items:baseline;gap:12px;margin-bottom:14px;">
-      <span id="ckNum" style="font-family:'Share Tech Mono',monospace;font-size:11px;letter-spacing:3px;color:var(--ck-modal-color,#00ccff);opacity:0.45;">#1</span>
-      <span id="ckName" style="font-family:'Black Ops One',system-ui;font-size:20px;color:var(--ck-modal-color,#00ccff);letter-spacing:2px;text-transform:uppercase;">MULADHARA</span>
-    </div>
-
-    <!-- bija + big Sanskrit glyph -->
-    <div style="display:flex;align-items:center;gap:18px;margin-bottom:18px;border-bottom:1px solid rgba(255,255,255,0.07);padding-bottom:16px;">
-      <div id="ckGlyph" style="font-family:'Courier Prime',monospace;font-size:52px;color:var(--ck-modal-color,#00ccff);opacity:0.65;line-height:1;">&#2354;&#2306;</div>
-      <div>
-        <div id="ckBija" style="font-family:'Share Tech Mono',monospace;font-size:14px;color:var(--ck-modal-color,#00ccff);letter-spacing:3px;margin-bottom:4px;">LAM</div>
-        <div id="ckFreq" style="font-family:'Space Mono',monospace;font-size:10px;color:var(--text-muted,#666);letter-spacing:1px;">396 Hz · Keynote C</div>
-        <div id="ckElem" style="font-family:'Space Mono',monospace;font-size:10px;color:var(--text-muted,#666);letter-spacing:1px;margin-top:2px;">Earth · Prthivi</div>
-      </div>
-    </div>
-
-    <!-- data rows -->
-    <div id="ckRows" style="margin-bottom:14px;"></div>
-
-    <!-- description -->
-    <div id="ckDesc" style="
-      font-family:'Courier Prime',monospace;font-size:12px;
-      color:rgba(255,255,255,0.6);line-height:1.75;
-      border-top:1px solid rgba(255,255,255,0.07);
-      padding-top:12px;
-    "></div>
-
-    <!-- qualities footer -->
-    <div id="ckQualities" style="
-      margin-top:12px;padding-top:10px;
-      border-top:1px solid rgba(255,255,255,0.06);
-      font-family:'Space Mono',monospace;font-size:9px;
-      color:var(--ck-modal-color,#00ccff);opacity:0.65;letter-spacing:1px;
-    "></div>
-
-    <!-- navigator -->
-    <div style="display:flex;justify-content:space-between;margin-top:20px;">
-      <button id="ckPrev" onclick="navigateCk(-1)" style="
-        background:none;border:1px solid var(--ck-modal-color,#00ccff);
-        color:var(--ck-modal-color,#00ccff);font-family:'Share Tech Mono',monospace;
-        font-size:10px;padding:7px 16px;cursor:pointer;letter-spacing:2px;
-        transition:all 0.2s;opacity:0.6;
-      " onmouseover="this.style.opacity=1" onmouseout="this.style.opacity=0.6">&larr; PREV</button>
-      <span id="ckNav" style="font-family:'Space Mono',monospace;font-size:9px;color:var(--text-muted,#666);align-self:center;letter-spacing:1px;">1 / 7</span>
-      <button id="ckNext" onclick="navigateCk(1)" style="
-        background:none;border:1px solid var(--ck-modal-color,#00ccff);
-        color:var(--ck-modal-color,#00ccff);font-family:'Share Tech Mono',monospace;
-        font-size:10px;padding:7px 16px;cursor:pointer;letter-spacing:2px;
-        transition:all 0.2s;opacity:0.6;
-      " onmouseover="this.style.opacity=1" onmouseout="this.style.opacity=0.6">NEXT &rarr;</button>
-    </div>
-  </div>
-</div>
-
-<style>
-@keyframes ckModalIn {
-  from { opacity:0; transform:scale(0.94) translateY(12px); }
-  to   { opacity:1; transform:scale(1)    translateY(0); }
-}
-</style>
-
+  </div><!-- /#vaOverlayInner -->
+</div><!-- /#vitruvianAtlasOverlay -->
 <script src="../assets/js/script.js"></script>
 <script src="../assets/js/ai-bot.js" defer></script>
 <script>
@@ -1364,13 +1202,13 @@
 (function() {
   /* Map each theme to its primary text-main colour */
   const THEME_COLORS = {
-    'theme-root':       '#b30000',
-    'theme-sacral':     '#0a0500',
-    'theme-solar':      '#665c00',
-    'theme-heart':      '#39ff14',
-    'theme-throat':     '#00ccff',
-    'theme-third-eye':  '#9d4edd',
-    'theme-crown':      '#2c3e50'
+    'theme-base':       '#b30000',
+    'theme-module':     '#0a0500',
+    'theme-cubit':      '#665c00',
+    'theme-square':      '#39ff14',
+    'theme-circle':     '#8fd8f5',
+    'theme-golden':     '#9d4edd',
+    'theme-canon':      '#2c3e50'
   };
 
   function updateVtGradients(color) {
@@ -1392,7 +1230,7 @@
       updateVtGradients(color);
     };
     /* Run immediately for current theme */
-    const cur = localStorage.getItem('portfolio-theme') || 'theme-throat';
+    const cur = sessionStorage.getItem('portfolio-theme') || 'theme-circle';
     updateVtGradients(THEME_COLORS[cur] || '#00ccff');
   }
 
@@ -1404,29 +1242,16 @@
 })();
 
 /* ══════════════════════════════════════════════════
-   CHAKRA GRID FULLSCREEN OVERLAY — open / close
+   VITRUVIAN PROPORTION ATLAS — open / close
 ══════════════════════════════════════════════════ */
-function openChakraGridOverlay() {
-  var overlay = document.getElementById('chakraGridOverlay');
+function openVitruvianAtlas() {
+  var overlay = document.getElementById('vitruvianAtlasOverlay');
   overlay.style.display = 'block';
   overlay.classList.remove('closing');
   document.body.style.overflow = 'hidden';
-  // Re-attach vt-hover tooltip listeners for cards inside overlay
-  overlay.querySelectorAll('.vt-hover[data-tt-title]').forEach(function(el) {
-    el.addEventListener('mouseenter', function() {
-      var tooltip = document.getElementById('vtTooltip');
-      document.getElementById('ttTitle').textContent = el.dataset.ttTitle || '';
-      document.getElementById('ttVal').textContent   = el.dataset.ttVal   || '';
-      document.getElementById('ttDesc').textContent  = el.dataset.ttDesc  || '';
-      tooltip.classList.add('visible');
-    });
-    el.addEventListener('mouseleave', function() {
-      document.getElementById('vtTooltip').classList.remove('visible');
-    });
-  });
 }
-function closeChakraGridOverlay() {
-  var overlay = document.getElementById('chakraGridOverlay');
+function closeVitruvianAtlas() {
+  var overlay = document.getElementById('vitruvianAtlasOverlay');
   overlay.classList.add('closing');
   setTimeout(function() {
     overlay.style.display = 'none';
@@ -1434,16 +1259,14 @@ function closeChakraGridOverlay() {
     document.body.style.overflow = '';
   }, 280);
 }
-// Close on Escape key
 document.addEventListener('keydown', function(e) {
   if (e.key === 'Escape') {
-    var overlay = document.getElementById('chakraGridOverlay');
-    if (overlay && overlay.style.display !== 'none') closeChakraGridOverlay();
+    var overlay = document.getElementById('vitruvianAtlasOverlay');
+    if (overlay && overlay.style.display !== 'none') closeVitruvianAtlas();
   }
 });
-// Close on click outside inner content
-document.getElementById('chakraGridOverlay').addEventListener('click', function(e) {
-  if (e.target === this) closeChakraGridOverlay();
+document.getElementById('vitruvianAtlasOverlay').addEventListener('click', function(e) {
+  if (e.target === this) closeVitruvianAtlas();
 });
 </script>
 </body>

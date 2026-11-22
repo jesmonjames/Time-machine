@@ -5,7 +5,7 @@
   "color": "#31a8ff",
   "difficulty": "Intermediate",
   "estTime": "4 Hours",
-  "tagline": "The pixel-bending reality forge of digital visionaries.",
+  "tagline": "The industry standard for raster image editing and digital art.",
   "timeTravelLog": "Created in 1987 by Thomas and John Knoll, Photoshop became the standard for digital image manipulation — a tool so culturally dominant that 'photoshopped' became a verb in global dictionaries.",
   "overview": "Adobe Photoshop is the industry-standard raster graphics editor used for photo manipulation, digital painting, UI asset creation, compositing, and print design. It operates on a layer-based, non-destructive editing workflow.",
   "syllabus": [
@@ -91,13 +91,13 @@
     }
   ],
   "quest": {
-    "title": "Quest: Design a Sci-Fi Mission Poster",
-    "challenge": "Composite a cinematic mission poster using multiple layers, masks, and color grading.",
+    "title": "Project: Design a Poster",
+    "challenge": "Composite a cinematic poster using multiple layers, masks, and color grading.",
     "instructions": [
-      "1. Place a space photo as the background (convert to Smart Object).",
-      "2. Place an astronaut/subject photo on a new layer and extract it using Select > Subject + Select and Mask.",
-      "3. Apply a teal-orange color grade using two Curves Adjustment Layers — one for teal shadows, one for warm highlights.",
-      "4. Add text for 'MISSION: HELIOS' using the Type tool with a clipping mask glow effect.",
+      "1. Place a background photo as the base (convert to Smart Object).",
+      "2. Place a subject photo on a new layer and extract it using Select > Subject + Select and Mask.",
+      "3. Apply a teal-orange color grade using two Curves Adjustment Layers - one for teal shadows, one for warm highlights.",
+      "4. Add a title using the Type tool with a clipping mask glow effect.",
       "5. Export the final composition as a WebP file at 85% quality optimized for web."
     ]
   }

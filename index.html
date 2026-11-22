@@ -14,6 +14,8 @@
   <meta name="author" content="Jesmon K J">
   <meta name="robots" content="index, follow">
   <link rel="canonical" href="https://jesmonjames.github.io/Time-machine/">
+  <link rel="icon" type="image/svg+xml" href="assets/favicon.svg">
+  <meta name="theme-color" content="#070c18">
 
   <!-- OPEN GRAPH (Facebook, LinkedIn) -->
   <meta property="og:type" content="website">
@@ -58,25 +60,33 @@
 
   <link rel="stylesheet" href="assets/css/style.css">
   <link rel="stylesheet" href="assets/css/ai-bot.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link
-    href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700&family=Space+Mono:ital,wght@0,400;0,700;1,400&family=Black+Ops+One&family=Stardos+Stencil:wght@400;700&family=Goldman:wght@400;700&family=Wallpoet&family=Share+Tech+Mono&family=Roboto+Mono:wght@400;700&family=Courier+Prime:wght@400;700&display=swap"
+    href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Space+Grotesk:wght@500;600;700&family=Space+Mono:ital,wght@0,400;0,700;1,400&family=Black+Ops+One&family=Stardos+Stencil:wght@400;700&family=Goldman:wght@400;700&family=Share+Tech+Mono&family=Roboto+Mono:wght@400;700&family=Courier+Prime:wght@400;700&display=swap"
     rel="stylesheet">
+  <noscript>
+    <style>
+      .loader, .mini-loader { display: none !important; }
+      .timeline-item { opacity: 1 !important; transform: none !important; }
+    </style>
+  </noscript>
 </head>
 
-<body class="theme-throat">
+<body class="theme-circle">
 
-  <div class="mini-loader" id="miniLoader" style="display: none;">
+  <div class="mini-loader" id="miniLoader" style="display: none;" aria-hidden="true">
     <div class="mini-loader-content">
       <div class="mini-spinner"></div>
-      <div id="miniLoadText" style="letter-spacing: 2px;">SYNCING... 0%</div>
+      <div id="miniLoadText" style="letter-spacing: 2px;">LOADING... 0%</div>
     </div>
   </div>
 
-  <div class="loader" id="loader">
+  <div class="loader" id="loader" aria-hidden="true">
     <canvas id="loaderCanvas"></canvas>
     <div class="loader-scanline"></div>
     <div class="loader-content">
-      <div class="boot-header">JES-007 // TACTICAL_LINK_76.26</div>
+      <div class="boot-header">JESMON K J // PORTFOLIO</div>
       <div class="boot-grid">
         <div class="boot-log" id="bootLog"></div>
         <div class="boot-log" id="bootLogRight"></div>
@@ -87,7 +97,7 @@
         </div>
         <div class="decrypt-text" id="decryptText">0%</div>
       </div>
-      <p id="bootStatus">SECURE BOOT INITIALIZED...</p>
+      <p id="bootStatus">INITIALISING INTERFACE...</p>
     </div>
   </div>
 
@@ -95,16 +105,16 @@
     <!-- TOP BAR -->
     <header class="top-bar">
       <div class="status-indicator">
-        <span class="dot green animated-pulse"></span> ONLINE | JES-007 | <strong>CLASSIFIED: TS/SCI</strong>
+        <span class="dot green animated-pulse"></span> OPEN TO OPPORTUNITIES <strong>· KOCHI, IN</strong>
       </div>
       <div class="coordinates">
-        LAT: 9.9312° N &middot; LNG: 76.2673° E &middot; ALT: 3 M &middot; EST. 2026
+        UI/UX ENGINEER &middot; FRONTEND DEVELOPER &middot; DIGITAL ARTIST
       </div>
       <div class="time-display" id="clock">
         00:00:00
       </div>
       <div class="sys-load" id="sysStat">
-        LOAD: 0.28% | RAM: 14GB
+        9+ YRS &middot; UI ENGINEERING
       </div>
       <div class="top-bar-updates-wrap" id="siteUpdatesWrap">
         <button type="button" class="top-bar-updates-btn" id="siteUpdatesBtn" aria-expanded="false" aria-haspopup="true"
@@ -114,9 +124,9 @@
         </button>
         <div class="top-bar-updates-panel" id="siteUpdatesPanel" role="region" aria-label="Recent Time Machine updates"
           hidden>
-          <div class="top-bar-updates-head">LATEST UPLINK</div>
+          <div class="top-bar-updates-head">LATEST UPDATES</div>
           <ul class="top-bar-updates-list" id="siteUpdatesList"></ul>
-          <a href="pages/journal.html" class="top-bar-updates-foot">Field journal →</a>
+          <a href="pages/journal.html" class="top-bar-updates-foot">Journal &rarr;</a>
         </div>
       </div>
     </header>
@@ -125,7 +135,7 @@
 
       <!-- LEFT SIDEBAR -->
       <aside class="sidebar">
-        <div class="chakra-logo-container" id="chakraLogo">
+        <div class="vitruvian-logo-container" id="vitruvianLogo">
           <!-- Dynamically injected SVG -->
         </div>
         <div class="hero">
@@ -133,8 +143,8 @@
           <h1>JESMON<br>K J</h1>
           <div class="hero-titles">
             <div class="hero-titles-tags">
-              <p>[ ROLE: ENGINEER | TEACHER ]</p>
-              <p>[ AREA: ARTIST | CREATOR ]</p>
+              <p>[ UI/UX ENGINEER &middot; FRONTEND ]</p>
+              <p>[ ARTIST &middot; TEACHER ]</p>
             </div>
             <div class="hero-icons" style="display: flex; gap: 10px; margin-left: auto;">
               <a href="pages/library.html" class="lib-icon-btn" aria-label="My Library">
@@ -156,16 +166,21 @@
               </a>
             </div>
           </div>
-          <button id="startJourney" class="tech-btn">PERSONAL NOTEBOOK &rarr;</button>
+          <p class="hero-bio">UI/UX engineer and frontend developer building clear, resilient interfaces &mdash; with a background in teaching and digital art.</p>
+          <div class="hero-cta">
+            <button id="startJourney" class="tech-btn">ABOUT ME &rarr;</button>
+            <a href="pages/contact.html" class="tech-btn secondary"
+              onclick="event.preventDefault(); handleTacticalLink('pages/contact.html')">CONTACT</a>
+          </div>
         </div>
 
         <div class="metadata-panel">
           <div class="sys-data">
-            <p>LAT: 9.9312&deg; N</p>
-            <p>LNG: 76.2673&deg; E</p>
-            <p>ALT: 3 M</p>
-            <p>UNIT: JES-007</p>
-            <p>UPTIME: <span id="uptime">00:00:00</span></p>
+            <p>KOCHI, INDIA</p>
+            <p>UI/UX ENGINEER</p>
+            <p>OPEN TO WORK</p>
+            <p>EN &middot; ML</p>
+            <p><a href="mailto:kjjesmon@gmail.com">EMAIL</a></p>
           </div>
         </div>
       </aside>
@@ -175,11 +190,11 @@
         <!-- Progress Analysis -->
         <section class="card module-archive timeline-item">
           <div class="card-header">
-            <h2>SYSTEM_PROGRESS.LOG</h2>
+            <h2>PROFILE AT A GLANCE</h2>
             <div class="leds"><span class="dot active"></span><span class="dot gray"></span></div>
           </div>
           <div class="card-body">
-            <p class="subtitle">Multi-sector operational synchronization.</p>
+            <p class="subtitle">Experience, focus and availability at a glance.</p>
 
             <div class="progress-display-grid">
               <!-- Radar Chart -->
@@ -194,18 +209,18 @@
                   <line x1="10" y1="50" x2="90" y2="50" class="radar-grid" />
                   <!-- Data Polygon (Recalibrated to 92/85/88/78) -->
                   <polygon points="50,13.2 84,50 50,85.2 18.8,50" class="radar-data h-target"
-                    data-label="OPERATIONAL_SYNC" data-value="85.7% AVG" />
+                    data-label="PROFILE STRENGTH" data-value="85.7% AVG" />
                   <circle cx="50" cy="13.2" r="3" class="radar-point h-target" data-label="ENGINEERING"
                     data-value="92%" />
                   <circle cx="84" cy="50" r="3" class="radar-point h-target" data-label="ARTISTRY" data-value="85%" />
                   <circle cx="50" cy="85.2" r="3" class="radar-point h-target" data-label="TEACHING" data-value="88%" />
-                  <circle cx="18.8" cy="50" r="3" class="radar-point h-target" data-label="MISSION" data-value="78%" />
+                  <circle cx="18.8" cy="50" r="3" class="radar-point h-target" data-label="DELIVERY" data-value="78%" />
                 </svg>
                 <div class="radar-labels">
                   <span class="lbl-top">ENG</span>
                   <span class="lbl-right">ART</span>
                   <span class="lbl-bottom">TEA</span>
-                  <span class="lbl-left">MIS</span>
+                  <span class="lbl-left">DEL</span>
                 </div>
               </div>
 
@@ -219,16 +234,16 @@
                 </div>
 
                 <div class="mini-stats">
-                  <div class="mini-item"><span>SYNC</span><span class="val">98.2%</span></div>
-                  <div class="mini-item"><span>LATENCY</span><span class="val">14ms</span></div>
-                  <div class="mini-item"><span>SIGNAL</span><span class="val">CRYPTO_OK</span></div>
+                  <div class="mini-item"><span>EXPERIENCE</span><span class="val">9+ YRS</span></div>
+                  <div class="mini-item"><span>FOCUS</span><span class="val">UI/UX</span></div>
+                  <div class="mini-item"><span>STATUS</span><span class="val">OPEN</span></div>
                 </div>
               </div>
             </div>
 
             <div class="progress-graph">
               <div class="graph-bar-group">
-                <div class="graph-label">SYSTEM_INTEGRITY</div>
+                <div class="graph-label">OVERALL PROFICIENCY</div>
                 <div class="graph-track">
                   <div class="graph-fill" style="width: 88%;"></div>
                 </div>
@@ -238,7 +253,7 @@
             <!-- Micro Telemetry Clusters -->
             <div class="telemetry-clusters">
               <div class="cluster">
-                <h5>BUFFER_ARRAY.7</h5>
+                <div class="cluster-title">DELIVERY</div>
                 <div class="cluster-dots">
                   <span class="tiny-dot active"></span>
                   <span class="tiny-dot active"></span>
@@ -247,63 +262,64 @@
                 </div>
               </div>
               <div class="cluster">
-                <h5>UPLINK_STATUS</h5>
-                <div class="tag-status">ENCRYPTED</div>
+                <div class="cluster-title">COLLABORATION</div>
+                <div class="tag-status">STRONG</div>
               </div>
               <div class="cluster">
-                <h5>CACHE_INTEGRITY</h5>
+                <div class="cluster-title">CODE QUALITY</div>
                 <div class="tag-status green">OPTIMAL</div>
               </div>
             </div>
           </div>
           <div class="card-footer" id="viewLogsBtn">
-            <span>REAL-TIME ANALYSIS</span>
-            <span class="action">VIEW LOGS &rarr;</span>
+            <span>PROFILE SUMMARY</span>
+            <span class="action">VIEW PROFILE &rarr;</span>
           </div>
         </section>
 
         <!-- Skills Arsenal -->
         <section class="card module-ideas timeline-item">
           <div class="card-header">
-            <h2>SKILLS ARSENAL</h2>
+            <h2>CORE SKILLS</h2>
             <div class="leds"><span class="dot orange"></span><span class="dot green"></span></div>
           </div>
           <div class="card-body">
-            <p class="subtitle">Tools for temporal engineering.</p>
+            <p class="subtitle">Tools and technologies I use to design and build products.</p>
             <div class="skills-tags">
-              <a href="javascript:void(0)" onclick="triggerMiniLoader('pages/skill.html?skill=html')" class="tag">HTML</a>
-              <a href="javascript:void(0)" onclick="triggerMiniLoader('pages/skill.html?skill=css')" class="tag">CSS</a>
-              <a href="javascript:void(0)" onclick="triggerMiniLoader('pages/skill.html?skill=javascript')" class="tag">JavaScript</a>
-              <a href="javascript:void(0)" onclick="triggerMiniLoader('pages/skill.html?skill=jquery')" class="tag">jQuery</a>
-              <a href="javascript:void(0)" onclick="triggerMiniLoader('pages/skill.html?skill=frontend')" class="tag">Frontend Development</a>
-              <a href="javascript:void(0)" onclick="triggerMiniLoader('pages/skill.html?skill=ui-ux')" class="tag">UI/UX</a>
-              <a href="javascript:void(0)" onclick="triggerMiniLoader('pages/skill.html?skill=drupal')" class="tag">Drupal</a>
-              <a href="javascript:void(0)" onclick="triggerMiniLoader('pages/skill.html?skill=nuxt')" class="tag">Nuxt.js</a>
-              <a href="javascript:void(0)" onclick="triggerMiniLoader('pages/skill.html?skill=photoshop')" class="tag">Photoshop</a>
-              <a href="javascript:void(0)" onclick="triggerMiniLoader('pages/skill.html?skill=bootstrap')" class="tag">Bootstrap</a>
-              <a href="javascript:void(0)" onclick="triggerMiniLoader('pages/skill.html?skill=aspnet')" class="tag">ASP.NET</a>
-              <a href="javascript:void(0)" onclick="triggerMiniLoader('pages/skill.html?skill=vue')" class="tag">Vue</a>
-              <a href="javascript:void(0)" onclick="triggerMiniLoader('pages/skill.html?skill=vuetify')" class="tag">Vuetify</a>
-              <a href="javascript:void(0)" onclick="triggerMiniLoader('pages/skill.html?skill=angular')" class="tag">Angular</a>
-              <a href="javascript:void(0)" onclick="triggerMiniLoader('pages/skill.html?skill=react')" class="tag">React</a>
-              <a href="javascript:void(0)" onclick="triggerMiniLoader('pages/skill.html?skill=npm')" class="tag">NPM</a>
+              <a href="pages/skill.html?skill=html" onclick="event.preventDefault(); triggerMiniLoader('pages/skill.html?skill=html')" class="tag">HTML</a>
+              <a href="pages/skill.html?skill=css" onclick="event.preventDefault(); triggerMiniLoader('pages/skill.html?skill=css')" class="tag">CSS</a>
+              <a href="pages/skill.html?skill=javascript" onclick="event.preventDefault(); triggerMiniLoader('pages/skill.html?skill=javascript')" class="tag">JavaScript</a>
+              <a href="pages/skill.html?skill=jquery" onclick="event.preventDefault(); triggerMiniLoader('pages/skill.html?skill=jquery')" class="tag">jQuery</a>
+              <a href="pages/skill.html?skill=frontend" onclick="event.preventDefault(); triggerMiniLoader('pages/skill.html?skill=frontend')" class="tag">Frontend Development</a>
+              <a href="pages/skill.html?skill=ui-ux" onclick="event.preventDefault(); triggerMiniLoader('pages/skill.html?skill=ui-ux')" class="tag">UI/UX</a>
+              <a href="pages/skill.html?skill=drupal" onclick="event.preventDefault(); triggerMiniLoader('pages/skill.html?skill=drupal')" class="tag">Drupal</a>
+              <a href="pages/skill.html?skill=nuxt" onclick="event.preventDefault(); triggerMiniLoader('pages/skill.html?skill=nuxt')" class="tag">Nuxt.js</a>
+              <a href="pages/skill.html?skill=photoshop" onclick="event.preventDefault(); triggerMiniLoader('pages/skill.html?skill=photoshop')" class="tag">Photoshop</a>
+              <a href="pages/skill.html?skill=bootstrap" onclick="event.preventDefault(); triggerMiniLoader('pages/skill.html?skill=bootstrap')" class="tag">Bootstrap</a>
+              <a href="pages/skill.html?skill=aspnet" onclick="event.preventDefault(); triggerMiniLoader('pages/skill.html?skill=aspnet')" class="tag">ASP.NET</a>
+              <a href="pages/skill.html?skill=vue" onclick="event.preventDefault(); triggerMiniLoader('pages/skill.html?skill=vue')" class="tag">Vue</a>
+              <a href="pages/skill.html?skill=vuetify" onclick="event.preventDefault(); triggerMiniLoader('pages/skill.html?skill=vuetify')" class="tag">Vuetify</a>
+              <a href="pages/skill.html?skill=angular" onclick="event.preventDefault(); triggerMiniLoader('pages/skill.html?skill=angular')" class="tag">Angular</a>
+              <a href="pages/skill.html?skill=react" onclick="event.preventDefault(); triggerMiniLoader('pages/skill.html?skill=react')" class="tag">React</a>
+              <a href="pages/skill.html?skill=npm" onclick="event.preventDefault(); triggerMiniLoader('pages/skill.html?skill=npm')" class="tag">NPM</a>
             </div>
           </div>
-          <a href="javascript:void(0)" onclick="handleTacticalLink('pages/detail.html?module=skills')"
+          <a href="pages/detail.html?module=skills"
+            onclick="event.preventDefault(); handleTacticalLink('pages/detail.html?module=skills')"
             class="card-footer">
             <span>16 CORE SKILLS</span>
-            <span class="action">READ &rarr;</span>
+            <span class="action">VIEW SKILLS &rarr;</span>
           </a>
         </section>
 
         <!-- Artistic Intelligence -->
         <section class="card module-engine timeline-item">
           <div class="card-header">
-            <h2>ARTISTIC_INTELLIGENCE // FIELD_SKETCH</h2>
+            <h2>ART &amp; ILLUSTRATION</h2>
             <div class="leds"><span class="dot active"></span><span class="dot gray"></span></div>
           </div>
           <div class="card-body">
-            <p class="subtitle">Manual rendering & tactical visualization.</p>
+            <p class="subtitle">Hand-drawn studies and visual explorations across six mediums.</p>
 
             <div class="art-skills-grid">
               <!-- Pencil -->
@@ -381,21 +397,30 @@
             </div>
           </div>
           <div class="card-footer">
-            <span>06 MEDIUMS ARCHIVED</span>
-            <span class="action" onclick="handleTacticalLink('pages/detail.html?module=gallery')">GALLERY &rarr;</span>
+            <span>6 MEDIUMS</span>
+            <a href="pages/detail.html?module=gallery" class="action"
+              onclick="event.preventDefault(); handleTacticalLink('pages/detail.html?module=gallery')">VIEW GALLERY &rarr;</a>
           </div>
         </section>
 
         <!-- Projects Laboratory -->
         <section class="card module-archive timeline-item">
           <div class="card-header">
-            <h2>PROJECTS LABORATORY</h2>
+            <h2>SELECTED PROJECTS</h2>
             <div class="leds"><span class="dot gray"></span><span class="dot gray"></span></div>
           </div>
           <div class="card-body">
-            <p class="subtitle">Classified catalogue of recovered temporal artifacts, interface prototypes, and
-              experimental modules extracted from multi-sector field operations.</p>
+            <p class="subtitle">A selection of interface prototypes, creative tools and interactive product experiments.</p>
             <div class="project-list">
+              <div class="proj-item">
+                <strong><a href="https://jwebsitebuilder.vercel.app/" target="_blank" rel="noopener noreferrer"
+                    style="color:var(--text-main); text-decoration:none; border-bottom:1px dashed var(--text-main);">J-BUILDER
+                    WEBSITE BUILDER &nearr;</a></strong>
+                <p>J-Builder is a dependency-free, no-code website studio with nine editorial templates, live in-canvas
+                  editing, independent day/night modes for the builder and the designed site, autosave, undo/redo,
+                  responsive previews and single-file HTML export. Built with plain HTML, CSS and JavaScript — no
+                  accounts, backend or build step.</p>
+              </div>
               <div class="proj-item">
                 <strong><a href="https://smartjowatch.vercel.app/" target="_blank" rel="noopener noreferrer"
                     style="color:var(--text-main); text-decoration:none; border-bottom:1px dashed var(--text-main);">SMARTJO
@@ -406,23 +431,16 @@
               </div>
               <div class="proj-item">
                 <strong><a href="https://j-mpass.vercel.app/" target="_blank" rel="noopener noreferrer"
-                    style="color:var(--text-main); text-decoration:none; border-bottom:1px dashed var(--text-main);">J-MPASS TACTICAL NAVIGATION &nearr;</a></strong>
-                <p>Tactical navigation system interface featuring magnetic and gyro sensors, solar and lunar telemetry, and hemispheric projection.</p>
-              </div>
-              <div class="proj-item">
-                <strong><a href="https://alien-detect-jadoo-for-kids.vercel.app/" target="_blank"
-                    rel="noopener noreferrer"
-                    style="color:var(--text-main); text-decoration:none; border-bottom:1px dashed var(--text-main);">SPACE
-                    SATELLITE INTERFACE &nearr;</a></strong>
-                <p>Tactical satellite communication interface simulating alien signal transmission, tone encoding, and
-                  frequency analysis.</p>
+                    style="color:var(--text-main); text-decoration:none; border-bottom:1px dashed var(--text-main);">J-MPASS NAVIGATION &nearr;</a></strong>
+                <p>Navigation interface featuring magnetic and gyro sensors, solar and lunar telemetry, and hemispheric projection.</p>
               </div>
             </div>
           </div>
-          <a href="javascript:void(0)" onclick="handleTacticalLink('pages/detail.html?module=projects')"
+          <a href="pages/detail.html?module=projects"
+            onclick="event.preventDefault(); handleTacticalLink('pages/detail.html?module=projects')"
             class="card-footer">
-            <span>07 ARTIFACTS</span>
-            <span class="action">EXPLORE &rarr;</span>
+            <span>8 PROJECTS</span>
+            <span class="action">VIEW ALL &rarr;</span>
           </a>
         </section>
 
@@ -435,24 +453,22 @@
                 class="dot green"></span></div>
           </div>
           <div class="card-body">
-            <p class="subtitle">Professional missions and academic training.</p>
+            <p class="subtitle">Professional experience and academic background.</p>
             <ul class="timeline-list">
-              <li><span class="year">2026</span> <strong>MISSION: AUTONOMOUS_EVOLUTION</strong><br><span
-                  class="desc">Initiated a phase of self-directed growth, focusing on the synthesis of AI-driven
-                  engineering and multidisciplinary artistry. <strong style="font-size: 13px;">Architecting the
-                    advancement of machine intelligence and creative automation as a catalyst for complete human
-                    evolution—empowering future generations to fearlessly pursue their own autonomous
-                    self-growth.</strong> Dedicated to continuous self-evolution across all fields, bridging technical
-                  logic with creative expression to pioneer holistic, next-generation solutions.</span></li>
+              <li><span class="year">2026</span> <strong>INDEPENDENT UI/UX ENGINEER &amp; FRONTEND DEVELOPER</strong><br><span
+                  class="desc">Building accessible, performant web interfaces and interactive product prototypes, with a focus on design systems, frontend architecture and creative tooling.</span></li>
+              <li><span class="year">2021 &ndash; 2026</span> <strong>SOFTWARE ENGINEER (UI/UX) &middot; PANAPPS INTERNATIONAL</strong><br><span
+                  class="desc">Designed and developed user-centric enterprise applications, modernised legacy interfaces and delivered responsive UI solutions across a broad technology stack.</span></li>
             </ul>
             <div class="timeline-more">
-              <em>Earlier records available in full archive.</em>
+              <em>Full career and education history in the archive.</em>
             </div>
           </div>
-          <a href="javascript:void(0)" onclick="handleTacticalLink('pages/detail.html?module=career-education')"
+          <a href="pages/detail.html?module=career-education"
+            onclick="event.preventDefault(); handleTacticalLink('pages/detail.html?module=career-education')"
             class="card-footer">
-            <span>FULL ARCHIVE</span>
-            <span class="action">ENTER &rarr;</span>
+            <span>FULL HISTORY</span>
+            <span class="action">VIEW DETAILS &rarr;</span>
           </a>
         </section>
 
@@ -460,11 +476,11 @@
         <div class="right-side-contact">
           <section class="card module-bench timeline-item">
             <div class="card-header">
-              <h2>OPEN FUTURE PORTAL</h2>
+              <h2>LET'S WORK TOGETHER</h2>
               <div class="leds"><span class="dot orange"></span><span class="dot orange"></span></div>
             </div>
             <div class="card-body">
-              <p class="subtitle">Establish communication array.</p>
+              <p class="subtitle">Open to full-time roles, freelance projects and collaborations.</p>
               <div class="contact-links">
                 <p><strong>EMAIL:</strong> <a href="mailto:kjjesmon@gmail.com" target="_blank"
                     rel="noopener noreferrer">kjjesmon@gmail.com</a></p>
@@ -474,9 +490,10 @@
                     rel="noopener noreferrer">github.com/jesmonjames</a></p>
               </div>
             </div>
-            <a href="javascript:void(0)" onclick="handleTacticalLink('pages/contact.html')" class="card-footer">
-              <span>PING ENDPOINT</span>
-              <span class="action">OPEN CHANNEL &rarr;</span>
+            <a href="pages/contact.html" onclick="event.preventDefault(); handleTacticalLink('pages/contact.html')"
+              class="card-footer">
+              <span>GET IN TOUCH</span>
+              <span class="action">CONTACT ME &rarr;</span>
             </a>
           </section>
         </div>
@@ -487,39 +504,39 @@
     <!-- BOTTOM BAR -->
     <footer class="bottom-bar">
       <div class="themes">
-        <button class="theme-btn" data-theme="theme-crown">CROWN</button>
-        <button class="theme-btn" data-theme="theme-third-eye">THIRD EYE</button>
-        <button class="theme-btn active" data-theme="theme-throat">THROAT</button>
-        <button class="theme-btn" data-theme="theme-heart">HEART</button>
-        <button class="theme-btn" data-theme="theme-solar">SOLAR</button>
-        <button class="theme-btn" data-theme="theme-sacral">SACRAL</button>
-        <button class="theme-btn" data-theme="theme-root">ROOT</button>
+        <button class="theme-btn" data-theme="theme-canon">CANON</button>
+        <button class="theme-btn" data-theme="theme-golden">GOLDEN</button>
+        <button class="theme-btn active" data-theme="theme-circle">CIRCLE</button>
+        <button class="theme-btn" data-theme="theme-square">SQUARE</button>
+        <button class="theme-btn" data-theme="theme-cubit">CUBIT</button>
+        <button class="theme-btn" data-theme="theme-module">MODULE</button>
+        <button class="theme-btn" data-theme="theme-base">BASE</button>
       </div>
       <div class="stats">
-        <span class="dot orange animated-pulse"></span> BROADCASTING
+        <span class="dot orange animated-pulse"></span> OPEN TO OPPORTUNITIES
         <span class="separator"> &nbsp;|&nbsp; </span>
-        9 MILESTONES &middot; 16 SKILLS &middot; 7 ARTIFACTS
+        9+ YEARS &middot; 16 SKILLS &middot; 8 PROJECTS
       </div>
     </footer>
   </div>
 
   <!-- TIC-TAC-TOE CHALLENGE MODAL -->
-  <div id="tttModal" class="ttt-overlay">
-    <div class="ttt-container">
+  <div id="tttModal" class="ttt-overlay" aria-hidden="true">
+    <div class="ttt-container" role="dialog" aria-modal="true" aria-labelledby="tttTitle">
       <div class="ttt-header">
         <h3 id="tttTitle">IDENTITY_VERIFICATION</h3>
-        <div id="tttStatus" class="ttt-status">SUBSYSTEM_LOCKED: WIN_TO_PROCEED</div>
+        <div id="tttStatus" class="ttt-status" role="status" aria-live="polite">SUBSYSTEM_LOCKED: WIN_TO_PROCEED</div>
       </div>
-      <div class="ttt-grid" id="tttGrid">
-        <div class="ttt-cell" data-index="0"></div>
-        <div class="ttt-cell" data-index="1"></div>
-        <div class="ttt-cell" data-index="2"></div>
-        <div class="ttt-cell" data-index="3"></div>
-        <div class="ttt-cell" data-index="4"></div>
-        <div class="ttt-cell" data-index="5"></div>
-        <div class="ttt-cell" data-index="6"></div>
-        <div class="ttt-cell" data-index="7"></div>
-        <div class="ttt-cell" data-index="8"></div>
+      <div class="ttt-grid" id="tttGrid" role="group" aria-label="Tic tac toe board">
+        <div class="ttt-cell" data-index="0" role="button" tabindex="0" aria-label="Cell 1"></div>
+        <div class="ttt-cell" data-index="1" role="button" tabindex="0" aria-label="Cell 2"></div>
+        <div class="ttt-cell" data-index="2" role="button" tabindex="0" aria-label="Cell 3"></div>
+        <div class="ttt-cell" data-index="3" role="button" tabindex="0" aria-label="Cell 4"></div>
+        <div class="ttt-cell" data-index="4" role="button" tabindex="0" aria-label="Cell 5"></div>
+        <div class="ttt-cell" data-index="5" role="button" tabindex="0" aria-label="Cell 6"></div>
+        <div class="ttt-cell" data-index="6" role="button" tabindex="0" aria-label="Cell 7"></div>
+        <div class="ttt-cell" data-index="7" role="button" tabindex="0" aria-label="Cell 8"></div>
+        <div class="ttt-cell" data-index="8" role="button" tabindex="0" aria-label="Cell 9"></div>
       </div>
       <div class="ttt-actions">
         <button id="tttCancel" class="ttt-btn secondary">ABORT_SYNC</button>

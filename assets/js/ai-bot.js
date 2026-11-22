@@ -1,5 +1,5 @@
 /**
- * TACTICAL AI STRATEGIST (JES-007)
+ * PORTFOLIO ASSISTANT
  * Core Logic for the Portfolio's Persistent AI Assistant.
  * 
  * FEATURES:
@@ -25,8 +25,8 @@ class TacticalBot {
             MIC_PERM: 'jes007_tactical_v2_mic_perm'
         };
 
-        this.isOpen = localStorage.getItem(this.STORAGE_KEYS.STATE) === 'true';
-        this.chatHistory = JSON.parse(localStorage.getItem(this.STORAGE_KEYS.HISTORY)) || [];
+        this.isOpen = this.readState();
+        this.chatHistory = this.readHistory();
         this.isVoiceActive = false;
         
         // --- SPEECH RECOGNITION SETUP ---
@@ -41,40 +41,58 @@ class TacticalBot {
         this.listenForRemoteSync();
     }
 
+    readState() {
+        try {
+            return localStorage.getItem(this.STORAGE_KEYS.STATE) === 'true';
+        } catch (e) {
+            return false;
+        }
+    }
+
+    readHistory() {
+        try {
+            const parsed = JSON.parse(localStorage.getItem(this.STORAGE_KEYS.HISTORY));
+            return Array.isArray(parsed) ? parsed.slice(-100) : [];
+        } catch (e) {
+            return [];
+        }
+    }
+
     /**
      * Entry point: Injects UI, binds events, and synchronizes data.
      */
     init() {
-        console.log("JES-007: Initializing Tactical Layer...");
+        console.log("Portfolio assistant: initializing...");
         this.injectHTML();
         this.bindEvents();
         
         // --- DEFAULT FAILSAFE RESPONSES ---
         this.responses = {
             "core": {
-                "initial": "UPLINK ESTABLISHED. Tactical AI Strategist JES-007 online. Intelligence protocols synchronized. What is your objective?",
-                "online": "JES IS ONLINE. Strategic voice protocols active. What is your command?",
-                "fallback": "COMMAND NOT RECOGNIZED. Suggesting core sectors for tactical advantage.",
-                "help": "Available sectors: [RESEARCH_LIBRARY], [FIELD_JOURNAL], [CONTACT_ARRAY], [CORE_DASHBOARD]. You can also ask me about my skills, art, or mission."
+                "initial": "Hi, I'm Jesmon's portfolio assistant. Ask me about his experience, skills, projects or availability.",
+                "online": "Voice input is active. How can I help?",
+                "fallback": "I didn't catch that. Try asking about experience, skills, projects or contact.",
+                "help": "You can ask about experience, skills, art, projects or contact. You can also navigate to the library, journal or dashboard."
             },
             "navigation": {
-                "library": "REDIRECTING TO RESEARCH LIBRARY...",
-                "journal": "ACCESSING FIELD JOURNAL...",
-                "contact": "INITIALIZING COMMUNICATION PROTOCOL...",
-                "dashboard": "RETURNING TO CORE DASHBOARD...",
-                "home": "RETURNING TO CORE DASHBOARD...",
-                "about": "ACCESSING DOSSIER..."
+                "library": "Opening the library...",
+                "journal": "Opening the journal...",
+                "contact": "Opening the contact page...",
+                "dashboard": "Returning to the dashboard...",
+                "home": "Returning to the dashboard...",
+                "about": "Opening the profile..."
             },
             "personality": {
-                "greetings": ["Hello. This is Jesmon's digital proxy. How can I assist?", "Uplink confirmed. What's on your mind?"],
-                "who": "I'm Jesmon K J — an Engineer by day, an artist by night, and a lifelong teacher.",
-                "location": "Current station: Kochi, Kerala, India.",
-                "status": "Systems are optimal. I'm currently focused on my independent journey.",
-                "mission": "My mission is the 'Autonomous Evolution'.",
-                "art": "I work across various mediums: pencil sketching, oil pastels, and digital interfaces.",
-                "skills": "Expertise in React, Vue, Drupal, and vanilla JavaScript.",
-                "feeling": "Operating at peak efficiency. Resonance at 99.1%.",
-                "thanks": "Acknowledged. Duty is its own reward. Standby."
+                "greetings": ["Hello. I'm Jesmon's portfolio assistant. How can I help?", "Hi there. What would you like to know?"],
+                "who": "Jesmon K J is a UI/UX engineer, frontend developer, artist and teacher based in Kochi, India.",
+                "location": "Jesmon is based in Kochi, Kerala, India.",
+                "status": "Jesmon is open to full-time roles, freelance projects and collaborations.",
+                "mission": "Jesmon's focus is on clear, accessible interfaces and thoughtful digital products.",
+                "art": "Jesmon works across pencil, oil pastel, watercolour and digital media.",
+                "skills": "Core skills include React, Vue, Angular, Drupal, JavaScript, HTML and CSS.",
+                "projects": "Recent work includes J-Builder — a dependency-free static website studio with nine editorial templates, dual light/dark themes, autosave and single-file HTML export. Live demo: https://jwebsitebuilder.vercel.app/",
+                "feeling": "Everything is running smoothly. Thanks for asking.",
+                "thanks": "You're welcome. Let me know if you'd like to see more."
             },
             "keywords": {
                 "hello": "personality.greetings", "hi": "personality.greetings", "hey": "personality.greetings",
@@ -83,6 +101,7 @@ class TacticalBot {
                 "doing": "personality.status", "mission": "personality.mission",
                 "art": "personality.art", "sketch": "personality.art",
                 "skill": "personality.skills", "code": "personality.skills",
+                "project": "personality.projects", "projects": "personality.projects", "jbuilder": "personality.projects", "j builder": "personality.projects", "website builder": "personality.projects", "jwebsitebuilder": "personality.projects",
                 "how are you": "personality.feeling", "thanks": "personality.thanks",
                 "library": "navigation.library", "journal": "navigation.journal",
                 "contact": "navigation.contact", "about": "navigation.about",
@@ -95,6 +114,9 @@ class TacticalBot {
         
         if (this.isOpen) {
             this.panel.classList.add('active');
+            this.panel.setAttribute('aria-hidden', 'false');
+            const trigger = document.getElementById('aiBotTrigger');
+            if (trigger) trigger.setAttribute('aria-expanded', 'true');
             this.input.focus();
         }
     }
@@ -105,20 +127,28 @@ class TacticalBot {
     listenForRemoteSync() {
         window.addEventListener('storage', (e) => {
             if (e.key === this.STORAGE_KEYS.HISTORY) {
-                this.chatHistory = JSON.parse(e.newValue) || [];
+                this.chatHistory = this.readHistory();
                 this.messagesContainer.innerHTML = '';
                 this.restoreChat();
             }
             if (e.key === this.STORAGE_KEYS.STATE) {
                 this.isOpen = e.newValue === 'true';
                 this.panel.classList.toggle('active', this.isOpen);
+                this.panel.setAttribute('aria-hidden', String(!this.isOpen));
+                const trigger = document.getElementById('aiBotTrigger');
+                if (trigger) trigger.setAttribute('aria-expanded', String(this.isOpen));
             }
         });
     }
 
     saveState() {
-        localStorage.setItem(this.STORAGE_KEYS.STATE, this.isOpen);
-        localStorage.setItem(this.STORAGE_KEYS.HISTORY, JSON.stringify(this.chatHistory));
+        this.chatHistory = this.chatHistory.slice(-100);
+        try {
+            localStorage.setItem(this.STORAGE_KEYS.STATE, this.isOpen);
+            localStorage.setItem(this.STORAGE_KEYS.HISTORY, JSON.stringify(this.chatHistory));
+        } catch (e) {
+            // Storage may be unavailable (private mode / quota); state stays in memory.
+        }
     }
 
     restoreChat() {
@@ -145,7 +175,7 @@ class TacticalBot {
                 this.responses = { ...this.responses, ...remoteData };
             }
         } catch (error) {
-            console.log("JES-007: Operating on local backup protocols.");
+            console.log("Portfolio assistant: using local fallback responses.");
         }
     }
 
@@ -181,42 +211,42 @@ class TacticalBot {
     injectHTML() {
         const botHTML = `
             <div class="ai-bot-container">
-                <div class="ai-bot-panel" id="aiBotPanel">
+                <div class="ai-bot-panel" id="aiBotPanel" role="dialog" aria-label="Portfolio assistant" aria-hidden="true">
                     <div class="ai-bot-header">
                         <div class="ai-bot-title">
                             <div class="ai-bot-status-dot"></div>
-                            JES-007 // STRATEGIST
+                            PORTFOLIO ASSISTANT
                         </div>
                         <div class="ai-bot-voice-indicator" id="voiceIndicator" title="VOICE STATUS">
                             <div class="wave"></div>
                             <div class="wave"></div>
                             <div class="wave"></div>
                         </div>
-                        <div class="ai-bot-close" id="aiBotClose">[ X ]</div>
+                        <div class="ai-bot-close" id="aiBotClose" role="button" tabindex="0" aria-label="Close assistant">[ X ]</div>
                     </div>
-                    <div class="ai-bot-messages" id="aiBotMessages"></div>
+                    <div class="ai-bot-messages" id="aiBotMessages" role="log" aria-live="polite" aria-label="Conversation"></div>
                     <div class="ai-bot-input-area">
-                        <input type="text" class="ai-bot-input" id="aiBotInput" placeholder="ENTER COMMAND..." autocomplete="off">
-                        <button class="ai-bot-voice-btn" id="aiBotVoiceToggle" title="TOGGLE VOICE COMMS">
-                            <svg viewBox="0 0 24 24" width="18" height="18" stroke="currentColor" stroke-width="2" fill="none"><path d="M12 1a3 3 0 0 0-3 3v8a3 3 0 0 0 6 0V4a3 3 0 0 0-3-3z"></path><path d="M19 10v2a7 7 0 0 1-14 0v-2"></path><line x1="12" y1="19" x2="12" y2="23"></line><line x1="8" y1="23" x2="16" y2="23"></line></svg>
+                        <input type="text" class="ai-bot-input" id="aiBotInput" placeholder="Ask about experience, skills or projects..." autocomplete="off" aria-label="Type a message">
+                        <button class="ai-bot-voice-btn" id="aiBotVoiceToggle" title="TOGGLE VOICE COMMS" aria-label="Toggle voice input" aria-pressed="false">
+                            <svg viewBox="0 0 24 24" width="18" height="18" stroke="currentColor" stroke-width="2" fill="none" aria-hidden="true"><path d="M12 1a3 3 0 0 0-3 3v8a3 3 0 0 0 6 0V4a3 3 0 0 0-3-3z"></path><path d="M19 10v2a7 7 0 0 1-14 0v-2"></path><line x1="12" y1="19" x2="12" y2="23"></line><line x1="8" y1="23" x2="16" y2="23"></line></svg>
                         </button>
-                        <button class="ai-bot-send" id="aiBotSend">
-                            <svg viewBox="0 0 24 24" width="20" height="20" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"><line x1="22" y1="2" x2="11" y2="13"></line><polygon points="22 2 15 22 11 13 2 9 22 2"></polygon></svg>
+                        <button class="ai-bot-send" id="aiBotSend" aria-label="Send command">
+                            <svg viewBox="0 0 24 24" width="20" height="20" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="22" y1="2" x2="11" y2="13"></line><polygon points="22 2 15 22 11 13 2 9 22 2"></polygon></svg>
                         </button>
                     </div>
                 </div>
-                <div class="ai-bot-trigger" id="aiBotTrigger" title="TACTICAL AI ASSISTANT">
-                    <svg viewBox="0 0 24 24" width="30" height="30" stroke="currentColor" stroke-width="1.5" fill="none" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path><circle cx="12" cy="10" r="2"></circle><line x1="12" y1="12" x2="12" y2="12.01"></line></svg>
+                <div class="ai-bot-trigger" id="aiBotTrigger" role="button" tabindex="0" title="Portfolio assistant" aria-label="Open portfolio assistant" aria-controls="aiBotPanel" aria-expanded="false">
+                    <svg viewBox="0 0 24 24" width="30" height="30" stroke="currentColor" stroke-width="1.5" fill="none" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path><circle cx="12" cy="10" r="2"></circle><line x1="12" y1="12" x2="12" y2="12.01"></line></svg>
                 </div>
             </div>
             
-            <!-- Tactical Mic Permission Modal -->
+            <!-- Mic Permission Modal -->
             <div class="tactical-modal-overlay" id="micPermissionModal">
                 <div class="tactical-modal-content">
-                    <div class="tactical-modal-title">SECURITY CLEARANCE REQUIRED</div>
+                    <div class="tactical-modal-title">MICROPHONE ACCESS</div>
                     <div class="tactical-modal-body">
-                        Tactical AI JES-007 requires AUDIO_INPUT to enable wake-word ("Jesmon come online") and voice commands.<br><br>
-                        Please authorize microphone access to proceed.
+                        The portfolio assistant can use voice input for hands-free questions. Allow microphone access to continue.<br><br>
+                        You can decline and continue using text input.
                     </div>
                     <div class="tactical-modal-actions">
                         <button class="tactical-btn decline" id="btnDeclineMic">[ DECLINE ]</button>
@@ -260,8 +290,23 @@ class TacticalBot {
         document.getElementById('aiBotTrigger').addEventListener('click', () => {
             this.togglePanel();
         });
+        document.getElementById('aiBotTrigger').addEventListener('keydown', (e) => {
+            if (e.key === 'Enter' || e.key === ' ') {
+                e.preventDefault();
+                this.togglePanel();
+            }
+        });
         document.getElementById('aiBotClose').addEventListener('click', () => this.togglePanel());
+        document.getElementById('aiBotClose').addEventListener('keydown', (e) => {
+            if (e.key === 'Enter' || e.key === ' ') {
+                e.preventDefault();
+                this.togglePanel();
+            }
+        });
         document.getElementById('aiBotSend').addEventListener('click', () => this.handleUserInput());
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape' && this.isOpen) this.togglePanel();
+        });
         
         // Microphone Modal Events
         const micModal = document.getElementById('micPermissionModal');
@@ -310,8 +355,18 @@ class TacticalBot {
             if (e.key === 'Enter') this.handleUserInput();
         });
         this.messagesContainer.addEventListener('click', (e) => {
-            if (e.target.classList.contains('suggestion-tag')) {
-                const cmd = e.target.getAttribute('data-cmd');
+            const tag = e.target.closest('.suggestion-tag');
+            if (tag) {
+                const cmd = tag.getAttribute('data-cmd');
+                this.input.value = cmd;
+                this.handleUserInput();
+            }
+        });
+        this.messagesContainer.addEventListener('keydown', (e) => {
+            const tag = e.target.closest('.suggestion-tag');
+            if (tag && (e.key === 'Enter' || e.key === ' ')) {
+                e.preventDefault();
+                const cmd = tag.getAttribute('data-cmd');
                 this.input.value = cmd;
                 this.handleUserInput();
             }
@@ -321,6 +376,9 @@ class TacticalBot {
     togglePanel() {
         this.isOpen = !this.isOpen;
         this.panel.classList.toggle('active', this.isOpen);
+        this.panel.setAttribute('aria-hidden', String(!this.isOpen));
+        const trigger = document.getElementById('aiBotTrigger');
+        if (trigger) trigger.setAttribute('aria-expanded', String(this.isOpen));
         if (this.isOpen) this.input.focus();
         this.saveState();
     }
@@ -348,7 +406,7 @@ class TacticalBot {
         const openMatch = normalizedCmd.match(/(?:open|access|show|view|take me to|go to)\s+(.+)/);
         const searchMatch = normalizedCmd.match(/(?:search|find|lookup)\s+(.+)/);
 
-        // --- TACTICAL KINETIC SCROLLING ---
+        // --- SMOOTH SCROLLING ---
         const scrollTarget = document.querySelector('.main-layout') || window;
         const currentScroll = scrollTarget === window ? window.scrollY : scrollTarget.scrollTop;
         const maxScroll = scrollTarget === window ? document.documentElement.scrollHeight - window.innerHeight : scrollTarget.scrollHeight - scrollTarget.clientHeight;
@@ -356,50 +414,50 @@ class TacticalBot {
         const atBottom = currentScroll >= maxScroll - 5;
 
         if (normalizedCmd.includes('scroll fully to bottom') || normalizedCmd.includes('scroll to end')) {
-            if (atBottom) responseText = "Scroll limit reached. Already at sector baseline.";
+            if (atBottom) responseText = "Scroll limit reached. Already at the bottom.";
             else {
                 const distance = (scrollTarget.scrollHeight || document.documentElement.scrollHeight);
                 action = () => this.tacticalScroll(distance, 60);
-                responseText = "Executing high-velocity descent to sector baseline.";
+                responseText = "Scrolling to the bottom.";
             }
         } else if (normalizedCmd.includes('scroll fully to top') || normalizedCmd.includes('scroll to top')) {
-            if (atTop) responseText = "Scroll limit reached. Already at sector apex.";
+            if (atTop) responseText = "Scroll limit reached. Already at the top.";
             else {
                 const distance = -(scrollTarget.scrollTop || window.scrollY || 2000);
                 action = () => this.tacticalScroll(distance, 60);
-                responseText = "Executing high-velocity ascent to sector apex.";
+                responseText = "Scrolling to the top.";
             }
         } else if (normalizedCmd.includes('scroll down') || normalizedCmd.includes('go down')) {
-            if (atBottom) responseText = "Scroll limit reached. No further descent possible.";
+            if (atBottom) responseText = "Scroll limit reached. No further scrolling down.";
             else {
                 action = () => this.tacticalScroll(300);
-                responseText = "Descending to lower tactical sector.";
+                responseText = "Scrolling down.";
             }
         } else if (normalizedCmd.includes('scroll up') || normalizedCmd.includes('go up')) {
-            if (atTop) responseText = "Scroll limit reached. Already at maximum elevation.";
+            if (atTop) responseText = "Scroll limit reached. Already at the top.";
             else {
                 action = () => this.tacticalScroll(-300);
-                responseText = "Ascending to upper tactical sector.";
+                responseText = "Scrolling up.";
             }
         } else if (normalizedCmd.includes('take me there') || normalizedCmd.includes('go there')) {
-            responseText = "Navigating to the requested tactical sector.";
+            responseText = "Navigating to the requested page.";
             if (normalizedCmd.includes('library')) action = () => this.navigate('pages/library.html');
             else if (normalizedCmd.includes('journal')) action = () => this.navigate('pages/journal.html');
             else if (normalizedCmd.includes('contact')) action = () => this.navigate('pages/contact.html');
             else if (normalizedCmd.includes('about') || normalizedCmd.includes('dossier')) action = () => this.navigate('pages/about.html');
             else if (normalizedCmd.includes('home') || normalizedCmd.includes('dashboard')) action = () => this.navigate('index.html');
-            else responseText = "Requesting clarification on 'THERE'. Which sector shall we access? [LIBRARY], [JOURNAL], or [DASHBOARD]?";
+            else responseText = "Which page would you like? [LIBRARY], [JOURNAL], or [DASHBOARD]?";
         } else if (normalizedCmd.includes('reload') || normalizedCmd.includes('restart timemachine') || normalizedCmd.includes('reboot')) {
             sessionStorage.removeItem('sysBooted');
-            responseText = "Initiating full system reboot. Re-initializing cold boot sequence...";
+            responseText = "Reloading the site...";
             action = () => this.navigate('index.html');
         } else if (openMatch || searchMatch) {
             const isSearch = !!searchMatch && !normalizedCmd.includes('open');
             const query = (isSearch ? searchMatch[1] : openMatch[1]).trim().toLowerCase();
             
-            // --- SECTOR REDIRECT OVERRIDE ---
-            // If the query is a major sector, we prioritize navigation over in-page commands.
-            const sectorMap = {
+            // --- PAGE REDIRECT ---
+            // If the query names a page, prioritize navigation over in-page commands.
+            const pageMap = {
                 'library': 'pages/library.html',
                 'journal': 'pages/journal.html',
                 'contact': 'pages/contact.html',
@@ -411,18 +469,18 @@ class TacticalBot {
                 'home': 'index.html'
             };
 
-            if (!isSearch && sectorMap[query]) {
-                responseText = `Navigating to ${query.toUpperCase()} sector. Initiating transition...`;
-                action = () => this.navigate(sectorMap[query]);
+            if (!isSearch && pageMap[query]) {
+                responseText = `Opening ${query.toUpperCase()}...`;
+                action = () => this.navigate(pageMap[query]);
             } else {
                 const event = new CustomEvent('tacticalPageCommand', { 
                     detail: { type: isSearch ? 'search' : 'open', query: query } 
                 });
                 window.dispatchEvent(event);
-                responseText = `Initiating tactical ${isSearch ? 'search' : 'access'} for: ${query.toUpperCase()}. Scanning current sector...`;
+                responseText = `${isSearch ? 'Searching' : 'Opening'}: ${query.toUpperCase()}...`;
             }
         } else if (normalizedCmd.includes('switch to') || normalizedCmd.includes('change theme to') || normalizedCmd.includes('set theme to')) {
-            const themes = ['crown', 'third eye', 'throat', 'heart', 'solar', 'sacral', 'root'];
+            const themes = ['canon', 'golden', 'circle', 'square', 'cubit', 'module', 'base'];
             let foundTheme = null;
             for (const t of themes) {
                 if (normalizedCmd.includes(t)) {
@@ -435,12 +493,12 @@ class TacticalBot {
                 const themeClass = `theme-${foundTheme}`;
                 if (window.applyTheme) {
                     window.applyTheme(themeClass);
-                    responseText = `Visual protocols synchronized to ${foundTheme.toUpperCase()} spectrum.`;
+                    responseText = `Theme switched to ${foundTheme.toUpperCase()}.`;
                 } else {
-                    responseText = "Theme engine link currently unavailable.";
+                    responseText = "Theme switching is currently unavailable.";
                 }
             } else {
-                responseText = "Theme signature not recognized. Please specify: [CROWN, THIRD EYE, THROAT, HEART, SOLAR, SACRAL, ROOT].";
+                responseText = "Theme not recognized. Please choose: [CIRCLE, SQUARE, GOLDEN, CANON, CUBIT, MODULE, BASE].";
             }
         } else {
             const sortedKeywords = Object.keys(this.responses.keywords).sort((a, b) => b.length - a.length);
@@ -468,7 +526,7 @@ class TacticalBot {
             }
         }
 
-        const fillers = ["Analyzing query...", "Let me check...", "Scanning archives...", "One moment..."];
+        const fillers = ["Checking...", "Let me check...", "Looking that up...", "One moment..."];
         const randomFiller = fillers[Math.floor(Math.random() * fillers.length)];
 
         this.addBotMessage(randomFiller, false, false);
@@ -494,7 +552,10 @@ class TacticalBot {
     updateVoiceUI(active) {
         const toggleBtn = document.getElementById('aiBotVoiceToggle');
         if (this.voiceIndicator) this.voiceIndicator.classList.toggle('active', active);
-        if (toggleBtn) toggleBtn.classList.toggle('active', active);
+        if (toggleBtn) {
+            toggleBtn.classList.toggle('active', active);
+            toggleBtn.setAttribute('aria-pressed', String(active));
+        }
     }
 
     navigate(url) {
@@ -510,7 +571,17 @@ class TacticalBot {
     addUserMessage(text, save = true) {
         const msgDiv = document.createElement('div');
         msgDiv.className = 'message user';
-        msgDiv.innerHTML = `<div class="message-label">RECRUIT</div><div class="message-content">${text}</div>`;
+
+        const label = document.createElement('div');
+        label.className = 'message-label';
+        label.textContent = 'RECRUIT';
+
+        const content = document.createElement('div');
+        content.className = 'message-content';
+        content.textContent = text;
+
+        msgDiv.appendChild(label);
+        msgDiv.appendChild(content);
         this.messagesContainer.appendChild(msgDiv);
         if (save) {
             this.chatHistory.push({ type: 'user', text });
@@ -522,7 +593,7 @@ class TacticalBot {
     addBotMessage(text, showSuggestions = false, save = true) {
         const msgDiv = document.createElement('div');
         msgDiv.className = 'message bot';
-        msgDiv.innerHTML = `<div class="message-label">JES-007 // STRATEGIST</div><div class="message-content"></div>`;
+        msgDiv.innerHTML = `<div class="message-label">PORTFOLIO ASSISTANT</div><div class="message-content"></div>`;
         this.messagesContainer.appendChild(msgDiv);
         const contentDiv = msgDiv.querySelector('.message-content');
         if (!save) {
@@ -549,6 +620,8 @@ class TacticalBot {
             span.className = 'suggestion-tag';
             span.textContent = `[ ${opt.label} ]`;
             span.setAttribute('data-cmd', opt.cmd);
+            span.setAttribute('role', 'button');
+            span.setAttribute('tabindex', '0');
             suggestionsDiv.appendChild(span);
         });
         parent.appendChild(suggestionsDiv);
@@ -573,7 +646,7 @@ class TacticalBot {
     }
 
     /**
-     * Kinetic Drift: Performs a controlled incremental scroll.
+     * Smooth Scroll: Performs a controlled incremental scroll.
      * @param {number} amount - Total pixels to scroll.
      * @param {number} speed - Pixels per step (higher = faster).
      */

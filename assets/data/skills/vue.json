@@ -5,7 +5,7 @@
   "color": "#42b883",
   "difficulty": "Intermediate",
   "estTime": "5 Hours",
-  "tagline": "The progressive framework for interactive UI construction.",
+  "tagline": "A progressive framework for building user interfaces.",
   "timeTravelLog": "Created by Evan You in 2014 by combining the best features of Angular and React. Focused on ease of adoption, declarative bindings, and a gentle learning curve.",
   "overview": "Vue.js is an open-source progressive JavaScript framework for building user interfaces and single-page applications. It features an incrementally adoptable architecture, a reactive data system, and a rich directive vocabulary.",
   "syllabus": [
@@ -13,53 +13,53 @@
       "title": "Module 1: Declarative Interpolation (Template Syntax)",
       "desc": "Binding JavaScript variables directly into HTML templates.",
       "content": "Vue's core is declarative rendering — the template automatically updates whenever its underlying data changes. Double curly braces {{ }} (mustache syntax) interpolate variable values into text content. For attribute binding, use v-bind (shorthand :) to connect variables to HTML attributes like src, class, and href.",
-      "codeExample": "<template>\n  <div>\n    <h1>{{ missionTitle }}</h1>\n    <p>Status: {{ isOnline ? 'ONLINE' : 'OFFLINE' }}</p>\n    <img :src=\"logoUrl\" :alt=\"missionTitle\">\n    <a :href=\"reportUrl\">View Report</a>\n  </div>\n</template>\n\n<script setup>\nconst missionTitle = 'Operation Helios';\nconst isOnline = true;\nconst logoUrl = '/assets/logo.png';\n</script>",
+      "codeExample": "<template>\n  <div>\n    <h1>{{ projectTitle }}</h1>\n    <p>Status: {{ isOnline ? 'ONLINE' : 'OFFLINE' }}</p>\n    <img :src=\"logoUrl\" :alt=\"projectTitle\">\n    <a :href=\"reportUrl\">View Report</a>\n  </div>\n</template>\n\n<script setup>\nconst projectTitle = 'Project Atlas';\nconst isOnline = true;\nconst logoUrl = '/assets/logo.png';\n</script>",
       "interactiveTip": "Mustache {{ }} only works in text content. For attributes, always use v-bind (:). You cannot write <div class=\"{{ myClass }}\"> — use :class instead!"
     },
     {
       "title": "Module 2: Conditional Rendering (v-if & v-show)",
       "desc": "Conditionally mounting or revealing elements based on data state.",
       "content": "v-if completely adds or removes an element from the DOM based on a condition. v-else and v-else-if chain fallback conditions. v-show toggles the CSS display property — the element stays in the DOM but becomes invisible. Use v-if for rarely-toggled elements; v-show for frequently toggled ones to avoid expensive DOM operations.",
-      "codeExample": "<template>\n  <div v-if=\"threatLevel === 'critical'\" class=\"alert-red\">\n    CRITICAL THREAT DETECTED\n  </div>\n  <div v-else-if=\"threatLevel === 'elevated'\" class=\"alert-orange\">\n    ELEVATED RISK LEVEL\n  </div>\n  <div v-else class=\"alert-green\">\n    NOMINAL STATUS\n  </div>\n\n  <!-- v-show: always in DOM, toggles display -->\n  <div v-show=\"showDetails\">Extended diagnostic data...</div>\n</template>",
+      "codeExample": "<template>\n  <div v-if=\"riskLevel === 'critical'\" class=\"alert-red\">\n    CRITICAL RISK DETECTED\n  </div>\n  <div v-else-if=\"riskLevel === 'elevated'\" class=\"alert-orange\">\n    ELEVATED RISK LEVEL\n  </div>\n  <div v-else class=\"alert-green\">\n    NORMAL STATUS\n  </div>\n\n  <!-- v-show: always in DOM, toggles display -->\n  <div v-show=\"showDetails\">Extended diagnostic data...</div>\n</template>",
       "interactiveTip": "v-if has higher toggle cost (DOM insertion/removal). v-show has higher initial cost (always rendered). Choose based on toggle frequency — v-show for frequent toggles!"
     },
     {
       "title": "Module 3: List Rendering (v-for)",
       "desc": "Generating repeating DOM elements from data arrays and objects.",
       "content": "v-for iterates over arrays and objects to generate repeated DOM elements. The syntax is v-for=\"item in items\". Always include :key for efficient update tracking. You can also access the iteration index, and destructure object entries directly in the directive.",
-      "codeExample": "<template>\n  <ul>\n    <li v-for=\"(sector, index) in sectors\" :key=\"sector.id\">\n      {{ index + 1 }}. {{ sector.name }} — {{ sector.status }}\n    </li>\n  </ul>\n\n  <!-- Object iteration -->\n  <div v-for=\"(value, key) in shipData\" :key=\"key\">\n    {{ key }}: {{ value }}\n  </div>\n</template>",
+      "codeExample": "<template>\n  <ul>\n    <li v-for=\"(category, index) in categories\" :key=\"category.id\">\n      {{ index + 1 }}. {{ category.name }} — {{ category.status }}\n    </li>\n  </ul>\n\n  <!-- Object iteration -->\n  <div v-for=\"(value, key) in appData\" :key=\"key\">\n    {{ key }}: {{ value }}\n  </div>\n</template>",
       "interactiveTip": "Never use v-if and v-for on the same element — v-if takes priority in Vue 3, which can cause confusing behavior. Wrap in a template tag to separate the concerns!"
     },
     {
       "title": "Module 4: Event Handling (v-on & Modifiers)",
       "desc": "Reacting to user input events with clean, declarative bindings.",
       "content": "v-on (shorthand @) attaches event listeners to elements. You can call methods directly, pass inline expressions, or use event modifiers to control behavior. Modifiers like .prevent stop default browser actions, .stop prevents event bubbling, .once fires the handler only one time, and .enter triggers only on Enter key.",
-      "codeExample": "<template>\n  <button @click=\"fireEngines\">LAUNCH</button>\n\n  <!-- Prevent form default submission -->\n  <form @submit.prevent=\"handleSubmit\">\n    <input @keyup.enter=\"search\" placeholder=\"Search sector...\">\n  </form>\n\n  <!-- Pass event object -->\n  <button @click=\"logEvent($event)\">Log Click</button>\n</template>\n\n<script setup>\nconst fireEngines = () => console.log('Engines fired!');\n</script>",
+      "codeExample": "<template>\n  <button @click=\"submitForm\">RUN</button>\n\n  <!-- Prevent form default submission -->\n  <form @submit.prevent=\"handleSubmit\">\n    <input @keyup.enter=\"search\" placeholder=\"Search category...\">\n  </form>\n\n  <!-- Pass event object -->\n  <button @click=\"logEvent($event)\">Log Click</button>\n</template>\n\n<script setup>\nconst submitForm = () => console.log('Action triggered!');\n</script>",
       "interactiveTip": "Event modifiers chain together: @click.stop.prevent handles both stopping propagation and default browser behavior in a single, readable directive!"
     },
     {
       "title": "Module 5: Two-Way Binding (v-model)",
       "desc": "Synchronizing form inputs with reactive data in both directions.",
       "content": "v-model creates a two-way data binding between a form input and a reactive variable — user input updates the variable AND variable changes update the input. It works on text inputs, textareas, checkboxes, radio buttons, and select dropdowns. Under the hood, it combines :value and @input event handling.",
-      "codeExample": "<template>\n  <input v-model=\"pilotName\" placeholder=\"Enter pilot name\">\n  <p>Hello, {{ pilotName }}!</p>\n\n  <select v-model=\"selectedSector\">\n    <option value=\"alpha\">Alpha Sector</option>\n    <option value=\"beta\">Beta Sector</option>\n  </select>\n\n  <input type=\"checkbox\" v-model=\"shieldActive\">\n  <label>Shields Active: {{ shieldActive }}</label>\n</template>",
+      "codeExample": "<template>\n  <input v-model=\"userName\" placeholder=\"Enter user name\">\n  <p>Hello, {{ userName }}!</p>\n\n  <select v-model=\"selectedCategory\">\n    <option value=\"alpha\">Alpha Category</option>\n    <option value=\"beta\">Beta Category</option>\n  </select>\n\n  <input type=\"checkbox\" v-model=\"notificationsOn\">\n  <label>Notifications On: {{ notificationsOn }}</label>\n</template>",
       "interactiveTip": "Use v-model.trim to auto-strip whitespace, v-model.number to cast input as a number, and v-model.lazy to sync only on 'change' instead of every keystroke!"
     },
     {
       "title": "Module 6: Composition API & Reactivity (ref & reactive)",
       "desc": "Writing clean, modular reactive logic using Vue 3 composition functions.",
       "content": "Vue 3's Composition API organizes logic by feature rather than option type. ref() wraps primitive values (strings, numbers, booleans) in a reactive container — access the value with .value in script. reactive() wraps objects and makes all their properties reactive automatically. computed() creates derived reactive values.",
-      "codeExample": "<script setup>\nimport { ref, reactive, computed } from 'vue';\n\nconst speed = ref(0);\nconst ship = reactive({ name: 'Helios', fuel: 100 });\n\nconst warpStatus = computed(() =>\n  speed.value > 10 ? 'WARP SPEED' : 'SUBLIGHT'\n);\n\nconst boost = () => {\n  speed.value += 5;\n  ship.fuel -= 10;\n};\n</script>",
+      "codeExample": "<script setup>\nimport { ref, reactive, computed } from 'vue';\n\nconst speed = ref(0);\nconst app = reactive({ name: 'Atlas', usage: 100 });\n\nconst syncStatus = computed(() =>\n  speed.value > 10 ? 'FAST MODE' : 'IDLE'\n);\n\nconst increase = () => {\n  speed.value += 5;\n  app.usage -= 10;\n};\n</script>",
       "interactiveTip": "In script setup, ref values need .value in JS but NOT in the template — Vue automatically unwraps refs in template expressions. reactive() objects never need .value."
     },
     {
       "title": "Module 7: Lifecycle Hooks & Watchers",
       "desc": "Reacting to component creation, mounting, updates, and destruction.",
       "content": "Lifecycle hooks let you run code at specific moments of a component's life. onMounted runs after the component is inserted into the DOM (great for fetching data). onUnmounted runs before destruction (for cleanup). watch() observes specific reactive sources and runs a callback when they change. watchEffect() automatically tracks its reactive dependencies.",
-      "codeExample": "<script setup>\nimport { ref, watch, onMounted, onUnmounted } from 'vue';\n\nconst telemetry = ref(null);\nconst fuelLevel = ref(100);\n\nonMounted(async () => {\n  const res = await fetch('/api/telemetry');\n  telemetry.value = await res.json();\n});\n\nwatch(fuelLevel, (newVal, oldVal) => {\n  if (newVal < 20) alert('FUEL CRITICAL!');\n});\n\nonUnmounted(() => {\n  console.log('Component removed from DOM — cleanup here.');\n});\n</script>",
+      "codeExample": "<script setup>\nimport { ref, watch, onMounted, onUnmounted } from 'vue';\n\nconst metrics = ref(null);\nconst usageLevel = ref(100);\n\nonMounted(async () => {\n  const res = await fetch('/api/metrics');\n  metrics.value = await res.json();\n});\n\nwatch(usageLevel, (newVal, oldVal) => {\n  if (newVal < 20) alert('USAGE CRITICAL!');\n});\n\nonUnmounted(() => {\n  console.log('Component removed from DOM — cleanup here.');\n});\n</script>",
       "interactiveTip": "Use watch for controlled, explicit observation of specific values. Use watchEffect for automatic dependency tracking when the watched sources aren't known in advance!"
     }
   ],
-  "sandboxInitialCode": "<!-- Vue reactive binding sandbox simulation -->\n<div style=\"background: #1e1e24; color: #42b883; border: 2px solid #42b883; padding: 25px; font-family: monospace; border-radius: 8px; text-align: center;\">\n  <h2 style=\"color: #ffffff; margin-top: 0;\">&#128154; Vue Reactive Deck</h2>\n  <p style=\"color: #888; font-size:12px;\">Simulating v-model two-way binding and computed properties!</p>\n  <input id=\"pilot-input\" type=\"text\" placeholder=\"Enter pilot name...\" oninput=\"syncName()\" style=\"width:100%; padding:10px; background:#111; border:1px solid #42b883; color:#fff; font-family:monospace; box-sizing:border-box; margin:15px 0;\">\n  <div id=\"greeting\" style=\"font-size:18px; color:#42b883; margin-bottom:15px;\">Hello, Pilot!</div>\n  <div style=\"margin: 15px 0;\">\n    <progress id=\"vue-progress\" value=\"35\" max=\"100\" style=\"width: 100%; accent-color: #42b883;\"></progress>\n  </div>\n  <button onclick=\"incrementProgress()\" style=\"background: transparent; border: 2px solid #42b883; color: #42b883; padding: 10px 20px; font-weight: bold; cursor: pointer; text-transform: uppercase;\">\n    Sync Matrix: <span id=\"vue-percentage\">35%</span>\n  </button>\n</div>\n<script>\n  let progressVal = 35;\n  window.syncName = function() {\n    const name = document.getElementById('pilot-input').value || 'Pilot';\n    document.getElementById('greeting').textContent = 'Hello, ' + name + '!';\n  };\n  window.incrementProgress = function() {\n    if (progressVal >= 100) progressVal = 0;\n    else progressVal += 15;\n    document.getElementById('vue-progress').value = progressVal;\n    document.getElementById('vue-percentage').innerHTML = progressVal + '%';\n  };\n</script>",
+  "sandboxInitialCode": "<!-- Vue reactive binding sandbox simulation -->\n<div style=\"background: #1e1e24; color: #42b883; border: 2px solid #42b883; padding: 25px; font-family: monospace; border-radius: 8px; text-align: center;\">\n  <h2 style=\"color: #ffffff; margin-top: 0;\">&#128154; Vue Reactive Demo</h2>\n  <p style=\"color: #888; font-size:12px;\">Simulating v-model two-way binding and computed properties!</p>\n  <input id=\"user-input\" type=\"text\" placeholder=\"Enter user name...\" oninput=\"syncName()\" style=\"width:100%; padding:10px; background:#111; border:1px solid #42b883; color:#fff; font-family:monospace; box-sizing:border-box; margin:15px 0;\">\n  <div id=\"greeting\" style=\"font-size:18px; color:#42b883; margin-bottom:15px;\">Hello, User!</div>\n  <div style=\"margin: 15px 0;\">\n    <progress id=\"vue-progress\" value=\"35\" max=\"100\" style=\"width: 100%; accent-color: #42b883;\"></progress>\n  </div>\n  <button onclick=\"incrementProgress()\" style=\"background: transparent; border: 2px solid #42b883; color: #42b883; padding: 10px 20px; font-weight: bold; cursor: pointer; text-transform: uppercase;\">\n    Update Progress: <span id=\"vue-percentage\">35%</span>\n  </button>\n</div>\n<script>\n  let progressVal = 35;\n  window.syncName = function() {\n    const name = document.getElementById('user-input').value || 'User';\n    document.getElementById('greeting').textContent = 'Hello, ' + name + '!';\n  };\n  window.incrementProgress = function() {\n    if (progressVal >= 100) progressVal = 0;\n    else progressVal += 15;\n    document.getElementById('vue-progress').value = progressVal;\n    document.getElementById('vue-percentage').innerHTML = progressVal + '%';\n  };\n</script>",
   "quiz": [
     {
       "question": "Which Vue directive creates a two-way data binding on form inputs?",
@@ -91,14 +91,14 @@
     }
   ],
   "quest": {
-    "title": "Quest: Code the Sector Map Filter",
-    "challenge": "Build a filterable list of planets using v-for, v-if, computed properties, and v-model input binding.",
+    "title": "Project: Build a Filterable List",
+    "challenge": "Build a filterable list of destinations using v-for, v-if, computed properties, and v-model input binding.",
     "instructions": [
-      "1. Declare a reactive array of planet objects with name and habitable boolean fields.",
+      "1. Declare a reactive array of destination objects with name and available boolean fields.",
       "2. Add a text input bound with v-model to a 'searchQuery' ref.",
-      "3. Create a computed property that filters planets matching the search query.",
-      "4. Render only filtered planets with v-for, styling habitable ones green and others red.",
-      "5. Show a message when no planets match the current filter."
+      "3. Create a computed property that filters destinations matching the search query.",
+      "4. Render only filtered destinations with v-for, styling available ones green and others red.",
+      "5. Show a message when no destinations match the current filter."
     ]
   }
 }

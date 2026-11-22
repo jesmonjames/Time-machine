@@ -1,5 +1,5 @@
 /**
- * TEMPORAL SKILL ACADEMY ENGINE
+ * SKILL MODULE ENGINE
  * Dynamically loads independent JSON datasets, manages live sandboxes, 
  * scores graded interactive quizzes, tracks page study progress, and handles link sharing.
  */
@@ -12,7 +12,7 @@ document.addEventListener('DOMContentLoaded', () => {
   // Set title in top bar coords
   const moduleNameEl = document.getElementById('moduleName');
   if (moduleNameEl) {
-    moduleNameEl.textContent = `ACADEMY_${skillId.toUpperCase()}`;
+    moduleNameEl.textContent = skillId.toUpperCase();
   }
 
   // Update Sharing Input Box with current URL
@@ -50,7 +50,7 @@ document.addEventListener('DOMContentLoaded', () => {
   // 2. POPULATE SKILL DETAIL PAGE
   function populatePage(data) {
     // Basic Details
-    document.getElementById('skillNameBadge').textContent = `${data.name} TRAINING CELL`;
+    document.getElementById('skillNameBadge').textContent = `${data.name.toUpperCase()} LEARNING MODULE`;
     document.getElementById('skillFullName').textContent = data.fullName;
     document.getElementById('skillTagline').textContent = data.tagline;
     document.getElementById('skillDifficulty').textContent = data.difficulty.toUpperCase();
@@ -75,17 +75,17 @@ document.addEventListener('DOMContentLoaded', () => {
       const header = document.createElement('div');
       header.className = 'module-header';
       header.innerHTML = `
-        <span>${module.title}</span>
+        <span>${escapeHTML(module.title)}</span>
         <span class="module-arrow" style="font-size: 10px;">▶</span>
       `;
 
       const body = document.createElement('div');
       body.className = 'module-body';
       body.innerHTML = `
-        <p>${module.content}</p>
+        <p>${escapeHTML(module.content)}</p>
         <div class="code-snippet-box">${escapeHTML(module.codeExample)}</div>
         <div class="interactive-tip-box">
-          <strong>ENG_TIP:</strong> ${module.interactiveTip}
+          <strong>TIP:</strong> ${escapeHTML(module.interactiveTip)}
         </div>
       `;
 
@@ -172,14 +172,14 @@ document.addEventListener('DOMContentLoaded', () => {
             buttons.forEach(b => b.setAttribute('disabled', 'true'));
             
             feedback.className = 'quiz-feedback-box correct';
-            feedback.innerHTML = `<strong>ACCESS GRANTED:</strong> ${q.explanation}`;
+            feedback.innerHTML = `<strong>CORRECT:</strong> ${escapeHTML(q.explanation)}`;
             
             completedQuizzes.add(qIndex);
             updateSyncProgress();
           } else {
             btn.classList.add('incorrect');
             feedback.className = 'quiz-feedback-box incorrect';
-            feedback.innerHTML = `<strong>ACCESS DENIED // CALIBRATING SYSTEM:</strong> Try again! ${q.explanation}`;
+            feedback.innerHTML = `<strong>NOT QUITE — TRY AGAIN:</strong> ${escapeHTML(q.explanation)}`;
           }
         });
         
@@ -234,38 +234,54 @@ document.addEventListener('DOMContentLoaded', () => {
     iframe.style.height = '260px';
     iframe.style.border = 'none';
     iframe.style.background = '#ffffff';
+    // Run user code in an isolated sandbox so it cannot access the parent page.
+    iframe.setAttribute('sandbox', 'allow-scripts allow-modals allow-forms allow-popups');
+    iframe.setAttribute('title', 'Interactive code simulation preview');
     preview.appendChild(iframe);
     
     try {
-      const iframeDoc = iframe.contentDocument || iframe.contentWindow.document;
-      iframeDoc.open();
-      iframeDoc.write(code);
-      iframeDoc.close();
+      iframe.srcdoc = code;
     } catch (e) {
-      preview.innerHTML = `<div style="color:red; font-family:monospace; padding:10px;">Simulation compile error: ${e.message}</div>`;
+      preview.innerHTML = `<div style="color:red; font-family:monospace; padding:10px;">Simulation compile error: ${escapeHTML(e.message)}</div>`;
     }
   };
 
-  // 5. SECURE LINK TRANSMISSION (DEEP LINK COPY)
+  // 5. DEEP LINK COPY
   window.copyDeepLink = function() {
-    const tempInput = document.createElement('input');
-    tempInput.value = window.location.href;
-    document.body.appendChild(tempInput);
-    tempInput.select();
-    document.execCommand('copy');
-    document.body.removeChild(tempInput);
-
-    // Show dynamic neon cyber toast notification
-    const toast = document.getElementById('cyberToast');
-    if (toast) {
-      toast.style.display = 'block';
-      setTimeout(() => {
-        toast.style.opacity = '0';
+    const showToast = () => {
+      const toast = document.getElementById('cyberToast');
+      if (toast) {
+        toast.style.display = 'block';
         setTimeout(() => {
-          toast.style.display = 'none';
-          toast.style.opacity = '1';
-        }, 300);
-      }, 2500);
+          toast.style.opacity = '0';
+          setTimeout(() => {
+            toast.style.display = 'none';
+            toast.style.opacity = '1';
+          }, 300);
+        }, 2500);
+      }
+    };
+
+    const legacyCopy = () => {
+      const tempInput = document.createElement('input');
+      tempInput.value = window.location.href;
+      tempInput.setAttribute('readonly', '');
+      tempInput.style.position = 'absolute';
+      tempInput.style.left = '-9999px';
+      document.body.appendChild(tempInput);
+      tempInput.select();
+      let ok = false;
+      try { ok = document.execCommand('copy'); } catch (e) { ok = false; }
+      document.body.removeChild(tempInput);
+      return ok;
+    };
+
+    if (navigator.clipboard && window.isSecureContext) {
+      navigator.clipboard.writeText(window.location.href).then(showToast).catch(() => {
+        if (legacyCopy()) showToast();
+      });
+    } else if (legacyCopy()) {
+      showToast();
     }
   };
 });

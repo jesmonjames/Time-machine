@@ -5,61 +5,61 @@
   "color": "var(--accent-yellow, #ffd54f)",
   "difficulty": "Intermediate",
   "estTime": "5 Hours",
-  "tagline": "The logical synapses of digital dimension travel.",
-  "timeTravelLog": "Coded in 10 days in 1995 by Brendan Eich. Transformed static text sheets into living, breathing, adaptive systems capable of responding to user impulses across all time zones.",
+  "tagline": "The scripting language that powers interactive web experiences.",
+  "timeTravelLog": "Coded in 10 days in 1995 by Brendan Eich. It turned static pages into interactive, responsive applications.",
   "overview": "JavaScript is a powerful, lightweight, interpreted scripting language with first-class functions. It powers interactivity, fetches real-time data, and controls every dynamic behavior of modern web applications.",
   "syllabus": [
     {
-      "title": "Module 1: Memory Cells (Variables & Datatypes)",
+      "title": "Module 1: Variables & Data Types",
       "desc": "How scripts store intelligence in named memory addresses.",
       "content": "Variables store data in memory. Use const for values that never change and let for values that will. Never use var in modern JS — it causes scope leaks. JavaScript has 7 primitive datatypes: String, Number, Boolean, Null, Undefined, BigInt, and Symbol. Objects and Arrays are reference types that can hold collections.",
-      "codeExample": "const pilotName = 'Jesmon';    // String\nlet fuelLevel = 98;             // Number\nlet isHyperdriveOn = false;     // Boolean\nconst coordinates = null;       // Null\n\nconst engineSectors = ['Alpha', 'Beta', 'Gamma'];  // Array\nconst vessel = { code: 'JES-007', speed: 12 };     // Object",
-      "interactiveTip": "Use camelCase for all variable names (fuelLevel, not fuel_level). Names must start with a letter, underscore, or dollar sign — never a number."
+      "codeExample": "const userName = 'Jesmon';    // String\nlet usageLevel = 98;             // Number\nlet isAutoSyncOn = false;     // Boolean\nconst coordinates = null;       // Null\n\nconst regions = ['Alpha', 'Beta', 'Gamma'];  // Array\nconst app = { code: 'JES-01', speed: 12 };     // Object",
+      "interactiveTip": "Use camelCase for all variable names (usageLevel, not usage_level). Names must start with a letter, underscore, or dollar sign — never a number."
     },
     {
-      "title": "Module 2: Tactical Functions (Reusable Logic Blocks)",
-      "desc": "Writing reusable engines that compute results from inputs.",
+      "title": "Module 2: Functions (Reusable Logic Blocks)",
+      "desc": "Writing reusable functions that compute results from inputs.",
       "content": "Functions are named or anonymous blocks of code that can be called repeatedly. They accept parameters (inputs) and return results via the return keyword. Modern JS uses arrow function syntax which is shorter and lexically scopes the 'this' keyword — essential for working inside class methods and callbacks.",
-      "codeExample": "// Classic function\nfunction calculateVelocity(speed, boost) {\n  return speed * boost;\n}\n\n// Arrow function\nconst warpSync = (factor) => factor > 10 ? 'WARP' : 'STABLE';\n\n// Default parameters\nconst launchMission = (planet = 'Mars', crew = 3) => {\n  return `Launching to ${planet} with ${crew} crew.`;\n};",
+      "codeExample": "// Classic function\nfunction calculateTotal(price, quantity) {\n  return price * quantity;\n}\n\n// Arrow function\nconst syncSpeed = (factor) => factor > 10 ? 'FAST' : 'STABLE';\n\n// Default parameters\nconst startProject = (project = 'Dashboard', team = 3) => {\n  return `Starting ${project} with ${team} members.`;\n};",
       "interactiveTip": "Arrow functions with a single expression body don't need curly braces or a return statement — the expression value is returned implicitly!"
     },
     {
-      "title": "Module 3: Logic Gates (Conditionals & Switch Cases)",
+      "title": "Module 3: Conditionals & Switch Cases",
       "desc": "Executing branching decisions based on real-time system evaluations.",
       "content": "Conditionals allow scripts to make decisions. if/else evaluates boolean expressions. Ternary operators (condition ? trueValue : falseValue) are compact single-line alternatives. Switch statements handle multiple fixed values cleanly without deeply nested if-else chains.",
-      "codeExample": "const threatLevel = 7;\n\nif (threatLevel >= 8) {\n  console.log('CRITICAL ALERT');\n} else if (threatLevel >= 5) {\n  console.log('ELEVATED RISK');\n} else {\n  console.log('NOMINAL STATUS');\n}\n\n// Ternary shorthand\nconst status = fuelLevel > 50 ? 'ADEQUATE' : 'CRITICAL';\n\n// Switch case\nswitch(sector) {\n  case 'Alpha': console.log('Alpha Online'); break;\n  case 'Beta': console.log('Beta Online'); break;\n  default: console.log('Unknown Sector');\n}",
-      "interactiveTip": "Always include a default case in switch statements to handle unexpected values gracefully — just like a fallback protocol in mission systems!"
+      "codeExample": "const riskLevel = 7;\n\nif (riskLevel >= 8) {\n  console.log('CRITICAL ALERT');\n} else if (riskLevel >= 5) {\n  console.log('ELEVATED RISK');\n} else {\n  console.log('NORMAL STATUS');\n}\n\n// Ternary shorthand\nconst status = usageLevel > 50 ? 'ADEQUATE' : 'CRITICAL';\n\n// Switch case\nswitch(category) {\n  case 'Alpha': console.log('Alpha Online'); break;\n  case 'Beta': console.log('Beta Online'); break;\n  default: console.log('Unknown Category');\n}",
+      "interactiveTip": "Always include a default case in switch statements to handle unexpected values gracefully — just like a fallback behavior in project systems!"
     },
     {
-      "title": "Module 4: Data Streams (Arrays & Objects)",
+      "title": "Module 4: Arrays & Objects",
       "desc": "Organizing, reading, and mutating collections of structured data.",
       "content": "Arrays store ordered lists and are accessed by index (starting at 0). Objects store key-value pairs and are accessed via dot notation (obj.key) or bracket notation (obj['key']). Both are reference types — modifying a copy also modifies the original unless you spread-clone them.",
-      "codeExample": "const crew = ['Jesmon', 'Astra', 'Nova'];\nconsole.log(crew[0]);       // 'Jesmon'\ncrew.push('Zenith');        // Add to end\ncrew.splice(1, 1);          // Remove 1 at index 1\n\nconst vessel = {\n  code: 'JES-007',\n  speed: 12,\n  crew: ['Jesmon', 'Nova']\n};\nconsole.log(vessel.speed);  // 12\nvessel.fuel = 98;           // Add new property",
-      "interactiveTip": "Use the spread operator (...) to clone arrays and objects without mutation: const newCrew = [...crew, 'Orion'] creates a safe copy with an added item!"
+      "codeExample": "const team = ['Jesmon', 'Astra', 'Nova'];\nconsole.log(team[0]);       // 'Jesmon'\nteam.push('Zenith');        // Add to end\nteam.splice(1, 1);          // Remove 1 at index 1\n\nconst app = {\n  code: 'JES-01',\n  speed: 12,\n  team: ['Jesmon', 'Nova']\n};\nconsole.log(app.speed);  // 12\napp.usage = 98;           // Add new property",
+      "interactiveTip": "Use the spread operator (...) to clone arrays and objects without mutation: const newTeam = [...team, 'Orion'] creates a safe copy with an added item!"
     },
     {
-      "title": "Module 5: Loop Arrays (For, While & Higher-Order Functions)",
+      "title": "Module 5: Loops (For, While & Higher-Order Functions)",
       "desc": "Iterating through data streams and transforming collections.",
       "content": "Loops execute blocks repeatedly. for loops iterate a fixed number of times. for...of iterates array values. for...in iterates object keys. But the most powerful are higher-order array methods: .map() transforms every item, .filter() returns only matching items, .find() returns the first match, .reduce() computes a single result from all items.",
-      "codeExample": "const sectors = [1, 2, 3, 4, 5];\n\n// Classic for loop\nfor (let i = 0; i < sectors.length; i++) {\n  console.log('Sector', sectors[i]);\n}\n\n// Higher-order methods\nconst doubled = sectors.map(s => s * 2);    // [2,4,6,8,10]\nconst evens = sectors.filter(s => s % 2 === 0); // [2,4]\nconst total = sectors.reduce((sum, s) => sum + s, 0); // 15",
+      "codeExample": "const categories = [1, 2, 3, 4, 5];\n\n// Classic for loop\nfor (let i = 0; i < categories.length; i++) {\n  console.log('Category', categories[i]);\n}\n\n// Higher-order methods\nconst doubled = categories.map(s => s * 2);    // [2,4,6,8,10]\nconst evens = categories.filter(s => s % 2 === 0); // [2,4]\nconst total = categories.reduce((sum, s) => sum + s, 0); // 15",
       "interactiveTip": "Prefer .map(), .filter() and .reduce() over manual for loops when transforming arrays — they are cleaner, chainable, and side-effect free!"
     },
     {
-      "title": "Module 6: DOM Architecture (Document Object Manipulation)",
+      "title": "Module 6: DOM Manipulation (Document Object Model)",
       "desc": "Reading, modifying, and controlling the live HTML structure from scripts.",
       "content": "The DOM (Document Object Model) is a live tree representation of your HTML page that JavaScript can read and modify. document.querySelector() selects the first matching element. classList.add/remove/toggle manages CSS classes. innerHTML and textContent update element content. createElement() and appendChild() build new nodes dynamically.",
-      "codeExample": "// Select elements\nconst btn = document.querySelector('#launchBtn');\nconst panel = document.querySelector('.status-panel');\n\n// Modify content & styles\npanel.textContent = 'SYSTEMS ONLINE';\npanel.classList.add('active');\npanel.style.borderColor = 'lime';\n\n// Create and inject new element\nconst newLog = document.createElement('div');\nnewLog.textContent = 'LOG: Mission initiated.';\ndocument.getElementById('logContainer').appendChild(newLog);",
+      "codeExample": "// Select elements\nconst btn = document.querySelector('#runBtn');\nconst panel = document.querySelector('.status-panel');\n\n// Modify content & styles\npanel.textContent = 'SYSTEMS ONLINE';\npanel.classList.add('active');\npanel.style.borderColor = 'lime';\n\n// Create and inject new element\nconst newLog = document.createElement('div');\nnewLog.textContent = 'LOG: Project initiated.';\ndocument.getElementById('logContainer').appendChild(newLog);",
       "interactiveTip": "Use querySelectorAll() to select multiple elements and iterate them with .forEach(). It returns a NodeList, not an Array — but forEach still works on it!"
     },
     {
-      "title": "Module 7: Async Uplinks (Events, Fetch API & Promises)",
+      "title": "Module 7: Async JavaScript (Events, Fetch API & Promises)",
       "desc": "Listening to user interactions and loading live data without page reloads.",
       "content": "addEventListener attaches event handlers for clicks, keypresses, form submissions, and more. The Fetch API loads remote data asynchronously, returning a Promise. Promises represent eventual results — .then() chains success, .catch() handles errors. async/await syntax makes Promises read like synchronous code for cleaner, more readable asynchronous engineering.",
-      "codeExample": "// Event listener\ndocument.querySelector('#fireBtn').addEventListener('click', () => {\n  console.log('Engines fired!');\n});\n\n// Fetch with async/await\nasync function loadMissionData() {\n  try {\n    const response = await fetch('/assets/data/missions.json');\n    const data = await response.json();\n    renderMissions(data);\n  } catch (error) {\n    console.error('Uplink failed:', error);\n  }\n}",
+      "codeExample": "// Event listener\ndocument.querySelector('#actionBtn').addEventListener('click', () => {\n  console.log('Action triggered!');\n});\n\n// Fetch with async/await\nasync function loadProjectData() {\n  try {\n    const response = await fetch('/assets/data/projects.json');\n    const data = await response.json();\n    renderProjects(data);\n  } catch (error) {\n    console.error('Request failed:', error);\n  }\n}",
       "interactiveTip": "Always wrap fetch calls in try/catch when using async/await — network failures and bad status codes will cause unhandled rejections that crash your interface!"
     }
   ],
-  "sandboxInitialCode": "<!-- JavaScript Interactive Terminal: Run logical codes! -->\n<div style=\"background: #000000; border: 2px solid #ffd54f; padding: 20px; font-family: monospace; border-radius: 8px; box-shadow: inset 0 0 10px rgba(255,213,79,0.3);\">\n  <h3 style=\"color: #ffd54f; margin-top:0;\">&gt; DYNAMIC_JS_CONSOLE</h3>\n  <p style=\"color: #888;\">Modify the script to change the dynamic content below!</p>\n  <div id=\"output-node\" style=\"color: #00ff00; padding: 10px; background: rgba(0,255,0,0.05); border: 1px solid #333; margin: 15px 0;\">System status: Awaiting computation...</div>\n  <button id=\"trigger-node\" style=\"background:#ffd54f; color:#000; border:none; padding:10px 15px; font-weight:bold; cursor:pointer; letter-spacing:1px;\">Trigger Synaptic Link</button>\n</div>\n<script>\n  const button = document.getElementById('trigger-node');\n  const output = document.getElementById('output-node');\n  let clicks = 0;\n  button.addEventListener('click', () => {\n    clicks++;\n    const status = clicks > 5 ? 'OVERLOAD DETECTED' : 'STABLE';\n    output.innerHTML = '&gt;&gt; Transmission #' + clicks + ' | Status: ' + status;\n    output.style.borderColor = clicks > 5 ? '#ff0055' : '#ffd54f';\n    output.style.color = clicks > 5 ? '#ff0055' : '#ffd54f';\n  });\n</script>",
+  "sandboxInitialCode": "<!-- JavaScript Interactive Terminal: Run logical codes! -->\n<div style=\"background: #000000; border: 2px solid #ffd54f; padding: 20px; font-family: monospace; border-radius: 8px; box-shadow: inset 0 0 10px rgba(255,213,79,0.3);\">\n  <h3 style=\"color: #ffd54f; margin-top:0;\">&gt; DYNAMIC_JS_CONSOLE</h3>\n  <p style=\"color: #888;\">Modify the script to change the dynamic content below!</p>\n  <div id=\"output-node\" style=\"color: #00ff00; padding: 10px; background: rgba(0,255,0,0.05); border: 1px solid #333; margin: 15px 0;\">System status: Awaiting computation...</div>\n  <button id=\"trigger-node\" style=\"background:#ffd54f; color:#000; border:none; padding:10px 15px; font-weight:bold; cursor:pointer; letter-spacing:1px;\">Run Sample</button>\n</div>\n<script>\n  const button = document.getElementById('trigger-node');\n  const output = document.getElementById('output-node');\n  let clicks = 0;\n  button.addEventListener('click', () => {\n    clicks++;\n    const status = clicks > 5 ? 'LIMIT REACHED' : 'STABLE';\n    output.innerHTML = '&gt;&gt; Request #' + clicks + ' | Status: ' + status;\n    output.style.borderColor = clicks > 5 ? '#ff0055' : '#ffd54f';\n    output.style.color = clicks > 5 ? '#ff0055' : '#ffd54f';\n  });\n</script>",
   "quiz": [
     {
       "question": "Which keyword declares a variable that CANNOT be reassigned?",
@@ -91,14 +91,14 @@
     }
   ],
   "quest": {
-    "title": "Quest: Code the Fuel Calibration Engine",
-    "challenge": "Build an interactive dashboard that tracks fuel levels, warns on low levels, and logs each update.",
+    "title": "Project: Build a Usage Tracker",
+    "challenge": "Build an interactive dashboard that tracks usage levels, warns on low levels, and logs each update.",
     "instructions": [
-      "1. Declare a let variable 'fuel' starting at 100.",
-      "2. Create a button that reduces fuel by 15 on each click.",
-      "3. Display the current fuel level in a div after each click.",
-      "4. If fuel drops below 20, change the display color to red and show a CRITICAL warning.",
-      "5. Add a 'Refuel' button that resets fuel back to 100."
+      "1. Declare a let variable 'usage' starting at 100.",
+      "2. Create a button that reduces usage by 15 on each click.",
+      "3. Display the current usage level in a div after each click.",
+      "4. If usage drops below 20, change the display color to red and show a CRITICAL warning.",
+      "5. Add a 'Reset' button that restores usage back to 100."
     ]
   }
 }

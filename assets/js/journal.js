@@ -10,18 +10,19 @@ const notesPerPage = 12; // Optimized for the single-column vertical list
 // --- UI FEEDBACK ---
 const grid = document.getElementById('journalGrid');
 if (grid) {
-  grid.innerHTML = '<div class="status-msg" style="color: var(--text-muted); padding: 20px;">[ .. ] INITIALIZING_DATA_STREAM...</div>';
+  grid.innerHTML = '<div class="status-msg" style="color: var(--text-muted); padding: 20px;">[ .. ] LOADING_ENTRIES...</div>';
 }
 
-// --- DATA UPLINK ---
+// --- DATA LOAD ---
 fetch('../assets/data/journal.json')
   .then(response => {
     if (!response.ok) throw new Error(`HTTP_ERROR_STATUS_${response.status}`);
     return response.json();
   })
   .then(data => {
+    if (!Array.isArray(data)) throw new Error('INVALID_DATASET');
     // Sort by date (descending) to show newest updates first
-    notes = data.sort((a, b) => b.date.localeCompare(a.date));
+    notes = data.slice().sort((a, b) => b.date.localeCompare(a.date));
     renderFilterTags();
     renderNotes();
     isInitial = false;
@@ -31,7 +32,7 @@ fetch('../assets/data/journal.json')
     if (grid) {
       grid.innerHTML = `
         <div class="status-msg" style="color: var(--accent-red); padding: 20px;">
-          [ ERROR ] DATA_UPLINK_FAILED: ${err.message}<br><br>
+          [ ERROR ] DATA_LOAD_FAILED: ${err.message}<br><br>
           <small style="opacity:0.8; line-height: 1.6;">
             NOTE: Modern browsers block "fetch" on local files (file://). <br>
             Please use a local web server (e.g. VS Code Live Server) to load journal.json.
@@ -68,7 +69,7 @@ let isInitial = true;
  * Main render function for the journal list.
  * Includes search matching across titles, descriptions, and full content.
  */
-function renderNotes(filter = currentFilter, page = currentPage, searchQuery = currentSearch) {
+function renderNotes(filter = currentFilter, page = currentPage, searchQuery = currentSearch, focusFirst = false) {
   currentFilter = filter;
   currentPage = page;
   currentSearch = searchQuery;
@@ -119,6 +120,7 @@ function renderNotes(filter = currentFilter, page = currentPage, searchQuery = c
         document.getElementById('modalNoteDesc').textContent = desc ? desc.textContent : '';
         document.getElementById('modalNoteFull').textContent = card.querySelector('.book-full').textContent;
         document.getElementById('noteDetailModal').classList.add('active');
+        document.getElementById('noteDetailModal').setAttribute('aria-hidden', 'false');
         document.body.style.overflow = 'hidden';
         setTimeout(() => { document.getElementById('closeNoteModal').focus(); }, 50);
       };
@@ -128,8 +130,10 @@ function renderNotes(filter = currentFilter, page = currentPage, searchQuery = c
 
     setTimeout(() => {
       grid.classList.remove('fading');
-      const firstCard = document.querySelector('.journal-list .book-card');
-      if (firstCard) firstCard.focus();
+      if (focusFirst) {
+        const firstCard = document.querySelector('.journal-list .book-card');
+        if (firstCard) firstCard.focus();
+      }
     }, 10);
   }, isInitial ? 0 : 400); 
 }
@@ -153,13 +157,6 @@ window.addEventListener('tacticalPageCommand', (e) => {
       }
     });
   }
-});
-
-// Accessibility
-document.addEventListener('DOMContentLoaded', function () {
-  const style = document.createElement('style');
-  style.innerHTML = `.book-card { outline: none; }`;
-  document.head.appendChild(style);
 });
 
 /**
@@ -186,11 +183,7 @@ function renderPagination(totalNotes = notes.length, page = currentPage) {
   prevBtn.disabled = page === 1;
   prevBtn.className = 'pagination-btn';
   prevBtn.onclick = () => {
-    renderNotes(currentFilter, page - 1, currentSearch);
-    setTimeout(() => {
-      const firstCard = document.querySelector('.journal-list .book-card');
-      if (firstCard) firstCard.focus();
-    }, 0);
+    renderNotes(currentFilter, page - 1, currentSearch, true);
   };
   pagination.appendChild(prevBtn);
 
@@ -200,11 +193,7 @@ function renderPagination(totalNotes = notes.length, page = currentPage) {
     pageBtn.className = 'pagination-btn' + (i === page ? ' active' : '');
     pageBtn.disabled = i === page;
     pageBtn.onclick = () => {
-      renderNotes(currentFilter, i, currentSearch);
-      setTimeout(() => {
-        const firstCard = document.querySelector('.journal-list .book-card');
-        if (firstCard) firstCard.focus();
-      }, 0);
+      renderNotes(currentFilter, i, currentSearch, true);
     };
     pagination.appendChild(pageBtn);
   }
@@ -214,33 +203,38 @@ function renderPagination(totalNotes = notes.length, page = currentPage) {
   nextBtn.disabled = page === totalPages;
   nextBtn.className = 'pagination-btn';
   nextBtn.onclick = () => {
-    renderNotes(currentFilter, page + 1, currentSearch);
-    setTimeout(() => {
-      const firstCard = document.querySelector('.journal-list .book-card');
-      if (firstCard) firstCard.focus();
-    }, 0);
+    renderNotes(currentFilter, page + 1, currentSearch, true);
   };
   pagination.appendChild(nextBtn);
 }
 
 // --- MODAL ENGINE ---
+const noteDetailModal = document.getElementById('noteDetailModal');
 const closeNoteModal = document.getElementById('closeNoteModal');
+
+function closeNoteDetail() {
+  if (noteDetailModal) {
+    noteDetailModal.classList.remove('active');
+    noteDetailModal.setAttribute('aria-hidden', 'true');
+  }
+  document.body.style.overflow = '';
+}
+
 if (closeNoteModal) {
-  closeNoteModal.onclick = function () {
-    document.getElementById('noteDetailModal').classList.remove('active');
-    document.body.style.overflow = '';
+  closeNoteModal.onclick = closeNoteDetail;
+}
+
+if (noteDetailModal) {
+  noteDetailModal.onclick = function (e) {
+    if (e.target === this) closeNoteDetail();
   };
 }
 
-const noteDetailModal = document.getElementById('noteDetailModal');
-if (noteDetailModal) {
-  noteDetailModal.onclick = function (e) {
-    if (e.target === this) {
-      this.classList.remove('active');
-      document.body.style.overflow = '';
-    }
-  };
-}
+document.addEventListener('keydown', (e) => {
+  if (e.key === 'Escape' && noteDetailModal && noteDetailModal.classList.contains('active')) {
+    closeNoteDetail();
+  }
+});
 
 // --- FILTER DELEGATION ---
 const filterTagsContainer = document.getElementById('filterTags');
@@ -250,7 +244,7 @@ if (filterTagsContainer) {
       document.querySelectorAll('.filter-tag').forEach(t => t.classList.remove('active'));
       e.target.classList.add('active');
       const filter = e.target.getAttribute('data-filter');
-      renderNotes(filter, 1, currentSearch);
+      renderNotes(filter, 1, currentSearch, true);
     }
   });
 }
@@ -260,33 +254,38 @@ const searchInput = document.getElementById('journalSearch');
 const autocompleteList = document.getElementById('searchAutocomplete');
 
 if (searchInput) {
+  let searchDebounce = null;
+
   searchInput.addEventListener('input', (e) => {
     const query = e.target.value.trim().toLowerCase();
-    
-    if (query.length < 2) {
-      autocompleteList.classList.add('hidden');
+
+    clearTimeout(searchDebounce);
+    searchDebounce = setTimeout(() => {
+      if (query.length < 2) {
+        autocompleteList.classList.add('hidden');
+        renderNotes(currentFilter, 1, query);
+        return;
+      }
+
+      const matches = notes.filter(n =>
+        n.title.toLowerCase().includes(query) ||
+        (n.description && n.description.toLowerCase().includes(query))
+      ).slice(0, 6);
+
+      if (matches.length > 0) {
+        autocompleteList.innerHTML = matches.map(m => `
+          <li class="autocomplete-item" data-title="${m.title}">
+            <span style="color:var(--text-main)">${m.title}</span>
+            <br><small style="opacity:0.6">${m.date} &middot; ${(m.type || 'other').toUpperCase()}</small>
+          </li>
+        `).join('');
+        autocompleteList.classList.remove('hidden');
+      } else {
+        autocompleteList.classList.add('hidden');
+      }
+
       renderNotes(currentFilter, 1, query);
-      return;
-    }
-
-    const matches = notes.filter(n => 
-      n.title.toLowerCase().includes(query) || 
-      (n.description && n.description.toLowerCase().includes(query))
-    ).slice(0, 6);
-
-    if (matches.length > 0) {
-      autocompleteList.innerHTML = matches.map(m => `
-        <li class="autocomplete-item" data-title="${m.title}">
-          <span style="color:var(--text-main)">${m.title}</span>
-          <br><small style="opacity:0.6">${m.date} &middot; ${m.type.toUpperCase()}</small>
-        </li>
-      `).join('');
-      autocompleteList.classList.remove('hidden');
-    } else {
-      autocompleteList.classList.add('hidden');
-    }
-    
-    renderNotes(currentFilter, 1, query);
+    }, 180);
   });
 
   autocompleteList.addEventListener('click', (e) => {
@@ -295,12 +294,12 @@ if (searchInput) {
       const selectedTitle = item.getAttribute('data-title');
       searchInput.value = selectedTitle;
       autocompleteList.classList.add('hidden');
-      
+
       document.querySelectorAll('.filter-tag').forEach(t => t.classList.remove('active'));
       const allTag = document.querySelector('[data-filter="all"]');
       if (allTag) allTag.classList.add('active');
-      
-      renderNotes('all', 1, selectedTitle);
+
+      renderNotes('all', 1, selectedTitle, true);
     }
   });
 

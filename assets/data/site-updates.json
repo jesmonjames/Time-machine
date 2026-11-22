@@ -1,5 +1,12 @@
 [
   {
+    "date": "2026-11-22",
+    "rank": 10,
+    "title": "Project // J-Builder",
+    "detail": "Added J-Builder to the Projects Laboratory — a dependency-free static website studio with nine templates, dual light/dark themes, autosave, responsive previews and single-file HTML export. Live build: https://jwebsitebuilder.vercel.app/",
+    "href": "https://jwebsitebuilder.vercel.app/"
+  },
+  {
     "date": "2026-10-26",
     "rank": 9,
     "title": "Interface // smartJO Watch",
@@ -23,15 +30,15 @@
   {
     "date": "2026-05-19",
     "rank": 6,
-    "title": "UI & Logic // Tactical Upgrades",
-    "detail": "Implemented a tactical microphone permission modal (Permission Priming). Added a new synthesis journal log, and expanded the note modal to full width with a themed scrollbar.",
+    "title": "UI & Logic // Interface Upgrades",
+    "detail": "Implemented a microphone permission modal (permission priming). Added a new synthesis journal log, and expanded the note modal to full width with a themed scrollbar.",
     "href": "pages/journal.html"
   },
   {
     "date": "2026-05-02",
     "rank": 5,
     "title": "AI // 'Humanly' Interaction Overhaul",
-    "detail": "Upgraded JES-007 with variable typing speeds, punctuation pauses, and a neural 'thinking' pulse for organic responses.",
+    "detail": "Upgraded the portfolio assistant with variable typing speeds, punctuation pauses and a thinking indicator for more natural responses.",
     "href": "pages/journal.html"
   },
   {
@@ -45,20 +52,20 @@
     "date": "2026-05-02",
     "rank": 3,
     "title": "UI // Page-Aware AI Bridge",
-    "detail": "Integrated a tactical bridge allowing the AI to directly open books and filter logs via voice/text commands.",
+    "detail": "Integrated a bridge allowing the assistant to open books and filter logs via voice/text commands.",
     "href": "pages/journal.html"
   },
   {
     "date": "2026-05-02",
     "rank": 2,
-    "title": "Dossier // Responsive Modal Fix",
+    "title": "Journal // Responsive Modal Fix",
     "detail": "Overhauled the high-density journal modal for mobile stability and long-form technical log scrolling.",
     "href": "pages/journal.html"
   },
   {
     "date": "2026-04-27",
     "rank": 3,
-    "title": "Field journal // MEVN & Nuxt 3 Pivot",
+    "title": "Journal // MEVN & Nuxt 3 Pivot",
     "detail": "Logged deep dive architectural pivot analysis to transition from static to native full-stack MEVN utilizing Nuxt 3.",
     "href": "pages/journal.html"
   },
@@ -73,34 +80,34 @@
     "date": "2026-04-20",
     "rank": 3,
     "title": "About // Vitruvian anatomical map",
-    "detail": "Interactive SVG, proportional tooltips, seven-node chakra overlay, and full chakra grid scan—theme-synced strokes.",
+    "detail": "Interactive SVG, proportional tooltips, seven Vitruvian datum markers, and a full proportion atlas panel—theme-synced strokes.",
     "href": "pages/about.html"
   },
   {
     "date": "2026-04-20",
     "rank": 2,
-    "title": "Field journal // synthesis log",
+    "title": "Journal // synthesis log",
     "detail": "New synthesis-type entry linking the Vitruvian build to real-life modular rhythm and this journal as the audit trail.",
     "href": "pages/journal.html"
   },
   {
     "date": "2026-04-20",
     "rank": 1,
-    "title": "Field journal // Cursor IDE benchmark",
+    "title": "Journal // Cursor IDE benchmark",
     "detail": "Logged install and prompting comparison vs VS Code and Antigravity-style agents.",
     "href": "pages/journal.html"
   },
   {
     "date": "2026-04-18",
     "rank": 0,
-    "title": "Field journal // Unity 6.4 boot camp",
+    "title": "Journal // Unity 6.4 boot camp",
     "detail": "Unity 6.4 baseline, 2D micro-prototype tutorial, AI-assisted debugging when the inspector drifted from notes.",
     "href": "pages/journal.html"
   },
   {
     "date": "2026-04-16",
     "rank": 0,
-    "title": "Field journal // local AI stack",
+    "title": "Journal // local AI stack",
     "detail": "Ollama with Qwen2.5 and DeepSeek-Coder wired into the editor workflow.",
     "href": "pages/journal.html"
   },

@@ -19,8 +19,9 @@ window.addEventListener("load", function() {
   
   // Track if the system has performed a "Cold Boot" in this session
   const hasBooted = sessionStorage.getItem('sysBooted');
+  const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
-  if (!hasBooted) {
+  if (!hasBooted && !prefersReducedMotion) {
     // --- COLD BOOT SEQUENCE (First Visit) ---
     sessionStorage.setItem('sysBooted', '1');
     
@@ -87,28 +88,29 @@ window.addEventListener("load", function() {
     // Progress Percentage Simulation
     let percent = 0;
     const perInt = setInterval(() => {
-      percent += Math.floor(Math.random() * 5) + 1;
+      percent += Math.floor(Math.random() * 7) + 3;
       if(percent >= 100) {
         percent = 100;
         clearInterval(perInt);
       }
       if(decryptText) decryptText.textContent = `${percent}%`;
-    }, 150);
+    }, 120);
   
     // Completion Sequence
     setTimeout(() => {
-      if(bootStatus) bootStatus.textContent = "UPLOADING TACTICAL INTERFACE...";
+      if(bootStatus) bootStatus.textContent = "LOADING INTERFACE...";
       setTimeout(() => {
-        if(bootStatus) bootStatus.textContent = "SYSTEM READY.";
+        if(bootStatus) bootStatus.textContent = "READY.";
         if(loader) {
             loader.style.opacity = "0";
-            setTimeout(() => loader.style.display = "none", 1000);
+            setTimeout(() => loader.style.display = "none", 900);
         }
-      }, 1500);
-    }, 4000);
+      }, 900);
+    }, 2600);
   } else {
     // --- WARM BOOT (Fast skip for return visits) ---
     if (loader) loader.style.display = "none";
+    if (!hasBooted) sessionStorage.setItem('sysBooted', '1');
   }
   
   // Cross-page "Mini Loader" for smooth navigation transitions
@@ -121,7 +123,7 @@ window.addEventListener("load", function() {
     const mInt = setInterval(() => {
       mCount += Math.floor(Math.random() * 20) + 10;
       if(mCount >= 100) mCount = 100;
-      if(miniLoadText) miniLoadText.textContent = `SYNCING... ${mCount}%`;
+      if(miniLoadText) miniLoadText.textContent = `LOADING... ${mCount}%`;
       if(mCount >= 100) {
         clearInterval(mInt);
         setTimeout(() => {
@@ -150,11 +152,11 @@ window.triggerMiniLoader = function(action, isSlow = false) {
     setTimeout(() => { miniLoader.style.opacity = "1"; }, 10);
     let mCount = 0;
     const miniLoadText = document.getElementById("miniLoadText");
-    if(miniLoadText) miniLoadText.textContent = `SYNCING... 0%`;
+    if(miniLoadText) miniLoadText.textContent = `LOADING... 0%`;
     const mInt = setInterval(() => {
       mCount += isSlow ? (Math.floor(Math.random() * 8) + 4) : (Math.floor(Math.random() * 20) + 10);
       if(mCount >= 100) mCount = 100;
-      if(miniLoadText) miniLoadText.textContent = `SYNCING... ${mCount}%`;
+      if(miniLoadText) miniLoadText.textContent = `LOADING... ${mCount}%`;
       if(mCount >= 100) {
         clearInterval(mInt);
         if (typeof action === 'function') {
@@ -196,6 +198,12 @@ function checkTimelineItems() {
   });
 }
 
+// Safety net: never leave the dashboard cards invisible if an observer or
+// scroll event is missed (for example on very short viewports).
+setTimeout(() => {
+  timelineItems.forEach(item => item.classList.add("visible"));
+}, 1500);
+
 // Handle scroll events for the main layout grid or window
 const mainLayout = document.querySelector(".main-layout");
 if(mainLayout) {
@@ -236,31 +244,62 @@ function updateTime() {
 
 function updateSysStats() {
   if(!sysStatEl) return;
-  const load = (Math.random() * (0.85 - 0.05) + 0.05).toFixed(2);
-  const ram = navigator.deviceMemory || 16;
-  sysStatEl.innerHTML = `LOAD: ${load}% | RAM: ${ram}GB`;
+  sysStatEl.textContent = "9+ YRS · UI ENGINEERING";
 }
 
 setInterval(updateTime, 1000);
-setInterval(updateSysStats, 3000);
 updateSysStats();
 updateTime();
 
-// --- THEME & CHAKRA ENGINE ---
-// Manages the 7-themed visual states and SVG logos
+// --- THEME & VITRUVIAN ENGINE ---
+// Manages the seven proportional visual states and their geometry marks.
 const themeBtns = document.querySelectorAll('.theme-btn');
-let savedTheme = sessionStorage.getItem('portfolio-theme') || 'theme-throat';
+let savedTheme = sessionStorage.getItem('portfolio-theme') || 'theme-circle';
 
-const chakraLogos = {
-  'theme-root': '<svg viewBox="0 0 100 100" class="chakra-svg"><g class="chakra-spin"><circle cx="50" cy="25" r="15" fill="none" stroke="currentColor" stroke-width="2"/><circle cx="50" cy="75" r="15" fill="none" stroke="currentColor" stroke-width="2"/><circle cx="25" cy="50" r="15" fill="none" stroke="currentColor" stroke-width="2"/><circle cx="75" cy="50" r="15" fill="none" stroke="currentColor" stroke-width="2"/><rect x="35" y="35" width="30" height="30" fill="none" stroke="currentColor" stroke-width="2"/><circle cx="50" cy="50" r="22" fill="none" stroke="currentColor" stroke-width="2"/></g><text x="50" y="50" dominant-baseline="central" font-family="sans-serif" font-size="12" font-weight="bold" text-anchor="middle" fill="currentColor">लं</text></svg>',
-  'theme-sacral': '<svg viewBox="0 0 100 100" class="chakra-svg"><g class="chakra-spin"><path d="M 36,25.8 Q 23,8 50,2 Q 77,8 64,25.8" fill="none" stroke="currentColor" stroke-width="1.5"/><path d="M 36,25.8 Q 23,8 50,2 Q 77,8 64,25.8" fill="none" stroke="currentColor" stroke-width="1.5" transform="rotate(60 50 50)"/><path d="M 36,25.8 Q 23,8 50,2 Q 77,8 64,25.8" fill="none" stroke="currentColor" stroke-width="1.5" transform="rotate(120 50 50)"/><path d="M 36,25.8 Q 23,8 50,2 Q 77,8 64,25.8" fill="none" stroke="currentColor" stroke-width="1.5" transform="rotate(180 50 50)"/><path d="M 36,25.8 Q 23,8 50,2 Q 77,8 64,25.8" fill="none" stroke="currentColor" stroke-width="1.5" transform="rotate(240 50 50)"/><path d="M 36,25.8 Q 23,8 50,2 Q 77,8 64,25.8" fill="none" stroke="currentColor" stroke-width="1.5" transform="rotate(300 50 50)"/><circle cx="50" cy="50" r="28" fill="none" stroke="currentColor" stroke-width="2"/><circle cx="50" cy="50" r="24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-dasharray="2 4"/><path d="M 33,56 A 17,17 0 0,1 67,56 A 22,22 0 0,0 33,56 Z" fill="none" stroke="currentColor" stroke-width="1.5"/></g><text x="50" y="48" dominant-baseline="central" font-family="sans-serif" font-size="14" font-weight="bold" text-anchor="middle" fill="currentColor">वं</text></svg>',
-  'theme-solar': '<svg viewBox="0 0 100 100" class="chakra-svg"><g class="chakra-spin"><path d="M 41.97,25.3 Q 35,10 50,0 Q 65,10 58.03,25.3" fill="none" stroke="currentColor" stroke-width="1.5" /><path d="M 41.97,25.3 Q 35,10 50,0 Q 65,10 58.03,25.3" fill="none" stroke="currentColor" stroke-width="1.5" transform="rotate(36 50 50)" /><path d="M 41.97,25.3 Q 35,10 50,0 Q 65,10 58.03,25.3" fill="none" stroke="currentColor" stroke-width="1.5" transform="rotate(72 50 50)" /><path d="M 41.97,25.3 Q 35,10 50,0 Q 65,10 58.03,25.3" fill="none" stroke="currentColor" stroke-width="1.5" transform="rotate(108 50 50)" /><path d="M 41.97,25.3 Q 35,10 50,0 Q 65,10 58.03,25.3" fill="none" stroke="currentColor" stroke-width="1.5" transform="rotate(144 50 50)" /><path d="M 41.97,25.3 Q 35,10 50,0 Q 65,10 58.03,25.3" fill="none" stroke="currentColor" stroke-width="1.5" transform="rotate(180 50 50)" /><path d="M 41.97,25.3 Q 35,10 50,0 Q 65,10 58.03,25.3" fill="none" stroke="currentColor" stroke-width="1.5" transform="rotate(216 50 50)" /><path d="M 41.97,25.3 Q 35,10 50,0 Q 65,10 58.03,25.3" fill="none" stroke="currentColor" stroke-width="1.5" transform="rotate(252 50 50)" /><path d="M 41.97,25.3 Q 35,10 50,0 Q 65,10 58.03,25.3" fill="none" stroke="currentColor" stroke-width="1.5" transform="rotate(288 50 50)" /><path d="M 41.97,25.3 Q 35,10 50,0 Q 65,10 58.03,25.3" fill="none" stroke="currentColor" stroke-width="1.5" transform="rotate(324 50 50)" /><circle cx="50" cy="50" r="26" fill="none" stroke="currentColor" stroke-width="2"/><polygon points="50,76 27.5,37 72.5,37" fill="none" stroke="currentColor" stroke-width="2"/></g><text x="50" y="50" dominant-baseline="central" font-family="sans-serif" font-size="12" font-weight="bold" text-anchor="middle" fill="currentColor">रं</text></svg>',
-  'theme-heart': '<svg viewBox="0 0 100 100" class="chakra-svg"><g class="chakra-spin"><circle cx="50" cy="50" r="38" fill="none" stroke="currentColor" stroke-width="8" stroke-dasharray="10 9.8"/><circle cx="50" cy="50" r="31" fill="none" stroke="currentColor" stroke-width="2"/><polygon points="50,22 25,65 75,65" fill="none" stroke="currentColor" stroke-width="2"/><polygon points="50,78 25,35 75,35" fill="none" stroke="currentColor" stroke-width="2"/></g><text x="50" y="50" dominant-baseline="central" font-family="sans-serif" font-size="12" font-weight="bold" text-anchor="middle" fill="currentColor">यं</text></svg>',
-  'theme-throat': '<svg viewBox="0 0 100 100" class="chakra-svg"><g class="chakra-spin"><circle cx="50" cy="50" r="38" fill="none" stroke="currentColor" stroke-width="8" stroke-dasharray="8 6.9"/><circle cx="50" cy="50" r="31" fill="none" stroke="currentColor" stroke-width="2"/><polygon points="50,75 28,38 72,38" fill="none" stroke="currentColor" stroke-width="2"/><circle cx="50" cy="50" r="21" fill="none" stroke="currentColor" stroke-width="2"/></g><text x="50" y="50" dominant-baseline="central" font-family="sans-serif" font-size="12" font-weight="bold" text-anchor="middle" fill="currentColor">हं</text></svg>',
-  'theme-third-eye': '<svg viewBox="0 0 100 100" class="chakra-svg"><g class="chakra-spin"><path d="M 5 50 Q 50 10 95 50 Q 50 90 5 50" fill="none" stroke="currentColor" stroke-width="2"/><circle cx="50" cy="50" r="28" fill="none" stroke="currentColor" stroke-width="2"/><polygon points="50,70 30,35 70,35" fill="none" stroke="currentColor" stroke-width="2"/></g><text x="50" y="50" dominant-baseline="central" font-family="sans-serif" font-size="14" font-weight="bold" text-anchor="middle" fill="currentColor">ॐ</text></svg>',
-  'theme-crown': '<svg viewBox="0 0 100 100" class="chakra-svg"><g class="chakra-spin"><circle cx="50" cy="50" r="42" fill="none" stroke="currentColor" stroke-width="6" stroke-dasharray="3 3"/><circle cx="50" cy="50" r="34" fill="none" stroke="currentColor" stroke-width="6" stroke-dasharray="4 3"/><circle cx="50" cy="50" r="26" fill="none" stroke="currentColor" stroke-width="6" stroke-dasharray="6 3"/><circle cx="50" cy="50" r="21" fill="none" stroke="currentColor" stroke-width="2"/></g><text x="50" y="50" dominant-baseline="central" font-family="sans-serif" font-size="16" font-weight="bold" text-anchor="middle" fill="currentColor">अँ</text></svg>'
+const svgOpen = '<svg viewBox="0 0 100 100" class="vitruvian-svg"><g class="vitruvian-spin">';
+const svgText = (label, size) => `<text x="50" y="50" dominant-baseline="central" font-family="Share Tech Mono, monospace" font-size="${size}" font-weight="bold" text-anchor="middle" fill="currentColor">${label}</text>`;
+const svgClose = '</g></svg>';
+
+const vitruvianLogos = {
+  'theme-base': svgOpen +
+    '<circle cx="50" cy="30" r="11" fill="none" stroke="currentColor" stroke-width="2"/>' +
+    '<path d="M50 41V68 M50 68L35 86 M50 68L65 86 M50 50L28 62 M50 50L72 62" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>' +
+    '<path d="M18 90H82 M18 86V94 M82 86V94" fill="none" stroke="currentColor" stroke-width="1.6"/>' +
+    svgText('1', 13) + svgClose,
+  'theme-module': svgOpen +
+    '<circle cx="50" cy="50" r="31" fill="none" stroke="currentColor" stroke-width="2"/>' +
+    '<path d="M19 50H81 M50 19V81" fill="none" stroke="currentColor" stroke-width="1.2" stroke-dasharray="3 4"/>' +
+    '<path d="M50 19V81 M19 50H81" fill="none" stroke="currentColor" stroke-width="0.8" opacity="0.45"/>' +
+    '<circle cx="50" cy="50" r="7" fill="none" stroke="currentColor" stroke-width="1.4"/>' +
+    svgText('8', 12) + svgClose,
+  'theme-cubit': svgOpen +
+    '<rect x="18" y="38" width="64" height="24" fill="none" stroke="currentColor" stroke-width="2"/>' +
+    '<path d="M34 38V52 M50 38V62 M66 38V52" fill="none" stroke="currentColor" stroke-width="1.4"/>' +
+    '<path d="M18 32V44 M82 32V44" fill="none" stroke="currentColor" stroke-width="1.6"/>' +
+    svgText('6', 12) + svgClose,
+  'theme-square': svgOpen +
+    '<rect x="20" y="20" width="60" height="60" fill="none" stroke="currentColor" stroke-width="2"/>' +
+    '<path d="M50 20V80 M20 50H80" fill="none" stroke="currentColor" stroke-width="1" stroke-dasharray="4 5"/>' +
+    '<path d="M20 20L80 80 M80 20L20 80" fill="none" stroke="currentColor" stroke-width="0.8" opacity="0.4"/>' +
+    svgText('4', 12) + svgClose,
+  'theme-circle': svgOpen +
+    '<circle cx="50" cy="50" r="38" fill="none" stroke="currentColor" stroke-width="2"/>' +
+    '<rect x="24" y="24" width="52" height="52" fill="none" stroke="currentColor" stroke-width="1.2" stroke-dasharray="4 5"/>' +
+    '<path d="M50 12V88 M12 50H88" fill="none" stroke="currentColor" stroke-width="0.8" opacity="0.5"/>' +
+    '<circle cx="50" cy="50" r="4" fill="currentColor"/>' +
+    svgText('H', 12) + svgClose,
+  'theme-golden': svgOpen +
+    '<rect x="16" y="16" width="68" height="68" fill="none" stroke="currentColor" stroke-width="1.4"/>' +
+    '<path d="M58 16V84 M16 58H84" fill="none" stroke="currentColor" stroke-width="1.2"/>' +
+    '<path d="M84 58 A42 42 0 0 1 42 16 A26 26 0 0 1 16 42 A16 16 0 0 1 32 58" fill="none" stroke="currentColor" stroke-width="2"/>' +
+    svgText('φ', 14) + svgClose,
+  'theme-canon': svgOpen +
+    '<circle cx="50" cy="50" r="40" fill="none" stroke="currentColor" stroke-width="2"/>' +
+    '<rect x="22" y="18" width="56" height="64" fill="none" stroke="currentColor" stroke-width="1.4"/>' +
+    '<circle cx="50" cy="30" r="8" fill="none" stroke="currentColor" stroke-width="1.6"/>' +
+    '<path d="M50 38V64 M50 64L38 82 M50 64L62 82 M50 46L30 56 M50 46L70 56" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/>' +
+    svgText('V', 12) + svgClose
 };
-
 
 // --- TACTICAL TOOLTIP ENGINE ---
 // Renders the glassmorphic tactical tooltips on hover targets
@@ -293,9 +332,9 @@ document.querySelectorAll('.h-target').forEach(target => {
   });
 });
 
-const validThemes = ['theme-root', 'theme-sacral', 'theme-solar', 'theme-heart', 'theme-throat', 'theme-third-eye', 'theme-crown'];
+const validThemes = ['theme-base', 'theme-module', 'theme-cubit', 'theme-square', 'theme-circle', 'theme-golden', 'theme-canon'];
 if (!validThemes.includes(savedTheme)) {
-  savedTheme = 'theme-throat';
+  savedTheme = 'theme-circle';
 }
 
 /**
@@ -303,7 +342,9 @@ if (!validThemes.includes(savedTheme)) {
  * @param {string} themeName - Class name of the theme to apply.
  */
 window.applyTheme = function(themeName) {
-  document.body.className = themeName;
+  // Preserve any non-theme body classes instead of wiping the class attribute.
+  Array.from(document.body.classList).filter(name => name.startsWith('theme-')).forEach(name => document.body.classList.remove(name));
+  document.body.classList.add(themeName);
   sessionStorage.setItem('portfolio-theme', themeName);
   
   themeBtns.forEach(btn => {
@@ -313,9 +354,9 @@ window.applyTheme = function(themeName) {
     }
   });
 
-  const logoContainer = document.getElementById('chakraLogo');
-  if (logoContainer && chakraLogos[themeName]) {
-    logoContainer.innerHTML = chakraLogos[themeName];
+  const logoContainer = document.getElementById('vitruvianLogo');
+  if (logoContainer && vitruvianLogos[themeName]) {
+    logoContainer.innerHTML = vitruvianLogos[themeName];
   }
 }
 
@@ -330,7 +371,7 @@ themeBtns.forEach(btn => {
 });
 
 // --- TIC-TAC-TOE CHALLENGE LOGIC ---
-// Tactical gateway that requires a win to proceed to certain sectors
+// Access gate that requires a win to proceed to certain pages
 let tttTargetUrl = '';
 let tttBoard = Array(9).fill(null);
 let tttActive = false;
@@ -344,11 +385,24 @@ function handleTacticalLink(url) {
   const tttModal = document.getElementById('tttModal');
   if (tttModal) {
     tttModal.style.display = 'flex';
+    tttModal.setAttribute('aria-hidden', 'false');
     document.body.style.overflow = 'hidden'; // Lock scroll
     resetTTT();
+    const firstCell = tttModal.querySelector('.ttt-cell');
+    if (firstCell) setTimeout(() => firstCell.focus(), 50);
   } else {
     window.location.href = url;
   }
+}
+
+function closeTTT() {
+  const tttModal = document.getElementById('tttModal');
+  tttActive = false;
+  if (tttModal) {
+    tttModal.style.display = 'none';
+    tttModal.setAttribute('aria-hidden', 'true');
+  }
+  document.body.style.overflow = '';
 }
 
 function resetTTT() {
@@ -428,9 +482,7 @@ function makeMove(index, player) {
       }
       result.line.forEach(idx => tttCells[idx].classList.add('win-cell'));
       setTimeout(() => {
-        const tttModal = document.getElementById('tttModal');
-        if (tttModal) tttModal.style.display = 'none';
-        document.body.style.overflow = 'auto';
+        closeTTT();
         triggerMiniLoader(tttTargetUrl);
       }, 1000);
     } else if (result.winner === 'O') {
@@ -457,26 +509,39 @@ function makeMove(index, player) {
 document.addEventListener('DOMContentLoaded', () => {
   const tttGrid = document.getElementById('tttGrid');
   if (tttGrid) {
+    const playCell = (cell) => {
+      if (!cell || !tttActive) return;
+      const index = parseInt(cell.getAttribute('data-index'), 10);
+      makeMove(index, 'X');
+    };
+
     tttGrid.addEventListener('click', (e) => {
+      playCell(e.target.closest('.ttt-cell'));
+    });
+
+    // Keyboard parity: the cells are divs, so Enter/Space must play them.
+    tttGrid.addEventListener('keydown', (e) => {
+      if (e.key !== 'Enter' && e.key !== ' ' && e.key !== 'Spacebar') return;
       const cell = e.target.closest('.ttt-cell');
-      if (cell && tttActive) {
-        const index = parseInt(cell.getAttribute('data-index'));
-        makeMove(index, 'X');
-      }
+      if (!cell) return;
+      e.preventDefault();
+      playCell(cell);
     });
   }
 
   const tttCancel = document.getElementById('tttCancel');
   if (tttCancel) {
-    tttCancel.onclick = () => {
-      const tttModal = document.getElementById('tttModal');
-      if (tttModal) tttModal.style.display = 'none';
-      document.body.style.overflow = 'auto';
-    };
+    tttCancel.onclick = closeTTT;
   }
 
   const tttResetBtn = document.getElementById('tttReset');
   if (tttResetBtn) {
     tttResetBtn.onclick = resetTTT;
   }
+
+  document.addEventListener('keydown', (e) => {
+    if (e.key !== 'Escape') return;
+    const tttModal = document.getElementById('tttModal');
+    if (tttModal && tttModal.style.display === 'flex') closeTTT();
+  });
 });

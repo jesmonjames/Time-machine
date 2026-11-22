@@ -8,13 +8,34 @@ let currentPage = 1;
 const booksPerPage = 12; // Grid layout optimization
 
 // --- DATA INITIALIZATION ---
+const libraryGrid = document.getElementById('libraryGrid');
+if (libraryGrid) {
+  libraryGrid.innerHTML = '<div class="status-msg" style="color: var(--text-muted); padding: 20px;">[ .. ] INITIALIZING_ARCHIVE...</div>';
+}
+
 fetch('../assets/data/books.json')
-  .then(response => response.json())
+  .then(response => {
+    if (!response.ok) throw new Error(`HTTP_ERROR_STATUS_${response.status}`);
+    return response.json();
+  })
   .then(data => {
-    books = data.reverse(); // Show latest added books first
+    if (!Array.isArray(data)) throw new Error('INVALID_DATASET');
+    books = data.slice().reverse(); // Show latest added books first
     renderFilterTags();
     renderBooks();
-    renderPagination();
+  })
+  .catch(err => {
+    console.error('LIBRARY_SYSTEM: LOAD_FAILURE:', err);
+    if (libraryGrid) {
+      libraryGrid.innerHTML = `
+        <div class="status-msg" style="color: var(--accent-red); padding: 20px;">
+          [ ERROR ] LIBRARY_LOAD_FAILED: ${err.message}<br><br>
+          <small style="opacity:0.8; line-height: 1.6;">
+            If you opened this file directly, browsers block "fetch" on file:// URLs.
+            Serve the site with a local web server (e.g. VS Code Live Server) instead.
+          </small>
+        </div>`;
+    }
   });
 
 /**
@@ -24,7 +45,7 @@ function renderFilterTags() {
   const filterTags = document.getElementById('filterTags');
   const types = Array.from(new Set(books.map(b => (b.type || 'other').toLowerCase())));
   filterTags.innerHTML = '<span class="tag filter-tag active" data-filter="all">ALL</span>' +
-    types.map(type => `<span class="tag filter-tag" data-filter="${type}">${type.toUpperCase()}</span>`).join('');
+    types.map(type => `<span class="tag filter-tag" data-filter="${type}">${type.replace(/_/g, '-').toUpperCase()}</span>`).join('');
 }
 
 let currentFilter = 'all';
@@ -34,7 +55,7 @@ let currentSearch = '';
  * Main render loop for the book grid.
  * Handles filtering, search matching, and pagination slicing.
  */
-function renderBooks(filter = currentFilter, page = currentPage, searchQuery = currentSearch) {
+function renderBooks(filter = currentFilter, page = currentPage, searchQuery = currentSearch, focusFirst = false) {
   currentFilter = filter;
   currentPage = page;
   currentSearch = searchQuery;
@@ -87,6 +108,7 @@ function renderBooks(filter = currentFilter, page = currentPage, searchQuery = c
         document.getElementById('modalBookDesc').textContent = desc ? desc.textContent : '';
         document.getElementById('modalBookFull').textContent = card.querySelector('.book-full').textContent;
         document.getElementById('bookDetailModal').classList.add('active');
+        document.getElementById('bookDetailModal').setAttribute('aria-hidden', 'false');
         document.body.style.overflow = 'hidden';
         setTimeout(() => { document.getElementById('closeBookModal').focus(); }, 50);
       };
@@ -97,8 +119,10 @@ function renderBooks(filter = currentFilter, page = currentPage, searchQuery = c
     // Fade back in
     setTimeout(() => {
       grid.classList.remove('fading');
-      const firstCard = document.querySelector('.library-grid .book-card');
-      if (firstCard) firstCard.focus();
+      if (focusFirst) {
+        const firstCard = document.querySelector('.library-grid .book-card');
+        if (firstCard) firstCard.focus();
+      }
     }, 10);
   }, 400);
 }
@@ -128,11 +152,7 @@ function renderPagination(totalBooks = books.length, page = currentPage) {
   prevBtn.disabled = page === 1;
   prevBtn.className = 'pagination-btn';
   prevBtn.onclick = () => {
-    renderBooks(currentFilter, page - 1, currentSearch);
-    setTimeout(() => {
-      const firstCard = document.querySelector('.library-grid .book-card');
-      if (firstCard) firstCard.focus();
-    }, 0);
+    renderBooks(currentFilter, page - 1, currentSearch, true);
   };
   pagination.appendChild(prevBtn);
 
@@ -143,11 +163,7 @@ function renderPagination(totalBooks = books.length, page = currentPage) {
     pageBtn.className = 'pagination-btn' + (i === page ? ' active' : '');
     pageBtn.disabled = i === page;
     pageBtn.onclick = () => {
-      renderBooks(currentFilter, i, currentSearch);
-      setTimeout(() => {
-        const firstCard = document.querySelector('.library-grid .book-card');
-        if (firstCard) firstCard.focus();
-      }, 0);
+      renderBooks(currentFilter, i, currentSearch, true);
     };
     pagination.appendChild(pageBtn);
   }
@@ -158,33 +174,37 @@ function renderPagination(totalBooks = books.length, page = currentPage) {
   nextBtn.disabled = page === totalPages;
   nextBtn.className = 'pagination-btn';
   nextBtn.onclick = () => {
-    renderBooks(currentFilter, page + 1, currentSearch);
-    setTimeout(() => {
-      const firstCard = document.querySelector('.library-grid .book-card');
-      if (firstCard) firstCard.focus();
-    }, 0);
+    renderBooks(currentFilter, page + 1, currentSearch, true);
   };
   pagination.appendChild(nextBtn);
 }
 
 // --- MODAL ENGINE ---
+const bookDetailModal = document.getElementById('bookDetailModal');
+
+function closeBookDetail() {
+  if (!bookDetailModal) return;
+  bookDetailModal.classList.remove('active');
+  bookDetailModal.setAttribute('aria-hidden', 'true');
+  document.body.style.overflow = '';
+}
+
 const closeBookModal = document.getElementById('closeBookModal');
 if (closeBookModal) {
-  closeBookModal.onclick = function () {
-    document.getElementById('bookDetailModal').classList.remove('active');
-    document.body.style.overflow = '';
+  closeBookModal.onclick = closeBookDetail;
+}
+
+if (bookDetailModal) {
+  bookDetailModal.onclick = function (e) {
+    if (e.target === this) closeBookDetail();
   };
 }
 
-const bookDetailModal = document.getElementById('bookDetailModal');
-if (bookDetailModal) {
-  bookDetailModal.onclick = function (e) {
-    if (e.target === this) {
-      this.classList.remove('active');
-      document.body.style.overflow = '';
-    }
-  };
-}
+document.addEventListener('keydown', (e) => {
+  if (e.key === 'Escape' && bookDetailModal && bookDetailModal.classList.contains('active')) {
+    closeBookDetail();
+  }
+});
 
 // --- CATEGORY FILTERING ---
 const filterTagsContainer = document.getElementById('filterTags');
@@ -194,7 +214,7 @@ if (filterTagsContainer) {
       document.querySelectorAll('.filter-tag').forEach(t => t.classList.remove('active'));
       e.target.classList.add('active');
       const filter = e.target.getAttribute('data-filter');
-      renderBooks(filter, 1, currentSearch);
+      renderBooks(filter, 1, currentSearch, true);
     }
   });
 }
@@ -203,36 +223,39 @@ if (filterTagsContainer) {
 const searchInput = document.getElementById('librarySearch');
 const autocompleteList = document.getElementById('searchAutocomplete');
 
+let searchDebounce;
 if (searchInput) {
   searchInput.addEventListener('input', (e) => {
     const query = e.target.value.trim().toLowerCase();
-    
+    clearTimeout(searchDebounce);
+
     // Clear autocomplete if query is short
     if (query.length < 2) {
       autocompleteList.classList.add('hidden');
-      renderBooks(currentFilter, 1, query);
-      return;
-    }
-
-    // Filter matches for tactical suggestions
-    const matches = books.filter(b => 
-      b.name.toLowerCase().includes(query) || 
-      (b.author && b.author.toLowerCase().includes(query))
-    ).slice(0, 6);
-
-    if (matches.length > 0) {
-      autocompleteList.innerHTML = matches.map(m => `
-        <li class="autocomplete-item" data-name="${m.name}">
-          <span style="color:var(--text-main)">${m.name}</span>
-          <br><small style="opacity:0.6">${m.author || ''}</small>
-        </li>
-      `).join('');
-      autocompleteList.classList.remove('hidden');
     } else {
-      autocompleteList.classList.add('hidden');
+      // Filter matches for tactical suggestions
+      const matches = books.filter(b =>
+        b.name.toLowerCase().includes(query) ||
+        (b.author && b.author.toLowerCase().includes(query))
+      ).slice(0, 6);
+
+      if (matches.length > 0) {
+        autocompleteList.innerHTML = matches.map(m => `
+          <li class="autocomplete-item" data-name="${m.name}">
+            <span style="color:var(--text-main)">${m.name}</span>
+            <br><small style="opacity:0.6">${m.author || ''}</small>
+          </li>
+        `).join('');
+        autocompleteList.classList.remove('hidden');
+      } else {
+        autocompleteList.classList.add('hidden');
+      }
     }
-    
-    renderBooks(currentFilter, 1, query);
+
+    // Debounce the grid re-render so fast typing does not queue stale renders.
+    searchDebounce = setTimeout(() => {
+      renderBooks(currentFilter, 1, query);
+    }, 180);
   });
 
   // Handle autocomplete selection
@@ -248,7 +271,7 @@ if (searchInput) {
       const allTag = document.querySelector('[data-filter="all"]');
       if (allTag) allTag.classList.add('active');
       
-      renderBooks('all', 1, selectedName);
+      renderBooks('all', 1, selectedName, true);
     }
   });
 

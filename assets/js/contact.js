@@ -2,12 +2,12 @@
 const terminal = document.getElementById('commsTerminal');
 if (terminal) {
   const logs = [
-    { delay: 200,  text: '<span>[SYS]</span> COMMS_ARRAY initialized. Scanning frequencies...' },
-    { delay: 800,  text: '<span>[OK]</span>  Security handshake: ENCRYPTED_v2' },
-    { delay: 1400, text: '<span>[OK]</span>  Channel bandwidth: 1.2 Tbps' },
-    { delay: 2000, text: '<span>[TX]</span>  BROADCASTING identity signature...' },
-    { delay: 2800, text: '<span>[RX]</span>  FREQ_76.26: OPEN — Awaiting input.' },
-    { delay: 3600, text: '<span>[SYS]</span> All channels <span style="color:#39ff14">LIVE</span>. Operative reachable.' },
+    { delay: 200,  text: '<span>[INFO]</span> Contact channels loaded.' },
+    { delay: 800,  text: '<span>[OK]</span>  Email: kjjesmon@gmail.com' },
+    { delay: 1400, text: '<span>[OK]</span>  LinkedIn and GitHub links verified.' },
+    { delay: 2000, text: '<span>[INFO]</span> Based in Kochi, India — IST / UTC+5:30.' },
+    { delay: 2800, text: '<span>[INFO]</span> Open to full-time, freelance and collaboration.' },
+    { delay: 3600, text: '<span>[OK]</span>  Typical response time: 24–48 hours.' },
   ];
 
   logs.forEach(({ delay, text }) => {
@@ -21,10 +21,8 @@ if (terminal) {
   });
 }
 
-// Live signal strength fluctuation
+// Availability indicator
 const signalEl = document.getElementById('signalStrength');
 if (signalEl) {
-  setInterval(() => {
-    signalEl.textContent = (97 + Math.random() * 2.8).toFixed(1) + '%';
-  }, 2000);
+  signalEl.textContent = 'OPEN';
 }
