@@ -213,10 +213,9 @@ window.addEventListener("scroll", checkTimelineItems);
 
 
 // --- SYSTEM DATA ENGINE ---
-// Manages real-time Clock, Uptime, and Hardware Simulation
+// Manages real-time Clock and Uptime
 const clockEl = document.getElementById("clock");
 const uptimeEl = document.getElementById("uptime");
-const sysStatEl = document.getElementById("sysStat");
 let startTime = Date.now();
 
 function updateTime() {
@@ -242,13 +241,7 @@ function updateTime() {
   }
 }
 
-function updateSysStats() {
-  if(!sysStatEl) return;
-  sysStatEl.textContent = "9+ YRS · UI ENGINEERING";
-}
-
 setInterval(updateTime, 1000);
-updateSysStats();
 updateTime();
 
 // --- THEME & VITRUVIAN ENGINE ---
